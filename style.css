@@ -1,0 +1,229 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman",
+    serif, Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  /* background-color: #11074f; */
+  background-color: #00224d;
+  color: #d1d4c9;
+  background-image: url("pictures/energy-\ by\ TungArt7\ DOUBLE.jpg");
+  background-repeat: repeat;
+  background-size: 100%;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: 10%;
+  height: 20%;
+  /* ne height: 20vh, jer se vh ne skalira dobro kasnije, kad bude puno elemenata dodano na listu (donji flex-container), 
+  oni ne stanu više u određeni broj vh (fiksno je), nego prelaze i preko gornjeg flex-containera, što izgleda ružno, strgano.
+  Bolje koristiti postotke za containere unutar same stranice, onda se stranica produžuje i 
+  elementi se samo dodaju na listu ali ne ispadaju iz svojeg containera, i možemo lako scrollati prema dolje. */
+}
+
+.flex-item {
+  position: relative;
+  flex-basis: 15%;
+  /* display: inline-block; */
+}
+
+#first-container {
+  border-radius: 30px;
+}
+
+#form {
+  /* background-color: #090305; */
+  /* background-color: #29435c; */
+  background-color: #5d0e41;
+  /* color: #FCE38A; */
+  color: #d1d4c9;
+  border-radius: 30px;
+  box-shadow: 5px 5px 3px red;
+  margin-top: 8%;
+}
+
+input {
+  width: 10rem;
+  height: 1.5rem;
+  border-radius: 30px;
+  background-color: #00224d;
+  color: #d1d4c9;
+  text-align: center;
+  font-size: 18px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman",
+    serif, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input:hover {
+  background-color: #ca3535;
+  color: black;
+}
+
+p {
+  padding: 2%;
+}
+
+/* input field for a numeric rate (smaller than others) */
+#review {
+  width: 7rem;
+}
+
+h1 {
+  margin-top: 10%;
+}
+
+button {
+  padding: 0 3%;
+  background-color: #a0153e;
+  font-weight: bold;
+  color: #d1d4c9;
+  width: 8rem;
+  height: 2rem;
+  border-width: 0;
+  border-radius: 30px;
+  font-size: 18px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman",
+    serif, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button:hover {
+  background-color: #ca3535;
+  color: black;
+}
+
+li p {
+  padding: 5%;
+  display: inline-block;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: 0;
+  margin-top: 5%;
+}
+
+#results {
+  margin: 2% auto;
+}
+
+li {
+  flex-basis: 80%;
+  padding: 0;
+}
+
+hr {
+  width: 70%;
+}
+
+.favorite-button,
+.remove-button {
+  padding: 0;
+  margin: 1%;
+  border-width: 0;
+  width: 12rem;
+  /* border-width je bio postavljen na 2 px kod ova 2 buttona, zato su bili veći od add-buttona */
+}
+
+.favorite-button {
+  background-color: #a0153e;
+  /* color: black; */
+  color: #d1d4c9;
+  height: 2rem;
+}
+
+.favorite-button:hover {
+  background-color: #ca3535;
+  color: black;
+}
+
+.remove-button {
+  background-color: #5d0e41;
+  color: #d1d4c9;
+  height: 2rem;
+}
+
+.remove-button:hover {
+  background-color: #ca3535;
+  color: black;
+}
+
+#white {
+  color: #d1d4c9;
+}
+
+#new-title {
+  display: none;
+}
+
+@media (max-width: 1056px) {
+  li {
+    flex-basis: 90%;
+  }
+  li p {
+    padding: 2% 0;
+  }
+}
+
+/* so that 'Rate (1-10)' doesn't break in 2 rows */
+@media (max-width: 956px) {
+  body {
+    font-size: 1rem;
+  }
+  #review {
+    width: 6rem;
+  }
+}
+
+@media (max-width: 786px) {
+  body {
+    font-size: 1rem;
+  }
+
+  .flex-item {
+    flex-basis: 70%;
+    margin: 1% auto;
+  }
+
+  .flex-container {
+    height: 45%;
+    width: 85%;
+    margin: 5% auto;
+    align-content: center;
+  }
+
+  button,
+  input {
+    width: 60%;
+  }
+
+  button {
+    margin-top: 5%;
+    margin-bottom: 10%;
+    padding: 0%;
+  }
+
+  li p {
+    padding: 2%;
+    display: block;
+  }
+
+  #first-container {
+    margin-bottom: 15%;
+  }
+
+  #empty {
+    display: none;
+  }
+}

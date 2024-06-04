@@ -1,0 +1,13 @@
+#node:
+node_modules
+
+#env:
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local 
+
+#notes related to API:
+API_notes.txt
+notes_plan.txt
