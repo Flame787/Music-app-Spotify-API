@@ -11,7 +11,7 @@
 
     let entry, rating, artist, time, item;
 
-    // kreiranje nove stavke:
+    // creating new task:
 
     function kreirajStavku(entry, artist, rating, time) {
       const item = document.createElement("li");
@@ -22,7 +22,7 @@
       return item;
     }
 
-    // dodavanje nove stavke na listu:
+    // adding new task on the list:
 
     function dodajStavku() {
       const entry = document.getElementById("album").value.trim();
@@ -40,13 +40,13 @@
       document.getElementById("review").value = "";
     }
 
-    // nova stavka (item) se doda na klik add-buttona:
+    // new task (item) added on the add-button click:
 
     this.init = function () {
       buttonAdd.addEventListener("click", dodajStavku);
     };
 
-    // dodaj FavoriteButton:
+    // add button FavoriteButton:
 
     function dodajFavoriteButton(item) {
       const favoriteButton = document.createElement("button");
@@ -61,7 +61,7 @@
       listTitle.style.display = "block";
     }
 
-    // funkcija setFavorite:
+    // funkcion setFavorite:
 
     function setFavorite(event) {
       const favoriteButton = event.target;
@@ -69,7 +69,7 @@
       //   parentNode.appendChild(favoriteButton);
     }
 
-    // dodaj RemoveButton:
+    // add button RemoveButton:
 
     function dodajRemoveButton(item) {
       const removeButton = document.createElement("button");
@@ -82,14 +82,14 @@
       removeButton.innerHTML = "Remove album";
     }
 
-    // funkcija removeStavka:
+    // function removeStavka:
     function removeStavka(event) {
       const removeButton = event.target;
       removeButton.parentNode.remove();
-      // uklanja cijelu parent-stavku (u kojoj se našao kao child)
+      // removes the whole parent-task (in which the removeButton was embedded as a child)
     }
   }
-  // ovdje je završila funkcija Todo
+  // here ends Todo function
 
   const todo = new Todo();
 
