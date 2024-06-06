@@ -1,18 +1,22 @@
-require ('dotenv').config();
+// require("dotenv").config();
+
+// alternativ:
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 (function () {
   function Todo() {
     const buttonAdd = document.querySelector(".input-button");
     const lista = document.querySelector("ul");
 
-    let entry, recenzija, artist, vrijeme, item;
+    let entry, rating, artist, time, item;
 
     // kreiranje nove stavke:
 
-    function kreirajStavku(entry, artist, recenzija, vrijeme) {
+    function kreirajStavku(entry, artist, rating, time) {
       const item = document.createElement("li");
 
-      item.innerHTML = `<p>Album: <span id="white">${entry}</span> <br> Artist: <span id="white">${artist}</span> <br> Rate: <span id="white">${recenzija}</span> <br> Rated on: <span id="white">${vrijeme}</span></p>`;
+      item.innerHTML = `<p>Album: <span id="white">${entry}</span> <br> Artist: <span id="white">${artist}</span> <br> Rate: <span id="white">${rating}</span> <br> Rated on: <span id="white">${time}</span></p>`;
       dodajFavoriteButton(item);
       dodajRemoveButton(item);
       return item;
@@ -23,13 +27,13 @@ require ('dotenv').config();
     function dodajStavku() {
       const entry = document.getElementById("album").value.trim();
       const artist = document.getElementById("artist").value.trim();
-      const recenzija = document.getElementById("review").value;
-      const vrijeme = new Date().toLocaleDateString();
+      const rating = document.getElementById("review").value;
+      const time = new Date().toLocaleDateString();
 
       // test:
-      //const vrijeme = new Date(2023, 11, 17).toLocaleDateString();
+      //const time = new Date(2023, 11, 17).toLocaleDateString();
 
-      const item = kreirajStavku(entry, artist, recenzija, vrijeme);
+      const item = kreirajStavku(entry, artist, rating, time);
       lista.appendChild(item);
       document.getElementById("album").value = "";
       document.getElementById("artist").value = "";
@@ -84,7 +88,6 @@ require ('dotenv').config();
       removeButton.parentNode.remove();
       // uklanja cijelu parent-stavku (u kojoj se našao kao child)
     }
-
   }
   // ovdje je završila funkcija Todo
 
@@ -92,7 +95,6 @@ require ('dotenv').config();
 
   window.addEventListener("load", todo.init);
 })();
-
 
 // API KEY:
 
