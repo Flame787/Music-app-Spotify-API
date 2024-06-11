@@ -13,18 +13,18 @@
 
     // creating new task:
 
-    function kreirajStavku(entry, artist, rating, time) {
+    function createTask(entry, artist, rating, time) {
       const item = document.createElement("li");
 
       item.innerHTML = `<p>Album: <span id="white">${entry}</span> <br> Artist: <span id="white">${artist}</span> <br> Rate: <span id="white">${rating}</span> <br> Rated on: <span id="white">${time}</span></p>`;
-      dodajFavoriteButton(item);
-      dodajRemoveButton(item);
+      addFavoriteButton(item);
+      addRemoveButton(item);
       return item;
     }
 
     // adding new task on the list:
 
-    function dodajStavku() {
+    function addTask() {
       const entry = document.getElementById("album").value.trim();
       const artist = document.getElementById("artist").value.trim();
       const rating = document.getElementById("review").value;
@@ -33,7 +33,7 @@
       // test:
       //const time = new Date(2023, 11, 17).toLocaleDateString();
 
-      const item = kreirajStavku(entry, artist, rating, time);
+      const item = createTask(entry, artist, rating, time);
       lista.appendChild(item);
       document.getElementById("album").value = "";
       document.getElementById("artist").value = "";
@@ -43,12 +43,12 @@
     // new task (item) added on the add-button click:
 
     this.init = function () {
-      buttonAdd.addEventListener("click", dodajStavku);
+      buttonAdd.addEventListener("click", addTask);
     };
 
     // add button FavoriteButton:
 
-    function dodajFavoriteButton(item) {
+    function addFavoriteButton(item) {
       const favoriteButton = document.createElement("button");
       favoriteButton.setAttribute("type", "checkbox");
       favoriteButton.classList.toggle("favorite-button");
@@ -71,19 +71,19 @@
 
     // add button RemoveButton:
 
-    function dodajRemoveButton(item) {
+    function addRemoveButton(item) {
       const removeButton = document.createElement("button");
       const hr = document.createElement("hr");
       removeButton.classList.add("remove-button");
       removeButton.classList.add("flex-item");
-      removeButton.addEventListener("click", removeStavka);
+      removeButton.addEventListener("click", removeTask);
       item.appendChild(removeButton);
       item.appendChild(hr);
       removeButton.innerHTML = "Remove album";
     }
 
-    // function removeStavka:
-    function removeStavka(event) {
+    // function removeTask:
+    function removeTask(event) {
       const removeButton = event.target;
       removeButton.parentNode.remove();
       // removes the whole parent-task (in which the removeButton was embedded as a child)
