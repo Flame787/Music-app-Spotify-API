@@ -12,7 +12,6 @@
     let entry, rating, artist, time, item;
 
     // creating new task:
-
     function createTask(entry, artist, rating, time) {
       const item = document.createElement("li");
 
@@ -23,7 +22,6 @@
     }
 
     // adding new task on the list:
-
     function addTask() {
       const entry = document.getElementById("album").value.trim();
       const artist = document.getElementById("artist").value.trim();
@@ -32,7 +30,6 @@
 
       // test:
       //const time = new Date(2023, 11, 17).toLocaleDateString();
-
       const item = createTask(entry, artist, rating, time);
       lista.appendChild(item);
       document.getElementById("album").value = "";
@@ -41,13 +38,11 @@
     }
 
     // new task (item) added on the add-button click:
-
     this.init = function () {
       buttonAdd.addEventListener("click", addTask);
     };
 
     // add button FavoriteButton:
-
     function addFavoriteButton(item) {
       const favoriteButton = document.createElement("button");
       favoriteButton.setAttribute("type", "checkbox");
@@ -62,7 +57,6 @@
     }
 
     // funkcion setFavorite:
-
     function setFavorite(event) {
       const favoriteButton = event.target;
       favoriteButton.classList.toggle("favorite");
@@ -70,7 +64,6 @@
     }
 
     // add button RemoveButton:
-
     function addRemoveButton(item) {
       const removeButton = document.createElement("button");
       const hr = document.createElement("hr");
@@ -89,9 +82,9 @@
       // removes the whole parent-task (in which the removeButton was embedded as a child)
     }
   }
-  // here ends Todo function
+  // here ends Todo function.
 
-  const todo = new Todo();
+  const todo = new Todo(); 
 
   window.addEventListener("load", todo.init);
 })();

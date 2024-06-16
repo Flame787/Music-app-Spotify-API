@@ -170,6 +170,8 @@ hr {
 
 #white {
   color: #d1d4c9;
+  font-weight: 100;
+  letter-spacing: 1px;
 }
 
 #new-title {
