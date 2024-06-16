@@ -12,6 +12,7 @@ body {
   /* background-color: #11074f; */
   background-color: #00224d;
   color: #d1d4c9;
+  text-shadow: 2px 2px 4px #000000;
   background-image: url("pictures/energy-\ by\ TungArt7\ DOUBLE.jpg");
   background-repeat: repeat;
   background-size: 100%;
@@ -86,8 +87,10 @@ h1 {
 button {
   padding: 0 3%;
   background-color: #a0153e;
+  box-shadow: 4px 5px 2px #232222b0;
   font-weight: bold;
   color: #d1d4c9;
+  text-shadow: 2px 2px 4px #000000;
   width: 8rem;
   height: 2rem;
   border-width: 0;
@@ -101,6 +104,7 @@ button {
 button:hover {
   background-color: #ca3535;
   color: black;
+  text-shadow: none;
 }
 
 li p {
@@ -129,8 +133,10 @@ hr {
 
 .favorite-button,
 .remove-button {
+  box-shadow: 4px 5px 2px #232222b0;
   padding: 0;
   margin: 1%;
+  text-shadow: 2px 2px 4px #000000;
   border-width: 0;
   width: 12rem;
   /* border-width je bio postavljen na 2 px kod ova 2 buttona, zato su bili veći od add-buttona */
@@ -146,6 +152,8 @@ hr {
 .favorite-button:hover {
   background-color: #ca3535;
   color: black;
+  text-shadow: none;
+
 }
 
 .remove-button {
@@ -157,6 +165,7 @@ hr {
 .remove-button:hover {
   background-color: #ca3535;
   color: black;
+  text-shadow: none;
 }
 
 #white {
