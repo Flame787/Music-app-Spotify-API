@@ -18,6 +18,78 @@ body {
   background-size: 100%;
 }
 
+/* ovdje počinje Navbar: */
+
+.red {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 120px;
+}
+
+.red > * {
+  padding: 0 10px 10px;
+}
+
+.red:first-child {
+  flex-wrap: wrap;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  align-items: center;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  opacity: 0.7;
+}
+
+/* 
+#navigation {
+  background: radial-gradient(at 20% 50%, #e0f1e3, #6b9574);
+} */
+
+/* #tolkien-top-logo {
+  text-align: center;
+}
+
+#nav-title {
+  font-family: "Italiana", sans-serif;
+  letter-spacing: 3px;
+  color: #040404;
+  font-weight: bold;
+  font-size: 1.7rem;
+}*/
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+
+li {
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 10px;
+  background-color: #e0e7f1;
+  border-radius: 5px;
+}
+
+li a {
+  color: #2b580c;
+  padding: 2px 3px;
+  text-decoration: none;
+  font-weight: 350;
+  color: #040404;
+}
+
+li a:hover {
+  color: #2bad61;
+} 
+
+
 .flex-container {
   display: flex;
   flex-wrap: wrap;
