@@ -7,7 +7,7 @@
 (function () {
   function Todo() {
     const buttonAdd = document.querySelector(".input-button");
-    const lista = document.querySelector("ul");
+    const lista = document.getElementById("added-list");
 
     let entry, rating, artist, time, item;
 

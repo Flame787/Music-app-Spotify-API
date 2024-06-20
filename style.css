@@ -3,6 +3,7 @@
 }
 
 body {
+  margin: 0;
   font-size: 1.2rem;
   font-weight: bold;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -42,7 +43,7 @@ body {
   align-items: center;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 /* 
@@ -52,43 +53,51 @@ body {
 
 /* #tolkien-top-logo {
   text-align: center;
-}
-
-#nav-title {
-  font-family: "Italiana", sans-serif;
-  letter-spacing: 3px;
-  color: #040404;
-  font-weight: bold;
-  font-size: 1.7rem;
 }*/
 
-ul {
+#nav-title {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  letter-spacing: 2px;
+  color: #d1d4c9;
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+#nav-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
   text-align: right;
 }
 
-li {
-  text-decoration: none;
+#nav-list button {
+  /* text-decoration: none; */
   display: inline-block;
-  margin: 0 10px;
-  background-color: #e0e7f1;
-  border-radius: 5px;
+  margin: 0 40px;
+  background-color: #a0153e;
+  border-radius: 30px;
+  padding: 5px 4px;
+  /* padding: 0% 3%; */
+  text-shadow: 2px 2px 4px #000000;
+  box-shadow: 4px 5px 2px #232222b0;
 }
 
-li a {
-  color: #2b580c;
-  padding: 2px 3px;
+#nav-list button a {
+  /* padding: 2px 3px; */
   text-decoration: none;
   font-weight: 350;
-  color: #040404;
+  color: #d1d4c9;
 }
 
-li a:hover {
-  color: #2bad61;
-} 
+#nav-list button:hover {
+  background-color: #ca3535;
+}
 
+#nav-list button a:hover {
+  color: #000000;
+  text-shadow: none;
+}
 
 .flex-container {
   display: flex;
@@ -225,7 +234,6 @@ hr {
   background-color: #ca3535;
   color: black;
   text-shadow: none;
-
 }
 
 .remove-button {
@@ -248,6 +256,40 @@ hr {
 
 #new-title {
   display: none;
+}
+
+.d-col-2 {
+  flex-basis: 16.66%;
+}
+.d-col-3 {
+  flex-basis: 25%;
+}
+.d-col-4 {
+  flex-basis: 33.33%;
+}
+.d-col-5 {
+  flex-basis: 41.66%;
+}
+.d-col-6 {
+  flex-basis: 50%;
+}
+.d-col-7 {
+  flex-basis: 58.33%;
+}
+.d-col-8 {
+  flex-basis: 66.66%;
+}
+.d-col-9 {
+  flex-basis: 75%;
+}
+.d-col-10 {
+  flex-basis: 83.33%;
+}
+.d-col-11 {
+  flex-basis: 91.66%;
+}
+.d-col-12 {
+  flex-basis: 100%;
 }
 
 @media (max-width: 1056px) {
