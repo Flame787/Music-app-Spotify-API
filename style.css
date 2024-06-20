@@ -74,13 +74,17 @@ body {
 #nav-list button {
   /* text-decoration: none; */
   display: inline-block;
-  margin: 0 40px;
+  margin: 0 70px;
   background-color: #a0153e;
   border-radius: 30px;
   padding: 5px 4px;
   /* padding: 0% 3%; */
   text-shadow: 2px 2px 4px #000000;
-  box-shadow: 4px 5px 2px #232222b0;
+  /* box-shadow: 4px 5px 2px #232222b0; */
+}
+
+#nav-list button:last-child {
+  margin-right: 250px;
 }
 
 #nav-list button a {
@@ -88,6 +92,7 @@ body {
   text-decoration: none;
   font-weight: 350;
   color: #d1d4c9;
+  font-weight: bold;
 }
 
 #nav-list button:hover {
@@ -97,6 +102,10 @@ body {
 #nav-list button a:hover {
   color: #000000;
   text-shadow: none;
+}
+
+#app-icon {
+  text-align: center;
 }
 
 .flex-container {
@@ -292,6 +301,26 @@ hr {
   flex-basis: 100%;
 }
 
+@media (max-width: 1540px) {
+  #nav-list button:last-child {
+    margin-right: 150px;
+  }
+
+  #nav-list button {
+    margin: 0 40px;
+  }
+}
+
+@media (max-width: 1150px) {
+  #nav-list button:last-child {
+    margin-right: 70px;
+  }
+
+  #nav-list button {
+    margin: 0 20px;
+  }
+}
+
 @media (max-width: 1056px) {
   li {
     flex-basis: 90%;
@@ -311,6 +340,31 @@ hr {
   }
 }
 
+@media (max-width: 880px) {
+  #nav-list button:last-child {
+    margin-right: 15px;
+  }
+
+  #nav-list button {
+    margin: 0 15px;
+  }
+
+  #nav-title {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 840px) {
+  #nav-list button {
+    margin: 0 10px;
+  }
+
+  #nav-title {
+    font-size: 1.2rem;
+    flex-basis: 90%;
+  }
+}
+
 @media (max-width: 786px) {
   body {
     font-size: 1rem;
@@ -326,6 +380,18 @@ hr {
     width: 85%;
     margin: 5% auto;
     align-content: center;
+  }
+
+  .red {
+    height: 200px;
+  }
+
+  #nav-list button {
+    width: 20%;
+  }
+
+  #navbar {
+    width: 100%;
   }
 
   button,
