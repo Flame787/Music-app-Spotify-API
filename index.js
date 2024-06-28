@@ -7,7 +7,7 @@
 (function () {
   function Todo() {
     const buttonAdd = document.querySelector(".input-button");
-    const lista = document.getElementById("added-list");
+    const list = document.getElementById("added-list");
 
     let entry, rating, artist, time, item;
 
@@ -31,7 +31,7 @@
       // test:
       //const time = new Date(2023, 11, 17).toLocaleDateString();
       const item = createTask(entry, artist, rating, time);
-      lista.appendChild(item);
+      list.appendChild(item);
       document.getElementById("album").value = "";
       document.getElementById("artist").value = "";
       document.getElementById("review").value = "";
@@ -81,6 +81,22 @@
       removeButton.parentNode.remove();
       // removes the whole parent-task (in which the removeButton was embedded as a child)
     }
+
+    // create favorite albums list (favorites.html):
+    const favoritesList = document.getElementById("fav_albums");
+    favoritesList.appendChild(item);
+
+    // creating new favorite:
+    function createFavorite(item) {
+      // const favItem = document.createElement("li");
+      // addFavoriteButton(item);
+      addRemoveButton(item);
+      // return favList;
+    }
+
+    // dodati:
+    // createFavorite-funkciju da se izvodi na pritisak buttona Favorite
+
   }
   // here ends Todo function.
 
