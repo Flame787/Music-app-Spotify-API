@@ -8,21 +8,22 @@
   function Todo() {
     const buttonAdd = document.querySelector(".input-button");
     const list = document.getElementById("added-list");
+    const favoritesList = document.getElementById("fav_albums");
 
     let entry, rating, artist, time, item;
 
     // creating new task:
     function createTask(entry, artist, rating, time) {
       const item = document.createElement("li");
-
-      item.innerHTML = `<p>Album: <span id="white">${entry}</span> <br> Artist: <span id="white">${artist}</span> <br> Rate: <span id="white">${rating}</span> <br> Rated on: <span id="white">${time}</span></p>`;
+      item.innerHTML = `<p>Album: <span id="white" class="entry">${entry}</span> <br> Artist: <span id="white" class="artist">${artist}</span> <br> Rate: <span id="white" class="rating">${rating}</span> <br> Rated on: <span id="white" class="time">${time}</span></p>`;
       addFavoriteButton(item);
       addRemoveButton(item);
       return item;
     }
 
     // adding new task on the list:
-    function addTask() {
+    function addTask(event) {
+      event.preventDefault();
       const entry = document.getElementById("album").value.trim();
       const artist = document.getElementById("artist").value.trim();
       const rating = document.getElementById("review").value;
@@ -45,8 +46,8 @@
     // add button FavoriteButton:
     function addFavoriteButton(item) {
       const favoriteButton = document.createElement("button");
-      favoriteButton.setAttribute("type", "checkbox");
-      favoriteButton.classList.toggle("favorite-button");
+      favoriteButton.setAttribute("type", "button");
+      // favoriteButton.classList.toggle("favorite-button");
       favoriteButton.classList.add("flex-item");
       favoriteButton.addEventListener("click", setFavorite);
       favoriteButton.innerHTML = "Add to favorites";
@@ -56,12 +57,58 @@
       listTitle.style.display = "block";
     }
 
-    // funkcion setFavorite:
+    // Function setFavorite:
     function setFavorite(event) {
-      const favoriteButton = event.target;
-      favoriteButton.classList.toggle("favorite");
-      //   parentNode.appendChild(favoriteButton);
+      const item = event.target.parentNode; 
+      const entry = item.querySelector(".entry").textContent; 
+      const artist = item.querySelector(".artist").textContent;
+      const rating = item.querySelector(".rating").textContent;
+      const time = item.querySelector(".time").textContent;
+      const favoriteItem = createFavorite(entry, artist, rating, time);
+      favoritesList.appendChild(favoriteItem);
     }
+
+    function createFavorite(entry, artist, rating, time) {
+      const item = document.createElement("li");
+      item.innerHTML = `<p>Album: <span class="entry">${entry}</span></p>
+      <p>Artist: <span class="artist">${artist}</span></p>
+      <p>Rate: <span class="rating">${rating}</span></p>
+      <p>Rated on: <span class="time">${time}</span></p>`;
+      addRemoveButton(item);
+      return item;
+    }
+
+    
+
+
+    // function setFavorite() {
+      
+    //   const entry = document.getElementById("album").value.trim();
+    //   const artist = document.getElementById("artist").value.trim();
+    //   const rating = document.getElementById("review").value;
+    //   const time = new Date().toLocaleDateString();
+    //   const favoriteItem = createFavorite(entry, artist, rating, time);
+    //   favoritesList.appendChild(favoriteItem);
+    // }
+
+     // Debugging to ensure favoritesList is found
+     console.log('favoritesList:', favoritesList);
+
+    //  if (favoritesList) {
+    //    favoritesList.appendChild(favoriteItem);
+    //  } else {
+    //    console.error('favoritesList element not found.');
+    //  }
+   
+
+    // funkcion setFavorite:
+    // function setFavorite() {
+    //   // const favoriteButton = event.target;
+    //   const item = createFavorite(entry, artist, rating, time);
+    //   // favoriteButton.classList.toggle("favorite"); 
+    //   //   parentNode.appendChild(favoriteButton);
+    //   favoritesList.appendChild(item);
+    // }
 
     // add button RemoveButton:
     function addRemoveButton(item) {
@@ -82,20 +129,6 @@
       // removes the whole parent-task (in which the removeButton was embedded as a child)
     }
 
-    // create favorite albums list (favorites.html):
-    const favoritesList = document.getElementById("fav_albums");
-    favoritesList.appendChild(item);
-
-    // creating new favorite:
-    function createFavorite(item) {
-      // const favItem = document.createElement("li");
-      // addFavoriteButton(item);
-      addRemoveButton(item);
-      // return favList;
-    }
-
-    // dodati:
-    // createFavorite-funkciju da se izvodi na pritisak buttona Favorite
 
   }
   // here ends Todo function.
