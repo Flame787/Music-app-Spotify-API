@@ -12,6 +12,47 @@
 
     let entry, rating, artist, time, item;
 
+    // Load lists from localStorage on init
+    function loadLists() {
+      const savedList = localStorage.getItem("addedList");
+      const savedFavorites = localStorage.getItem("favoritesList");
+
+      if (savedList) {
+        const items = JSON.parse(savedList);
+        items.forEach(item => list.appendChild(createTask(item.entry, item.artist, item.rating, item.time)));
+      }
+
+      if (savedFavorites) {
+        const items = JSON.parse(savedFavorites);
+        items.forEach(item => favoritesList.appendChild(createFavorite(item.entry, item.artist, item.rating, item.time)));
+      }
+    }
+
+    // Save lists to localStorage
+    function saveLists() {
+      const addedItems = [];
+      list.querySelectorAll("li").forEach(item => {
+        addedItems.push({
+          entry: item.querySelector(".entry").textContent,
+          artist: item.querySelector(".artist").textContent,
+          rating: item.querySelector(".rating").textContent,
+          time: item.querySelector(".time").textContent
+        });
+      });
+      localStorage.setItem("addedList", JSON.stringify(addedItems));
+
+      const favoriteItems = [];
+      favoritesList.querySelectorAll("li").forEach(item => {
+        favoriteItems.push({
+          entry: item.querySelector(".entry").textContent,
+          artist: item.querySelector(".artist").textContent,
+          rating: item.querySelector(".rating").textContent,
+          time: item.querySelector(".time").textContent
+        });
+      });
+      localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
+    }
+
     // creating new task:
     function createTask(entry, artist, rating, time) {
       const item = document.createElement("li");
@@ -36,11 +77,13 @@
       document.getElementById("album").value = "";
       document.getElementById("artist").value = "";
       document.getElementById("review").value = "";
+      saveLists();
     }
 
     // new task (item) added on the add-button click:
     this.init = function () {
       buttonAdd.addEventListener("click", addTask);
+      loadLists();
     };
 
     // add button FavoriteButton:
@@ -82,6 +125,7 @@
       }
 
       addIf(favoriteItem);
+      saveLists();
 
       // favoritesList.appendChild(favoriteItem);
     }
@@ -117,6 +161,7 @@
       const removeButton = event.target;
       removeButton.parentNode.remove();
       // removes the whole parent-task (in which the removeButton was embedded as a child)
+      saveLists();
     }
   }
   // here ends Todo function.

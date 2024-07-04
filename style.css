@@ -223,7 +223,8 @@ hr {
 
 .favorite-button,
 .remove-button {
-  box-shadow: 4px 5px 2px #232222b0;
+  /* box-shadow: 4px 5px 2px #232222b0; */
+  box-shadow: 3px 3px 2px #787676b0;
   padding: 0;
   margin: 1%;
   text-shadow: 2px 2px 4px #000000;
