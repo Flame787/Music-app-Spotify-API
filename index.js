@@ -59,15 +59,34 @@
 
     // Function setFavorite:
     function setFavorite(event) {
-      const item = event.target.parentNode; 
-      const entry = item.querySelector(".entry").textContent; 
+      const item = event.target.parentNode;
+      const entry = item.querySelector(".entry").textContent;
       const artist = item.querySelector(".artist").textContent;
       const rating = item.querySelector(".rating").textContent;
       const time = item.querySelector(".time").textContent;
       const favoriteItem = createFavorite(entry, artist, rating, time);
-      favoritesList.appendChild(favoriteItem);
+
+      function addIf(favoriteItem) {
+        let found = false;
+        favoritesList.querySelectorAll('li').forEach((element) => {
+          if (element.textContent === favoriteItem.textContent) {
+            found = true;
+          }
+        });
+        if (!found) {
+          favoritesList.appendChild(favoriteItem);
+          console.log(`Added '${favoriteItem}' on the favorites list.`);
+        } else {
+          console.log(`'${favoriteItem}' is already on the list.`);
+        }
+      }
+
+      addIf(favoriteItem);
+
+      // favoritesList.appendChild(favoriteItem);
     }
 
+    // Function createFavorite:
     function createFavorite(entry, artist, rating, time) {
       const item = document.createElement("li");
       item.innerHTML = `<p>Album: <span class="entry">${entry}</span></p>
@@ -78,37 +97,8 @@
       return item;
     }
 
-    
-
-
-    // function setFavorite() {
-      
-    //   const entry = document.getElementById("album").value.trim();
-    //   const artist = document.getElementById("artist").value.trim();
-    //   const rating = document.getElementById("review").value;
-    //   const time = new Date().toLocaleDateString();
-    //   const favoriteItem = createFavorite(entry, artist, rating, time);
-    //   favoritesList.appendChild(favoriteItem);
-    // }
-
-     // Debugging to ensure favoritesList is found
-     console.log('favoritesList:', favoritesList);
-
-    //  if (favoritesList) {
-    //    favoritesList.appendChild(favoriteItem);
-    //  } else {
-    //    console.error('favoritesList element not found.');
-    //  }
-   
-
-    // funkcion setFavorite:
-    // function setFavorite() {
-    //   // const favoriteButton = event.target;
-    //   const item = createFavorite(entry, artist, rating, time);
-    //   // favoriteButton.classList.toggle("favorite"); 
-    //   //   parentNode.appendChild(favoriteButton);
-    //   favoritesList.appendChild(item);
-    // }
+    // Debugging to ensure favoritesList is found
+    console.log("favoritesList:", favoritesList);
 
     // add button RemoveButton:
     function addRemoveButton(item) {
@@ -128,12 +118,10 @@
       removeButton.parentNode.remove();
       // removes the whole parent-task (in which the removeButton was embedded as a child)
     }
-
-
   }
   // here ends Todo function.
 
-  const todo = new Todo(); 
+  const todo = new Todo();
 
   window.addEventListener("load", todo.init);
 })();
