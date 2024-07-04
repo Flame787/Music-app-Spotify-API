@@ -47,7 +47,7 @@
     function addFavoriteButton(item) {
       const favoriteButton = document.createElement("button");
       favoriteButton.setAttribute("type", "button");
-      // favoriteButton.classList.toggle("favorite-button");
+      favoriteButton.classList.add("favorite-button");
       favoriteButton.classList.add("flex-item");
       favoriteButton.addEventListener("click", setFavorite);
       favoriteButton.innerHTML = "Add to favorites";
