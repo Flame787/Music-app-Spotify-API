@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   box-sizing: border-box;
 }
@@ -177,6 +176,14 @@ li {
 li p {
   padding: 2%;
   display: inline-block;
+  color: rgba(209, 212, 201, 0.5725490196);
+  opacity: 0.9;
+}
+
+#white {
+  color: #d1d4c9;
+  font-weight: 100;
+  letter-spacing: 1px;
 }
 
 #results {
@@ -213,12 +220,6 @@ hr {
 
 .remove-button {
   background-color: #5d0e41;
-}
-
-#white {
-  color: #d1d4c9;
-  font-weight: 100;
-  letter-spacing: 1px;
 }
 
 #new-title {
@@ -370,8 +371,4 @@ hr {
   #empty {
     display: none;
   }
-}
-/* popraviti My lists button u navbaru na rezoluciji najužeg ekrana mobitela 
-  (proširiti button ili prostor za button da slova ne ispadaju) */
-/* poravnati navbar buttone u sredini kad je u uskoj mobilnoj rezoluciji */
-/* u uskoj mobilnoj rezoluciji - povećati razmak između remove-buttona i donje crte *//*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

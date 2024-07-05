@@ -133,10 +133,10 @@
     // Function createFavorite:
     function createFavorite(entry, artist, rating, time) {
       const item = document.createElement("li");
-      item.innerHTML = `<p>Album: <span class="entry">${entry}</span></p>
-      <p>Artist: <span class="artist">${artist}</span></p>
-      <p>Rate: <span class="rating">${rating}</span></p>
-      <p>Rated on: <span class="time">${time}</span></p>`;
+      item.innerHTML = `<p>Album: <span id="white" class="entry">${entry}</span></p>
+      <p>Artist: <span id="white" class="artist">${artist}</span></p>
+      <p>Rate: <span id="white" class="rating">${rating}</span></p>
+      <p>Rated on: <span id="white" class="time">${time}</span></p>`;
       addRemoveButton(item);
       return item;
     }

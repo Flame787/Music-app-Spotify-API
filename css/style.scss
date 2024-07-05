@@ -128,10 +128,13 @@ ul {
 li {
   flex-basis: 80%;
   p {
-    padding: 2%;
-    display: inline-block;
+    @include list-paragraph();
   }
 }
+
+#white {
+    @include white-todos();
+  }
 
 #results {
   margin: 2% auto;
@@ -159,49 +162,12 @@ hr {
   background-color: $formRemoveColor1;
 }
 
-#white {
-  color: $fontColor1;
-  font-weight: 100;
-  letter-spacing: 1px;
-}
-
 #new-title {
   display: none;
 }
 
-.d-col-2 {
-  flex-basis: 16.66%;
-}
-.d-col-3 {
-  flex-basis: 25%;
-}
-.d-col-4 {
-  flex-basis: 33.33%;
-}
-.d-col-5 {
-  flex-basis: 41.66%;
-}
-.d-col-6 {
-  flex-basis: 50%;
-}
-.d-col-7 {
-  flex-basis: 58.33%;
-}
-.d-col-8 {
-  flex-basis: 66.66%;
-}
-.d-col-9 {
-  flex-basis: 75%;
-}
-.d-col-10 {
-  flex-basis: 83.33%;
-}
-.d-col-11 {
-  flex-basis: 91.66%;
-}
-.d-col-12 {
-  flex-basis: 100%;
-}
+@include columns();
+
 
 @media (max-width: 1540px) {
   #nav-list button:last-child {
@@ -329,11 +295,5 @@ hr {
   }
 }
 
-/* popraviti My lists button u navbaru na rezoluciji najužeg ekrana mobitela 
-  (proširiti button ili prostor za button da slova ne ispadaju) */
-
-/* poravnati navbar buttone u sredini kad je u uskoj mobilnoj rezoluciji */
-
-/* u uskoj mobilnoj rezoluciji - povećati razmak između remove-buttona i donje crte */
 
 // na kraju izbrisati style.css originalni koji je van scss foldera, jer je nepotreban
