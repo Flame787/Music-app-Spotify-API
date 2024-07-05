@@ -76,6 +76,7 @@ body {
   display: inline-block;
   margin: 0 70px;
   background-color: #a0153e;
+  box-shadow: 3px 3px 2px #787676b0;
   border-radius: 30px;
   padding: 5px 4px;
   /* padding: 0% 3%; */
@@ -219,7 +220,7 @@ ul {
 
 li {
   flex-basis: 80%;
-  padding: 0;
+  
 }
 
 hr {
@@ -369,6 +370,10 @@ hr {
     font-size: 1.2rem;
     flex-basis: 90%;
   }
+
+  .remove-button {
+    margin: 3%;
+  }
 }
 
 @media (max-width: 786px) {
@@ -393,7 +398,7 @@ hr {
   }
 
   #nav-list button {
-    width: 20%;
+    width: 25%;
   }
 
   #navbar {
@@ -409,6 +414,10 @@ hr {
     margin-top: 5%;
     margin-bottom: 10%;
     padding: 0%;
+  }
+
+  .remove-button {
+    margin: 3%;
   }
 
   li p {
