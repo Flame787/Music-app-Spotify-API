@@ -1,16 +1,11 @@
 @import "base/reset";
-@import "base/color";
+@import "base/colors";
 @import "base/typography";
 @import "abstracts/mixins";
 
 body {
-  font-size: 1.2rem;
-  font-weight: bold;
-  font-family: $sans-serif1;
-  text-align: center;
-  /* background-color: #11074f; */
-  /* background-color: #00224d; */
   color: $fontColor1;
+  font-family: $sans-serif1;
   text-shadow: 2px 2px 4px $textShadowColor1;
   background-image: url("../pictures/energy-\ by\ TungArt7\ DOUBLE.jpg");
   background-repeat: repeat;
@@ -45,8 +40,8 @@ body {
   text-align: right;
 
   button {
-    display: inline-block;
     @include button-style();
+    @include navbar-button();
 
     &:last-child {
       margin-right: 250px;
@@ -56,10 +51,10 @@ body {
     }
     a {
       @include nav-ancor-text();
-    }
-    &:hover {
-      color: $textShadowColor1;
-      text-shadow: none;
+
+      &:hover {
+        @include button-hover();
+      }
     }
   }
 }
@@ -68,59 +63,45 @@ body {
   text-align: center;
 }
 
+h1,
+h2 {
+  margin-top: 10%;
+}
+
+// form:
+
 .flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  @include flex-container();
   align-items: center;
   width: 80%;
   margin: 10%;
   height: 20%;
-  /* ne height: 20vh, jer se vh ne skalira dobro kasnije, kad bude puno elemenata dodano na listu (donji flex-container), 
-    oni ne stanu više u određeni broj vh (fiksno je), nego prelaze i preko gornjeg flex-containera, što izgleda ružno, strgano.
-    Bolje koristiti postotke za containere unutar same stranice, onda se stranica produžuje i 
-    elementi se samo dodaju na listu ali ne ispadaju iz svojeg containera, i možemo lako scrollati prema dolje. */
 }
-
-.flex-item {
-  position: relative;
-  flex-basis: 15%;
-  /* display: inline-block; */
-}
+/* if height in vh: 20vh is used, it doesn't scale well, if too many elements added to the list (lower flex-container), 
+    they won't fit anymore to a fixed vh-height, but will be overlapping into upper flex-container.
+    Better to use percentage for containers inside the page, then the page will grow larger if needed - scrollable, 
+    as long as alements are added to the list, but they will always fit into their container.
+ */
 
 #first-container {
   border-radius: 30px;
 }
 
 #form {
-  /* background-color: #090305; */
-  /* background-color: #29435c; */
-  background-color: #5d0e41;
-  /* color: #FCE38A; */
-  color: $fontColor1;
-  border-radius: 30px;
-  box-shadow: 5px 5px 3px #ca3535;
-  margin-top: 8%;
+  @include form-design();
 }
 
 input {
-  width: 10rem;
-  height: 1.5rem;
-  border-radius: 30px;
-  background-color: #00224d;
-  color: $fontColor1;
-  text-align: center;
-  font-size: 18px;
-  font-family: $sans-serif1;
-}
+  @include input-field();
 
-input:hover {
-  background-color: #ca3535;
-  color: $textShadowColor1;
+  &:hover {
+    background-color: $hoverColor1;
+    color: $textShadowColor1;
+  }
 }
 
 p {
-  padding: 2%;
+  padding: 2% 0;
 }
 
 /* input field for a numeric rate (smaller than others) */
@@ -128,52 +109,32 @@ p {
   width: 7rem;
 }
 
-h1 {
-  margin-top: 10%;
-}
-
-h2 {
-  margin-top: 10%;
-}
-
+// submit-button:
 button {
-  padding: 0 3%;
-  background-color: $navButtonColor1;
-  box-shadow: 4px 5px 2px #232222b0;
-  font-weight: bold;
-  color: $fontColor1;
-  text-shadow: 2px 2px 4px $textShadowColor1;
-  width: 8rem;
-  height: 2rem;
-  border-width: 0;
-  border-radius: 30px;
-  font-size: 18px;
-  font-family: $sans-serif1;
-}
+  @include submit-button();
+  @include button-style();
 
-button:hover {
-  background-color: #ca3535;
-  color: black;
-  text-shadow: none;
-}
-
-li p {
-  padding: 2%;
-  display: inline-block;
+  &:hover {
+    @include button-hover();
+  }
 }
 
 ul {
-  list-style-type: none;
-  padding-inline-start: 0;
-  margin-top: 5%;
+    list-style-type: none;
+    padding-inline-start: 0;
+    margin-top: 5%;
+  }
+
+li {
+  flex-basis: 80%;
+  p {
+    padding: 2%;
+    display: inline-block;
+  }
 }
 
 #results {
   margin: 2% auto;
-}
-
-li {
-  flex-basis: 80%;
 }
 
 hr {
@@ -182,39 +143,20 @@ hr {
 
 .favorite-button,
 .remove-button {
-  /* box-shadow: 4px 5px 2px #232222b0; */
-  box-shadow: 3px 3px 2px $boxShadowColor1;
-  padding: 0;
-  margin: 1%;
-  text-shadow: 2px 2px 4px $textShadowColor1;
-  border-width: 0;
-  width: 12rem;
-  /* border-width je bio postavljen na 2 px kod ova 2 buttona, zato su bili veći od add-buttona */
+  @include button-style();
+  @include fav-and-remove-button();
+
+  &:hover {
+    @include button-hover();
+  }
 }
 
 .favorite-button {
   background-color: $navButtonColor1;
-  /* color: black; */
-  color: $fontColor1;
-  height: 2rem;
-}
-
-.favorite-button:hover {
-  background-color: #ca3535;
-  color: $textShadowColor1;
-  text-shadow: none;
 }
 
 .remove-button {
-  background-color: #5d0e41;
-  color: $fontColor1;
-  height: 2rem;
-}
-
-.remove-button:hover {
-  background-color: #ca3535;
-  color: $textShadowColor1;
-  text-shadow: none;
+  background-color: $formRemoveColor1;
 }
 
 #white {

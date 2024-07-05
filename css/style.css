@@ -5,16 +5,14 @@
 
 body {
   margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 body {
-  font-size: 1.2rem;
-  font-weight: bold;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
-  /* background-color: #11074f; */
-  /* background-color: #00224d; */
   color: #d1d4c9;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   text-shadow: 2px 2px 4px #000000;
   background-image: url("../pictures/energy- by TungArt7 DOUBLE.jpg");
   background-repeat: repeat;
@@ -48,7 +46,9 @@ body {
 #nav-title {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: #d1d4c9;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   letter-spacing: 2px;
+  color: #d1d4c9;
   font-weight: bold;
   font-size: 1.7rem;
 }
@@ -58,24 +58,13 @@ body {
   text-align: right;
 }
 #nav-list button {
+  background-color: #a0153e;
+  border-radius: 30px;
+  text-shadow: 2px 2px 4px #000000;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
   display: inline-block;
   margin: 0 70px;
-  background-color: #a0153e;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-  border-radius: 30px;
   padding: 5px 4px;
-  text-shadow: 2px 2px 4px #000000;
-}
-#nav-list button a {
-  /* padding: 2px 3px; */
-  text-decoration: none;
-  font-weight: 350;
-  color: #d1d4c9;
-  font-weight: bold;
-}
-#nav-list button a:hover {
-  color: #000000;
-  text-shadow: none;
 }
 #nav-list button:last-child {
   margin-right: 250px;
@@ -83,9 +72,25 @@ body {
 #nav-list button:hover {
   background-color: #ca3535;
 }
+#nav-list button a {
+  text-decoration: none;
+  font-weight: 350;
+  color: #d1d4c9;
+  font-weight: bold;
+}
+#nav-list button a:hover {
+  background-color: #ca3535;
+  color: #000000;
+  text-shadow: none;
+}
 
 #app-icon {
   text-align: center;
+}
+
+h1,
+h2 {
+  margin-top: 10%;
 }
 
 .flex-container {
@@ -96,29 +101,22 @@ body {
   width: 80%;
   margin: 10%;
   height: 20%;
-  /* ne height: 20vh, jer se vh ne skalira dobro kasnije, kad bude puno elemenata dodano na listu (donji flex-container), 
-    oni ne stanu više u određeni broj vh (fiksno je), nego prelaze i preko gornjeg flex-containera, što izgleda ružno, strgano.
-    Bolje koristiti postotke za containere unutar same stranice, onda se stranica produžuje i 
-    elementi se samo dodaju na listu ali ne ispadaju iz svojeg containera, i možemo lako scrollati prema dolje. */
 }
 
-.flex-item {
-  position: relative;
-  flex-basis: 15%;
-  /* display: inline-block; */
-}
-
+/* if height in vh: 20vh is used, it doesn't scale well, if too many elements added to the list (lower flex-container), 
+    they won't fit anymore to a fixed vh-height, but will be overlapping into upper flex-container.
+    Better to use percentage for containers inside the page, then the page will grow larger if needed - scrollable, 
+    as long as alements are added to the list, but they will always fit into their container.
+ */
 #first-container {
   border-radius: 30px;
 }
 
 #form {
-  /* background-color: #090305; */
-  /* background-color: #29435c; */
-  background-color: #5d0e41;
-  /* color: #FCE38A; */
+  background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
   color: #d1d4c9;
   border-radius: 30px;
+  border-top: 1px solid #000000;
   box-shadow: 5px 5px 3px #ca3535;
   margin-top: 8%;
 }
@@ -133,14 +131,13 @@ input {
   font-size: 18px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
 }
-
 input:hover {
   background-color: #ca3535;
   color: #000000;
 }
 
 p {
-  padding: 2%;
+  padding: 2% 0;
 }
 
 /* input field for a numeric rate (smaller than others) */
@@ -148,38 +145,24 @@ p {
   width: 7rem;
 }
 
-h1 {
-  margin-top: 10%;
-}
-
-h2 {
-  margin-top: 10%;
-}
-
 button {
   padding: 0 3%;
-  background-color: #a0153e;
-  box-shadow: 4px 5px 2px rgba(35, 34, 34, 0.6901960784);
   font-weight: bold;
   color: #d1d4c9;
-  text-shadow: 2px 2px 4px #000000;
   width: 8rem;
   height: 2rem;
   border-width: 0;
-  border-radius: 30px;
   font-size: 18px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #a0153e;
+  border-radius: 30px;
+  text-shadow: 2px 2px 4px #000000;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-
 button:hover {
   background-color: #ca3535;
-  color: black;
+  color: #000000;
   text-shadow: none;
-}
-
-li p {
-  padding: 2%;
-  display: inline-block;
 }
 
 ul {
@@ -188,12 +171,16 @@ ul {
   margin-top: 5%;
 }
 
-#results {
-  margin: 2% auto;
-}
-
 li {
   flex-basis: 80%;
+}
+li p {
+  padding: 2%;
+  display: inline-block;
+}
+
+#results {
+  margin: 2% auto;
 }
 
 hr {
@@ -202,39 +189,30 @@ hr {
 
 .favorite-button,
 .remove-button {
-  /* box-shadow: 4px 5px 2px #232222b0; */
+  background-color: #a0153e;
+  border-radius: 30px;
+  text-shadow: 2px 2px 4px #000000;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
   padding: 0;
   margin: 1%;
-  text-shadow: 2px 2px 4px #000000;
   border-width: 0;
   width: 12rem;
-  /* border-width je bio postavljen na 2 px kod ova 2 buttona, zato su bili veći od add-buttona */
-}
-
-.favorite-button {
-  background-color: #a0153e;
-  /* color: black; */
-  color: #d1d4c9;
   height: 2rem;
-}
-
-.favorite-button:hover {
-  background-color: #ca3535;
-  color: #000000;
-  text-shadow: none;
-}
-
-.remove-button {
-  background-color: #5d0e41;
   color: #d1d4c9;
-  height: 2rem;
 }
-
+.favorite-button:hover,
 .remove-button:hover {
   background-color: #ca3535;
   color: #000000;
   text-shadow: none;
+}
+
+.favorite-button {
+  background-color: #a0153e;
+}
+
+.remove-button {
+  background-color: #5d0e41;
 }
 
 #white {
