@@ -3,445 +3,395 @@
 @import "base/typography";
 @import "abstracts/mixins";
 
-
 body {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: bold;
-    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-      "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman",
-      serif, Tahoma, Geneva, Verdana, sans-serif;
-    text-align: center;
-    /* background-color: #11074f; */
-    /* background-color: #00224d; */
-    color: #d1d4c9;
-    text-shadow: 2px 2px 4px #000000;
-    background-image: url("../pictures/energy-\ by\ TungArt7\ DOUBLE.jpg");
-    background-repeat: repeat;
-    background-size: 100%;
-  }
-  
-  /* ovdje počinje Navbar: */
-  
-  .red {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    height: 120px;
-  }
-  
-  .red > * {
-    padding: 0 10px 10px;
-  }
-  
-  .red:first-child {
-    flex-wrap: wrap;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.7);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-    align-items: center;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    opacity: 0.8;
-  }
-  
-  /* 
-  #navigation {
-    background: radial-gradient(at 20% 50%, #e0f1e3, #6b9574);
-  } */
-  
-  /* #tolkien-top-logo {
-    text-align: center;
-  }*/
-  
-  #nav-title {
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    letter-spacing: 2px;
-    color: #d1d4c9;
-    font-weight: bold;
-    font-size: 1.7rem;
-  }
-  
-  #nav-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-align: right;
-  }
-  
-  #nav-list button {
-    /* text-decoration: none; */
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: $sans-serif1;
+  text-align: center;
+  /* background-color: #11074f; */
+  /* background-color: #00224d; */
+  color: $fontColor1;
+  text-shadow: 2px 2px 4px $textShadowColor1;
+  background-image: url("../pictures/energy-\ by\ TungArt7\ DOUBLE.jpg");
+  background-repeat: repeat;
+  background-size: 100%;
+}
+
+// Navbar (header id="navigation" class="red"):
+
+.red {
+  @include flex-container();
+  height: 120px;
+}
+
+// all children elements of header, which has class .red:
+.red > * {
+  padding: 0 10px 10px;
+}
+
+#navigation {
+  @include navigation-position();
+  @include navigation-design();
+}
+
+#nav-title {
+  font-family: $sans-serif2;
+  color: $fontColor1;
+  @include nav-title();
+}
+
+#nav-list {
+  list-style-type: none;
+  text-align: right;
+
+  button {
     display: inline-block;
-    margin: 0 70px;
-    background-color: #a0153e;
-    box-shadow: 3px 3px 2px #787676b0;
-    border-radius: 30px;
-    padding: 5px 4px;
-    /* padding: 0% 3%; */
-    text-shadow: 2px 2px 4px #000000;
-    /* box-shadow: 4px 5px 2px #232222b0; */
+    @include button-style();
+
+    &:last-child {
+      margin-right: 250px;
+    }
+    &:hover {
+      background-color: $hoverColor1;
+    }
+    a {
+      @include nav-ancor-text();
+    }
+    &:hover {
+      color: $textShadowColor1;
+      text-shadow: none;
+    }
   }
-  
-  #nav-list button:last-child {
-    margin-right: 250px;
-  }
-  
-  #nav-list button a {
-    /* padding: 2px 3px; */
-    text-decoration: none;
-    font-weight: 350;
-    color: #d1d4c9;
-    font-weight: bold;
-  }
-  
-  #nav-list button:hover {
-    background-color: #ca3535;
-  }
-  
-  #nav-list button a:hover {
-    color: #000000;
-    text-shadow: none;
-  }
-  
-  #app-icon {
-    text-align: center;
-  }
-  
-  .flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    width: 80%;
-    margin: 10%;
-    height: 20%;
-    /* ne height: 20vh, jer se vh ne skalira dobro kasnije, kad bude puno elemenata dodano na listu (donji flex-container), 
+}
+
+#app-icon {
+  text-align: center;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: 10%;
+  height: 20%;
+  /* ne height: 20vh, jer se vh ne skalira dobro kasnije, kad bude puno elemenata dodano na listu (donji flex-container), 
     oni ne stanu više u određeni broj vh (fiksno je), nego prelaze i preko gornjeg flex-containera, što izgleda ružno, strgano.
     Bolje koristiti postotke za containere unutar same stranice, onda se stranica produžuje i 
     elementi se samo dodaju na listu ali ne ispadaju iz svojeg containera, i možemo lako scrollati prema dolje. */
+}
+
+.flex-item {
+  position: relative;
+  flex-basis: 15%;
+  /* display: inline-block; */
+}
+
+#first-container {
+  border-radius: 30px;
+}
+
+#form {
+  /* background-color: #090305; */
+  /* background-color: #29435c; */
+  background-color: #5d0e41;
+  /* color: #FCE38A; */
+  color: $fontColor1;
+  border-radius: 30px;
+  box-shadow: 5px 5px 3px #ca3535;
+  margin-top: 8%;
+}
+
+input {
+  width: 10rem;
+  height: 1.5rem;
+  border-radius: 30px;
+  background-color: #00224d;
+  color: $fontColor1;
+  text-align: center;
+  font-size: 18px;
+  font-family: $sans-serif1;
+}
+
+input:hover {
+  background-color: #ca3535;
+  color: $textShadowColor1;
+}
+
+p {
+  padding: 2%;
+}
+
+/* input field for a numeric rate (smaller than others) */
+#review {
+  width: 7rem;
+}
+
+h1 {
+  margin-top: 10%;
+}
+
+h2 {
+  margin-top: 10%;
+}
+
+button {
+  padding: 0 3%;
+  background-color: $navButtonColor1;
+  box-shadow: 4px 5px 2px #232222b0;
+  font-weight: bold;
+  color: $fontColor1;
+  text-shadow: 2px 2px 4px $textShadowColor1;
+  width: 8rem;
+  height: 2rem;
+  border-width: 0;
+  border-radius: 30px;
+  font-size: 18px;
+  font-family: $sans-serif1;
+}
+
+button:hover {
+  background-color: #ca3535;
+  color: black;
+  text-shadow: none;
+}
+
+li p {
+  padding: 2%;
+  display: inline-block;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: 0;
+  margin-top: 5%;
+}
+
+#results {
+  margin: 2% auto;
+}
+
+li {
+  flex-basis: 80%;
+}
+
+hr {
+  width: 70%;
+}
+
+.favorite-button,
+.remove-button {
+  /* box-shadow: 4px 5px 2px #232222b0; */
+  box-shadow: 3px 3px 2px $boxShadowColor1;
+  padding: 0;
+  margin: 1%;
+  text-shadow: 2px 2px 4px $textShadowColor1;
+  border-width: 0;
+  width: 12rem;
+  /* border-width je bio postavljen na 2 px kod ova 2 buttona, zato su bili veći od add-buttona */
+}
+
+.favorite-button {
+  background-color: $navButtonColor1;
+  /* color: black; */
+  color: $fontColor1;
+  height: 2rem;
+}
+
+.favorite-button:hover {
+  background-color: #ca3535;
+  color: $textShadowColor1;
+  text-shadow: none;
+}
+
+.remove-button {
+  background-color: #5d0e41;
+  color: $fontColor1;
+  height: 2rem;
+}
+
+.remove-button:hover {
+  background-color: #ca3535;
+  color: $textShadowColor1;
+  text-shadow: none;
+}
+
+#white {
+  color: $fontColor1;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+#new-title {
+  display: none;
+}
+
+.d-col-2 {
+  flex-basis: 16.66%;
+}
+.d-col-3 {
+  flex-basis: 25%;
+}
+.d-col-4 {
+  flex-basis: 33.33%;
+}
+.d-col-5 {
+  flex-basis: 41.66%;
+}
+.d-col-6 {
+  flex-basis: 50%;
+}
+.d-col-7 {
+  flex-basis: 58.33%;
+}
+.d-col-8 {
+  flex-basis: 66.66%;
+}
+.d-col-9 {
+  flex-basis: 75%;
+}
+.d-col-10 {
+  flex-basis: 83.33%;
+}
+.d-col-11 {
+  flex-basis: 91.66%;
+}
+.d-col-12 {
+  flex-basis: 100%;
+}
+
+@media (max-width: 1540px) {
+  #nav-list button:last-child {
+    margin-right: 150px;
   }
-  
-  .flex-item {
-    position: relative;
-    flex-basis: 15%;
-    /* display: inline-block; */
+
+  #nav-list button {
+    margin: 0 40px;
   }
-  
-  #first-container {
-    border-radius: 30px;
+}
+
+@media (max-width: 1150px) {
+  #nav-list button:last-child {
+    margin-right: 70px;
   }
-  
-  #form {
-    /* background-color: #090305; */
-    /* background-color: #29435c; */
-    background-color: #5d0e41;
-    /* color: #FCE38A; */
-    color: #d1d4c9;
-    border-radius: 30px;
-    box-shadow: 5px 5px 3px #ca3535;
-    margin-top: 8%;
+
+  #nav-list button {
+    margin: 0 20px;
   }
-  
-  input {
-    width: 10rem;
-    height: 1.5rem;
-    border-radius: 30px;
-    background-color: #00224d;
-    color: #d1d4c9;
-    text-align: center;
-    font-size: 18px;
-    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-      "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman",
-      serif, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@media (max-width: 1056px) {
+  li {
+    flex-basis: 90%;
   }
-  
-  input:hover {
-    background-color: #ca3535;
-    color: #000000;
+  li p {
+    padding: 2% 0;
   }
-  
-  p {
-    padding: 2%;
+}
+
+/* so that 'Rate (1-10)' doesn't break in 2 rows */
+@media (max-width: 956px) {
+  body {
+    font-size: 1rem;
   }
-  
-  /* input field for a numeric rate (smaller than others) */
   #review {
-    width: 7rem;
+    width: 6rem;
   }
-  
-  h1 {
-    margin-top: 10%;
+}
+
+@media (max-width: 880px) {
+  #nav-list button:last-child {
+    margin-right: 15px;
   }
-  
-  h2 {
-    margin-top: 10%;
+
+  #nav-list button {
+    margin: 0 15px;
   }
-  
-  
+
+  #nav-title {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 840px) {
+  #nav-list button {
+    margin: 0 10px;
+  }
+
+  #nav-title {
+    font-size: 1.2rem;
+    flex-basis: 90%;
+  }
+
+  .remove-button {
+    margin: 3%;
+  }
+}
+
+@media (max-width: 786px) {
+  body {
+    font-size: 1rem;
+  }
+
+  .flex-item {
+    flex-basis: 70%;
+    margin: 1% auto;
+  }
+
+  .flex-container {
+    height: 45%;
+    width: 85%;
+    margin: 5% auto;
+    align-content: center;
+  }
+
+  .red {
+    height: 200px;
+  }
+
+  #nav-list button {
+    width: 25%;
+  }
+
+  #navbar {
+    width: 100%;
+  }
+
+  button,
+  input {
+    width: 60%;
+  }
+
   button {
-    padding: 0 3%;
-    background-color: #a0153e;
-    box-shadow: 4px 5px 2px #232222b0;
-    font-weight: bold;
-    color: #d1d4c9;
-    text-shadow: 2px 2px 4px #000000;
-    width: 8rem;
-    height: 2rem;
-    border-width: 0;
-    border-radius: 30px;
-    font-size: 18px;
-    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-      "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman",
-      serif, Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    padding: 0%;
   }
-  
-  button:hover {
-    background-color: #ca3535;
-    color: black;
-    text-shadow: none;
+
+  .remove-button {
+    margin: 3%;
   }
-  
+
   li p {
     padding: 2%;
-    display: inline-block;
+    display: block;
   }
-  
-  ul {
-    list-style-type: none;
-    padding-inline-start: 0;
-    margin-top: 5%;
+
+  #first-container {
+    margin-bottom: 15%;
   }
-  
-  #results {
-    margin: 2% auto;
-  }
-  
-  li {
-    flex-basis: 80%;
-    
-  }
-  
-  hr {
-    width: 70%;
-  }
-  
-  .favorite-button,
-  .remove-button {
-    /* box-shadow: 4px 5px 2px #232222b0; */
-    box-shadow: 3px 3px 2px #787676b0;
-    padding: 0;
-    margin: 1%;
-    text-shadow: 2px 2px 4px #000000;
-    border-width: 0;
-    width: 12rem;
-    /* border-width je bio postavljen na 2 px kod ova 2 buttona, zato su bili veći od add-buttona */
-  }
-  
-  .favorite-button {
-    background-color: #a0153e;
-    /* color: black; */
-    color: #d1d4c9;
-    height: 2rem;
-  }
-  
-  .favorite-button:hover {
-    background-color: #ca3535;
-    color: #000000;
-    text-shadow: none;
-  }
-  
-  .remove-button {
-    background-color: #5d0e41;
-    color: #d1d4c9;
-    height: 2rem;
-  }
-  
-  .remove-button:hover {
-    background-color: #ca3535;
-    color: #000000;
-    text-shadow: none;
-  }
-  
-  #white {
-    color: #d1d4c9;
-    font-weight: 100;
-    letter-spacing: 1px;
-  }
-  
-  #new-title {
+
+  #empty {
     display: none;
   }
-  
-  .d-col-2 {
-    flex-basis: 16.66%;
-  }
-  .d-col-3 {
-    flex-basis: 25%;
-  }
-  .d-col-4 {
-    flex-basis: 33.33%;
-  }
-  .d-col-5 {
-    flex-basis: 41.66%;
-  }
-  .d-col-6 {
-    flex-basis: 50%;
-  }
-  .d-col-7 {
-    flex-basis: 58.33%;
-  }
-  .d-col-8 {
-    flex-basis: 66.66%;
-  }
-  .d-col-9 {
-    flex-basis: 75%;
-  }
-  .d-col-10 {
-    flex-basis: 83.33%;
-  }
-  .d-col-11 {
-    flex-basis: 91.66%;
-  }
-  .d-col-12 {
-    flex-basis: 100%;
-  }
-  
-  @media (max-width: 1540px) {
-    #nav-list button:last-child {
-      margin-right: 150px;
-    }
-  
-    #nav-list button {
-      margin: 0 40px;
-    }
-  }
-  
-  @media (max-width: 1150px) {
-    #nav-list button:last-child {
-      margin-right: 70px;
-    }
-  
-    #nav-list button {
-      margin: 0 20px;
-    }
-  }
-  
-  @media (max-width: 1056px) {
-    li {
-      flex-basis: 90%;
-    }
-    li p {
-      padding: 2% 0;
-    }
-  }
-  
-  /* so that 'Rate (1-10)' doesn't break in 2 rows */
-  @media (max-width: 956px) {
-    body {
-      font-size: 1rem;
-    }
-    #review {
-      width: 6rem;
-    }
-  }
-  
-  @media (max-width: 880px) {
-    #nav-list button:last-child {
-      margin-right: 15px;
-    }
-  
-    #nav-list button {
-      margin: 0 15px;
-    }
-  
-    #nav-title {
-      font-size: 1.4rem;
-    }
-  }
-  
-  @media (max-width: 840px) {
-    #nav-list button {
-      margin: 0 10px;
-    }
-  
-    #nav-title {
-      font-size: 1.2rem;
-      flex-basis: 90%;
-    }
-  
-    .remove-button {
-      margin: 3%;
-    }
-  }
-  
-  @media (max-width: 786px) {
-    body {
-      font-size: 1rem;
-    }
-  
-    .flex-item {
-      flex-basis: 70%;
-      margin: 1% auto;
-    }
-  
-    .flex-container {
-      height: 45%;
-      width: 85%;
-      margin: 5% auto;
-      align-content: center;
-    }
-  
-    .red {
-      height: 200px;
-    }
-  
-    #nav-list button {
-      width: 25%;
-    }
-  
-    #navbar {
-      width: 100%;
-    }
-  
-    button,
-    input {
-      width: 60%;
-    }
-  
-    button {
-      margin-top: 5%;
-      margin-bottom: 10%;
-      padding: 0%;
-    }
-  
-    .remove-button {
-      margin: 3%;
-    }
-  
-    li p {
-      padding: 2%;
-      display: block;
-    }
-  
-    #first-container {
-      margin-bottom: 15%;
-    }
-  
-    #empty {
-      display: none;
-    }
-  }
-  
-  
-  /* popraviti My lists button u navbaru na rezoluciji najužeg ekrana mobitela 
+}
+
+/* popraviti My lists button u navbaru na rezoluciji najužeg ekrana mobitela 
   (proširiti button ili prostor za button da slova ne ispadaju) */
-  
-  /* poravnati navbar buttone u sredini kad je u uskoj mobilnoj rezoluciji */
-  
-  /* u uskoj mobilnoj rezoluciji - povećati razmak između remove-buttona i donje crte */
-  
-  
+
+/* poravnati navbar buttone u sredini kad je u uskoj mobilnoj rezoluciji */
+
+/* u uskoj mobilnoj rezoluciji - povećati razmak između remove-buttona i donje crte */
+
+// na kraju izbrisati style.css originalni koji je van scss foldera, jer je nepotreban

@@ -8,7 +8,6 @@ body {
 }
 
 body {
-  margin: 0;
   font-size: 1.2rem;
   font-weight: bold;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
@@ -22,7 +21,6 @@ body {
   background-size: 100%;
 }
 
-/* ovdje počinje Navbar: */
 .red {
   display: flex;
   flex-wrap: wrap;
@@ -34,58 +32,40 @@ body {
   padding: 0 10px 10px;
 }
 
-.red:first-child {
+#navigation {
   flex-wrap: wrap;
   position: sticky;
   top: 0;
   z-index: 1000;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-  align-items: center;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
   opacity: 0.8;
 }
 
-/* 
-#navigation {
-  background: radial-gradient(at 20% 50%, #e0f1e3, #6b9574);
-} */
-/* #tolkien-top-logo {
-  text-align: center;
-}*/
 #nav-title {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  letter-spacing: 2px;
   color: #d1d4c9;
+  letter-spacing: 2px;
   font-weight: bold;
   font-size: 1.7rem;
 }
 
 #nav-list {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   text-align: right;
 }
-
 #nav-list button {
-  /* text-decoration: none; */
   display: inline-block;
   margin: 0 70px;
   background-color: #a0153e;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
   border-radius: 30px;
   padding: 5px 4px;
-  /* padding: 0% 3%; */
   text-shadow: 2px 2px 4px #000000;
-  /* box-shadow: 4px 5px 2px #232222b0; */
 }
-
-#nav-list button:last-child {
-  margin-right: 250px;
-}
-
 #nav-list button a {
   /* padding: 2px 3px; */
   text-decoration: none;
@@ -93,14 +73,15 @@ body {
   color: #d1d4c9;
   font-weight: bold;
 }
-
-#nav-list button:hover {
-  background-color: #ca3535;
-}
-
 #nav-list button a:hover {
   color: #000000;
   text-shadow: none;
+}
+#nav-list button:last-child {
+  margin-right: 250px;
+}
+#nav-list button:hover {
+  background-color: #ca3535;
 }
 
 #app-icon {
@@ -116,9 +97,9 @@ body {
   margin: 10%;
   height: 20%;
   /* ne height: 20vh, jer se vh ne skalira dobro kasnije, kad bude puno elemenata dodano na listu (donji flex-container), 
-  oni ne stanu više u određeni broj vh (fiksno je), nego prelaze i preko gornjeg flex-containera, što izgleda ružno, strgano.
-  Bolje koristiti postotke za containere unutar same stranice, onda se stranica produžuje i 
-  elementi se samo dodaju na listu ali ne ispadaju iz svojeg containera, i možemo lako scrollati prema dolje. */
+    oni ne stanu više u određeni broj vh (fiksno je), nego prelaze i preko gornjeg flex-containera, što izgleda ružno, strgano.
+    Bolje koristiti postotke za containere unutar same stranice, onda se stranica produžuje i 
+    elementi se samo dodaju na listu ali ne ispadaju iz svojeg containera, i možemo lako scrollati prema dolje. */
 }
 
 .flex-item {
@@ -413,6 +394,6 @@ hr {
   }
 }
 /* popraviti My lists button u navbaru na rezoluciji najužeg ekrana mobitela 
-(proširiti button ili prostor za button da slova ne ispadaju) */
+  (proširiti button ili prostor za button da slova ne ispadaju) */
 /* poravnati navbar buttone u sredini kad je u uskoj mobilnoj rezoluciji */
 /* u uskoj mobilnoj rezoluciji - povećati razmak između remove-buttona i donje crte *//*# sourceMappingURL=style.css.map */
