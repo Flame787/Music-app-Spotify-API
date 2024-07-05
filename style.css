@@ -11,7 +11,7 @@ body {
     serif, Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   /* background-color: #11074f; */
-  background-color: #00224d;
+  /* background-color: #00224d; */
   color: #d1d4c9;
   text-shadow: 2px 2px 4px #000000;
   background-image: url("pictures/energy-\ by\ TungArt7\ DOUBLE.jpg");
@@ -140,7 +140,7 @@ body {
   /* color: #FCE38A; */
   color: #d1d4c9;
   border-radius: 30px;
-  box-shadow: 5px 5px 3px red;
+  box-shadow: 5px 5px 3px #ca3535;
   margin-top: 8%;
 }
 
@@ -159,7 +159,7 @@ input {
 
 input:hover {
   background-color: #ca3535;
-  color: black;
+  color: #000000;
 }
 
 p {
@@ -248,7 +248,7 @@ hr {
 
 .favorite-button:hover {
   background-color: #ca3535;
-  color: black;
+  color: #000000;
   text-shadow: none;
 }
 
@@ -260,7 +260,7 @@ hr {
 
 .remove-button:hover {
   background-color: #ca3535;
-  color: black;
+  color: #000000;
   text-shadow: none;
 }
 
