@@ -77,17 +77,12 @@
     // možda bolje importati cijelu listu artist-ID-jeva iz nekog drugog zasebnog filea:
 
     // za artiste je endpoint value njihov id (šifra svakog artista) - treba nabaviti cijelu listu tih id-jeva
-    // ili hard-kodirati samo neki uži izbor artista
-
-    // dodati funkciju koja u pozadini dodaje spremljeni ID uz neki artistEntry.
-    // {id} je value koji se prosljeđuje API-requestu
-
-    // dohvaćamo objekte koji su elementi liste.
+    // ili hard-kodirati samo neki uži izbor artista...
 
     // FUNKCIJA ZA HENDLANJE PODATAKA:
 
     const handleData = function (data) {
-      // inicijaliziranje varijabli:
+      // inicijaliziranje varijabli koje će nam kasnije biti spremnici za dohvaćene podatke:
       var resultArtist = "",
         resultAlbum = "",
         artistName,
@@ -96,22 +91,6 @@
       //   for (let i = 0; i < data.length; i++) {
       //     artistName = data[i].artistName;
       //     albumName = data[i].albumName;
-
-      const artistEntries = [
-        {
-          name: "metallica",
-          id: "2ye2Wgw4gimLv2eAKyk1NB",
-        },
-        {
-          name: "iron maiden",
-          id: "6mdiAmATAx73kdxrNrnlao",
-        },
-      ];
-
-      artistEntries.forEach((item) => {
-        const artistItem = item.name;
-        const idItem = item.id;
-      });
 
       if (data.length > 0) {
         resultArtist += artistName;
@@ -134,7 +113,35 @@
     // FUNKCIJA ZA SLANJE API-REQUESTOVA:
 
     document.getElementById("artist").addEventListener("change", function () {
-      const artistEntry = artist.value.trim;
+      const artist = document.getElementById("artist").value.trim();
+
+      // dohvaćamo objekte (artiste) koji su elementi liste:
+
+      const artistEntries = [
+        {
+          name: "metallica",
+          id: "2ye2Wgw4gimLv2eAKyk1NB",
+        },
+        {
+          name: "iron maiden",
+          id: "6mdiAmATAx73kdxrNrnlao",
+        },
+      ];
+
+      // funkcija koja sprema svaki ID vezan uz artista, u zasebnu varibalu id - idItem:
+      // {id} je value koji se prosljeđuje API-requestu
+
+      artistEntries.forEach((item) => {
+        // const artistName = item.name;
+        const id = item.id;
+        return id;
+        // return artistName;
+      });
+
+      //  U 1. API-REQUESTU USER UNOSI 'ARTIST' - TO JE ZAPRAVO ARTISTNAME / ITEM.NAME. NJEGOV ID SE SPREMA ZA KASNIJE.
+
+      // U 2. API REQUESTU SE U 2. POLJU IZLISTAJU SVI ALBUMI UNESENOG ARTISTA (TJ. VEZANOG ID-A) (DROPDOWN LISTA).
+      // KORISNIK MOŽE IZABRATI SAMO 1 ALBUM IZ DROPDOWNA, DATI MU OCJENU I SUBMITTATI GA NA SVOJU CUSTOM LISTU.
 
       // za albume je endpoint (koristi id artista): https://api.spotify.com/v1/artists/{id}/albums
       // ili kad se stavi u browser: https://api.spotify.com/v1/artists/%7Bid%7D/albums
@@ -146,10 +153,10 @@
       //   "total_tracks": 9,
       //  "id": "2up3OPMp9Tb4dAKM2erWXQ", ... } ]
 
-      if (artistEntry != "") {
-        fetch(`https://api.spotify.com/v1/artists/{id}`, {
+      if (artist != "") {
+        fetch(`https://api.spotify.com/v1/artists/${id}/albums`, {
           headers: {
-            Authorization: "Bearer YOUR_ACCESS_TOKEN",
+            Authorization: "Bearer ${YOUR_ACCESS_TOKEN}",
           },
         })
           .then((response) => response.json())
@@ -160,23 +167,21 @@
       }
     });
 
-    document.getElementById("artist").addEventListener("change", function () {
-      const artistEntry = artist.value.trim;
-      const albumEntry = entry.value.trim;
+    // DODATI FOREACH-FUNKCIJU KOJA ZA SVAKI NAĐENI ITEM (ALBUM) UZIMA ALBUM-NAME I ISPIŠE GA NA DROPDOWN-LISTI, pa korisnik može izabrati jedan album:
 
-      if (artistEntry != "" && albumEntry != "") {
-        fetch(`https://api.spotify.com/v1/artists/{id}/albums`, {
-          headers: {
-            Authorization: "Bearer YOUR_ACCESS_TOKEN",
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => handleData(data))
-          .catch((error) => handleError());
-      } else {
-        entry.innerHTML = "enter album";
-      }
+    // for Each nije dobra metoda, JER NE KREIRA DRUGI ARRAY:
+    albums.forEach((album) => {
+      const albumName = album.items.name;
+      return albumName;
     });
+
+    // BOLJA JE MAP-METODA kojom se kreira nova lista allAlbums:
+    const allAlbums = albums.map((album) => {
+        return album.items.map((item) => item.name);
+      })
+      .flat();
+
+      
 
     // adding new task on the list:
     function addTask(event) {
