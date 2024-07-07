@@ -12,7 +12,7 @@
 
     let entry, rating, artist, time, item;
 
-    // Load lists from localStorage on init
+    // Load lists from localStorage on init:
     function loadLists() {
       const savedList = localStorage.getItem("addedList");
       const savedFavorites = localStorage.getItem("favoritesList");
@@ -28,7 +28,7 @@
       }
     }
 
-    // Save lists to localStorage
+    // Save lists to localStorage:
     function saveLists() {
       const addedItems = [];
       list.querySelectorAll("li").forEach(item => {
