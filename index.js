@@ -10,6 +10,45 @@
     const list = document.getElementById("added-list");
     const favoritesList = document.getElementById("fav_albums");
 
+    const themeColorSelect = document.getElementById("theme_color");
+    themeColorSelect.addEventListener("change", changeTheme);
+
+    function changeTheme(){
+      const themeColor = themeColorSelect.value;
+      if (themeColor == "white"){
+        document.body.style.backgroundImage = "url(./pictures/energy-white.jpg)";
+      } 
+      else if (themeColor == "black"){
+        document.body.style.backgroundImage = "url(./pictures/energy-black.jpg)";
+      }
+      else if (themeColor == "blue"){
+        document.body.style.backgroundImage = "url(./pictures/energy-blue.jpg)";
+      }
+      else if (themeColor == "green"){
+        document.body.style.backgroundImage = "url(./pictures/energy-green.jpg)";
+      }
+      else if (themeColor == "yellow"){
+        document.body.style.backgroundImage = "url(./pictures/energy-yellow.jpg)";
+      }
+      else if (themeColor == "water"){
+        document.body.style.backgroundImage = "url(./pictures/energy-water.jpg)";
+      }
+      else if (themeColor == "red"){
+        document.body.style.backgroundImage = "url(./pictures/energy-red.jpg)";
+      }
+      else {
+        document.body.style.backgroundImage = "url(./pictures/energy-violet.jpg)";
+      }
+    }
+    changeTheme();
+
+    // this.init = function () {
+    //   themeColor.addEventListener("change");
+    //   changeTheme();
+    // };
+
+// themeColor.addEventListener("change", changeTheme);
+
     let entry, rating, artist, time, item;
 
     // Load lists from localStorage on init:
