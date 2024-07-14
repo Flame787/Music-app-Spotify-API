@@ -42,12 +42,6 @@
     }
     changeTheme();
 
-    // this.init = function () {
-    //   themeColor.addEventListener("change");
-    //   changeTheme();
-    // };
-
-// themeColor.addEventListener("change", changeTheme);
 
     let entry, rating, artist, time, item;
 
