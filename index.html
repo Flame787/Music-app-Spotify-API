@@ -10,7 +10,7 @@
   <body>
 
     <header id="navigation" class="red" class="flex-container">
-      <div id="top-icon" class="d-col-1">
+      <div id="top-icon" >
         <img
           id="app-icon"
           src="pictures/app-icon.png"
@@ -19,22 +19,24 @@
           alt="application icon"
         />
       </div>
-      <div id="nav-title" class="d-col-3">Music album review</div>
-      <nav id="navbar" class="d-col-8">
+      <div id="nav-title" >Music album review</div>
+      <nav id="navbar" >
         <div id="nav-list">
           <button><a href="index.html">Home</a></button>
           <button><a href="favorites.html">My lists</a></button>
           <button><a href="sources_contact.html">Sources</a></button>  
-          <button><select id="theme_color">
-            <option value="theme" selected>Theme</option>
-            <option value="violet">Music 🎵</option>
-            <option value="water">Water 💦</option>
-            <option value="black">Dark 🌑</option>
-            <option value="blue">Ocean 🌊</option>
-            <option value="green">Nature 🌿</option>
-            <option value="yellow">Sun ☀️</option>
-            <option value="red">Fire 🔥</option>
-          </select></button> 
+          
+            <select id="theme_color">
+              <option class="option" value="theme" selected>Theme</option>
+              <option class="option" value="violet">Music 🎵</option>
+              <option class="option" value="water">Water 💦</option>
+              <option class="option" value="black">Dark 🌑</option>
+              <option class="option" value="blue">Ocean 🌊</option>
+              <option class="option" value="green">Nature 🌿</option>
+              <option class="option" value="yellow">Sun ☀️</option>
+              <option class="option" value="red">Fire 🔥</option>
+            </select>
+          
         </div>
       </nav>
     </header>
