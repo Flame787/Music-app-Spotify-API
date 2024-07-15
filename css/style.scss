@@ -218,6 +218,14 @@ hr {
 
 @include columns();
 
+.water {
+  // for .select:
+    background-color: $paragraphColor;
+  
+}
+
+// media queries:
+
 @media (max-width: 1540px) {
   #nav-list button:last-child {
     margin-right: 150px;

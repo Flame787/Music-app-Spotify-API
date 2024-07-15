@@ -13,7 +13,7 @@
     const themeColorSelect = document.getElementById("theme_color");
     themeColorSelect.addEventListener("change", changeTheme);
 
-    const option = document.getElementById("option");
+    const option = document.querySelectorAll("option");
     console.log(option);
 
     function changeTheme() {
@@ -21,24 +21,57 @@
       if (themeColor == "black") {
         document.body.style.backgroundImage =
           "url(./pictures/energy-black.jpg)";
+        option.forEach((element) => {
+          element.style.backgroundColor = "black";
+          element.style.color = "white";
+          // element.style.opacity = "0.5";
+        });
       } else if (themeColor == "blue") {
         document.body.style.backgroundImage = "url(./pictures/energy-blue.jpg)";
+        option.forEach((element) => {
+          element.style.backgroundColor = "teal";
+          element.style.color = "white";
+          // element.style.opacity = "0.5";
+        });
       } else if (themeColor == "green") {
         document.body.style.backgroundImage =
           "url(./pictures/energy-green.jpg)";
+        option.forEach((element) => {
+          element.style.backgroundColor = "forestgreen";
+          element.style.color = "white";
+          // element.style.opacity = "0.5";
+        });
       } else if (themeColor == "yellow") {
         document.body.style.backgroundImage =
           "url(./pictures/energy-yellow.jpg)";
+        option.forEach((element) => {
+          element.style.backgroundColor = "sandybrown";
+          element.style.color = "black";
+          // element.style.opacity = "0.5";
+        });
       } else if (themeColor == "water") {
         document.body.style.backgroundImage =
           "url(./pictures/energy-water.jpg)";
-        option.style.backgroundColor = "red";
-      
+        option.forEach((element) => {
+          element.style.backgroundColor = "lightblue";
+          element.style.color = "black";
+          // element.style.opacity = "0.5";
+        });
       } else if (themeColor == "red") {
         document.body.style.backgroundImage = "url(./pictures/energy-red.jpg)";
+        option.forEach((element) => {
+          element.style.backgroundColor = "firebrick";
+          element.style.color = "black";
+          // element.style.opacity = "0.5";
+        });
       } else {
         document.body.style.backgroundImage =
           "url(./pictures/energy-violet.jpg)";
+          option.forEach((element) => {
+            element.style.backgroundColor = "darkslateblue";
+            element.style.color = "white";
+            // element.style.opacity = "0.5";
+          });
       }
     }
     changeTheme();

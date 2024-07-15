@@ -310,6 +310,10 @@ hr {
   flex-basis: 100%;
 }
 
+.water {
+  background-color: rgba(209, 212, 201, 0.5725490196);
+}
+
 @media (max-width: 1540px) {
   #nav-list button:last-child {
     margin-right: 150px;
