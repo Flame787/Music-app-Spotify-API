@@ -13,35 +13,35 @@
     const themeColorSelect = document.getElementById("theme_color");
     themeColorSelect.addEventListener("change", changeTheme);
 
-    function changeTheme(){
+    const option = document.getElementById("option");
+    console.log(option);
+
+    function changeTheme() {
       const themeColor = themeColorSelect.value;
-      if (themeColor == "white"){
-        document.body.style.backgroundImage = "url(./pictures/energy-white.jpg)";
-      } 
-      else if (themeColor == "black"){
-        document.body.style.backgroundImage = "url(./pictures/energy-black.jpg)";
-      }
-      else if (themeColor == "blue"){
+      if (themeColor == "black") {
+        document.body.style.backgroundImage =
+          "url(./pictures/energy-black.jpg)";
+      } else if (themeColor == "blue") {
         document.body.style.backgroundImage = "url(./pictures/energy-blue.jpg)";
-      }
-      else if (themeColor == "green"){
-        document.body.style.backgroundImage = "url(./pictures/energy-green.jpg)";
-      }
-      else if (themeColor == "yellow"){
-        document.body.style.backgroundImage = "url(./pictures/energy-yellow.jpg)";
-      }
-      else if (themeColor == "water"){
-        document.body.style.backgroundImage = "url(./pictures/energy-water.jpg)";
-      }
-      else if (themeColor == "red"){
+      } else if (themeColor == "green") {
+        document.body.style.backgroundImage =
+          "url(./pictures/energy-green.jpg)";
+      } else if (themeColor == "yellow") {
+        document.body.style.backgroundImage =
+          "url(./pictures/energy-yellow.jpg)";
+      } else if (themeColor == "water") {
+        document.body.style.backgroundImage =
+          "url(./pictures/energy-water.jpg)";
+        option.style.backgroundColor = "red";
+      
+      } else if (themeColor == "red") {
         document.body.style.backgroundImage = "url(./pictures/energy-red.jpg)";
-      }
-      else {
-        document.body.style.backgroundImage = "url(./pictures/energy-violet.jpg)";
+      } else {
+        document.body.style.backgroundImage =
+          "url(./pictures/energy-violet.jpg)";
       }
     }
     changeTheme();
-
 
     let entry, rating, artist, time, item;
 
@@ -52,35 +52,43 @@
 
       if (savedList) {
         const items = JSON.parse(savedList);
-        items.forEach(item => list.appendChild(createTask(item.entry, item.artist, item.rating, item.time)));
+        items.forEach((item) =>
+          list.appendChild(
+            createTask(item.entry, item.artist, item.rating, item.time)
+          )
+        );
       }
 
       if (savedFavorites) {
         const items = JSON.parse(savedFavorites);
-        items.forEach(item => favoritesList.appendChild(createFavorite(item.entry, item.artist, item.rating, item.time)));
+        items.forEach((item) =>
+          favoritesList.appendChild(
+            createFavorite(item.entry, item.artist, item.rating, item.time)
+          )
+        );
       }
     }
 
     // Save lists to localStorage:
     function saveLists() {
       const addedItems = [];
-      list.querySelectorAll("li").forEach(item => {
+      list.querySelectorAll("li").forEach((item) => {
         addedItems.push({
           entry: item.querySelector(".entry").textContent,
           artist: item.querySelector(".artist").textContent,
           rating: item.querySelector(".rating").textContent,
-          time: item.querySelector(".time").textContent
+          time: item.querySelector(".time").textContent,
         });
       });
       localStorage.setItem("addedList", JSON.stringify(addedItems));
 
       const favoriteItems = [];
-      favoritesList.querySelectorAll("li").forEach(item => {
+      favoritesList.querySelectorAll("li").forEach((item) => {
         favoriteItems.push({
           entry: item.querySelector(".entry").textContent,
           artist: item.querySelector(".artist").textContent,
           rating: item.querySelector(".rating").textContent,
-          time: item.querySelector(".time").textContent
+          time: item.querySelector(".time").textContent,
         });
       });
       localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
@@ -144,7 +152,7 @@
 
       function addIf(favoriteItem) {
         let found = false;
-        favoritesList.querySelectorAll('li').forEach((element) => {
+        favoritesList.querySelectorAll("li").forEach((element) => {
           if (element.textContent === favoriteItem.textContent) {
             found = true;
           }

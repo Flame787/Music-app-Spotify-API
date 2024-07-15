@@ -96,9 +96,6 @@ select {
   display: inline-block;
   margin: 0 70px;
   padding: 5px 4px;
-  background-color: #ca3535;
-  color: #000000;
-  text-shadow: none;
   display: inline-block;
   border-radius: 30px;
   width: 12%;
@@ -110,6 +107,20 @@ select {
   text-shadow: 2px 2px 4px #000000;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
+}
+select:hover {
+  background-color: #ca3535;
+  color: #000000;
+  text-shadow: none;
+}
+
+select option {
+  color: #d1d4c9;
+}
+
+.option {
+  background-color: #00224d;
+  border-radius: 30px;
 }
 
 #app-icon {
@@ -322,7 +333,8 @@ hr {
   }
 }
 @media (max-width: 1113px) {
-  #nav-list button, select {
+  #nav-list button,
+  select {
     width: 15%;
   }
 }
@@ -357,7 +369,8 @@ hr {
   }
 }
 @media (max-width: 900px) {
-  #nav-list button, select {
+  #nav-list button,
+  select {
     width: 14%;
   }
 }
@@ -365,7 +378,8 @@ hr {
   #nav-list button:last-child {
     margin-right: 15px;
   }
-  #nav-list button, select {
+  #nav-list button,
+  select {
     margin: 0 15px;
   }
   #nav-title {
@@ -373,7 +387,8 @@ hr {
   }
 }
 @media (max-width: 840px) {
-  #nav-list button, select {
+  #nav-list button,
+  select {
     margin: 0 10px;
   }
   #nav-title {
@@ -401,7 +416,8 @@ hr {
   .red {
     height: 200px;
   }
-  #nav-list button, select {
+  #nav-list button,
+  select {
     width: 35%;
   }
   #navbar {
