@@ -183,6 +183,7 @@
 
       // change paragraph style instantly during new item creation:
       const paragraph = item.querySelector("p");
+      const span = item.querySelectorAll("span");
 
       themeColorSelect.addEventListener("change", changeParagraphStyle);
       function changeParagraphStyle() {
@@ -204,6 +205,45 @@
         }
       }
       changeParagraphStyle(paragraph);
+
+      themeColorSelect.addEventListener("change", changeSpanStyle);
+      function changeSpanStyle() {
+        span.forEach((element) => {
+          element.classList.remove("whiteText", "blackText");
+        });
+        
+
+        if (themeColorSelect.value == "black") {
+          span.forEach((element) => {
+            element.classList.add("whiteText");
+          });
+        } else if (themeColorSelect.value == "blue") {
+          span.forEach((element) => {
+            element.classList.add("whiteText");
+          });
+        } else if (themeColorSelect.value == "green") {
+          span.forEach((element) => {
+            element.classList.add("whiteText");
+          });
+        } else if (themeColorSelect.value == "yellow") {
+          span.forEach((element) => {
+            element.classList.add("blackText");
+          });
+        } else if (themeColorSelect.value == "water") {
+          span.forEach((element) => {
+            element.classList.add("blackText");
+          });
+        } else if (themeColorSelect.value == "red") {
+          span.forEach((element) => {
+            element.classList.add("blackText");
+          });
+        } else {
+          span.forEach((element) => {
+            element.classList.add("whiteText");
+          });
+        }
+      }
+      changeSpanStyle(span);
 
       return item;
     }
