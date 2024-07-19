@@ -17,9 +17,6 @@
     const button = document.querySelectorAll("button");
     const option = document.querySelectorAll("option");
     console.log(option);
-    // const favoriteButton = document.querySelectorAll("favorite-button");
-    // const favoriteButton = document.getElementsByClassName("favorite-button");
-    // const buttonAdd = document.querySelector(".input-button");
 
     function changeTheme() {
       const themeColor = themeColorSelect.value;
@@ -65,15 +62,10 @@
         document.body.style.color = "#00224d";
         document.body.style.textShadow = "none";
 
-        // favoriteButton.classList.remove("button");
-        // favoriteButton.classList.add("buttonWater");
         button.forEach((element) => {
           element.classList.remove("button");
           element.classList.add("buttonWater");
         });
-
-        // paragraph.classList.remove("whiteParagraph");
-        // paragraph.classList.add("blackParagraph");
 
         option.forEach((element) => {
           element.style.backgroundColor = "lightblue";
@@ -153,26 +145,7 @@
       "whiteParagraph",
       "blackParagraph"
     );
-    // paragraph.forEach(changeParagraphStyle);
-
-    // function changeParagraphStyle(paragraph) {
-    //   paragraph.classList.remove("whiteParagraph", "blackParagraph");
-    //   if (themeColorSelect.value == "black") {
-    //     paragraph.classList.add("whiteParagraph");
-    //   } else if (themeColorSelect.value == "blue") {
-    //     paragraph.classList.add("whiteParagraph");
-    //   } else if (themeColorSelect.value == "green") {
-    //     paragraph.classList.add("whiteParagraph");
-    //   } else if (themeColorSelect.value == "yellow") {
-    //     paragraph.classList.add("blackParagraph");
-    //   } else if (themeColorSelect.value == "water") {
-    //     paragraph.classList.add("blackParagraph");
-    //   } else if (themeColorSelect.value == "red") {
-    //     paragraph.classList.add("blackParagraph");
-    //   } else {
-    //     paragraph.classList.add("whiteParagraph");
-    //   }
-    // }
+   
 
     // creating new task:
     function createTask(entry, artist, rating, time) {
@@ -211,7 +184,6 @@
         span.forEach((element) => {
           element.classList.remove("whiteText", "blackText");
         });
-        
 
         if (themeColorSelect.value == "black") {
           span.forEach((element) => {
@@ -249,30 +221,6 @@
     }
 
     console.log(paragraph);
-
-    // document.body.addEventListener("change", function (event) {
-    //   if (event.target.id == "themeColorSelect") {
-    //     function changeParagraph(paragraph) {
-    //       if (themeColorSelect.value == "black") {
-    //         paragraph.classList.add("whiteParagraph");
-    //       } else if (themeColorSelect.value == "blue") {
-    //         paragraph.classList.add("whiteParagraph");
-    //       } else if (themeColorSelect.value == "green") {
-    //         paragraph.classList.add("whiteParagraph");
-    //       } else if (themeColorSelect.value == "yellow") {
-    //         paragraph.classList.add("blackParagraph");
-    //       } else if (themeColorSelect.value == "water") {
-    //         paragraph.classList.remove("whiteParagraph");
-    //         // paragraph.classList.add("blackParagraph");
-    //       } else if (themeColorSelect.value == "red") {
-    //         paragraph.classList.add("blackParagraph");
-    //       } else {
-    //         paragraph.classList.add("whiteParagraph");
-    //       }
-    //     }
-    //     changeParagraph(paragraph);
-    //   }
-    // });
 
     // adding new task on the list:
     function addTask(event) {
@@ -313,18 +261,19 @@
 
       themeColorSelect.addEventListener("change", changeFavButton);
       function changeFavButton() {
+        favoriteButton.classList.remove("button");
         if (themeColorSelect.value == "black") {
-          favoriteButton.classList.add("buttunBlack");
+          favoriteButton.classList.add("buttonBlack");
         } else if (themeColorSelect.value == "blue") {
-          favoriteButton.classList.add("buttunBlue");
+          favoriteButton.classList.add("buttonBlue");
         } else if (themeColorSelect.value == "green") {
-          favoriteButton.classList.add("buttunGreen");
+          favoriteButton.classList.add("buttonGreen");
         } else if (themeColorSelect.value == "yellow") {
-          favoriteButton.classList.add("buttunYellow");
+          favoriteButton.classList.add("buttonYellow");
         } else if (themeColorSelect.value == "water") {
           favoriteButton.classList.add("buttonWater");
         } else if (themeColorSelect.value == "red") {
-          favoriteButton.classList.add("buttunRed");
+          favoriteButton.classList.add("buttonRed");
         } else {
           favoriteButton.classList.add("button");
         }
@@ -340,6 +289,11 @@
       const rating = item.querySelector(".rating").textContent;
       const time = item.querySelector(".time").textContent;
       const favoriteItem = createFavorite(entry, artist, rating, time);
+
+      if (!entryElement || !artistElement || !ratingElement || !timeElement) {
+        console.error("Cannot find necessary elements in the item.");
+        return;
+      }
 
       function addIf(favoriteItem) {
         let found = false;
@@ -427,3 +381,21 @@
 
 // const apikey = process.env.API_KEY;
 //
+
+
+// Error kod dodavanja novih itema na favorite listu:
+// index.js:338 Uncaught TypeError: Cannot read properties of null (reading 'textContent')
+//     at HTMLButtonElement.setFavorite (index.js:338:49)
+
+// index.js:287 Uncaught TypeError: Cannot read properties of null (reading 'textContent')
+//     at HTMLButtonElement.setFavorite (index.js:287:49)
+
+// također se ne može ni removati iteme s 1. liste:
+// index.js:124 Uncaught TypeError: Cannot read properties of null (reading 'textContent')
+//     at index.js:124:46
+//     at NodeList.forEach (<anonymous>)
+//     at saveLists (index.js:122:35)
+//     at HTMLButtonElement.removeTask (index.js:370:7)
+// Kasnije je removanje s osnovne liste ipak proradilo. 
+
+// I removanje itema s favorite liste radi normalno, ali dodavanje s osnovne liste ne radi.
