@@ -17,7 +17,8 @@
     const button = document.querySelectorAll("button");
     const option = document.querySelectorAll("option");
     console.log(option);
-    const favoriteButton = document.querySelectorAll("favorite-button");
+    // const favoriteButton = document.querySelectorAll("favorite-button");
+    // const favoriteButton = document.getElementsByClassName("favorite-button");
     // const buttonAdd = document.querySelector(".input-button");
 
     function changeTheme() {
@@ -69,11 +70,11 @@
           element.classList.add("buttonWater");
         });
 
-        console.log(favoriteButton);
-        favoriteButton.forEach((element) => {
-          element.classList.remove("button");
-          element.classList.add("buttonWater");
-        });
+        // console.log(favoriteButton);
+        // favoriteButton.forEach((element) => {
+        //   element.classList.remove("button");
+        //   element.classList.add("buttonWater");
+        // });
         option.forEach((element) => {
           element.style.backgroundColor = "lightblue";
           element.style.color = "black";
@@ -184,7 +185,7 @@
     // function changeFavButton(favoriteButton){
     //   const themeColor = themeColorSelect.value;
     //   if (themeColor.value == "black") {
-        
+
     //   } else if (themeColor == "blue") {
     //   } else if (themeColor == "green") {
     //   } else if (themeColor == "yellow") {
@@ -194,7 +195,7 @@
     //   } else if (themeColor == "red") {
     //   } else {
     //   }
-      
+
     // }
 
     // add button FavoriteButton:
@@ -209,10 +210,28 @@
       item.insertBefore(favoriteButton, item.firstChild);
       const listTitle = document.getElementById("new-title");
       listTitle.style.display = "block";
-      // changeFavButton(favoriteButton);
-    }
 
-    
+      themeColorSelect.addEventListener("change", changeFavButton);
+      function changeFavButton() {
+        if (themeColorSelect.value == "black") {
+          favoriteButton.classList.add("buttunBlack");
+        } else if (themeColorSelect.value == "blue") {
+          favoriteButton.classList.add("buttunBlue");
+        } else if (themeColorSelect.value == "green") {
+          favoriteButton.classList.add("buttunGreen");
+        } else if (themeColorSelect.value == "yellow") {
+          favoriteButton.classList.add("buttunYellow");
+        } else if (themeColorSelect.value == "water") {
+          favoriteButton.classList.add("buttonWater");
+        } else if (themeColorSelect.value == "red") {
+          favoriteButton.classList.add("buttunRed");
+        } else {
+          favoriteButton.classList.add("button");
+        }
+      }
+      changeFavButton(favoriteButton);
+      
+    }
 
     // Function setFavorite:
     function setFavorite(event) {
