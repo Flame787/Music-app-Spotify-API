@@ -30,7 +30,6 @@
 }
 
 @mixin button-style {
-  background-color: $navButtonColor1;
   border-radius: 30px;
   text-shadow: 2px 2px 4px $textShadowColor1;
   box-shadow: 3px 3px 2px $boxShadowColor1;
@@ -76,9 +75,6 @@
 }
 
 @mixin form-design {
-  //   background-color: $formRemoveColor1;
-  background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
-  color: $fontColor1;
   border-radius: 30px;
   border-top: 1px solid $textShadowColor1;
   box-shadow: 5px 5px 3px $hoverColor1;

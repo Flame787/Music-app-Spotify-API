@@ -78,7 +78,7 @@ select {
   border-radius: 30px;
   width: 12%;
   padding: 5px 10px 5px 10px;
-  background-color: $navButtonColor1;
+  // background-color: $navButtonColor1;
   color: $fontColor1;
   font-weight: bold;
   font-size: 1.1rem;
@@ -138,8 +138,20 @@ h2 {
 }
 
 #form {
-  @include form-design();
+  @include form-design(); 
 }
+
+.formViolet {
+  background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
+  color: $fontColor1;
+}
+
+.formBlue {
+  background: radial-gradient(at 25% 75%, #0f4d5f, rgba(77, 148, 255, 0));
+  color: $fontColor1;
+}
+
+
 
 input {
   @include input-field();
@@ -163,10 +175,19 @@ p {
 button {
   @include submit-button();
   @include button-style();
+  
 
   &:hover {
     @include button-hover();
   }
+}
+
+.button {
+  background-color: $navButtonColor1;
+}
+
+.buttonWater {
+  background-color: $buttonWater;
 }
 
 ul {
@@ -204,9 +225,9 @@ hr {
   }
 }
 
-.favorite-button {
-  background-color: $navButtonColor1;
-}
+// .favorite-button {
+//   background-color: $navButtonColor1;
+// }
 
 .remove-button {
   background-color: $formRemoveColor1;

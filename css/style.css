@@ -65,7 +65,6 @@ body {
   text-align: right;
 }
 #nav-list button {
-  background-color: #a0153e;
   border-radius: 30px;
   text-shadow: 2px 2px 4px #000000;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
@@ -89,7 +88,6 @@ body {
 }
 
 select {
-  background-color: #a0153e;
   border-radius: 30px;
   text-shadow: 2px 2px 4px #000000;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
@@ -100,7 +98,6 @@ select {
   border-radius: 30px;
   width: 12%;
   padding: 5px 10px 5px 10px;
-  background-color: #a0153e;
   color: #d1d4c9;
   font-weight: bold;
   font-size: 1.1rem;
@@ -152,12 +149,20 @@ h2 {
 }
 
 #form {
-  background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
-  color: #d1d4c9;
   border-radius: 30px;
   border-top: 1px solid #000000;
   box-shadow: 5px 5px 3px #ca3535;
   margin-top: 8%;
+}
+
+.formViolet {
+  background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
+  color: #d1d4c9;
+}
+
+.formBlue {
+  background: radial-gradient(at 25% 75%, #0f4d5f, rgba(77, 148, 255, 0));
+  color: #d1d4c9;
 }
 
 input {
@@ -193,7 +198,6 @@ button {
   border-width: 0;
   font-size: 18px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #a0153e;
   border-radius: 30px;
   text-shadow: 2px 2px 4px #000000;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
@@ -202,6 +206,14 @@ button:hover {
   background-color: #ca3535;
   color: #000000;
   text-shadow: none;
+}
+
+.button {
+  background-color: #a0153e;
+}
+
+.buttonWater {
+  background-color: #0f4d5f;
 }
 
 ul {
@@ -236,7 +248,6 @@ hr {
 
 .favorite-button,
 .remove-button {
-  background-color: #a0153e;
   border-radius: 30px;
   text-shadow: 2px 2px 4px #000000;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
@@ -252,10 +263,6 @@ hr {
   background-color: #ca3535;
   color: #000000;
   text-shadow: none;
-}
-
-.favorite-button {
-  background-color: #a0153e;
 }
 
 .remove-button {

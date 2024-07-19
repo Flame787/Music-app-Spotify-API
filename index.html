@@ -22,10 +22,10 @@
       <div id="nav-title" >Music album review</div>
       <nav id="navbar" >
         <div id="nav-list">
-          <button><a href="index.html">Home</a></button>
-          <button><a href="favorites.html">My lists</a></button>
-          <button><a href="sources_contact.html">Sources</a></button>  
-            <select id="theme_color">
+          <button class="button"><a href="index.html">Home</a></button>
+          <button class="button"><a href="favorites.html">My lists</a></button>
+          <button class="button"><a href="sources_contact.html">Sources</a></button>  
+            <select id="theme_color" class="button">
               <option class="option" value="theme" hidden>Theme</option>
               <option class="option" value="violet">Music 🎵</option>
               <option class="option" value="water">Water 💦</option>
@@ -43,7 +43,7 @@
       <div id="first-container">
         <h1>Album review</h1>
         <h3>Create your list and share it with others!</h3>
-        <form action="" method="get" id="form" class="flex-container">
+        <form action="" method="get" id="form" class="flex-container formViolet">
           <div class="flex-item" id="second-input">
             <p><label for="album">Artist:</label></p>
             <p><input type="text" id="artist" name="artist" /></p>
@@ -70,7 +70,7 @@
 
           <div id="submit-button" class="flex-item">
             <p id="empty"></p>
-            <button type="submit" class="input-button">Submit</button>
+            <button type="submit" class="input-button button">Submit</button>
           </div>
         </form>
       </div>

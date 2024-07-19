@@ -13,8 +13,12 @@
     const themeColorSelect = document.getElementById("theme_color");
     themeColorSelect.addEventListener("change", changeTheme);
 
+    const form = document.getElementById("form");
+    const button = document.querySelectorAll("button");
     const option = document.querySelectorAll("option");
     console.log(option);
+    const favoriteButton = document.querySelectorAll("favorite-button");
+    // const buttonAdd = document.querySelector(".input-button");
 
     function changeTheme() {
       const themeColor = themeColorSelect.value;
@@ -52,10 +56,27 @@
       } else if (themeColor == "water") {
         document.body.style.backgroundImage =
           "url(./pictures/energy-water.jpg)";
+        form.classList.remove("formViolet");
+        form.classList.add("formBlue");
+        console.log(button);
+        themeColorSelect.classList.remove("button");
+        themeColorSelect.classList.add("buttonWater");
+
+        // favoriteButton.classList.remove("button");
+        // favoriteButton.classList.add("buttonWater");
+        button.forEach((element) => {
+          element.classList.remove("button");
+          element.classList.add("buttonWater");
+        });
+
+        console.log(favoriteButton);
+        favoriteButton.forEach((element) => {
+          element.classList.remove("button");
+          element.classList.add("buttonWater");
+        });
         option.forEach((element) => {
           element.style.backgroundColor = "lightblue";
           element.style.color = "black";
-          // element.style.opacity = "0.5";
         });
       } else if (themeColor == "red") {
         document.body.style.backgroundImage = "url(./pictures/energy-red.jpg)";
@@ -67,11 +88,11 @@
       } else {
         document.body.style.backgroundImage =
           "url(./pictures/energy-violet.jpg)";
-          option.forEach((element) => {
-            element.style.backgroundColor = "darkslateblue";
-            element.style.color = "white";
-            // element.style.opacity = "0.5";
-          });
+        option.forEach((element) => {
+          element.style.backgroundColor = "darkslateblue";
+          element.style.color = "white";
+          // element.style.opacity = "0.5";
+        });
       }
     }
     changeTheme();
@@ -160,19 +181,38 @@
       loadLists();
     };
 
+    // function changeFavButton(favoriteButton){
+    //   const themeColor = themeColorSelect.value;
+    //   if (themeColor.value == "black") {
+        
+    //   } else if (themeColor == "blue") {
+    //   } else if (themeColor == "green") {
+    //   } else if (themeColor == "yellow") {
+    //   } else if (themeColor == "water") {
+    //     favoriteButton.classList.remove("button");
+    //     favoriteButton.classList.add("buttonWater");
+    //   } else if (themeColor == "red") {
+    //   } else {
+    //   }
+      
+    // }
+
     // add button FavoriteButton:
     function addFavoriteButton(item) {
       const favoriteButton = document.createElement("button");
       favoriteButton.setAttribute("type", "button");
       favoriteButton.classList.add("favorite-button");
+      favoriteButton.classList.add("button");
       favoriteButton.classList.add("flex-item");
       favoriteButton.addEventListener("click", setFavorite);
       favoriteButton.innerHTML = "Add to favorites";
       item.insertBefore(favoriteButton, item.firstChild);
-
       const listTitle = document.getElementById("new-title");
       listTitle.style.display = "block";
+      // changeFavButton(favoriteButton);
     }
+
+    
 
     // Function setFavorite:
     function setFavorite(event) {
