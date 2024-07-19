@@ -62,6 +62,8 @@
         console.log(button);
         themeColorSelect.classList.remove("button");
         themeColorSelect.classList.add("buttonWater");
+        document.body.style.color = "#00224d";
+        document.body.style.textShadow = "none";
 
         // favoriteButton.classList.remove("button");
         // favoriteButton.classList.add("buttonWater");
@@ -70,11 +72,9 @@
           element.classList.add("buttonWater");
         });
 
-        // console.log(favoriteButton);
-        // favoriteButton.forEach((element) => {
-        //   element.classList.remove("button");
-        //   element.classList.add("buttonWater");
-        // });
+        // paragraph.classList.remove("whiteParagraph");
+        // paragraph.classList.add("blackParagraph");
+
         option.forEach((element) => {
           element.style.backgroundColor = "lightblue";
           element.style.color = "black";
@@ -149,14 +149,90 @@
       localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
     }
 
+    const paragraph = document.querySelectorAll(
+      "whiteParagraph",
+      "blackParagraph"
+    );
+    // paragraph.forEach(changeParagraphStyle);
+
+    // function changeParagraphStyle(paragraph) {
+    //   paragraph.classList.remove("whiteParagraph", "blackParagraph");
+    //   if (themeColorSelect.value == "black") {
+    //     paragraph.classList.add("whiteParagraph");
+    //   } else if (themeColorSelect.value == "blue") {
+    //     paragraph.classList.add("whiteParagraph");
+    //   } else if (themeColorSelect.value == "green") {
+    //     paragraph.classList.add("whiteParagraph");
+    //   } else if (themeColorSelect.value == "yellow") {
+    //     paragraph.classList.add("blackParagraph");
+    //   } else if (themeColorSelect.value == "water") {
+    //     paragraph.classList.add("blackParagraph");
+    //   } else if (themeColorSelect.value == "red") {
+    //     paragraph.classList.add("blackParagraph");
+    //   } else {
+    //     paragraph.classList.add("whiteParagraph");
+    //   }
+    // }
+
     // creating new task:
     function createTask(entry, artist, rating, time) {
       const item = document.createElement("li");
-      item.innerHTML = `<p>Album: <span id="white" class="entry">${entry}</span> <br> Artist: <span id="white" class="artist">${artist}</span> <br> Rate: <span id="white" class="rating">${rating}</span> <br> Rated on: <span id="white" class="time">${time}</span></p>`;
+      item.innerHTML = `<p class="whiteParagraph">Album: <span class="whiteText" class="entry">${entry}</span> <br> Artist: <span class="whiteText" class="artist">${artist}</span> <br> Rate: <span class="whiteText" class="rating">${rating}</span> <br> Rated on: <span class="whiteText" class="time">${time}</span></p>`;
       addFavoriteButton(item);
       addRemoveButton(item);
+
+      // change paragraph style instantly during new item creation:
+      const paragraph = item.querySelector("p");
+
+      themeColorSelect.addEventListener("change", changeParagraphStyle);
+      function changeParagraphStyle() {
+        paragraph.classList.remove("whiteParagraph", "blackParagraph");
+        if (themeColorSelect.value == "black") {
+          paragraph.classList.add("whiteParagraph");
+        } else if (themeColorSelect.value == "blue") {
+          paragraph.classList.add("whiteParagraph");
+        } else if (themeColorSelect.value == "green") {
+          paragraph.classList.add("whiteParagraph");
+        } else if (themeColorSelect.value == "yellow") {
+          paragraph.classList.add("blackParagraph");
+        } else if (themeColorSelect.value == "water") {
+          paragraph.classList.add("blackParagraph");
+        } else if (themeColorSelect.value == "red") {
+          paragraph.classList.add("blackParagraph");
+        } else {
+          paragraph.classList.add("whiteParagraph");
+        }
+      }
+      changeParagraphStyle(paragraph);
+
       return item;
     }
+
+    console.log(paragraph);
+
+    // document.body.addEventListener("change", function (event) {
+    //   if (event.target.id == "themeColorSelect") {
+    //     function changeParagraph(paragraph) {
+    //       if (themeColorSelect.value == "black") {
+    //         paragraph.classList.add("whiteParagraph");
+    //       } else if (themeColorSelect.value == "blue") {
+    //         paragraph.classList.add("whiteParagraph");
+    //       } else if (themeColorSelect.value == "green") {
+    //         paragraph.classList.add("whiteParagraph");
+    //       } else if (themeColorSelect.value == "yellow") {
+    //         paragraph.classList.add("blackParagraph");
+    //       } else if (themeColorSelect.value == "water") {
+    //         paragraph.classList.remove("whiteParagraph");
+    //         // paragraph.classList.add("blackParagraph");
+    //       } else if (themeColorSelect.value == "red") {
+    //         paragraph.classList.add("blackParagraph");
+    //       } else {
+    //         paragraph.classList.add("whiteParagraph");
+    //       }
+    //     }
+    //     changeParagraph(paragraph);
+    //   }
+    // });
 
     // adding new task on the list:
     function addTask(event) {
@@ -181,22 +257,6 @@
       buttonAdd.addEventListener("click", addTask);
       loadLists();
     };
-
-    // function changeFavButton(favoriteButton){
-    //   const themeColor = themeColorSelect.value;
-    //   if (themeColor.value == "black") {
-
-    //   } else if (themeColor == "blue") {
-    //   } else if (themeColor == "green") {
-    //   } else if (themeColor == "yellow") {
-    //   } else if (themeColor == "water") {
-    //     favoriteButton.classList.remove("button");
-    //     favoriteButton.classList.add("buttonWater");
-    //   } else if (themeColor == "red") {
-    //   } else {
-    //   }
-
-    // }
 
     // add button FavoriteButton:
     function addFavoriteButton(item) {
@@ -230,7 +290,6 @@
         }
       }
       changeFavButton(favoriteButton);
-      
     }
 
     // Function setFavorite:
@@ -287,6 +346,26 @@
       item.appendChild(removeButton);
       item.appendChild(hr);
       removeButton.innerHTML = "Remove album";
+
+      themeColorSelect.addEventListener("change", changeRemoveButton);
+      function changeRemoveButton() {
+        if (themeColorSelect.value == "black") {
+          removeButton.classList.add("removeButtonBlack");
+        } else if (themeColorSelect.value == "blue") {
+          removeButton.classList.add("removeButtonBlue");
+        } else if (themeColorSelect.value == "green") {
+          removeButton.classList.add("removeButtonGreen");
+        } else if (themeColorSelect.value == "yellow") {
+          removeButton.classList.add("removeButtonYellow");
+        } else if (themeColorSelect.value == "water") {
+          removeButton.classList.add("removeButtonWater");
+        } else if (themeColorSelect.value == "red") {
+          removeButton.classList.add("removeButtonRed");
+        } else {
+          removeButton.classList.add("remove-button");
+        }
+      }
+      changeRemoveButton(removeButton);
     }
 
     // function removeTask:

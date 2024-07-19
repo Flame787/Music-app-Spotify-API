@@ -138,7 +138,7 @@ h2 {
 }
 
 #form {
-  @include form-design(); 
+  @include form-design();
 }
 
 .formViolet {
@@ -150,8 +150,6 @@ h2 {
   background: radial-gradient(at 25% 75%, #0f4d5f, rgba(77, 148, 255, 0));
   color: $fontColor1;
 }
-
-
 
 input {
   @include input-field();
@@ -175,7 +173,6 @@ p {
 button {
   @include submit-button();
   @include button-style();
-  
 
   &:hover {
     @include button-hover();
@@ -198,12 +195,25 @@ ul {
 
 li {
   flex-basis: 80%;
-  p {
-    @include list-paragraph();
-  }
 }
 
-#white {
+.whiteParagraph {
+  color: $paragraphColor;
+  @include list-paragraph();
+}
+
+.blackParagraph {
+  color: $inputColor1;
+  @include list-paragraph();
+}
+
+.whiteText {
+  color: $fontColor1;
+  @include white-todos();
+}
+
+.blackText {
+  color: $textShadowColor1;
   @include white-todos();
 }
 
@@ -233,6 +243,10 @@ hr {
   background-color: $formRemoveColor1;
 }
 
+.removeButtonWater {
+  background-color: $inputColor1;
+}
+
 #new-title {
   display: none;
 }
@@ -241,8 +255,7 @@ hr {
 
 .water {
   // for .select:
-    background-color: $paragraphColor;
-  
+  background-color: $paragraphColor;
 }
 
 // media queries:

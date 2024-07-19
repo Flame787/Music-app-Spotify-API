@@ -225,15 +225,29 @@ ul {
 li {
   flex-basis: 80%;
 }
-li p {
+
+.whiteParagraph {
+  color: rgba(209, 212, 201, 0.5725490196);
   padding: 2%;
   display: inline-block;
-  color: rgba(209, 212, 201, 0.5725490196);
   opacity: 0.9;
 }
 
-#white {
+.blackParagraph {
+  color: #00224d;
+  padding: 2%;
+  display: inline-block;
+  opacity: 0.9;
+}
+
+.whiteText {
   color: #d1d4c9;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+.blackText {
+  color: #000000;
   font-weight: 100;
   letter-spacing: 1px;
 }
@@ -267,6 +281,10 @@ hr {
 
 .remove-button {
   background-color: #5d0e41;
+}
+
+.removeButtonWater {
+  background-color: #00224d;
 }
 
 #new-title {

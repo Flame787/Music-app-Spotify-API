@@ -95,12 +95,12 @@
 @mixin list-paragraph {
   padding: 2%;
   display: inline-block;
-  color: $paragraphColor;
+  
   opacity: 0.9;
 }
 
 @mixin white-todos {
-  color: $fontColor1;
+  
   font-weight: 100;
   letter-spacing: 1px;
 }
