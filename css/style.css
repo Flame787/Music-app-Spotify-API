@@ -38,8 +38,7 @@ body {
   top: 0;
   z-index: 1000;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.76);
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
   opacity: 0.8;
@@ -124,11 +123,6 @@ select option {
   text-align: center;
 }
 
-h1,
-h2 {
-  margin-top: 10%;
-}
-
 .flex-container {
   display: flex;
   flex-wrap: wrap;
@@ -153,6 +147,24 @@ h2 {
   border-top: 1px solid #000000;
   box-shadow: 5px 5px 3px #ca3535;
   margin-top: 8%;
+}
+
+.visible-title1 {
+  padding: 0.1%;
+  margin: 5% 35%;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.655);
+  color: #d1d4c9;
+  box-shadow: 5px 5px 3px #ca3535;
+}
+
+.visible-title2 {
+  padding: 0.1%;
+  margin: 5% 35%;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.655);
+  color: #d1d4c9;
+  box-shadow: 5px 5px 3px #ca3535;
 }
 
 .formViolet {

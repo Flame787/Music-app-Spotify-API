@@ -22,7 +22,7 @@
       const themeColor = themeColorSelect.value;
       if (themeColor == "black") {
         document.body.style.backgroundImage =
-          "url(./pictures/energy-black.jpg)";
+          "url(./pictures/triangular-neon-laser.jpg)";
         option.forEach((element) => {
           element.style.backgroundColor = "black";
           element.style.color = "white";
@@ -37,7 +37,7 @@
         });
       } else if (themeColor == "green") {
         document.body.style.backgroundImage =
-          "url(./pictures/energy-green.jpg)";
+          "url(./pictures/orange-green.jpg)";
         option.forEach((element) => {
           element.style.backgroundColor = "forestgreen";
           element.style.color = "white";
@@ -85,6 +85,9 @@
           element.style.backgroundColor = "darkslateblue";
           element.style.color = "white";
           // element.style.opacity = "0.5";
+
+          // treba maknuti sve ostale prijašnje klase ili jednostavno dodijeliti nove. 
+          // Inače ostanu uključene ranije klase za boje buttona (iako se background promijeni).
         });
       }
     }
@@ -399,3 +402,18 @@
 // Kasnije je removanje s osnovne liste ipak proradilo. 
 
 // I removanje itema s favorite liste radi normalno, ali dodavanje s osnovne liste ne radi.
+
+
+
+// Give your stylesheet link an id..
+
+// <link rel=stylesheet href=mycss.css id=shtylesheet>
+// Then you can change it with javascript
+
+// function changeStylesheet(newstylesheet){
+//     document.getElementById('shtylesheet').setAttribute('href', newstylesheet);
+// }
+// Then if you wanna do buttons or something
+
+// <button onclick="changeStylesheet('light.css')">Lights on</button>
+// <button onclick="changeStylesheet('dark.css')">Lights off</button>
