@@ -177,6 +177,11 @@ select option {
   color: #d1d4c9;
 }
 
+.formBlack {
+  background: rgba(0, 0, 0, 0.655);
+  color: #d1d4c9;
+}
+
 input {
   width: 10rem;
   height: 1.5rem;

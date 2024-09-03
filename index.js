@@ -55,7 +55,7 @@
         document.body.style.backgroundImage =
           "url(./pictures/energy-water.jpg)";
         form.classList.remove("formViolet");
-        form.classList.add("formBlue");
+        form.classList.add("formBlack");
         console.log(button);
         themeColorSelect.classList.remove("button");
         themeColorSelect.classList.add("buttonWater");

@@ -146,10 +146,12 @@ select {
   margin: 5% 35%;
   border-radius: 30px;
   background: rgba(0, 0, 0, 0.655);
+  // background: rgba(230, 227, 227, 0.655);
+  
   // to have div transparent, but text inside of it fully visible - rgba with transparent effect:
   // background-color: #041e2684;
   // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
-  color: #d1d4c9;
+  color: $fontColor1;
   box-shadow: 5px 5px 3px #ca3535; 
 }
 
@@ -159,7 +161,8 @@ select {
   border-radius: 30px;
   // margin: 30%;
   background: rgba(0, 0, 0, 0.655);
-  color: #d1d4c9;
+  // background: rgba(230, 227, 227, 0.655);
+  color: $fontColor1;
   box-shadow: 5px 5px 3px #ca3535;
 }
 
@@ -171,6 +174,11 @@ select {
 
 .formBlue {
   background: radial-gradient(at 25% 75%, #0f4d5f, rgba(77, 148, 255, 0));
+  color: $fontColor1;
+}
+
+.formBlack {
+  background: rgba(0, 0, 0, 0.655);
   color: $fontColor1;
 }
 
