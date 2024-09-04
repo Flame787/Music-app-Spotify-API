@@ -47,9 +47,9 @@
   font-weight: bold;
   color: $fontColor1;
   width: 8rem;
-  height: 2rem;
+  height: 3rem;
   border-width: 0;
-  font-size: 18px;
+  font-size: 1.5rem;
   font-family: $sans-serif1;
 }
 
@@ -63,8 +63,8 @@
   padding: 0;
   margin: 1%;
   border-width: 0;
-  width: 12rem;
-  height: 2rem;
+  width: 15rem;
+  height: 3rem;
   color: $fontColor1;
 }
 
@@ -83,8 +83,8 @@
 }
 
 @mixin input-field {
-  width: 10rem;
-  height: 1.5rem;
+  width: 12rem;
+  height: 2.5rem;
   border-radius: 30px;
   background-color: $inputColor1;
   color: $fontColor1;

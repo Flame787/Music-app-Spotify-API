@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
 }
@@ -93,13 +93,20 @@ select {
   display: inline-block;
   margin: 0 70px;
   padding: 5px 4px;
+  padding: 0 3%;
+  font-weight: bold;
+  color: #d1d4c9;
+  width: 8rem;
+  height: 3rem;
+  border-width: 0;
+  font-size: 1.5rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   display: inline-block;
   border-radius: 30px;
   width: 12%;
   padding: 5px 10px 5px 10px;
   color: #d1d4c9;
   font-weight: bold;
-  font-size: 1.1rem;
   text-shadow: 2px 2px 4px #000000;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
@@ -183,8 +190,8 @@ select option {
 }
 
 input {
-  width: 10rem;
-  height: 1.5rem;
+  width: 12rem;
+  height: 2.5rem;
   border-radius: 30px;
   background-color: #00224d;
   color: #d1d4c9;
@@ -211,9 +218,9 @@ button {
   font-weight: bold;
   color: #d1d4c9;
   width: 8rem;
-  height: 2rem;
+  height: 3rem;
   border-width: 0;
-  font-size: 18px;
+  font-size: 1.5rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 30px;
   text-shadow: 2px 2px 4px #000000;
@@ -285,8 +292,8 @@ hr {
   padding: 0;
   margin: 1%;
   border-width: 0;
-  width: 12rem;
-  height: 2rem;
+  width: 15rem;
+  height: 3rem;
   color: #d1d4c9;
 }
 .favorite-button:hover,
@@ -408,10 +415,20 @@ hr {
   #review {
     width: 6rem;
   }
+  #nav-list button,
+  select {
+    width: 8rem;
+    height: 3rem;
+  }
 }
 @media (max-width: 908px) {
   #nav-title {
     font-size: 1.4rem;
+  }
+  #nav-list button,
+  select {
+    width: 8rem;
+    height: 3rem;
   }
 }
 @media (max-width: 900px) {
@@ -427,6 +444,8 @@ hr {
   #nav-list button,
   select {
     margin: 0 15px;
+    width: 8rem;
+    height: 3rem;
   }
   #nav-title {
     font-size: 1.4rem;
@@ -436,6 +455,8 @@ hr {
   #nav-list button,
   select {
     margin: 0 10px;
+    width: 8rem;
+    height: 3rem;
   }
   #nav-title {
     font-size: 1.2rem;

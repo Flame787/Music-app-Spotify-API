@@ -71,6 +71,7 @@ body {
 select {
   @include button-style();
   @include navbar-button();
+  @include submit-button();
   // -webkit-appearance: none;
   // -moz-appearance: none;
   display: inline-block;
@@ -81,7 +82,6 @@ select {
   // background-color: $navButtonColor1;
   color: $fontColor1;
   font-weight: bold;
-  font-size: 1.1rem;
   text-shadow: 2px 2px 4px $textShadowColor1;
   font-family: $sans-serif1;
   text-align: center;
@@ -147,12 +147,12 @@ select {
   border-radius: 30px;
   background: rgba(0, 0, 0, 0.655);
   // background: rgba(230, 227, 227, 0.655);
-  
+
   // to have div transparent, but text inside of it fully visible - rgba with transparent effect:
   // background-color: #041e2684;
   // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
   color: $fontColor1;
-  box-shadow: 5px 5px 3px #ca3535; 
+  box-shadow: 5px 5px 3px #ca3535;
 }
 
 .visible-title2 {
@@ -165,7 +165,6 @@ select {
   color: $fontColor1;
   box-shadow: 5px 5px 3px #ca3535;
 }
-
 
 .formViolet {
   background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
@@ -350,11 +349,21 @@ hr {
   #review {
     width: 6rem;
   }
+  #nav-list button,
+  select {
+    width: 8rem;
+    height: 3rem;
+  }
 }
 
 @media (max-width: 908px) {
   #nav-title {
     font-size: 1.4rem;
+  }
+  #nav-list button,
+  select {
+    width: 8rem;
+    height: 3rem;
   }
 }
 
@@ -373,6 +382,8 @@ hr {
   #nav-list button,
   select {
     margin: 0 15px;
+    width: 8rem;
+    height: 3rem;
   }
 
   #nav-title {
@@ -384,6 +395,8 @@ hr {
   #nav-list button,
   select {
     margin: 0 10px;
+    width: 8rem;
+    height: 3rem;
   }
 
   #nav-title {
