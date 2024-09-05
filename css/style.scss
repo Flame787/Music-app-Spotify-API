@@ -288,7 +288,186 @@ hr {
   background-color: $paragraphColor;
 }
 
-// media queries:
+// THEMES:
+
+// variable $themes is an object, has many different key-value pairs. Values may consist of several css-atributes.
+
+// Set of colors for nav- and add- buttons:
+
+$themes: (
+  theme1: (
+    background-color: violet,
+    color: white,
+  ),
+  theme2: (
+    background-color: lightblue,
+    color: black,
+  )
+  theme3:
+  (
+    background-color: blue,
+    color: white,
+  ),
+  theme4: (
+    background-color: black,
+    color: white,
+  ),
+  theme5: (
+    background-color: gray,
+    color: white,
+  ),
+  theme6: (
+    background-color: green,
+    color: white,
+  ),
+  theme7: (
+    background-color: lightgreen,
+    color: black,
+  ),
+  theme8: (
+    background-color: yellow,
+    color: black,
+  ),
+  theme9: (
+    background-color: orange,
+    color: black,
+  ),
+  theme10: (
+    background-color: red,
+    color: white,
+  ),
+  theme11: (
+    background-color: darkred,
+    color: white,
+  ),
+  theme12: (
+    background-color: white,
+    color: black,
+  ),
+);
+
+// Set of colors for remove-buttons:
+
+$themes2: (
+  theme1: (
+    background-color: violet,
+    color: white,
+  ),
+  theme2: (
+    background-color: lightblue,
+    color: black,
+  )
+  theme3:
+  (
+    background-color: blue,
+    color: white,
+  ),
+  theme4: (
+    background-color: black,
+    color: white,
+  ),
+  theme5: (
+    background-color: gray,
+    color: white,
+  ),
+  theme6: (
+    background-color: green,
+    color: white,
+  ),
+  theme7: (
+    background-color: lightgreen,
+    color: black,
+  ),
+  theme8: (
+    background-color: yellow,
+    color: black,
+  ),
+  theme9: (
+    background-color: orange,
+    color: black,
+  ),
+  theme10: (
+    background-color: red,
+    color: white,
+  ),
+  theme11: (
+    background-color: darkred,
+    color: white,
+  ),
+  theme12: (
+    background-color: white,
+    color: black,
+  ),
+);
+
+$backgrounds: (
+  theme1: url("../pictures/energy-violet.jpg"),
+  theme2: url("../pictures/blue-water-pool.jpg"),
+  theme3: url("../pictures/ocean.jpg"),
+  theme4: url("../pictures/triangular-neon-laser.jpg"),
+  theme5: url("../pictures/guitar-by\ Ri_Ya.jpg"),
+  theme6: url("../pictures/green-abstract.jpg"),
+  theme7: url("../pictures/green-triangles.jpg"),
+  theme8: url("../pictures/energy-yellow.jpg"),
+  theme8: url("../pictures/orange-green.jpg"),
+  theme10: url("../pictures/red-triangles.jpg"),
+  theme11: url("../pictures/energy-red.jpg"),
+  theme12: url("../pictures/energy-white.jpg"),
+);
+
+// On each loop, assign these values to $theme and $map:
+// module-name is a placeholder, should be replaced with any html-element: div, navbar, card, button etc - a container whose style we want to change.
+// in html, we use naming like this :<div class="theme1 navbar">...</div>
+// The & refers to parent selectors, and placing it after .#{$theme} tells Sass to output any parent selectors after the theme name:
+
+// .module-name {
+//   @each $theme, $map in $themes {
+//     .#{$theme} & {
+//       color: map-get($map, color);
+//       background-color: map-get($map, background-color);
+//       font-size: map-get($map, font-size);
+//     }
+//   }
+// }
+
+// FOR NAV- AND ADD-BUTTONS:
+
+.module-name {
+  @each $theme, $map in $themes {
+    .#{$theme} & {
+      background-color: map-get($map, background-color);
+      color: map-get($map, color);
+    }
+  }
+}
+
+// FOR REMOVE-BUTTONS:
+
+.module-name {
+  @each $theme, $map in $themes2 {
+    .#{$theme} & {
+      background-color: map-get($map, background-color);
+      color: map-get($map, color);
+    }
+  }
+}
+
+// PAGE-BACKGROUND:
+
+.element-with-background {
+  @each $theme, $background in $backgrounds {
+    .#{$theme} & {
+      background-image: $background;
+    }
+  }
+}
+
+// dodati boje ovisno o temama za div-ove koji su containeri za naslove, i za form, a možda i za navbar pozadinsku boju 
+// i sukladno tome, ime aplikacije u lijevom gornjem kutu
+
+// podebljani tekst označiti istom bojom kao i slova buttona, a obični tekst nekom sličnom ali jednostavnijom bojom
+
+// MEDIA QUERIES:
 
 @media (max-width: 1540px) {
   #nav-list button:last-child {

@@ -19,78 +19,91 @@
     console.log(option);
 
     function changeTheme() {
-      const themeColor = themeColorSelect.value;
-      if (themeColor == "black") {
-        document.body.style.backgroundImage =
-          "url(./pictures/triangular-neon-laser.jpg)";
-        option.forEach((element) => {
-          element.style.backgroundColor = "black";
-          element.style.color = "white";
-          // element.style.opacity = "0.5";
-        });
-      } else if (themeColor == "blue") {
-        document.body.style.backgroundImage = "url(./pictures/energy-blue.jpg)";
-        option.forEach((element) => {
-          element.style.backgroundColor = "teal";
-          element.style.color = "white";
-          // element.style.opacity = "0.5";
-        });
-      } else if (themeColor == "green") {
-        document.body.style.backgroundImage =
-          "url(./pictures/orange-green.jpg)";
-        option.forEach((element) => {
-          element.style.backgroundColor = "forestgreen";
-          element.style.color = "white";
-          // element.style.opacity = "0.5";
-        });
-      } else if (themeColor == "yellow") {
-        document.body.style.backgroundImage =
-          "url(./pictures/energy-yellow.jpg)";
-        option.forEach((element) => {
-          element.style.backgroundColor = "sandybrown";
-          element.style.color = "black";
-          // element.style.opacity = "0.5";
-        });
-      } else if (themeColor == "water") {
-        document.body.style.backgroundImage =
-          "url(./pictures/energy-water.jpg)";
-        form.classList.remove("formViolet");
-        form.classList.add("formBlack");
-        console.log(button);
-        themeColorSelect.classList.remove("button");
-        themeColorSelect.classList.add("buttonWater");
-        document.body.style.color = "#00224d";
-        document.body.style.textShadow = "none";
 
-        button.forEach((element) => {
-          element.classList.remove("button");
-          element.classList.add("buttonWater");
-        });
+// get value of the selected theme
+const selectedTheme = this.value;
 
-        option.forEach((element) => {
-          element.style.backgroundColor = "lightblue";
-          element.style.color = "black";
-        });
-      } else if (themeColor == "red") {
-        document.body.style.backgroundImage = "url(./pictures/energy-red.jpg)";
-        option.forEach((element) => {
-          element.style.backgroundColor = "firebrick";
-          element.style.color = "black";
-          // element.style.opacity = "0.5";
-        });
-      } else {
-        document.body.style.backgroundImage =
-          "url(./pictures/energy-violet.jpg)";
-        option.forEach((element) => {
-          element.style.backgroundColor = "darkslateblue";
-          element.style.color = "white";
-          // element.style.opacity = "0.5";
+// get main element which should be stylized:
+const headerElement = document.getElementById("navigation");
 
-          // treba maknuti sve ostale prijašnje klase ili jednostavno dodijeliti nove. 
-          // Inače ostanu uključene ranije klase za boje buttona (iako se background promijeni).
-        });
-      }
+// remove all existing themes from this element:
+headerElement.className = headerElement.className.replace(/\btheme\d+\b/g, "").trim();
+
+// Add new theme to this element:
+headerElement.classList.add(selectedTheme);
+
     }
+
+    // function changeTheme() {
+    //   const themeColor = themeColorSelect.value;
+    //   if (themeColor == "black") {
+    //     document.body.style.backgroundImage =
+    //       "url(./pictures/triangular-neon-laser.jpg)";
+    //     option.forEach((element) => {
+    //       element.style.backgroundColor = "black";
+    //       element.style.color = "white";
+        
+    //     });
+    //   } else if (themeColor == "blue") {
+    //     document.body.style.backgroundImage = "url(./pictures/ocean.jpg)";
+    //     option.forEach((element) => {
+    //       element.style.backgroundColor = "teal";
+    //       element.style.color = "white";
+     
+    //     });
+    //   } else if (themeColor == "green") {
+    //     document.body.style.backgroundImage =
+    //       "url(./pictures/orange-green.jpg)";
+    //     option.forEach((element) => {
+    //       element.style.backgroundColor = "forestgreen";
+    //       element.style.color = "white";
+      
+    //     });
+    //   } else if (themeColor == "yellow") {
+    //     document.body.style.backgroundImage =
+    //       "url(./pictures/energy-yellow.jpg)";
+    //     option.forEach((element) => {
+    //       element.style.backgroundColor = "sandybrown";
+    //       element.style.color = "black";
+       
+    //     });
+    //   } else if (themeColor == "water") {
+    //     document.body.style.backgroundImage =
+    //       "url(./pictures/energy-water.jpg)";
+    //     form.classList.remove("formViolet");
+    //     form.classList.add("formBlack");
+    //     console.log(button);
+    //     themeColorSelect.classList.remove("button");
+    //     themeColorSelect.classList.add("buttonWater");
+    //     document.body.style.color = "#00224d";
+    //     document.body.style.textShadow = "none";
+
+    //     button.forEach((element) => {
+    //       element.classList.remove("button");
+    //       element.classList.add("buttonWater");
+    //     });
+
+    //     option.forEach((element) => {
+    //       element.style.backgroundColor = "lightblue";
+    //       element.style.color = "black";
+    //     });
+    //   } else if (themeColor == "red") {
+    //     document.body.style.backgroundImage = "url(./pictures/energy-red.jpg)";
+    //     option.forEach((element) => {
+    //       element.style.backgroundColor = "firebrick";
+    //       element.style.color = "black";
+      
+    //     });
+    //   } else {
+    //     document.body.style.backgroundImage =
+    //       "url(./pictures/energy-violet.jpg)";
+    //     option.forEach((element) => {
+    //       element.style.backgroundColor = "darkslateblue";
+    //       element.style.color = "white";
+    //     });
+    //   }
+    // }
+
     changeTheme();
 
     let entry, rating, artist, time, item;
