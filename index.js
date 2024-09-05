@@ -15,22 +15,45 @@
 
     const form = document.getElementById("form");
     const button = document.querySelectorAll("button");
+
     const option = document.querySelectorAll("option");
     console.log(option);
 
     function changeTheme() {
+      // get value of the selected theme
+      const selectedTheme = this.value;
 
-// get value of the selected theme
-const selectedTheme = this.value;
+      // get main element which should be stylized
+      // (add buttons, body, navbar, inputs, form, text-blocks, add- and remove-buttons):
 
-// get main element which should be stylized:
-const headerElement = document.getElementById("navigation");
+      const body = document.body;
+      const buttonTh1 = document.querySelectorAll(".button-th1");
+      const buttonTh2 = document.querySelectorAll(".button-th2");
+      
 
-// remove all existing themes from this element:
-headerElement.className = headerElement.className.replace(/\btheme\d+\b/g, "").trim();
+      // remove all existing themes from this element:
+      body.className = body.className.replace(/\btheme\d+\b/g, "").trim();
 
-// Add new theme to this element:
-headerElement.classList.add(selectedTheme);
+      buttonTh1.forEach(button => {
+        button.className = button.className.replace(/\btheme\d+\b/g, "").trim();
+      });
+
+      buttonTh2.forEach(button => {
+        button.className = button.className.replace(/\btheme\d+\b/g, "").trim();
+      });
+
+
+      
+      // Add new theme to this element:
+      body.classList.add(selectedTheme);
+
+      buttonTh1.forEach(button => {
+        button.classList.add(selectedTheme);
+      });
+
+      buttonTh2.forEach(button => {
+        button.classList.add(selectedTheme);
+      });
 
     }
 
@@ -42,14 +65,14 @@ headerElement.classList.add(selectedTheme);
     //     option.forEach((element) => {
     //       element.style.backgroundColor = "black";
     //       element.style.color = "white";
-        
+
     //     });
     //   } else if (themeColor == "blue") {
     //     document.body.style.backgroundImage = "url(./pictures/ocean.jpg)";
     //     option.forEach((element) => {
     //       element.style.backgroundColor = "teal";
     //       element.style.color = "white";
-     
+
     //     });
     //   } else if (themeColor == "green") {
     //     document.body.style.backgroundImage =
@@ -57,7 +80,7 @@ headerElement.classList.add(selectedTheme);
     //     option.forEach((element) => {
     //       element.style.backgroundColor = "forestgreen";
     //       element.style.color = "white";
-      
+
     //     });
     //   } else if (themeColor == "yellow") {
     //     document.body.style.backgroundImage =
@@ -65,7 +88,7 @@ headerElement.classList.add(selectedTheme);
     //     option.forEach((element) => {
     //       element.style.backgroundColor = "sandybrown";
     //       element.style.color = "black";
-       
+
     //     });
     //   } else if (themeColor == "water") {
     //     document.body.style.backgroundImage =
@@ -92,7 +115,7 @@ headerElement.classList.add(selectedTheme);
     //     option.forEach((element) => {
     //       element.style.backgroundColor = "firebrick";
     //       element.style.color = "black";
-      
+
     //     });
     //   } else {
     //     document.body.style.backgroundImage =
@@ -104,7 +127,6 @@ headerElement.classList.add(selectedTheme);
     //   }
     // }
 
-    changeTheme();
 
     let entry, rating, artist, time, item;
 
@@ -161,7 +183,6 @@ headerElement.classList.add(selectedTheme);
       "whiteParagraph",
       "blackParagraph"
     );
-   
 
     // creating new task:
     function createTask(entry, artist, rating, time) {
@@ -398,7 +419,6 @@ headerElement.classList.add(selectedTheme);
 // const apikey = process.env.API_KEY;
 //
 
-
 // Error kod dodavanja novih itema na favorite listu:
 // index.js:338 Uncaught TypeError: Cannot read properties of null (reading 'textContent')
 //     at HTMLButtonElement.setFavorite (index.js:338:49)
@@ -412,11 +432,9 @@ headerElement.classList.add(selectedTheme);
 //     at NodeList.forEach (<anonymous>)
 //     at saveLists (index.js:122:35)
 //     at HTMLButtonElement.removeTask (index.js:370:7)
-// Kasnije je removanje s osnovne liste ipak proradilo. 
+// Kasnije je removanje s osnovne liste ipak proradilo.
 
 // I removanje itema s favorite liste radi normalno, ali dodavanje s osnovne liste ne radi.
-
-
 
 // Give your stylesheet link an id..
 

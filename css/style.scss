@@ -2,6 +2,7 @@
 @import "base/colors";
 @import "base/typography";
 @import "abstracts/mixins";
+@import "abstracts/themes";
 
 body {
   color: $fontColor1;
@@ -409,7 +410,7 @@ $backgrounds: (
   theme6: url("../pictures/green-abstract.jpg"),
   theme7: url("../pictures/green-triangles.jpg"),
   theme8: url("../pictures/energy-yellow.jpg"),
-  theme8: url("../pictures/orange-green.jpg"),
+  theme9: url("../pictures/orange-green.jpg"),
   theme10: url("../pictures/red-triangles.jpg"),
   theme11: url("../pictures/energy-red.jpg"),
   theme12: url("../pictures/energy-white.jpg"),
@@ -430,9 +431,20 @@ $backgrounds: (
 //   }
 // }
 
-// FOR NAV- AND ADD-BUTTONS:
 
-.module-name {
+// PAGE-BACKGROUND:
+
+body {
+  @each $theme, $background in $backgrounds {
+    .#{$theme} & {
+      background-image: $background;
+    }
+  }
+}
+
+// FOR NAV-BUTTONS (html) AND ADD-BUTTONS (JS-file):
+
+.button-th1 {
   @each $theme, $map in $themes {
     .#{$theme} & {
       background-color: map-get($map, background-color);
@@ -441,9 +453,9 @@ $backgrounds: (
   }
 }
 
-// FOR REMOVE-BUTTONS:
+// FOR REMOVE-BUTTONS (JS-file):
 
-.module-name {
+.button-th2 {
   @each $theme, $map in $themes2 {
     .#{$theme} & {
       background-color: map-get($map, background-color);
@@ -452,20 +464,14 @@ $backgrounds: (
   }
 }
 
-// PAGE-BACKGROUND:
 
-.element-with-background {
-  @each $theme, $background in $backgrounds {
-    .#{$theme} & {
-      background-image: $background;
-    }
-  }
-}
 
-// dodati boje ovisno o temama za div-ove koji su containeri za naslove, i za form, a možda i za navbar pozadinsku boju 
+// dodati boje ovisno o temama za div-ove koji su containeri za naslove, i za form, za input polja, a možda i za navbar pozadinsku boju 
 // i sukladno tome, ime aplikacije u lijevom gornjem kutu
 
 // podebljani tekst označiti istom bojom kao i slova buttona, a obični tekst nekom sličnom ali jednostavnijom bojom
+
+// kasnije sve teme spremiti u zaseban file, npr. _themes.scss i importati u ovaj file
 
 // MEDIA QUERIES:
 
