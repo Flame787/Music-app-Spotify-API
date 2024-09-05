@@ -26,9 +26,12 @@
 
     function changeTheme() {
       // get value of the selected theme
-      const selectedValue = this.value;
+      // const selectedValue = this.value;
 
-      const selectedTheme = "theme" + (themes.indexOf("theme" + selectedValue) + 1);
+      // const selectedTheme = "theme" + (themes.indexOf("theme" + selectedValue) + 1);
+
+      const selectedTheme = this.value;
+      // const selectedTheme = "theme" + (themes.indexOf("theme" + selectedValue) + 1);
 
       // get main elements which should be stylized
       // (add buttons, body, navbar, inputs, form, text-blocks, add- and remove-buttons):

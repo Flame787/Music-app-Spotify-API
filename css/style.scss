@@ -296,6 +296,10 @@ hr {
 // Set of colors for nav- and add- buttons:
 
 $themes: (
+  theme0: (
+    background-color: violet,
+    color: white,
+  ),
   theme1: (
     background-color: violet,
     color: white,
@@ -350,6 +354,10 @@ $themes: (
 // Set of colors for remove-buttons:
 
 $themes2: (
+  theme0: (
+    background-color: violet,
+    color: white,
+  ),
   theme1: (
     background-color: violet,
     color: white,
@@ -402,6 +410,7 @@ $themes2: (
 );
 
 $backgrounds: (
+  theme0: url("../pictures/energy-violet.jpg"),
   theme1: url("../pictures/energy-violet.jpg"),
   theme2: url("../pictures/blue-water-pool.jpg"),
   theme3: url("../pictures/ocean.jpg"),
