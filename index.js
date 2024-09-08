@@ -20,64 +20,60 @@
     console.log(option);
 
     const themes = [
-      "theme1", "theme2", "theme3", "theme4", "theme5", "theme6", "theme7", 
-      "theme8", "theme9", "theme10", "theme11", "theme12"
+      "theme0",
+      "theme1",
+      "theme2",
+      "theme3",
+      "theme4",
+      "theme5",
+      "theme6",
+      "theme7",
+      "theme8",
+      "theme9",
+      "theme10",
+      "theme11",
+      "theme12",
     ];
 
     function changeTheme() {
       // get value of the selected theme
-      // const selectedValue = this.value;
 
-      // const selectedTheme = "theme" + (themes.indexOf("theme" + selectedValue) + 1);
-
-      const selectedTheme = this.value;
-      // const selectedTheme = "theme" + (themes.indexOf("theme" + selectedValue) + 1);
+      const selectedTheme = themeColorSelect.value;
 
       // get main elements which should be stylized
       // (add buttons, body, navbar, inputs, form, text-blocks, add- and remove-buttons):
 
       const body = document.body;
+      // getting nodelists, so we will use forEach-function on each button:
       const buttonTh1 = document.querySelectorAll(".button-th1");
       const buttonTh2 = document.querySelectorAll(".button-th2");
-      
 
       // remove all existing themes from this element:
-      themes.forEach(theme => {
+      themes.forEach((theme) => {
         body.classList.remove(theme);
 
-        buttonTh1.forEach(button => {
+        buttonTh1.forEach((button) => {
           button.classList.remove(theme);
         });
 
-        buttonTh2.forEach(button => {
+        buttonTh2.forEach((button) => {
           button.classList.remove(theme);
         });
       });
 
-
-      // body.className = body.className.replace(/\btheme\d+\b/g, "").trim();
-
-      // buttonTh1.forEach(button => {
-      //   button.className = button.className.replace(/\btheme\d+\b/g, "").trim();
-      // });
-
-      // buttonTh2.forEach(button => {
-      //   button.className = button.className.replace(/\btheme\d+\b/g, "").trim();
-      // });
-
-
-      
       // Add new theme to this element:
       body.classList.add(selectedTheme);
 
-      buttonTh1.forEach(button => {
+      buttonTh1.forEach((button) => {
         button.classList.add(selectedTheme);
       });
 
-      buttonTh2.forEach(button => {
+      buttonTh2.forEach((button) => {
         button.classList.add(selectedTheme);
       });
 
+      console.log("Selected theme:", selectedTheme);
+      console.log("Body classes:", body.classList);
     }
 
     // function changeTheme() {
@@ -149,7 +145,6 @@
     //     });
     //   }
     // }
-
 
     let entry, rating, artist, time, item;
 

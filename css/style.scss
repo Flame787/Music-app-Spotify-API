@@ -4,11 +4,148 @@
 @import "abstracts/mixins";
 @import "abstracts/themes";
 
+// THEMES:
+
+// variable $themes is an object, has many different key-value pairs. Values may consist of several css-atributes.
+
+// Set of colors for nav- and add- buttons:
+
+$themes: (
+  theme0: (
+    background-color: violet,
+    color: white,
+  ),
+  theme1: (
+    background-color: violet,
+    color: white,
+  ),
+  theme2: (
+    background-color: lightblue,
+    color: black,
+  ),
+  theme3:
+  (
+    background-color: blue,
+    color: white,
+  ),
+  theme4: (
+    background-color: black,
+    color: white,
+  ),
+  theme5: (
+    background-color: gray,
+    color: white,
+  ),
+  theme6: (
+    background-color: green,
+    color: white,
+  ),
+  theme7: (
+    background-color: lightgreen,
+    color: black,
+  ),
+  theme8: (
+    background-color: yellow,
+    color: black,
+  ),
+  theme9: (
+    background-color: orange,
+    color: black,
+  ),
+  theme10: (
+    background-color: red,
+    color: white,
+  ),
+  theme11: (
+    background-color: darkred,
+    color: white,
+  ),
+  theme12: (
+    background-color: white,
+    color: black,
+  ),
+);
+
+// Set of colors for remove-buttons:
+
+$themes2: (
+  theme0: (
+    background-color: violet,
+    color: white,
+  ),
+  theme1: (
+    background-color: violet,
+    color: white,
+  ),
+  theme2: (
+    background-color: lightblue,
+    color: black,
+  ),
+  theme3:
+  (
+    background-color: blue,
+    color: white,
+  ),
+  theme4: (
+    background-color: black,
+    color: white,
+  ),
+  theme5: (
+    background-color: gray,
+    color: white,
+  ),
+  theme6: (
+    background-color: green,
+    color: white,
+  ),
+  theme7: (
+    background-color: lightgreen,
+    color: black,
+  ),
+  theme8: (
+    background-color: yellow,
+    color: black,
+  ),
+  theme9: (
+    background-color: orange,
+    color: black,
+  ),
+  theme10: (
+    background-color: red,
+    color: white,
+  ),
+  theme11: (
+    background-color: darkred,
+    color: white,
+  ),
+  theme12: (
+    background-color: white,
+    color: black,
+  ),
+);
+
+$backgrounds: (
+  theme0: url("../pictures/energy-violet.jpg"),
+  theme1: url("../pictures/energy-violet.jpg"),
+  theme2: url("../pictures/blue-water-pool.jpg"),
+  theme3: url("../pictures/ocean.jpg"),
+  theme4: url("../pictures/triangular-neon-laser.jpg"),
+  theme5: url("../pictures/guitar-by Ri_Ya.jpg"),
+  theme6: url("../pictures/green-abstract.jpg"),
+  theme7: url("../pictures/green-triangles.jpg"),
+  theme8: url("../pictures/energy-yellow.jpg"),
+  theme9: url("../pictures/orange-green.jpg"),
+  theme10: url("../pictures/red-triangles.jpg"),
+  theme11: url("../pictures/energy-red.jpg"),
+  theme12: url("../pictures/energy-white.jpg"),
+);
+
 body {
   color: $fontColor1;
   font-family: $sans-serif1;
   text-shadow: 2px 2px 4px $textShadowColor1;
   // background-image: url("../pictures/energy-violet.jpg");
+  // background-image: $backgrounds;
   background-repeat: repeat;
   background-size: 100%;
 }
@@ -210,9 +347,9 @@ button {
   }
 }
 
-.button {
-  background-color: $navButtonColor1;
-}
+// .button {
+//   background-color: $navButtonColor1;
+// }
 
 .buttonWater {
   background-color: $buttonWater;
@@ -289,141 +426,7 @@ hr {
   background-color: $paragraphColor;
 }
 
-// THEMES:
 
-// variable $themes is an object, has many different key-value pairs. Values may consist of several css-atributes.
-
-// Set of colors for nav- and add- buttons:
-
-$themes: (
-  theme0: (
-    background-color: violet,
-    color: white,
-  ),
-  theme1: (
-    background-color: violet,
-    color: white,
-  ),
-  theme2: (
-    background-color: lightblue,
-    color: black,
-  )
-  theme3:
-  (
-    background-color: blue,
-    color: white,
-  ),
-  theme4: (
-    background-color: black,
-    color: white,
-  ),
-  theme5: (
-    background-color: gray,
-    color: white,
-  ),
-  theme6: (
-    background-color: green,
-    color: white,
-  ),
-  theme7: (
-    background-color: lightgreen,
-    color: black,
-  ),
-  theme8: (
-    background-color: yellow,
-    color: black,
-  ),
-  theme9: (
-    background-color: orange,
-    color: black,
-  ),
-  theme10: (
-    background-color: red,
-    color: white,
-  ),
-  theme11: (
-    background-color: darkred,
-    color: white,
-  ),
-  theme12: (
-    background-color: white,
-    color: black,
-  ),
-);
-
-// Set of colors for remove-buttons:
-
-$themes2: (
-  theme0: (
-    background-color: violet,
-    color: white,
-  ),
-  theme1: (
-    background-color: violet,
-    color: white,
-  ),
-  theme2: (
-    background-color: lightblue,
-    color: black,
-  )
-  theme3:
-  (
-    background-color: blue,
-    color: white,
-  ),
-  theme4: (
-    background-color: black,
-    color: white,
-  ),
-  theme5: (
-    background-color: gray,
-    color: white,
-  ),
-  theme6: (
-    background-color: green,
-    color: white,
-  ),
-  theme7: (
-    background-color: lightgreen,
-    color: black,
-  ),
-  theme8: (
-    background-color: yellow,
-    color: black,
-  ),
-  theme9: (
-    background-color: orange,
-    color: black,
-  ),
-  theme10: (
-    background-color: red,
-    color: white,
-  ),
-  theme11: (
-    background-color: darkred,
-    color: white,
-  ),
-  theme12: (
-    background-color: white,
-    color: black,
-  ),
-);
-
-$backgrounds: (
-  theme0: url("../pictures/energy-violet.jpg"),
-  theme1: url("../pictures/energy-violet.jpg"),
-  theme2: url("../pictures/blue-water-pool.jpg"),
-  theme3: url("../pictures/ocean.jpg"),
-  theme4: url("../pictures/triangular-neon-laser.jpg"),
-  theme5: url("../pictures/guitar-by\ Ri_Ya.jpg"),
-  theme6: url("../pictures/green-abstract.jpg"),
-  theme7: url("../pictures/green-triangles.jpg"),
-  theme8: url("../pictures/energy-yellow.jpg"),
-  theme9: url("../pictures/orange-green.jpg"),
-  theme10: url("../pictures/red-triangles.jpg"),
-  theme11: url("../pictures/energy-red.jpg"),
-  theme12: url("../pictures/energy-white.jpg"),
-);
 
 // On each loop, assign these values to $theme and $map:
 // module-name is a placeholder, should be replaced with any html-element: div, navbar, card, button etc - a container whose style we want to change.
@@ -440,13 +443,31 @@ $backgrounds: (
 //   }
 // }
 
+// .module-name {
+//   h1 {
+//     @each $theme, $map in $themes {
+//       .#{$theme} & {
+//         color: map-get($map, color);
+//       }
+//     }
+//   }
+// }
+
+/* CSS */
+// .theme1 .module-name h1 { color: red; }
+// .theme2 .module-name h1 { color: orange; }
+// .theme3 .module-name h1 { color: yellow; }
+// .theme4 .module-name h1 { color: green; }
+// .theme5 .module-name h1 { color: blue; }
 
 // PAGE-BACKGROUND:
 
+// &.#{$theme} - current element, .#{$theme} & { - parent element gets the class
+
 body {
   @each $theme, $background in $backgrounds {
-    .#{$theme} & {
-      background-image: $background;
+    &.#{$theme} {
+      background-image: $background !important;
     }
   }
 }
@@ -473,9 +494,7 @@ body {
   }
 }
 
-
-
-// dodati boje ovisno o temama za div-ove koji su containeri za naslove, i za form, za input polja, a možda i za navbar pozadinsku boju 
+// dodati boje ovisno o temama za div-ove koji su containeri za naslove, i za form, za input polja, a možda i za navbar pozadinsku boju
 // i sukladno tome, ime aplikacije u lijevom gornjem kutu
 
 // podebljani tekst označiti istom bojom kao i slova buttona, a obični tekst nekom sličnom ali jednostavnijom bojom
