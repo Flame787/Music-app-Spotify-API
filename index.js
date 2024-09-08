@@ -45,8 +45,8 @@
 
       const body = document.body;
       // getting nodelists, so we will use forEach-function on each button:
-      const buttonTh1 = document.querySelectorAll(".button-th1");
-      const buttonTh2 = document.querySelectorAll(".button-th2");
+      const buttonTh1 = document.querySelectorAll(".button-th1, .favorite-button");
+      const buttonTh2 = document.querySelectorAll(".remove-button");
 
       // remove all existing themes from this element:
       themes.forEach((theme) => {
@@ -131,7 +131,10 @@
     // creating new task:
     function createTask(entry, artist, rating, time) {
       const item = document.createElement("li");
-      item.innerHTML = `<p class="whiteParagraph">Album: <span class="whiteText" class="entry">${entry}</span> <br> Artist: <span class="whiteText" class="artist">${artist}</span> <br> Rate: <span class="whiteText" class="rating">${rating}</span> <br> Rated on: <span class="whiteText" class="time">${time}</span></p>`;
+      item.innerHTML = `<p class="whiteParagraph">Album: <span class="whiteText" class="entry">${entry}</span> 
+      <br> Artist: <span class="whiteText" class="artist">${artist}</span> 
+      <br> Rate: <span class="whiteText" class="rating">${rating}</span> 
+      <br> Rated on: <span class="whiteText" class="time">${time}</span></p>`;
       addFavoriteButton(item);
       addRemoveButton(item);
 
@@ -171,7 +174,7 @@
       const favoriteButton = document.createElement("button");
       favoriteButton.setAttribute("type", "button");
       favoriteButton.classList.add("favorite-button");
-      favoriteButton.classList.add("buttonTh1");
+      // favoriteButton.classList.add("buttonTh1");
       favoriteButton.classList.add("button");
       favoriteButton.classList.add("flex-item");
       favoriteButton.addEventListener("click", setFavorite);
@@ -183,17 +186,18 @@
     }
 
     // function that applies theme to all newly created fav-buttons:
-    function setThemeToFavButton() {
-      const button = document.querySelectorAll(".favorite-button");
+    // function setThemeToFavButton(theme, selectedTheme) {
+    //   const button = document.querySelectorAll(".favorite-button");
 
-      button.forEach((button) => {
-        button.classList.remove(theme);
-      });
-      button.forEach((button) => {
-        button.classList.add(selectedTheme);
-      });
-    }
-    setThemeToFavButton();
+    //   button.forEach((button) => {
+    //     button.classList.remove(theme);
+    //   });
+    //   button.forEach((button) => {
+    //     button.classList.add(selectedTheme);
+    //   });
+    // }
+    // setThemeToFavButton();
+
 
     // Function setFavorite:
     function setFavorite(event) {
@@ -205,7 +209,7 @@
 
       console.log("Extracted values:", { entry, artist, rating, time }); // Debugging
 
-      if (!entryElement || !artist || !rating || !time) {
+      if (!entry || !artist || !rating || !time) {
         console.error("Some elements are missing in the item:", {
           entry,
           artist,

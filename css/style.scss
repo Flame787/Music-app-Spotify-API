@@ -407,9 +407,9 @@ hr {
 //   background-color: $navButtonColor1;
 // }
 
-.remove-button {
-  background-color: $formRemoveColor1;
-}
+// .remove-button {
+//   background-color: $formRemoveColor1;
+// }
 
 .removeButtonWater {
   background-color: $inputColor1;
@@ -483,9 +483,18 @@ body {
   }
 }
 
+.favorite-button {
+  @each $theme, $map in $themes {
+    .#{$theme} & {
+      background-color: map-get($map, background-color);
+      color: map-get($map, color);
+    }
+  }
+}
+
 // FOR REMOVE-BUTTONS (JS-file):
 
-.button-th2 {
+.remove-button {
   @each $theme, $map in $themes2 {
     .#{$theme} & {
       background-color: map-get($map, background-color);

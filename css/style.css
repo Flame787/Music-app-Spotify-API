@@ -299,10 +299,6 @@ hr {
   text-shadow: none;
 }
 
-.remove-button {
-  background-color: #5d0e41;
-}
-
 .removeButtonWater {
   background-color: #00224d;
 }
@@ -453,55 +449,108 @@ body.theme12 {
   color: black;
 }
 
-.theme0 .button-th2 {
-  background-color: violet;
+.theme0 .favorite-button {
+  background-color: #a0153e;
   color: white;
 }
-.theme1 .button-th2 {
-  background-color: violet;
+.theme1 .favorite-button {
+  background-color: #a0153e;
   color: white;
 }
-.theme2 .button-th2 {
+.theme2 .favorite-button {
   background-color: lightblue;
   color: black;
 }
-.theme3 .button-th2 {
+.theme3 .favorite-button {
   background-color: blue;
   color: white;
 }
-.theme4 .button-th2 {
+.theme4 .favorite-button {
   background-color: black;
   color: white;
 }
-.theme5 .button-th2 {
+.theme5 .favorite-button {
   background-color: gray;
   color: white;
 }
-.theme6 .button-th2 {
+.theme6 .favorite-button {
   background-color: green;
   color: white;
 }
-.theme7 .button-th2 {
+.theme7 .favorite-button {
   background-color: lightgreen;
   color: black;
 }
-.theme8 .button-th2 {
+.theme8 .favorite-button {
   background-color: yellow;
   color: black;
 }
-.theme9 .button-th2 {
+.theme9 .favorite-button {
   background-color: orange;
   color: black;
 }
-.theme10 .button-th2 {
+.theme10 .favorite-button {
   background-color: red;
   color: white;
 }
-.theme11 .button-th2 {
+.theme11 .favorite-button {
   background-color: darkred;
   color: white;
 }
-.theme12 .button-th2 {
+.theme12 .favorite-button {
+  background-color: white;
+  color: black;
+}
+
+.theme0 .remove-button {
+  background-color: violet;
+  color: white;
+}
+.theme1 .remove-button {
+  background-color: violet;
+  color: white;
+}
+.theme2 .remove-button {
+  background-color: lightblue;
+  color: black;
+}
+.theme3 .remove-button {
+  background-color: blue;
+  color: white;
+}
+.theme4 .remove-button {
+  background-color: black;
+  color: white;
+}
+.theme5 .remove-button {
+  background-color: gray;
+  color: white;
+}
+.theme6 .remove-button {
+  background-color: green;
+  color: white;
+}
+.theme7 .remove-button {
+  background-color: lightgreen;
+  color: black;
+}
+.theme8 .remove-button {
+  background-color: yellow;
+  color: black;
+}
+.theme9 .remove-button {
+  background-color: orange;
+  color: black;
+}
+.theme10 .remove-button {
+  background-color: red;
+  color: white;
+}
+.theme11 .remove-button {
+  background-color: darkred;
+  color: white;
+}
+.theme12 .remove-button {
   background-color: white;
   color: black;
 }
