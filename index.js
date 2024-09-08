@@ -76,76 +76,7 @@
       console.log("Body classes:", body.classList);
     }
 
-    // function changeTheme() {
-    //   const themeColor = themeColorSelect.value;
-    //   if (themeColor == "black") {
-    //     document.body.style.backgroundImage =
-    //       "url(./pictures/triangular-neon-laser.jpg)";
-    //     option.forEach((element) => {
-    //       element.style.backgroundColor = "black";
-    //       element.style.color = "white";
-
-    //     });
-    //   } else if (themeColor == "blue") {
-    //     document.body.style.backgroundImage = "url(./pictures/ocean.jpg)";
-    //     option.forEach((element) => {
-    //       element.style.backgroundColor = "teal";
-    //       element.style.color = "white";
-
-    //     });
-    //   } else if (themeColor == "green") {
-    //     document.body.style.backgroundImage =
-    //       "url(./pictures/orange-green.jpg)";
-    //     option.forEach((element) => {
-    //       element.style.backgroundColor = "forestgreen";
-    //       element.style.color = "white";
-
-    //     });
-    //   } else if (themeColor == "yellow") {
-    //     document.body.style.backgroundImage =
-    //       "url(./pictures/energy-yellow.jpg)";
-    //     option.forEach((element) => {
-    //       element.style.backgroundColor = "sandybrown";
-    //       element.style.color = "black";
-
-    //     });
-    //   } else if (themeColor == "water") {
-    //     document.body.style.backgroundImage =
-    //       "url(./pictures/energy-water.jpg)";
-    //     form.classList.remove("formViolet");
-    //     form.classList.add("formBlack");
-    //     console.log(button);
-    //     themeColorSelect.classList.remove("button");
-    //     themeColorSelect.classList.add("buttonWater");
-    //     document.body.style.color = "#00224d";
-    //     document.body.style.textShadow = "none";
-
-    //     button.forEach((element) => {
-    //       element.classList.remove("button");
-    //       element.classList.add("buttonWater");
-    //     });
-
-    //     option.forEach((element) => {
-    //       element.style.backgroundColor = "lightblue";
-    //       element.style.color = "black";
-    //     });
-    //   } else if (themeColor == "red") {
-    //     document.body.style.backgroundImage = "url(./pictures/energy-red.jpg)";
-    //     option.forEach((element) => {
-    //       element.style.backgroundColor = "firebrick";
-    //       element.style.color = "black";
-
-    //     });
-    //   } else {
-    //     document.body.style.backgroundImage =
-    //       "url(./pictures/energy-violet.jpg)";
-    //     option.forEach((element) => {
-    //       element.style.backgroundColor = "darkslateblue";
-    //       element.style.color = "white";
-    //     });
-    //   }
-    // }
-
+    
     let entry, rating, artist, time, item;
 
     // Load lists from localStorage on init:
@@ -197,11 +128,6 @@
       localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
     }
 
-    const paragraph = document.querySelectorAll(
-      "whiteParagraph",
-      "blackParagraph"
-    );
-
     // creating new task:
     function createTask(entry, artist, rating, time) {
       const item = document.createElement("li");
@@ -209,73 +135,10 @@
       addFavoriteButton(item);
       addRemoveButton(item);
 
-      // change paragraph style instantly during new item creation:
-      const paragraph = item.querySelector("p");
-      const span = item.querySelectorAll("span");
-
-      themeColorSelect.addEventListener("change", changeParagraphStyle);
-      function changeParagraphStyle() {
-        paragraph.classList.remove("whiteParagraph", "blackParagraph");
-        if (themeColorSelect.value == "black") {
-          paragraph.classList.add("whiteParagraph");
-        } else if (themeColorSelect.value == "blue") {
-          paragraph.classList.add("whiteParagraph");
-        } else if (themeColorSelect.value == "green") {
-          paragraph.classList.add("whiteParagraph");
-        } else if (themeColorSelect.value == "yellow") {
-          paragraph.classList.add("blackParagraph");
-        } else if (themeColorSelect.value == "water") {
-          paragraph.classList.add("blackParagraph");
-        } else if (themeColorSelect.value == "red") {
-          paragraph.classList.add("blackParagraph");
-        } else {
-          paragraph.classList.add("whiteParagraph");
-        }
-      }
-      changeParagraphStyle(paragraph);
-
-      themeColorSelect.addEventListener("change", changeSpanStyle);
-      function changeSpanStyle() {
-        span.forEach((element) => {
-          element.classList.remove("whiteText", "blackText");
-        });
-
-        if (themeColorSelect.value == "black") {
-          span.forEach((element) => {
-            element.classList.add("whiteText");
-          });
-        } else if (themeColorSelect.value == "blue") {
-          span.forEach((element) => {
-            element.classList.add("whiteText");
-          });
-        } else if (themeColorSelect.value == "green") {
-          span.forEach((element) => {
-            element.classList.add("whiteText");
-          });
-        } else if (themeColorSelect.value == "yellow") {
-          span.forEach((element) => {
-            element.classList.add("blackText");
-          });
-        } else if (themeColorSelect.value == "water") {
-          span.forEach((element) => {
-            element.classList.add("blackText");
-          });
-        } else if (themeColorSelect.value == "red") {
-          span.forEach((element) => {
-            element.classList.add("blackText");
-          });
-        } else {
-          span.forEach((element) => {
-            element.classList.add("whiteText");
-          });
-        }
-      }
-      changeSpanStyle(span);
-
       return item;
     }
 
-    console.log(paragraph);
+    // console.log(paragraph);
 
     // adding new task on the list:
     function addTask(event) {
@@ -295,8 +158,10 @@
       saveLists();
     }
 
-    // new task (item) added on the add-button click:
     this.init = function () {
+      // body initially has a default theme:
+      document.body.classList.add("theme0");
+      // new task (item) added on the add-button click:
       buttonAdd.addEventListener("click", addTask);
       loadLists();
     };
@@ -306,6 +171,7 @@
       const favoriteButton = document.createElement("button");
       favoriteButton.setAttribute("type", "button");
       favoriteButton.classList.add("favorite-button");
+      favoriteButton.classList.add("buttonTh1");
       favoriteButton.classList.add("button");
       favoriteButton.classList.add("flex-item");
       favoriteButton.addEventListener("click", setFavorite);
@@ -314,27 +180,20 @@
       const listTitle = document.getElementById("new-title");
       listTitle.style.display = "block";
 
-      themeColorSelect.addEventListener("change", changeFavButton);
-      function changeFavButton() {
-        favoriteButton.classList.remove("button");
-        if (themeColorSelect.value == "black") {
-          favoriteButton.classList.add("buttonBlack");
-        } else if (themeColorSelect.value == "blue") {
-          favoriteButton.classList.add("buttonBlue");
-        } else if (themeColorSelect.value == "green") {
-          favoriteButton.classList.add("buttonGreen");
-        } else if (themeColorSelect.value == "yellow") {
-          favoriteButton.classList.add("buttonYellow");
-        } else if (themeColorSelect.value == "water") {
-          favoriteButton.classList.add("buttonWater");
-        } else if (themeColorSelect.value == "red") {
-          favoriteButton.classList.add("buttonRed");
-        } else {
-          favoriteButton.classList.add("button");
-        }
-      }
-      changeFavButton(favoriteButton);
     }
+
+    // function that applies theme to all newly created fav-buttons:
+    function setThemeToFavButton() {
+      const button = document.querySelectorAll(".favorite-button");
+
+      button.forEach((button) => {
+        button.classList.remove(theme);
+      });
+      button.forEach((button) => {
+        button.classList.add(selectedTheme);
+      });
+    }
+    setThemeToFavButton();
 
     // Function setFavorite:
     function setFavorite(event) {
@@ -343,41 +202,59 @@
       const artist = item.querySelector(".artist").textContent;
       const rating = item.querySelector(".rating").textContent;
       const time = item.querySelector(".time").textContent;
-      const favoriteItem = createFavorite(entry, artist, rating, time);
 
-      if (!entryElement || !artistElement || !ratingElement || !timeElement) {
-        console.error("Cannot find necessary elements in the item.");
+      console.log("Extracted values:", { entry, artist, rating, time }); // Debugging
+
+      if (!entryElement || !artist || !rating || !time) {
+        console.error("Some elements are missing in the item:", {
+          entry,
+          artist,
+          rating,
+          time
+        });
         return;
       }
+
+       // Create favorite item:
+      const favoriteItem = createFavorite(entry, artist, rating, time);
+
+      // if (!entryElement || !artistElement || !ratingElement || !timeElement) {
+      //   console.error("Cannot find necessary elements in the item.");
+      //   return;
+      // }
+
+        // Function to check if the item already exists in favorites, and if not, adds it to Favorites list:
 
       function addIf(favoriteItem) {
         let found = false;
         favoritesList.querySelectorAll("li").forEach((element) => {
-          if (element.textContent === favoriteItem.textContent) {
+          if (element.innerHTML === favoriteItem.innerHTML) {
             found = true;
           }
         });
         if (!found) {
           favoritesList.appendChild(favoriteItem);
-          console.log(`Added '${favoriteItem}' on the favorites list.`);
+          console.log(`Added '${entry}' on the favorites list.`);
         } else {
-          console.log(`'${favoriteItem}' is already on the list.`);
+          console.log(`'${entry}' is already on the list.`);
         }
       }
 
       addIf(favoriteItem);
       saveLists();
 
-      // favoritesList.appendChild(favoriteItem);
     }
 
     // Function createFavorite:
     function createFavorite(entry, artist, rating, time) {
       const item = document.createElement("li");
-      item.innerHTML = `<p>Album: <span id="white" class="entry">${entry}</span></p>
-      <p>Artist: <span id="white" class="artist">${artist}</span></p>
-      <p>Rate: <span id="white" class="rating">${rating}</span></p>
-      <p>Rated on: <span id="white" class="time">${time}</span></p>`;
+      item.innerHTML = `<p class="entry">Album: <span id="white" >${entry}</span></p>
+      <p class="artist">Artist: <span id="white" >${artist}</span></p>
+      <p class="rating">Rate: <span id="white" >${rating}</span></p>
+      <p class="time">Rated on: <span id="white" >${time}</span></p>`;
+
+      console.log("Created item HTML:", item.innerHTML); // Debugging
+
       addRemoveButton(item);
       return item;
     }
@@ -396,25 +273,6 @@
       item.appendChild(hr);
       removeButton.innerHTML = "Remove album";
 
-      themeColorSelect.addEventListener("change", changeRemoveButton);
-      function changeRemoveButton() {
-        if (themeColorSelect.value == "black") {
-          removeButton.classList.add("removeButtonBlack");
-        } else if (themeColorSelect.value == "blue") {
-          removeButton.classList.add("removeButtonBlue");
-        } else if (themeColorSelect.value == "green") {
-          removeButton.classList.add("removeButtonGreen");
-        } else if (themeColorSelect.value == "yellow") {
-          removeButton.classList.add("removeButtonYellow");
-        } else if (themeColorSelect.value == "water") {
-          removeButton.classList.add("removeButtonWater");
-        } else if (themeColorSelect.value == "red") {
-          removeButton.classList.add("removeButtonRed");
-        } else {
-          removeButton.classList.add("remove-button");
-        }
-      }
-      changeRemoveButton(removeButton);
     }
 
     // function removeTask:

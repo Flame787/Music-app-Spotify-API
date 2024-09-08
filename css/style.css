@@ -361,10 +361,10 @@ hr {
 
 /* CSS */
 body.theme0 {
-  background-image: url("../pictures/energy-violet.jpg") !important;
+  background-image: url("../pictures/blue_vibe.jpg") !important;
 }
 body.theme1 {
-  background-image: url("../pictures/energy-violet.jpg") !important;
+  background-image: url("../pictures/blue_vibe.jpg") !important;
 }
 body.theme2 {
   background-image: url("../pictures/blue-water-pool.jpg") !important;
@@ -401,11 +401,11 @@ body.theme12 {
 }
 
 .theme0 .button-th1 {
-  background-color: violet;
+  background-color: #a0153e;
   color: white;
 }
 .theme1 .button-th1 {
-  background-color: violet;
+  background-color: #a0153e;
   color: white;
 }
 .theme2 .button-th1 {
