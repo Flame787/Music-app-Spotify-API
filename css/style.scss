@@ -66,7 +66,7 @@ $themes: (
   ),
 );
 
-// Set of colors for remove-buttons:
+// Set of colors for Remove-buttons:
 
 $themes2: (
   theme0: (
@@ -95,7 +95,7 @@ $themes2: (
     color: white,
   ),
   theme6: (
-    background-color: green,
+    background-color: rgb(3, 73, 3),
     color: white,
   ),
   theme7: (
@@ -403,13 +403,6 @@ hr {
   }
 }
 
-// .favorite-button {
-//   background-color: $navButtonColor1;
-// }
-
-// .remove-button {
-//   background-color: $formRemoveColor1;
-// }
 
 .removeButtonWater {
   background-color: $inputColor1;
@@ -426,7 +419,7 @@ hr {
   background-color: $paragraphColor;
 }
 
-
+// THEME MODULES: 
 
 // On each loop, assign these values to $theme and $map:
 // module-name is a placeholder, should be replaced with any html-element: div, navbar, card, button etc - a container whose style we want to change.
@@ -460,9 +453,14 @@ hr {
 // .theme4 .module-name h1 { color: green; }
 // .theme5 .module-name h1 { color: blue; }
 
+// <body class="theme7">
+// <button class="button nav-button theme7"><a href="index.html">Home</a></button>
+// <button type="button" class="favorite-button button flex-item theme7">Add to favorites</button>
+
 // PAGE-BACKGROUND:
 
-// &.#{$theme} - current element, .#{$theme} & { - parent element gets the class
+// &.#{$theme} - current element
+// .#{$theme} & { - parent element gets the class
 
 body {
   @each $theme, $background in $backgrounds {
@@ -474,7 +472,26 @@ body {
 
 // FOR NAV-BUTTONS (html) AND ADD-BUTTONS (JS-file):
 
-.button-th1 {
+// .nav-button {
+//   @each $theme, $map in $themes {
+//     .#{$theme} & {
+//       background-color: map-get($map, background-color);
+//       color: map-get($map, color);
+//     }
+//   }
+// }
+
+// .favorite-button {
+//   @each $theme, $map in $themes {
+//     .#{$theme} & {
+//       background-color: map-get($map, background-color);
+//       color: map-get($map, color);
+//     }
+//   }
+// }
+
+
+.theme-button {
   @each $theme, $map in $themes {
     .#{$theme} & {
       background-color: map-get($map, background-color);
@@ -483,13 +500,10 @@ body {
   }
 }
 
-.favorite-button {
-  @each $theme, $map in $themes {
-    .#{$theme} & {
-      background-color: map-get($map, background-color);
-      color: map-get($map, color);
-    }
-  }
+// Apply 1 scss-module to several classes (these classes/id-s/elements have to be all targeted in JS, in order to apply themes on them):
+.nav-button,
+.favorite-button, #theme_color, option {
+  @extend .theme-button;
 }
 
 // FOR REMOVE-BUTTONS (JS-file):

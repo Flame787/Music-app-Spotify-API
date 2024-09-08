@@ -44,11 +44,13 @@
       // (add buttons, body, navbar, inputs, form, text-blocks, add- and remove-buttons):
 
       const body = document.body;
-      // getting nodelists, so we will use forEach-function on each button:
-      const buttonTh1 = document.querySelectorAll(".button-th1, .favorite-button");
+      
+      // all these classes have to have scss-code for switching between different themes ( @each $theme...):
+      const buttonTh1 = document.querySelectorAll(".nav-button, .favorite-button, #theme_color, option");
       const buttonTh2 = document.querySelectorAll(".remove-button");
 
-      // remove all existing themes from this element:
+      // Results are nodelists of several elements, so we will use forEach-function to target each button:
+      // 1. Remove all existing themes from this element:
       themes.forEach((theme) => {
         body.classList.remove(theme);
 
@@ -61,7 +63,7 @@
         });
       });
 
-      // Add new theme to this element:
+      // 2. Add new theme to this element:
       body.classList.add(selectedTheme);
 
       buttonTh1.forEach((button) => {

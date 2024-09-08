@@ -396,108 +396,68 @@ body.theme12 {
   background-image: url("../pictures/energy-white.jpg") !important;
 }
 
-.theme0 .button-th1 {
+.theme0 .theme-button, .theme0 .nav-button,
+.theme0 .favorite-button, .theme0 #theme_color, .theme0 option {
   background-color: #a0153e;
   color: white;
 }
-.theme1 .button-th1 {
+.theme1 .theme-button, .theme1 .nav-button,
+.theme1 .favorite-button, .theme1 #theme_color, .theme1 option {
   background-color: #a0153e;
   color: white;
 }
-.theme2 .button-th1 {
+.theme2 .theme-button, .theme2 .nav-button,
+.theme2 .favorite-button, .theme2 #theme_color, .theme2 option {
   background-color: lightblue;
   color: black;
 }
-.theme3 .button-th1 {
+.theme3 .theme-button, .theme3 .nav-button,
+.theme3 .favorite-button, .theme3 #theme_color, .theme3 option {
   background-color: blue;
   color: white;
 }
-.theme4 .button-th1 {
+.theme4 .theme-button, .theme4 .nav-button,
+.theme4 .favorite-button, .theme4 #theme_color, .theme4 option {
   background-color: black;
   color: white;
 }
-.theme5 .button-th1 {
+.theme5 .theme-button, .theme5 .nav-button,
+.theme5 .favorite-button, .theme5 #theme_color, .theme5 option {
   background-color: gray;
   color: white;
 }
-.theme6 .button-th1 {
+.theme6 .theme-button, .theme6 .nav-button,
+.theme6 .favorite-button, .theme6 #theme_color, .theme6 option {
   background-color: green;
   color: white;
 }
-.theme7 .button-th1 {
+.theme7 .theme-button, .theme7 .nav-button,
+.theme7 .favorite-button, .theme7 #theme_color, .theme7 option {
   background-color: lightgreen;
   color: black;
 }
-.theme8 .button-th1 {
+.theme8 .theme-button, .theme8 .nav-button,
+.theme8 .favorite-button, .theme8 #theme_color, .theme8 option {
   background-color: yellow;
   color: black;
 }
-.theme9 .button-th1 {
+.theme9 .theme-button, .theme9 .nav-button,
+.theme9 .favorite-button, .theme9 #theme_color, .theme9 option {
   background-color: orange;
   color: black;
 }
-.theme10 .button-th1 {
+.theme10 .theme-button, .theme10 .nav-button,
+.theme10 .favorite-button, .theme10 #theme_color, .theme10 option {
   background-color: red;
   color: white;
 }
-.theme11 .button-th1 {
+.theme11 .theme-button, .theme11 .nav-button,
+.theme11 .favorite-button, .theme11 #theme_color, .theme11 option {
   background-color: darkred;
   color: white;
 }
-.theme12 .button-th1 {
-  background-color: white;
-  color: black;
-}
-
-.theme0 .favorite-button {
-  background-color: #a0153e;
-  color: white;
-}
-.theme1 .favorite-button {
-  background-color: #a0153e;
-  color: white;
-}
-.theme2 .favorite-button {
-  background-color: lightblue;
-  color: black;
-}
-.theme3 .favorite-button {
-  background-color: blue;
-  color: white;
-}
-.theme4 .favorite-button {
-  background-color: black;
-  color: white;
-}
-.theme5 .favorite-button {
-  background-color: gray;
-  color: white;
-}
-.theme6 .favorite-button {
-  background-color: green;
-  color: white;
-}
-.theme7 .favorite-button {
-  background-color: lightgreen;
-  color: black;
-}
-.theme8 .favorite-button {
-  background-color: yellow;
-  color: black;
-}
-.theme9 .favorite-button {
-  background-color: orange;
-  color: black;
-}
-.theme10 .favorite-button {
-  background-color: red;
-  color: white;
-}
-.theme11 .favorite-button {
-  background-color: darkred;
-  color: white;
-}
-.theme12 .favorite-button {
+.theme12 .theme-button, .theme12 .nav-button,
+.theme12 .favorite-button, .theme12 #theme_color, .theme12 option {
   background-color: white;
   color: black;
 }
@@ -527,7 +487,7 @@ body.theme12 {
   color: white;
 }
 .theme6 .remove-button {
-  background-color: green;
+  background-color: rgb(3, 73, 3);
   color: white;
 }
 .theme7 .remove-button {
