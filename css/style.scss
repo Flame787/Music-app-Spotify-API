@@ -23,8 +23,7 @@ $themes: (
     background-color: lightblue,
     color: black,
   ),
-  theme3:
-  (
+  theme3: (
     background-color: blue,
     color: white,
   ),
@@ -81,8 +80,7 @@ $themes2: (
     background-color: lightblue,
     color: black,
   ),
-  theme3:
-  (
+  theme3: (
     background-color: blue,
     color: white,
   ),
@@ -133,7 +131,7 @@ $backgrounds: (
   theme5: url("../pictures/volcano.jpg"),
   theme6: url("../pictures/green-abstract.jpg"),
   theme7: url("../pictures/green-triangles.jpg"),
-  theme8: url("../pictures/energy-yellow.jpg"),
+  theme8: url("../pictures/gold.jpg"),
   theme9: url("../pictures/orange-green.jpg"),
   theme10: url("../pictures/red-triangles.jpg"),
   theme11: url("../pictures/violet.jpg"),
@@ -236,9 +234,14 @@ select {
 }
 
 .option {
+  font-size: 0.9rem;
   background-color: $inputColor1;
   border-radius: 30px;
-  // opacity: 0.5;
+  // opacity: 0.8 !important;
+}
+
+#theme-color option {
+  opacity: 0.8 !important;
 }
 
 // option:hover {
@@ -403,7 +406,6 @@ hr {
   }
 }
 
-
 .removeButtonWater {
   background-color: $inputColor1;
 }
@@ -419,7 +421,7 @@ hr {
   background-color: $paragraphColor;
 }
 
-// THEME MODULES: 
+// THEME MODULES:
 
 // On each loop, assign these values to $theme and $map:
 // module-name is a placeholder, should be replaced with any html-element: div, navbar, card, button etc - a container whose style we want to change.
@@ -490,7 +492,6 @@ body {
 //   }
 // }
 
-
 .theme-button {
   @each $theme, $map in $themes {
     .#{$theme} & {
@@ -502,7 +503,9 @@ body {
 
 // Apply 1 scss-module to several classes (these classes/id-s/elements have to be all targeted in JS, in order to apply themes on them):
 .nav-button,
-.favorite-button, #theme_color, option {
+.favorite-button,
+#theme_color,
+option {
   @extend .theme-button;
 }
 
