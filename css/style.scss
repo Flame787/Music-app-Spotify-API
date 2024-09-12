@@ -4,9 +4,8 @@
 @import "abstracts/mixins";
 @import "abstracts/themes";
 
-
 body {
-  color: $fontColor1;
+  // color: $fontColor1;
   font-family: $sans-serif1;
   text-shadow: 2px 2px 4px $textShadowColor1;
   // background-image: url("../pictures/energy-violet.jpg");
@@ -111,7 +110,6 @@ select {
   opacity: 0.8 !important;
 }
 
-
 #app-icon {
   text-align: center;
 }
@@ -156,8 +154,8 @@ select {
   // to have div transparent, but text inside of it fully visible - rgba with transparent effect:
   // background-color: #041e2684;
   // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
-  color: $fontColor1;
-  box-shadow: 5px 5px 3px $navButtonColor1;
+  // color: $fontColor1;
+  // box-shadow: 5px 5px 3px $navButtonColor1;
   transition: transform 0.3s ease;
 }
 
@@ -169,31 +167,36 @@ select {
   background: rgba(0, 0, 0, 0.655);
   background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
   // background: rgba(230, 227, 227, 0.655);
-  color: $fontColor1;
-  box-shadow: 5px 5px 3px $navButtonColor1;
+  // color: $fontColor1;
+  // box-shadow: 5px 5px 3px $navButtonColor1;
   transition: transform 0.3s ease;
 }
 
 .visible-title1:hover,
-.visible-title2:hover, form:hover {
+.visible-title2:hover,
+form:hover {
   transform: translateY(-10px);
 }
 
-.formViolet {
-  // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
-  background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
-  color: $fontColor1;
-}
+// label {
+//   text-shadow: none !important;
+// }
 
-.formBlue {
-  background: radial-gradient(at 25% 75%, #0f4d5f, rgba(77, 148, 255, 0));
-  color: $fontColor1;
-}
+// .formViolet {
+//   // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
+//   background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
+//   color: $fontColor1;
+// }
 
-.formBlack {
-  background: rgba(0, 0, 0, 0.655);
-  color: $fontColor1;
-}
+// .formBlue {
+//   background: radial-gradient(at 25% 75%, #0f4d5f, rgba(77, 148, 255, 0));
+//   color: $fontColor1;
+// }
+
+// .formBlack {
+//   background: rgba(0, 0, 0, 0.655);
+//   color: $fontColor1;
+// }
 
 input {
   @include input-field();
@@ -341,6 +344,14 @@ body {
   }
 }
 
+body {
+  @each $theme, $fontColor in $fontColors {
+    &.#{$theme} {
+      color: $fontColor !important;
+    }
+  }
+}
+
 // FOR NAV-BUTTONS (html) AND ADD-BUTTONS (JS-file):
 
 // .nav-button {
@@ -357,6 +368,7 @@ body {
     .#{$theme} & {
       background-color: map-get($map, background-color);
       color: map-get($map, color);
+      box-shadow: map-get($map, box-shadow);
     }
   }
 }
@@ -376,6 +388,7 @@ option {
     .#{$theme} & {
       background-color: map-get($map, background-color);
       color: map-get($map, color);
+      box-shadow: map-get($map, box-shadow);
     }
   }
 }
@@ -383,10 +396,11 @@ option {
 // FORM AND TITLES:
 
 .form-theme {
-  @each $theme, $map in $themes {
-    .#{$theme} & {
-      background-color: map-get($map, background-color);
+  @each $box, $map in $boxes {
+    .#{$box} & {
+      background: map-get($map, background);
       color: map-get($map, color);
+      box-shadow: map-get($map, box-shadow);
     }
   }
 }
@@ -394,7 +408,6 @@ option {
 .title-theme {
   @extend .form-theme;
 }
-
 
 // dodati boje ovisno o temama za div-ove koji su containeri za naslove, i za form, za input polja, a možda i za navbar pozadinsku boju
 // i sukladno tome, ime aplikacije u lijevom gornjem kutu

@@ -8,58 +8,69 @@ $themes: (
   theme0: (
     background-color: $navButtonColor1,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme1: (
     background-color: $navButtonColor1,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme2: (
     background-color: lightblue,
     color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme3: (
     background-color: blue,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme4: (
     background-color: black,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme5: (
-    background-color: gray,
-    color: white,
+    background-color: rgb(223, 86, 13),
+    color: $textShadowColor1,
+    box-shadow: 3px 3px 2px $textShadowColor1,
   ),
   theme6: (
     background-color: green,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme7: (
     background-color: lightgreen,
     color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme8: (
     background-color: yellow,
     color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme9: (
     background-color: orange,
     color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme10: (
     background-color: red,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme11: (
     background-color: darkred,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme12: (
     background-color: white,
     color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
 );
-
-
 
 // Set of colors for Remove-buttons:
 
@@ -67,54 +78,67 @@ $themes2: (
   theme0: (
     background-color: violet,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme1: (
     background-color: violet,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme2: (
     background-color: lightblue,
     color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme3: (
     background-color: blue,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme4: (
     background-color: black,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme5: (
-    background-color: gray,
+    background-color: rgb(150, 34, 6),
     color: white,
+    box-shadow: 3px 3px 2px $textShadowColor1,
   ),
   theme6: (
     background-color: rgb(3, 73, 3),
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme7: (
     background-color: lightgreen,
     color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme8: (
     background-color: yellow,
     color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme9: (
     background-color: orange,
     color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme10: (
     background-color: red,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme11: (
     background-color: darkred,
     color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme12: (
     background-color: white,
     color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
 );
 
@@ -133,3 +157,95 @@ $backgrounds: (
   theme11: url("../pictures/violet.jpg"),
   theme12: url("../pictures/frost.jpg"),
 );
+
+// body font colors:
+
+$fontColors: (
+  theme0: $fontColor1,
+  theme1: $fontColor1,
+  theme2: $fontColor1,
+  theme3: $fontColor1,
+  theme4: $textShadowColor1,
+  theme5: $textShadowColor1,
+  theme6: $textShadowColor1,
+  theme7: $textShadowColor1,
+  theme8: $textShadowColor1,
+  theme9: $textShadowColor1,
+  theme10: $textShadowColor1,
+  theme11: $textShadowColor1,
+  theme12: $fontColor1,
+);
+
+// Set of colors for Forms and Titles:
+
+$boxes: (
+  theme0: (
+    background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+  theme1: (
+    background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+  theme2: (
+    background:
+      radial-gradient(at 25% 75%, #c0eef3b2, rgba(91, 213, 241, 0.749)),
+    color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+  theme3: (
+    background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
+    color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+  theme4: (
+    background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+  theme5: (
+    background: radial-gradient(at 25% 75%, #ce5d3ed2, rgba(9, 20, 36, 0.749)),
+    color: white,
+    box-shadow: 3px 3px 2px $textShadowColor1,
+  ),
+  theme6: (
+    background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
+    color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+  theme7: (
+    background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
+    color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+  theme8: (
+    background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
+    color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+  theme9: (
+    background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
+    color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+  theme10: (
+    background: radial-gradient(at 25% 75%, #343030b2, rgba(33, 2, 3, 0.749)),
+    color: white,
+    box-shadow: 3px 3px 2px black,
+  ),
+  theme11: (
+    background: radial-gradient(at 25% 75%, #eda4a4b2, rgba(95, 9, 123, 0.749)),
+    color: white,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+  theme12: (
+    background:
+      radial-gradient(at 25% 75%, #a4d1edb2, rgba(96, 148, 226, 0.749)),
+    color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
+  ),
+);
+
+
