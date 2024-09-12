@@ -85,6 +85,9 @@
       );
       const buttonTh2 = document.querySelectorAll(".remove-button");
 
+      const formTheme = document.querySelectorAll(".form-theme");
+      const titleTheme = document.querySelectorAll(".title-theme");
+
       // Results are nodelists of several elements, so we will use forEach-function to target each button:
       // 1. Remove all existing themes from this element:
       themes.forEach((theme) => {
@@ -97,6 +100,14 @@
         buttonTh2.forEach((button) => {
           button.classList.remove(theme);
         });
+
+        formTheme.forEach((form) => {
+          form.classList.remove(theme);
+        });
+
+        titleTheme.forEach((title) => {
+          title.classList.remove(theme);
+        });
       });
 
       // 2. Add new theme to this element:
@@ -108,6 +119,14 @@
 
       buttonTh2.forEach((button) => {
         button.classList.add(selectedTheme);
+      });
+
+      formTheme.forEach((form) => {
+        form.classList.add(selectedTheme);
+      });
+
+      titleTheme.forEach((title) => {
+        title.classList.add(selectedTheme);
       });
 
       console.log("Selected theme:", selectedTheme);

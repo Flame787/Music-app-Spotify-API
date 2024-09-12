@@ -161,18 +161,19 @@ select option {
 #form {
   border-radius: 10px;
   border-top: 1px solid #000000;
-  box-shadow: 5px 5px 3px #ca3535;
+  box-shadow: 5px 5px 3px #a0153e;
   margin-top: 8%;
+  transition: transform 0.3s ease;
 }
 
 .visible-title1 {
   padding: 0.1%;
   margin: 5% 35%;
   border-radius: 15px;
-  background: rgba(0, 0, 0, 0.655);
-  background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
   color: #d1d4c9;
-  box-shadow: 5px 5px 3px #ca3535;
+  box-shadow: 5px 5px 3px #a0153e;
+  transition: transform 0.3s ease;
 }
 
 .visible-title2 {
@@ -182,7 +183,13 @@ select option {
   background: rgba(0, 0, 0, 0.655);
   background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
   color: #d1d4c9;
-  box-shadow: 5px 5px 3px #ca3535;
+  box-shadow: 5px 5px 3px #a0153e;
+  transition: transform 0.3s ease;
+}
+
+.visible-title1:hover,
+.visible-title2:hover, form:hover {
+  transform: translateY(-10px);
 }
 
 .formViolet {
@@ -552,6 +559,59 @@ body.theme12 {
   color: white;
 }
 .theme12 .remove-button {
+  background-color: white;
+  color: black;
+}
+
+.theme0 .form-theme, .theme0 .title-theme {
+  background-color: #a0153e;
+  color: white;
+}
+.theme1 .form-theme, .theme1 .title-theme {
+  background-color: #a0153e;
+  color: white;
+}
+.theme2 .form-theme, .theme2 .title-theme {
+  background-color: lightblue;
+  color: black;
+}
+.theme3 .form-theme, .theme3 .title-theme {
+  background-color: blue;
+  color: white;
+}
+.theme4 .form-theme, .theme4 .title-theme {
+  background-color: black;
+  color: white;
+}
+.theme5 .form-theme, .theme5 .title-theme {
+  background-color: gray;
+  color: white;
+}
+.theme6 .form-theme, .theme6 .title-theme {
+  background-color: green;
+  color: white;
+}
+.theme7 .form-theme, .theme7 .title-theme {
+  background-color: lightgreen;
+  color: black;
+}
+.theme8 .form-theme, .theme8 .title-theme {
+  background-color: yellow;
+  color: black;
+}
+.theme9 .form-theme, .theme9 .title-theme {
+  background-color: orange;
+  color: black;
+}
+.theme10 .form-theme, .theme10 .title-theme {
+  background-color: red;
+  color: white;
+}
+.theme11 .form-theme, .theme11 .title-theme {
+  background-color: darkred;
+  color: white;
+}
+.theme12 .form-theme, .theme12 .title-theme {
   background-color: white;
   color: black;
 }

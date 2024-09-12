@@ -4,139 +4,6 @@
 @import "abstracts/mixins";
 @import "abstracts/themes";
 
-// THEMES:
-
-// variable $themes is an object, has many different key-value pairs. Values may consist of several css-atributes.
-
-// Set of colors for nav- and add- buttons:
-
-$themes: (
-  theme0: (
-    background-color: $navButtonColor1,
-    color: white,
-  ),
-  theme1: (
-    background-color: $navButtonColor1,
-    color: white,
-  ),
-  theme2: (
-    background-color: lightblue,
-    color: black,
-  ),
-  theme3: (
-    background-color: blue,
-    color: white,
-  ),
-  theme4: (
-    background-color: black,
-    color: white,
-  ),
-  theme5: (
-    background-color: gray,
-    color: white,
-  ),
-  theme6: (
-    background-color: green,
-    color: white,
-  ),
-  theme7: (
-    background-color: lightgreen,
-    color: black,
-  ),
-  theme8: (
-    background-color: yellow,
-    color: black,
-  ),
-  theme9: (
-    background-color: orange,
-    color: black,
-  ),
-  theme10: (
-    background-color: red,
-    color: white,
-  ),
-  theme11: (
-    background-color: darkred,
-    color: white,
-  ),
-  theme12: (
-    background-color: white,
-    color: black,
-  ),
-);
-
-// Set of colors for Remove-buttons:
-
-$themes2: (
-  theme0: (
-    background-color: violet,
-    color: white,
-  ),
-  theme1: (
-    background-color: violet,
-    color: white,
-  ),
-  theme2: (
-    background-color: lightblue,
-    color: black,
-  ),
-  theme3: (
-    background-color: blue,
-    color: white,
-  ),
-  theme4: (
-    background-color: black,
-    color: white,
-  ),
-  theme5: (
-    background-color: gray,
-    color: white,
-  ),
-  theme6: (
-    background-color: rgb(3, 73, 3),
-    color: white,
-  ),
-  theme7: (
-    background-color: lightgreen,
-    color: black,
-  ),
-  theme8: (
-    background-color: yellow,
-    color: black,
-  ),
-  theme9: (
-    background-color: orange,
-    color: black,
-  ),
-  theme10: (
-    background-color: red,
-    color: white,
-  ),
-  theme11: (
-    background-color: darkred,
-    color: white,
-  ),
-  theme12: (
-    background-color: white,
-    color: black,
-  ),
-);
-
-$backgrounds: (
-  theme0: url("../pictures/purple-lights2.jpg"),
-  theme1: url("../pictures/blue_vibe.jpg"),
-  theme2: url("../pictures/blue-water-pool.jpg"),
-  theme3: url("../pictures/ocean.jpg"),
-  theme4: url("../pictures/triangular-neon-laser.jpg"),
-  theme5: url("../pictures/volcano.jpg"),
-  theme6: url("../pictures/green-abstract.jpg"),
-  theme7: url("../pictures/green-triangles.jpg"),
-  theme8: url("../pictures/gold3.jpg"),
-  theme9: url("../pictures/orange-green.jpg"),
-  theme10: url("../pictures/red-triangles.jpg"),
-  theme11: url("../pictures/violet.jpg"),
-  theme12: url("../pictures/frost.jpg"),
-);
 
 body {
   color: $fontColor1;
@@ -244,11 +111,6 @@ select {
   opacity: 0.8 !important;
 }
 
-// option:hover {
-//   color: $inputColor1;
-//   border-radius: 30px;
-//   opacity: 0.8;
-// }
 
 #app-icon {
   text-align: center;
@@ -286,15 +148,17 @@ select {
   padding: 0.1%;
   margin: 5% 35%;
   border-radius: 15px;
-  background: rgba(0, 0, 0, 0.655);
-  background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
+  // background: rgba(0, 0, 0, 0.655);
+  // background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
   // background: rgba(230, 227, 227, 0.655);
 
   // to have div transparent, but text inside of it fully visible - rgba with transparent effect:
   // background-color: #041e2684;
   // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
   color: $fontColor1;
-  box-shadow: 5px 5px 3px #ca3535;
+  box-shadow: 5px 5px 3px $navButtonColor1;
+  transition: transform 0.3s ease;
 }
 
 .visible-title2 {
@@ -306,7 +170,13 @@ select {
   background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
   // background: rgba(230, 227, 227, 0.655);
   color: $fontColor1;
-  box-shadow: 5px 5px 3px #ca3535;
+  box-shadow: 5px 5px 3px $navButtonColor1;
+  transition: transform 0.3s ease;
+}
+
+.visible-title1:hover,
+.visible-title2:hover, form:hover {
+  transform: translateY(-10px);
 }
 
 .formViolet {
@@ -352,10 +222,6 @@ button {
     @include button-hover();
   }
 }
-
-// .button {
-//   background-color: $navButtonColor1;
-// }
 
 .buttonWater {
   background-color: $buttonWater;
@@ -486,15 +352,6 @@ body {
 //   }
 // }
 
-// .favorite-button {
-//   @each $theme, $map in $themes {
-//     .#{$theme} & {
-//       background-color: map-get($map, background-color);
-//       color: map-get($map, color);
-//     }
-//   }
-// }
-
 .theme-button {
   @each $theme, $map in $themes {
     .#{$theme} & {
@@ -522,6 +379,22 @@ option {
     }
   }
 }
+
+// FORM AND TITLES:
+
+.form-theme {
+  @each $theme, $map in $themes {
+    .#{$theme} & {
+      background-color: map-get($map, background-color);
+      color: map-get($map, color);
+    }
+  }
+}
+
+.title-theme {
+  @extend .form-theme;
+}
+
 
 // dodati boje ovisno o temama za div-ove koji su containeri za naslove, i za form, za input polja, a možda i za navbar pozadinsku boju
 // i sukladno tome, ime aplikacije u lijevom gornjem kutu

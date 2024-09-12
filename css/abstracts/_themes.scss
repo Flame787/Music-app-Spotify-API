@@ -1,0 +1,135 @@
+// THEMES:
+
+// variable $themes is an object, has many different key-value pairs. Values may consist of several css-atributes.
+
+// Set of colors for nav- and add- buttons:
+
+$themes: (
+  theme0: (
+    background-color: $navButtonColor1,
+    color: white,
+  ),
+  theme1: (
+    background-color: $navButtonColor1,
+    color: white,
+  ),
+  theme2: (
+    background-color: lightblue,
+    color: black,
+  ),
+  theme3: (
+    background-color: blue,
+    color: white,
+  ),
+  theme4: (
+    background-color: black,
+    color: white,
+  ),
+  theme5: (
+    background-color: gray,
+    color: white,
+  ),
+  theme6: (
+    background-color: green,
+    color: white,
+  ),
+  theme7: (
+    background-color: lightgreen,
+    color: black,
+  ),
+  theme8: (
+    background-color: yellow,
+    color: black,
+  ),
+  theme9: (
+    background-color: orange,
+    color: black,
+  ),
+  theme10: (
+    background-color: red,
+    color: white,
+  ),
+  theme11: (
+    background-color: darkred,
+    color: white,
+  ),
+  theme12: (
+    background-color: white,
+    color: black,
+  ),
+);
+
+
+
+// Set of colors for Remove-buttons:
+
+$themes2: (
+  theme0: (
+    background-color: violet,
+    color: white,
+  ),
+  theme1: (
+    background-color: violet,
+    color: white,
+  ),
+  theme2: (
+    background-color: lightblue,
+    color: black,
+  ),
+  theme3: (
+    background-color: blue,
+    color: white,
+  ),
+  theme4: (
+    background-color: black,
+    color: white,
+  ),
+  theme5: (
+    background-color: gray,
+    color: white,
+  ),
+  theme6: (
+    background-color: rgb(3, 73, 3),
+    color: white,
+  ),
+  theme7: (
+    background-color: lightgreen,
+    color: black,
+  ),
+  theme8: (
+    background-color: yellow,
+    color: black,
+  ),
+  theme9: (
+    background-color: orange,
+    color: black,
+  ),
+  theme10: (
+    background-color: red,
+    color: white,
+  ),
+  theme11: (
+    background-color: darkred,
+    color: white,
+  ),
+  theme12: (
+    background-color: white,
+    color: black,
+  ),
+);
+
+$backgrounds: (
+  theme0: url("../pictures/purple-lights2.jpg"),
+  theme1: url("../pictures/blue_vibe.jpg"),
+  theme2: url("../pictures/blue-water-pool.jpg"),
+  theme3: url("../pictures/ocean.jpg"),
+  theme4: url("../pictures/triangular-neon-laser.jpg"),
+  theme5: url("../pictures/volcano.jpg"),
+  theme6: url("../pictures/green-abstract.jpg"),
+  theme7: url("../pictures/green-triangles.jpg"),
+  theme8: url("../pictures/gold3.jpg"),
+  theme9: url("../pictures/orange-green.jpg"),
+  theme10: url("../pictures/red-triangles.jpg"),
+  theme11: url("../pictures/violet.jpg"),
+  theme12: url("../pictures/frost.jpg"),
+);

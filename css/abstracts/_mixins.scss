@@ -81,8 +81,9 @@
 @mixin form-design {
   border-radius: 10px;
   border-top: 1px solid $textShadowColor1;
-  box-shadow: 5px 5px 3px $hoverColor1;
+  box-shadow: 5px 5px 3px $navButtonColor1;
   margin-top: 8%;
+  transition: transform 0.3s ease;
 }
 
 @mixin input-field {
