@@ -35,6 +35,40 @@
       "theme12",
     ];
 
+    // Navbar behavior:
+
+    let prevScrollPos = window.scrollY;
+    const navbar = document.getElementById("navigation");
+
+    window.onscroll = function () {
+      let currentScrollPos = window.scrollY;
+
+      if (prevScrollPos > currentScrollPos) {
+        //  If scrolling up, show navbar:
+        navbar.style.top = "0";
+      } else {
+        // If scrolling down, hide navbar:
+        navbar.style.top = "-100px"; // Navbar height - adjustable
+      }
+
+      prevScrollPos = currentScrollPos;
+    };
+
+    // Showing navbar when hovered over with mouse:
+    navbar.addEventListener("mouseenter", () => {
+      navbar.style.top = "0";
+    });
+
+    // Hiding navbar when mouse leaves navbar area and user scrolls down:
+    navbar.addEventListener("mouseleave", () => {
+      let currentScrollPos = window.scrollY;
+      if (prevScrollPos < currentScrollPos) {
+        navbar.style.top = "-100px";
+      }
+    });
+
+    // Theme changing:
+
     function changeTheme() {
       // get value of the selected theme
 
@@ -44,9 +78,11 @@
       // (add buttons, body, navbar, inputs, form, text-blocks, add- and remove-buttons):
 
       const body = document.body;
-      
+
       // all these classes have to have scss-code for switching between different themes ( @each $theme...):
-      const buttonTh1 = document.querySelectorAll(".nav-button, .favorite-button, #theme_color, option");
+      const buttonTh1 = document.querySelectorAll(
+        ".nav-button, .favorite-button, #theme_color, option"
+      );
       const buttonTh2 = document.querySelectorAll(".remove-button");
 
       // Results are nodelists of several elements, so we will use forEach-function to target each button:
@@ -78,7 +114,6 @@
       console.log("Body classes:", body.classList);
     }
 
-    
     let entry, rating, artist, time, item;
 
     // Load lists from localStorage on init:
@@ -184,7 +219,6 @@
       item.insertBefore(favoriteButton, item.firstChild);
       const listTitle = document.getElementById("new-title");
       listTitle.style.display = "block";
-
     }
 
     // function that applies theme to all newly created fav-buttons:
@@ -199,7 +233,6 @@
     //   });
     // }
     // setThemeToFavButton();
-
 
     // Function setFavorite:
     function setFavorite(event) {
@@ -216,12 +249,12 @@
           entry,
           artist,
           rating,
-          time
+          time,
         });
         return;
       }
 
-       // Create favorite item:
+      // Create favorite item:
       const favoriteItem = createFavorite(entry, artist, rating, time);
 
       // if (!entryElement || !artistElement || !ratingElement || !timeElement) {
@@ -229,7 +262,7 @@
       //   return;
       // }
 
-        // Function to check if the item already exists in favorites, and if not, adds it to Favorites list:
+      // Function to check if the item already exists in favorites, and if not, adds it to Favorites list:
 
       function addIf(favoriteItem) {
         let found = false;
@@ -248,7 +281,6 @@
 
       addIf(favoriteItem);
       saveLists();
-
     }
 
     // Function createFavorite:
@@ -278,7 +310,6 @@
       item.appendChild(removeButton);
       item.appendChild(hr);
       removeButton.innerHTML = "Remove album";
-
     }
 
     // function removeTask:

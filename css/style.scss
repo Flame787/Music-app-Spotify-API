@@ -123,7 +123,7 @@ $themes2: (
 );
 
 $backgrounds: (
-  theme0: url("../pictures/spiral.jpg"),
+  theme0: url("../pictures/purple-lights2.jpg"),
   theme1: url("../pictures/blue_vibe.jpg"),
   theme2: url("../pictures/blue-water-pool.jpg"),
   theme3: url("../pictures/ocean.jpg"),
@@ -131,7 +131,7 @@ $backgrounds: (
   theme5: url("../pictures/volcano.jpg"),
   theme6: url("../pictures/green-abstract.jpg"),
   theme7: url("../pictures/green-triangles.jpg"),
-  theme8: url("../pictures/gold.jpg"),
+  theme8: url("../pictures/gold3.jpg"),
   theme9: url("../pictures/orange-green.jpg"),
   theme10: url("../pictures/red-triangles.jpg"),
   theme11: url("../pictures/violet.jpg"),
@@ -212,7 +212,7 @@ select {
   // -moz-appearance: none;
   display: inline-block;
   // appearance: none;
-  border-radius: 30px;
+  border-radius: 15px;
   width: 12%;
   padding: 5px 10px 5px 10px;
   // background-color: $navButtonColor1;
@@ -236,7 +236,7 @@ select {
 .option {
   font-size: 0.9rem;
   background-color: $inputColor1;
-  border-radius: 30px;
+  border-radius: 15px;
   // opacity: 0.8 !important;
 }
 
@@ -275,7 +275,7 @@ select {
  */
 
 #first-container {
-  border-radius: 30px;
+  border-radius: 15px;
 }
 
 #form {
@@ -285,8 +285,9 @@ select {
 .visible-title1 {
   padding: 0.1%;
   margin: 5% 35%;
-  border-radius: 30px;
+  border-radius: 15px;
   background: rgba(0, 0, 0, 0.655);
+  background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
   // background: rgba(230, 227, 227, 0.655);
 
   // to have div transparent, but text inside of it fully visible - rgba with transparent effect:
@@ -299,16 +300,18 @@ select {
 .visible-title2 {
   padding: 0.1%;
   margin: 5% 35%;
-  border-radius: 30px;
+  border-radius: 15px;
   // margin: 30%;
   background: rgba(0, 0, 0, 0.655);
+  background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
   // background: rgba(230, 227, 227, 0.655);
   color: $fontColor1;
   box-shadow: 5px 5px 3px #ca3535;
 }
 
 .formViolet {
-  background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
+  // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
+  background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
   color: $fontColor1;
 }
 

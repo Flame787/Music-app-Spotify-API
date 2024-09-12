@@ -64,9 +64,10 @@ body {
   text-align: right;
 }
 #nav-list button {
-  border-radius: 30px;
+  border-radius: 15px;
   text-shadow: 2px 2px 4px #000000;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  transition: transform 0.3s ease;
   display: inline-block;
   margin: 0 70px;
   padding: 5px 4px;
@@ -84,12 +85,14 @@ body {
   background-color: #ca3535;
   color: #000000;
   text-shadow: none;
+  transform: translateY(-7px);
 }
 
 select {
-  border-radius: 30px;
+  border-radius: 15px;
   text-shadow: 2px 2px 4px #000000;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  transition: transform 0.3s ease;
   display: inline-block;
   margin: 0 70px;
   padding: 5px 4px;
@@ -102,7 +105,7 @@ select {
   font-size: 1.5rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   display: inline-block;
-  border-radius: 30px;
+  border-radius: 15px;
   width: 12%;
   padding: 5px 10px 5px 10px;
   color: #d1d4c9;
@@ -115,6 +118,7 @@ select:hover {
   background-color: #ca3535;
   color: #000000;
   text-shadow: none;
+  transform: translateY(-7px);
 }
 
 select option {
@@ -124,7 +128,7 @@ select option {
 .option {
   font-size: 0.9rem;
   background-color: #00224d;
-  border-radius: 30px;
+  border-radius: 15px;
 }
 
 #theme-color option {
@@ -151,11 +155,11 @@ select option {
     as long as alements are added to the list, but they will always fit into their container.
  */
 #first-container {
-  border-radius: 30px;
+  border-radius: 15px;
 }
 
 #form {
-  border-radius: 30px;
+  border-radius: 10px;
   border-top: 1px solid #000000;
   box-shadow: 5px 5px 3px #ca3535;
   margin-top: 8%;
@@ -164,8 +168,9 @@ select option {
 .visible-title1 {
   padding: 0.1%;
   margin: 5% 35%;
-  border-radius: 30px;
+  border-radius: 15px;
   background: rgba(0, 0, 0, 0.655);
+  background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
   color: #d1d4c9;
   box-shadow: 5px 5px 3px #ca3535;
 }
@@ -173,14 +178,15 @@ select option {
 .visible-title2 {
   padding: 0.1%;
   margin: 5% 35%;
-  border-radius: 30px;
+  border-radius: 15px;
   background: rgba(0, 0, 0, 0.655);
+  background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
   color: #d1d4c9;
   box-shadow: 5px 5px 3px #ca3535;
 }
 
 .formViolet {
-  background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
+  background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
   color: #d1d4c9;
 }
 
@@ -197,7 +203,7 @@ select option {
 input {
   width: 12rem;
   height: 2.5rem;
-  border-radius: 30px;
+  border-radius: 15px;
   background-color: #00224d;
   color: #d1d4c9;
   text-align: center;
@@ -227,14 +233,16 @@ button {
   border-width: 0;
   font-size: 1.5rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
-  border-radius: 30px;
+  border-radius: 15px;
   text-shadow: 2px 2px 4px #000000;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  transition: transform 0.3s ease;
 }
 button:hover {
   background-color: #ca3535;
   color: #000000;
   text-shadow: none;
+  transform: translateY(-7px);
 }
 
 .buttonWater {
@@ -287,9 +295,10 @@ hr {
 
 .favorite-button,
 .remove-button {
-  border-radius: 30px;
+  border-radius: 15px;
   text-shadow: 2px 2px 4px #000000;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  transition: transform 0.3s ease;
   padding: 0;
   margin: 1%;
   border-width: 0;
@@ -302,6 +311,7 @@ hr {
   background-color: #ca3535;
   color: #000000;
   text-shadow: none;
+  transform: translateY(-7px);
 }
 
 .removeButtonWater {
@@ -362,7 +372,7 @@ hr {
 
 /* CSS */
 body.theme0 {
-  background-image: url("../pictures/spiral.jpg") !important;
+  background-image: url("../pictures/purple-lights2.jpg") !important;
 }
 body.theme1 {
   background-image: url("../pictures/blue_vibe.jpg") !important;
@@ -386,7 +396,7 @@ body.theme7 {
   background-image: url("../pictures/green-triangles.jpg") !important;
 }
 body.theme8 {
-  background-image: url("../pictures/gold.jpg") !important;
+  background-image: url("../pictures/gold3.jpg") !important;
 }
 body.theme9 {
   background-image: url("../pictures/orange-green.jpg") !important;
