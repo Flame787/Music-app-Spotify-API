@@ -38,14 +38,6 @@
       "theme15",
       "theme16",
       "theme17",
-      "theme18",
-      "theme19",
-      "theme20",
-      "theme21",
-      "theme22",
-      "theme23",
-      "theme24",
-      "theme25",
     ];
 
     // Navbar behavior:
@@ -101,6 +93,8 @@
       const formTheme = document.querySelectorAll(".form-theme");
       const titleTheme = document.querySelectorAll(".title-theme");
 
+      const inputColor = document.querySelectorAll(".input-color");
+
       // Results are nodelists of several elements, so we will use forEach-function to target each button:
       // 1. Remove all existing themes from this element:
       themes.forEach((theme) => {
@@ -121,6 +115,10 @@
         titleTheme.forEach((title) => {
           title.classList.remove(theme);
         });
+
+        inputColor.forEach((input) => {
+          input.classList.remove(theme);
+        });
       });
 
       // 2. Add new theme to this element:
@@ -140,6 +138,10 @@
 
       titleTheme.forEach((title) => {
         title.classList.add(selectedTheme);
+      });
+
+      inputColor.forEach((input) => {
+        input.classList.add(selectedTheme);
       });
 
       console.log("Selected theme:", selectedTheme);
@@ -200,12 +202,20 @@
     // creating new task:
     function createTask(entry, artist, rating, time) {
       const item = document.createElement("li");
-      item.innerHTML = `<p class="whiteParagraph">Album: <span class="whiteText" class="entry">${entry}</span> 
+
+      // const div = document.createElement("div");
+      // div.classList.add("form-theme", "item-card"); 
+
+      item.innerHTML = `<div class="form-theme item-card"> <p class="whiteParagraph">Album: <span class="whiteText" class="entry">${entry}</span> 
       <br> Artist: <span class="whiteText" class="artist">${artist}</span> 
       <br> Rate: <span class="whiteText" class="rating">${rating}</span> 
-      <br> Rated on: <span class="whiteText" class="time">${time}</span></p>`;
-      addFavoriteButton(item);
-      addRemoveButton(item);
+      <br> Rated on: <span class="whiteText" class="time">${time}</span></p>  </div>`;
+
+      const itemCardDiv = item.querySelector('.item-card');
+
+      addFavoriteButton(itemCardDiv);
+      addRemoveButton(itemCardDiv);
+  
 
       return item;
     }
@@ -239,16 +249,22 @@
     };
 
     // add button FavoriteButton:
-    function addFavoriteButton(item) {
+    function addFavoriteButton(itemCardDiv) {
       const favoriteButton = document.createElement("button");
       favoriteButton.setAttribute("type", "button");
-      favoriteButton.classList.add("favorite-button");
+      favoriteButton.classList.add("favorite-button", "button", "flex-item");
       // favoriteButton.classList.add("buttonTh1");
-      favoriteButton.classList.add("button");
-      favoriteButton.classList.add("flex-item");
+      // favoriteButton.classList.add("button");
+      // favoriteButton.classList.add("flex-item");
       favoriteButton.addEventListener("click", setFavorite);
       favoriteButton.innerHTML = "Add to favorites";
-      item.insertBefore(favoriteButton, item.firstChild);
+
+      // div.insertBefore(favoriteButton, div.firstChild);
+
+      // itemCardDiv.appendChild(favoriteButton);
+
+      itemCardDiv.insertBefore(favoriteButton, itemCardDiv.firstChild);
+
       const listTitle = document.getElementById("new-title");
       listTitle.style.display = "block";
     }
@@ -318,14 +334,17 @@
     // Function createFavorite:
     function createFavorite(entry, artist, rating, time) {
       const item = document.createElement("li");
-      item.innerHTML = `<p class="entry">Album: <span id="white" >${entry}</span></p>
+      item.innerHTML = `<div class="form-theme item-card"> <p class="entry">Album: <span id="white" >${entry}</span></p>
       <p class="artist">Artist: <span id="white" >${artist}</span></p>
       <p class="rating">Rate: <span id="white" >${rating}</span></p>
-      <p class="time">Rated on: <span id="white" >${time}</span></p>`;
+      <p class="time">Rated on: <span id="white" >${time}</span></p>  </div>`;
 
       console.log("Created item HTML:", item.innerHTML); // Debugging
 
-      addRemoveButton(item);
+      const itemCardDiv = item.querySelector('.item-card');
+
+      addRemoveButton(itemCardDiv);
+   
       return item;
     }
 
@@ -335,12 +354,18 @@
     // add button RemoveButton:
     function addRemoveButton(item) {
       const removeButton = document.createElement("button");
-      const hr = document.createElement("hr");
+
+      const divElement = document.querySelectorAll(".item-card");
+      // const hr = document.createElement("hr");
+
       removeButton.classList.add("remove-button");
       removeButton.classList.add("flex-item");
       removeButton.addEventListener("click", removeTask);
       item.appendChild(removeButton);
-      item.appendChild(hr);
+      // item.appendChild(hr);
+
+      divElement.innerHTML += removeButton.outerHTML;
+
       removeButton.innerHTML = "Remove album";
     }
 
