@@ -33,6 +33,19 @@
       "theme10",
       "theme11",
       "theme12",
+      "theme13",
+      "theme14",
+      "theme15",
+      "theme16",
+      "theme17",
+      "theme18",
+      "theme19",
+      "theme20",
+      "theme21",
+      "theme22",
+      "theme23",
+      "theme24",
+      "theme25",
     ];
 
     // Navbar behavior:
