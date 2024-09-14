@@ -4,6 +4,162 @@
 @import "abstracts/mixins";
 @import "abstracts/themes";
 
+// THEME MODULES:
+
+// On each loop, assign these values to $theme and $map:
+// module-name is a placeholder, should be replaced with any html-element: div, navbar, card, button etc - a container whose style we want to change.
+// in html, we use naming like this :<div class="theme1 navbar">...</div>
+// The & refers to parent selectors, and placing it after .#{$theme} tells Sass to output any parent selectors after the theme name:
+
+// .module-name {
+//   @each $theme, $map in $themes {
+//     .#{$theme} & {
+//       color: map-get($map, color);
+//       background-color: map-get($map, background-color);
+//       font-size: map-get($map, font-size);
+//     }
+//   }
+// }
+
+// .module-name {
+//   h1 {
+//     @each $theme, $map in $themes {
+//       .#{$theme} & {
+//         color: map-get($map, color);
+//       }
+//     }
+//   }
+// }
+
+/* CSS */
+// .theme1 .module-name h1 { color: red; }
+// .theme2 .module-name h1 { color: orange; }
+// .theme3 .module-name h1 { color: yellow; }
+// .theme4 .module-name h1 { color: green; }
+// .theme5 .module-name h1 { color: blue; }
+
+// <body class="theme7">
+// <button class="button nav-button theme7"><a href="index.html">Home</a></button>
+// <button type="button" class="favorite-button button flex-item theme7">Add to favorites</button>
+
+// PAGE-BACKGROUND:
+
+// &.#{$theme} - current element
+// .#{$theme} & { - parent element gets the class
+
+body {
+  @each $theme, $background in $backgrounds {
+    &.#{$theme} {
+      background-image: $background !important;
+    }
+  }
+}
+
+body {
+  @each $theme, $properties in $fontColors {
+    &.#{$theme} {
+      color: map-get($properties, color) !important;
+      text-shadow: map-get($properties, text-shadow) !important;
+    }
+  }
+}
+
+// FOR NAV-BUTTONS (html) AND ADD-BUTTONS (JS-file):
+
+// .nav-button {
+//   @each $theme, $map in $themes {
+//     .#{$theme} & {
+//       background-color: map-get($map, background-color);
+//       color: map-get($map, color);
+//     }
+//   }
+// }
+
+.theme-button {
+  @each $theme, $map in $themes {
+    .#{$theme} & {
+      background-color: map-get($map, background-color);
+      color: map-get($map, color);
+      border: map-get($map, border);
+      box-shadow: map-get($map, box-shadow);
+    }
+  }
+}
+
+// Apply 1 scss-module to several classes (these classes/id-s/elements have to be all targeted in JS, in order to apply themes on them):
+.nav-button,
+.favorite-button,
+#theme_color,
+option {
+  @extend .theme-button;
+}
+
+//ancor buttons have the same style like Select buttons:
+
+button a{
+  @each $theme, $map in $themes {
+    .#{$theme} & {
+      color: map-get($map, color);
+    }
+  }
+}
+
+// FOR REMOVE-BUTTONS (JS-file):
+
+.remove-button {
+  @each $theme, $map in $themes2 {
+    .#{$theme} & {
+      background-color: map-get($map, background-color);
+      color: map-get($map, color);
+      border: map-get($map, border);
+      box-shadow: map-get($map, box-shadow);
+    }
+  }
+}
+
+// FORM AND TITLES:
+
+.form-theme {
+  @each $formTheme, $map in $formThemes {
+    .#{$formTheme} & {
+      background: map-get($map, background);
+      background-color: map-get($map, background-color);
+      color: map-get($map, color);
+      box-shadow: map-get($map, box-shadow);
+    }
+  }
+}
+
+.title-theme {
+  @extend .form-theme;
+  @each $titleTheme, $map in $titleThemes {
+    .#{$titleTheme} & {
+      background: map-get($map, background);
+    }
+  }
+}
+
+.header-style {
+  @each $headerTheme, $map in $headerThemes {
+    .#{$headerTheme} & {
+      background: map-get($map, background);
+    }
+  }
+}
+
+// Input background colors and fonts:
+
+.input-color {
+  @each $inputColor, $map in $inputColors {
+    .#{$inputColor} & {
+      background-color: map-get($map, background-color);
+      color: map-get($map, color);
+    }
+  }
+}
+
+
+
 body {
   // color: $fontColor1;
   font-family: $sans-serif1;
@@ -23,7 +179,7 @@ body {
 
 // all children elements of header, which has class .red:
 .red > * {
-  padding: 0 10px 10px;
+  padding: 0 5px 5px;
 }
 
 #navbar {
@@ -62,6 +218,8 @@ body {
     }
     a {
       @include nav-ancor-text();
+      text-decoration: none;
+      // color: inherit;
 
       &:hover {
         @include button-hover();
@@ -69,6 +227,8 @@ body {
     }
   }
 }
+
+
 
 select {
   @include button-style();
@@ -84,11 +244,9 @@ select {
   // background-color: $navButtonColor1;
   color: $fontColor1;
   font-weight: bold;
-  text-shadow: 2px 2px 4px $textShadowColor1;
+  // text-shadow: 2px 2px 4px $textShadowColor1;
   font-family: $sans-serif1;
   text-align: center;
-  
- 
 
   &:hover {
     @include button-hover();
@@ -144,20 +302,18 @@ select {
   @include form-design();
 }
 
-
-.visible-title1, .visible-title2 {
+.visible-title1,
+.visible-title2 {
   padding: 0.1%;
   margin: 5% 35%;
   border-radius: 15px;
   border-top: 1px solid rgba(128, 128, 128, 0.485);
   border-left: 1px solid rgba(128, 128, 128, 0.478);
   transition: transform 0.3s ease;
-  
+
   // to have div transparent, but text inside of it fully visible - rgba with transparent effect:
   // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
 }
-
-
 
 .visible-title1:hover,
 .visible-title2:hover,
@@ -175,7 +331,15 @@ form:hover {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s ease;
+}
 
+.item-card:hover {
+  transform: translateY(-10px);
+}
+
+.item-card2 {
+  gap: 25%;
 }
 
 // label {
@@ -198,6 +362,10 @@ form:hover {
 //   color: $fontColor1;
 // }
 
+.shadow-text {
+  font-size: 2rem;
+}
+
 input {
   @include input-field();
 
@@ -205,6 +373,13 @@ input {
     background-color: $hoverColor1;
     color: $textShadowColor1;
   }
+}
+
+
+.input-button:hover {
+  background-color: $hoverColor1;
+  color: $textShadowColor1;
+  text-shadow: none;
 }
 
 p {
@@ -225,7 +400,6 @@ button {
     @include button-hover();
   }
 }
-
 
 ul {
   list-style-type: none;
@@ -290,144 +464,7 @@ hr {
   background-color: $paragraphColor;
 }
 
-// THEME MODULES:
 
-// On each loop, assign these values to $theme and $map:
-// module-name is a placeholder, should be replaced with any html-element: div, navbar, card, button etc - a container whose style we want to change.
-// in html, we use naming like this :<div class="theme1 navbar">...</div>
-// The & refers to parent selectors, and placing it after .#{$theme} tells Sass to output any parent selectors after the theme name:
-
-// .module-name {
-//   @each $theme, $map in $themes {
-//     .#{$theme} & {
-//       color: map-get($map, color);
-//       background-color: map-get($map, background-color);
-//       font-size: map-get($map, font-size);
-//     }
-//   }
-// }
-
-// .module-name {
-//   h1 {
-//     @each $theme, $map in $themes {
-//       .#{$theme} & {
-//         color: map-get($map, color);
-//       }
-//     }
-//   }
-// }
-
-/* CSS */
-// .theme1 .module-name h1 { color: red; }
-// .theme2 .module-name h1 { color: orange; }
-// .theme3 .module-name h1 { color: yellow; }
-// .theme4 .module-name h1 { color: green; }
-// .theme5 .module-name h1 { color: blue; }
-
-// <body class="theme7">
-// <button class="button nav-button theme7"><a href="index.html">Home</a></button>
-// <button type="button" class="favorite-button button flex-item theme7">Add to favorites</button>
-
-// PAGE-BACKGROUND:
-
-// &.#{$theme} - current element
-// .#{$theme} & { - parent element gets the class
-
-body {
-  @each $theme, $background in $backgrounds {
-    &.#{$theme} {
-      background-image: $background !important;
-    }
-  }
-}
-
-body {
-  @each $theme, $fontColor in $fontColors {
-    &.#{$theme} {
-      color: $fontColor !important;
-    }
-  }
-}
-
-// FOR NAV-BUTTONS (html) AND ADD-BUTTONS (JS-file):
-
-// .nav-button {
-//   @each $theme, $map in $themes {
-//     .#{$theme} & {
-//       background-color: map-get($map, background-color);
-//       color: map-get($map, color);
-//     }
-//   }
-// }
-
-.theme-button {
-  @each $theme, $map in $themes {
-    .#{$theme} & {
-      background-color: map-get($map, background-color);
-      color: map-get($map, color);
-      border: map-get($map, border);
-      box-shadow: map-get($map, box-shadow);
-    }
-  }
-}
-
-// Apply 1 scss-module to several classes (these classes/id-s/elements have to be all targeted in JS, in order to apply themes on them):
-.nav-button,
-.favorite-button,
-#theme_color,
-option {
-  @extend .theme-button;
-}
-
-// FOR REMOVE-BUTTONS (JS-file):
-
-.remove-button {
-  @each $theme, $map in $themes2 {
-    .#{$theme} & {
-      background-color: map-get($map, background-color);
-      color: map-get($map, color);
-      border: map-get($map, border);
-      box-shadow: map-get($map, box-shadow);
-    }
-  }
-}
-
-// FORM AND TITLES:
-
-.form-theme {
-  @each $box, $map in $boxes {
-    .#{$box} & {
-      background: map-get($map, background);
-      background-color: map-get($map, background-color);
-      color: map-get($map, color);
-      box-shadow: map-get($map, box-shadow);
-      opacity: map-get($map, opacity);
-    }
-  }
-}
-
-.title-theme {
-  @extend .form-theme;
-}
-
-// Input background colors and fonts:
-
-.input-color {
-  @each $inputColor, $map in $inputColors {
-    .#{$inputColor} & {
-      background-color: map-get($map, background-color);
-      color: map-get($map, color);
-      
-    }
-  }
-}
-
-// dodati boje ovisno o temama za div-ove koji su containeri za naslove, i za form, za input polja, a možda i za navbar pozadinsku boju
-// i sukladno tome, ime aplikacije u lijevom gornjem kutu
-
-// podebljani tekst označiti istom bojom kao i slova buttona, a obični tekst nekom sličnom ali jednostavnijom bojom
-
-// kasnije sve teme spremiti u zaseban file, npr. _themes.scss i importati u ovaj file
 
 // MEDIA QUERIES:
 

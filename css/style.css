@@ -9,6 +9,686 @@ body {
   text-align: center;
 }
 
+/* CSS */
+body.theme0 {
+  background-image: url("../pictures/neon-quadrats.jpg") !important;
+}
+body.theme1 {
+  background-image: url("../pictures/purple-lights2.jpg") !important;
+}
+body.theme2 {
+  background-image: url("../pictures/violet.jpg") !important;
+}
+body.theme3 {
+  background-image: url("../pictures/triangular-neon-laser.jpg") !important;
+}
+body.theme4 {
+  background-image: url("../pictures/blue-pixel.jpg") !important;
+}
+body.theme5 {
+  background-image: url("../pictures/gold3.jpg") !important;
+}
+body.theme6 {
+  background-image: url("../pictures/volcano.jpg") !important;
+}
+body.theme7 {
+  background-image: url("../pictures/red-triangles.jpg") !important;
+}
+body.theme8 {
+  background-image: url("../pictures/red-blue.jpg") !important;
+}
+body.theme9 {
+  background-image: url("../pictures/orange-green.jpg") !important;
+}
+body.theme10 {
+  background-image: url("../pictures/abstract-green.jpg") !important;
+}
+body.theme11 {
+  background-image: url("../pictures/green-triangles.jpg") !important;
+}
+body.theme12 {
+  background-image: url("../pictures/blue-water.jpg") !important;
+}
+body.theme13 {
+  background-image: url("../pictures/frost.jpg") !important;
+}
+body.theme14 {
+  background-image: url("../pictures/ice.jpg") !important;
+}
+body.theme15 {
+  background-image: url("../pictures/abstract-violet.jpg") !important;
+}
+body.theme16 {
+  background-image: url("../pictures/violet-white.jpg") !important;
+}
+body.theme17 {
+  background-image: url("../pictures/white-colored.jpg") !important;
+}
+
+body.theme0 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme1 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme2 {
+  color: #d1d4c9 !important;
+  text-shadow: none !important;
+}
+body.theme3 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme4 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme5 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme6 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme7 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme8 {
+  color: #d1d4c9 !important;
+  text-shadow: none !important;
+}
+body.theme9 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme10 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme11 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme12 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme13 {
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+}
+body.theme14 {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+body.theme15 {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+body.theme16 {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+body.theme17 {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+.theme0 .theme-button, .theme0 .nav-button,
+.theme0 .favorite-button,
+.theme0 #theme_color,
+.theme0 option {
+  background-color: #a60c3a;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme1 .theme-button, .theme1 .nav-button,
+.theme1 .favorite-button,
+.theme1 #theme_color,
+.theme1 option {
+  background-color: #a0153e;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme2 .theme-button, .theme2 .nav-button,
+.theme2 .favorite-button,
+.theme2 #theme_color,
+.theme2 option {
+  background-color: rgb(174, 127, 229);
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme3 .theme-button, .theme3 .nav-button,
+.theme3 .favorite-button,
+.theme3 #theme_color,
+.theme3 option {
+  background-color: rgb(1, 1, 11);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme4 .theme-button, .theme4 .nav-button,
+.theme4 .favorite-button,
+.theme4 #theme_color,
+.theme4 option {
+  background-color: #0b6893;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme5 .theme-button, .theme5 .nav-button,
+.theme5 .favorite-button,
+.theme5 #theme_color,
+.theme5 option {
+  background-color: rgb(223, 178, 13);
+  color: #000000;
+  box-shadow: 3px 3px 2px #000000;
+}
+.theme6 .theme-button, .theme6 .nav-button,
+.theme6 .favorite-button,
+.theme6 #theme_color,
+.theme6 option {
+  background-color: rgb(222, 162, 12);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme7 .theme-button, .theme7 .nav-button,
+.theme7 .favorite-button,
+.theme7 #theme_color,
+.theme7 option {
+  background-color: lightgreen;
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme8 .theme-button, .theme8 .nav-button,
+.theme8 .favorite-button,
+.theme8 #theme_color,
+.theme8 option {
+  background-color: rgb(52, 139, 185);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme9 .theme-button, .theme9 .nav-button,
+.theme9 .favorite-button,
+.theme9 #theme_color,
+.theme9 option {
+  background-color: orange;
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme10 .theme-button, .theme10 .nav-button,
+.theme10 .favorite-button,
+.theme10 #theme_color,
+.theme10 option {
+  background-color: red;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme11 .theme-button, .theme11 .nav-button,
+.theme11 .favorite-button,
+.theme11 #theme_color,
+.theme11 option {
+  background-color: darkred;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme12 .theme-button, .theme12 .nav-button,
+.theme12 .favorite-button,
+.theme12 #theme_color,
+.theme12 option {
+  background-color: white;
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme13 .theme-button, .theme13 .nav-button,
+.theme13 .favorite-button,
+.theme13 #theme_color,
+.theme13 option {
+  background-color: yellow;
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme14 .theme-button, .theme14 .nav-button,
+.theme14 .favorite-button,
+.theme14 #theme_color,
+.theme14 option {
+  background-color: rgb(124, 218, 231);
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme15 .theme-button, .theme15 .nav-button,
+.theme15 .favorite-button,
+.theme15 #theme_color,
+.theme15 option {
+  background-color: red;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme16 .theme-button, .theme16 .nav-button,
+.theme16 .favorite-button,
+.theme16 #theme_color,
+.theme16 option {
+  background-color: rgba(157, 43, 159, 0.749);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme17 .theme-button, .theme17 .nav-button,
+.theme17 .favorite-button,
+.theme17 #theme_color,
+.theme17 option {
+  background-color: rgb(246, 194, 38);
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+
+.theme0 button a {
+  color: white;
+}
+.theme1 button a {
+  color: white;
+}
+.theme2 button a {
+  color: black;
+}
+.theme3 button a {
+  color: white;
+}
+.theme4 button a {
+  color: white;
+}
+.theme5 button a {
+  color: #000000;
+}
+.theme6 button a {
+  color: white;
+}
+.theme7 button a {
+  color: black;
+}
+.theme8 button a {
+  color: white;
+}
+.theme9 button a {
+  color: black;
+}
+.theme10 button a {
+  color: white;
+}
+.theme11 button a {
+  color: white;
+}
+.theme12 button a {
+  color: black;
+}
+.theme13 button a {
+  color: black;
+}
+.theme14 button a {
+  color: black;
+}
+.theme15 button a {
+  color: white;
+}
+.theme16 button a {
+  color: white;
+}
+.theme17 button a {
+  color: black;
+}
+
+.theme0 .remove-button {
+  background-color: rgb(18, 13, 83);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme1 .remove-button {
+  background-color: violet;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme2 .remove-button {
+  background-color: rgb(29, 5, 48);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme3 .remove-button {
+  background-color: rgb(65, 7, 75);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme4 .remove-button {
+  background-color: rgb(3, 16, 42);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme5 .remove-button {
+  background-color: rgb(150, 34, 6);
+  color: white;
+  box-shadow: 3px 3px 2px #000000;
+}
+.theme6 .remove-button {
+  background-color: rgb(180, 56, 28);
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme7 .remove-button {
+  background-color: lightgreen;
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme8 .remove-button {
+  background-color: rgb(163, 11, 11);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme9 .remove-button {
+  background-color: orange;
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme10 .remove-button {
+  background-color: red;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme11 .remove-button {
+  background-color: darkred;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme12 .remove-button {
+  background-color: white;
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme13 .remove-button {
+  background-color: orange;
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme14 .remove-button {
+  background-color: rgb(35, 107, 116);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme15 .remove-button {
+  background-color: darkred;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme16 .remove-button {
+  background-color: rgb(34, 33, 33);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme17 .remove-button {
+  background-color: black;
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+
+.theme0 .form-theme, .theme0 .title-theme {
+  background: radial-gradient(at 75% 25%, #621c4b, rgba(5, 25, 55, 0.749));
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme1 .form-theme, .theme1 .title-theme {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme2 .form-theme, .theme2 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(210, 192, 243, 0.6980392157), rgba(35, 6, 71, 0.749));
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme3 .form-theme, .theme3 .title-theme {
+  background: radial-gradient(at 25% 75%, #6ab3d7, rgba(51, 4, 39, 0.4078431373));
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme4 .form-theme, .theme4 .title-theme {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme5 .form-theme, .theme5 .title-theme {
+  background: radial-gradient(at 75% 25%, rgba(206, 184, 62, 0.9294117647), rgba(203, 28, 28, 0.918));
+  color: white;
+  box-shadow: 3px 3px 2px #000000;
+}
+.theme6 .form-theme, .theme6 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(81, 79, 79, 0.8588235294), rgba(9, 3, 1, 0.749));
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme7 .form-theme, .theme7 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme8 .form-theme, .theme8 .title-theme {
+  background: radial-gradient(at 25% 75%, #f3eef1, rgba(33, 44, 66, 0.749));
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme9 .form-theme, .theme9 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme10 .form-theme, .theme10 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(52, 48, 48, 0.6980392157), rgba(33, 2, 3, 0.749));
+  color: white;
+  box-shadow: 3px 3px 2px black;
+}
+.theme11 .form-theme, .theme11 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme12 .form-theme, .theme12 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(96, 148, 226, 0.749));
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme13 .form-theme, .theme13 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme14 .form-theme, .theme14 .title-theme {
+  background: radial-gradient(at 75% 25%, rgba(177, 176, 176, 0.6980392157), rgba(12, 58, 88, 0.749));
+  color: white;
+  box-shadow: 3px 3px 2px black;
+}
+.theme15 .form-theme, .theme15 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
+  color: white;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme16 .form-theme, .theme16 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(225, 142, 226, 0.749));
+  color: black;
+  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+}
+.theme17 .form-theme, .theme17 .title-theme {
+  background: radial-gradient(at 25% 75%, rgb(248, 248, 246), rgba(255, 255, 255, 0.5));
+  color: black;
+  box-shadow: 3px 3px 2px #000000;
+}
+
+.theme0 .title-theme {
+  background: radial-gradient(at 25% 75%, #a60c3a, rgba(9, 20, 36, 0.749));
+}
+.theme1 .title-theme {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme2 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(239, 230, 244, 0.6980392157), rgba(88, 44, 142, 0.749));
+}
+.theme3 .title-theme {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(1, 8, 20, 0.94));
+}
+.theme4 .title-theme {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme5 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(206, 184, 62, 0.8235294118), rgba(203, 28, 28, 0.749));
+}
+.theme6 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(54, 52, 51, 0.8588235294), rgba(9, 3, 1, 0.749));
+}
+.theme7 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
+}
+.theme8 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(243, 238, 241, 0.8941176471), rgba(174, 188, 214, 0.749));
+}
+.theme9 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
+}
+.theme10 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(52, 48, 48, 0.6980392157), rgba(33, 2, 3, 0.749));
+}
+.theme11 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
+}
+.theme12 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(96, 148, 226, 0.749));
+}
+.theme13 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
+}
+.theme14 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(52, 48, 48, 0.6980392157), rgba(43, 92, 165, 0.749));
+}
+.theme15 .title-theme {
+  background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
+}
+.theme16 .title-theme {
+  background: radial-gradient(at 75% 25%, rgba(154, 175, 189, 0.6980392157), rgba(92, 6, 100, 0.749));
+}
+.theme17 .title-theme {
+  background: radial-gradient(at 25% 75%, rgb(246, 246, 17), rgba(255, 255, 255, 0.5));
+}
+
+.theme0 .header-style {
+  background: radial-gradient(at 25% 75%, #350926, rgba(9, 20, 36, 0.749));
+}
+.theme1 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme2 .header-style {
+  background: radial-gradient(at 25% 75%, #2b043e, rgba(9, 20, 36, 0.749));
+}
+.theme3 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme4 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme5 .header-style {
+  background: radial-gradient(at 25% 75%, rgb(223, 86, 13), rgba(9, 20, 36, 0.749));
+}
+.theme6 .header-style {
+  background: radial-gradient(at 25% 75%, rgba(54, 52, 51, 0.8588235294), rgba(9, 3, 1, 0.749));
+}
+.theme7 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme8 .header-style {
+  background: radial-gradient(at 75% 25%, #f3eef1, rgba(18, 24, 35, 0.749));
+}
+.theme9 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme10 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme11 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme12 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme13 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme14 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme15 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme16 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+.theme17 .header-style {
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+}
+
+.theme0 .input-color {
+  color: black;
+}
+.theme1 .input-color {
+  color: black;
+}
+.theme2 .input-color {
+  color: black;
+}
+.theme3 .input-color {
+  color: black;
+}
+.theme4 .input-color {
+  background-color: #728d99;
+  color: black;
+}
+.theme5 .input-color {
+  background-color: #e2da84;
+  color: black;
+}
+.theme6 .input-color {
+  color: black;
+}
+.theme7 .input-color {
+  color: black;
+}
+.theme8 .input-color {
+  background-color: rgba(224, 219, 219, 0.792);
+  color: black;
+}
+.theme9 .input-color {
+  color: black;
+}
+.theme10 .input-color {
+  color: black;
+}
+.theme11 .input-color {
+  color: black;
+}
+.theme12 .input-color {
+  color: black;
+}
+.theme13 .input-color {
+  color: black;
+}
+.theme14 .input-color {
+  color: black;
+}
+.theme15 .input-color {
+  color: black;
+}
+.theme16 .input-color {
+  color: black;
+}
+.theme17 .input-color {
+  background-color: rgb(239, 227, 184);
+  color: black;
+}
+
 body {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   background-repeat: repeat;
@@ -23,7 +703,7 @@ body {
 }
 
 .red > * {
-  padding: 0 10px 10px;
+  padding: 0 5px 5px;
 }
 
 #navbar {
@@ -36,10 +716,8 @@ body {
   top: 0;
   z-index: 1000;
   align-items: center;
-  background: rgba(0, 0, 0, 0.76);
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
-  opacity: 0.8;
 }
 
 #top-icon {
@@ -71,9 +749,9 @@ body {
   background-color: #ca3535;
 }
 #nav-list button a {
-  text-decoration: none;
   font-weight: 350;
   font-weight: bold;
+  text-decoration: none;
 }
 #nav-list button a:hover {
   background-color: #ca3535;
@@ -101,7 +779,6 @@ select {
   padding: 5px 10px 5px 10px;
   color: #d1d4c9;
   font-weight: bold;
-  text-shadow: 2px 2px 4px #000000;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
 }
@@ -157,7 +834,8 @@ select option {
   transition: transform 0.3s ease;
 }
 
-.visible-title1, .visible-title2 {
+.visible-title1,
+.visible-title2 {
   padding: 0.1%;
   margin: 5% 35%;
   border-radius: 15px;
@@ -182,6 +860,19 @@ form:hover {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.item-card:hover {
+  transform: translateY(-10px);
+}
+
+.item-card2 {
+  gap: 25%;
+}
+
+.shadow-text {
+  font-size: 2rem;
 }
 
 input {
@@ -196,6 +887,12 @@ input {
 input:hover {
   background-color: #ca3535;
   color: #000000;
+}
+
+.input-button:hover {
+  background-color: #ca3535;
+  color: #000000;
+  text-shadow: none;
 }
 
 p {
@@ -341,501 +1038,6 @@ hr {
 
 .water {
   background-color: rgba(209, 212, 201, 0.5725490196);
-}
-
-/* CSS */
-body.theme0 {
-  background-image: url("../pictures/neon-quadrats.jpg") !important;
-}
-body.theme1 {
-  background-image: url("../pictures/purple-lights2.jpg") !important;
-}
-body.theme2 {
-  background-image: url("../pictures/violet.jpg") !important;
-}
-body.theme3 {
-  background-image: url("../pictures/triangular-neon-laser.jpg") !important;
-}
-body.theme4 {
-  background-image: url("../pictures/blue-pixel.jpg") !important;
-}
-body.theme5 {
-  background-image: url("../pictures/gold3.jpg") !important;
-}
-body.theme6 {
-  background-image: url("../pictures/volcano.jpg") !important;
-}
-body.theme7 {
-  background-image: url("../pictures/red-triangles.jpg") !important;
-}
-body.theme8 {
-  background-image: url("../pictures/red-blue.jpg") !important;
-}
-body.theme9 {
-  background-image: url("../pictures/orange-green.jpg") !important;
-}
-body.theme10 {
-  background-image: url("../pictures/abstract-green.jpg") !important;
-}
-body.theme11 {
-  background-image: url("../pictures/green-triangles.jpg") !important;
-}
-body.theme12 {
-  background-image: url("../pictures/blue-water.jpg") !important;
-}
-body.theme13 {
-  background-image: url("../pictures/frost.jpg") !important;
-}
-body.theme14 {
-  background-image: url("../pictures/ice.jpg") !important;
-}
-body.theme15 {
-  background-image: url("../pictures/abstract-violet.jpg") !important;
-}
-body.theme16 {
-  background-image: url("../pictures/violet-white.jpg") !important;
-}
-body.theme17 {
-  background-image: url("../pictures/white-colored.jpg") !important;
-}
-
-body.theme0 {
-  color: #d1d4c9 !important;
-}
-body.theme1 {
-  color: #d1d4c9 !important;
-}
-body.theme2 {
-  color: #d1d4c9 !important;
-}
-body.theme3 {
-  color: #d1d4c9 !important;
-}
-body.theme4 {
-  color: #000000 !important;
-}
-body.theme5 {
-  color: #000000 !important;
-}
-body.theme6 {
-  color: #000000 !important;
-}
-body.theme7 {
-  color: #000000 !important;
-}
-body.theme8 {
-  color: #000000 !important;
-}
-body.theme9 {
-  color: #000000 !important;
-}
-body.theme10 {
-  color: #000000 !important;
-}
-body.theme11 {
-  color: #000000 !important;
-}
-body.theme12 {
-  color: #d1d4c9 !important;
-}
-body.theme13 {
-  color: #000000 !important;
-}
-body.theme14 {
-  color: #000000 !important;
-}
-body.theme15 {
-  color: #000000 !important;
-}
-body.theme16 {
-  color: #000000 !important;
-}
-body.theme17 {
-  color: #000000 !important;
-}
-
-.theme0 .theme-button, .theme0 .nav-button,
-.theme0 .favorite-button,
-.theme0 #theme_color,
-.theme0 option {
-  background-color: #a0153e;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme1 .theme-button, .theme1 .nav-button,
-.theme1 .favorite-button,
-.theme1 #theme_color,
-.theme1 option {
-  background-color: #a0153e;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme2 .theme-button, .theme2 .nav-button,
-.theme2 .favorite-button,
-.theme2 #theme_color,
-.theme2 option {
-  background-color: lightblue;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme3 .theme-button, .theme3 .nav-button,
-.theme3 .favorite-button,
-.theme3 #theme_color,
-.theme3 option {
-  background-color: blue;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme4 .theme-button, .theme4 .nav-button,
-.theme4 .favorite-button,
-.theme4 #theme_color,
-.theme4 option {
-  background-color: black;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme5 .theme-button, .theme5 .nav-button,
-.theme5 .favorite-button,
-.theme5 #theme_color,
-.theme5 option {
-  background-color: rgb(223, 86, 13);
-  color: #000000;
-  box-shadow: 3px 3px 2px #000000;
-}
-.theme6 .theme-button, .theme6 .nav-button,
-.theme6 .favorite-button,
-.theme6 #theme_color,
-.theme6 option {
-  background-color: green;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme7 .theme-button, .theme7 .nav-button,
-.theme7 .favorite-button,
-.theme7 #theme_color,
-.theme7 option {
-  background-color: lightgreen;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme8 .theme-button, .theme8 .nav-button,
-.theme8 .favorite-button,
-.theme8 #theme_color,
-.theme8 option {
-  background-color: yellow;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme9 .theme-button, .theme9 .nav-button,
-.theme9 .favorite-button,
-.theme9 #theme_color,
-.theme9 option {
-  background-color: orange;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme10 .theme-button, .theme10 .nav-button,
-.theme10 .favorite-button,
-.theme10 #theme_color,
-.theme10 option {
-  background-color: red;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme11 .theme-button, .theme11 .nav-button,
-.theme11 .favorite-button,
-.theme11 #theme_color,
-.theme11 option {
-  background-color: darkred;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme12 .theme-button, .theme12 .nav-button,
-.theme12 .favorite-button,
-.theme12 #theme_color,
-.theme12 option {
-  background-color: white;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme13 .theme-button, .theme13 .nav-button,
-.theme13 .favorite-button,
-.theme13 #theme_color,
-.theme13 option {
-  background-color: yellow;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme14 .theme-button, .theme14 .nav-button,
-.theme14 .favorite-button,
-.theme14 #theme_color,
-.theme14 option {
-  background-color: orange;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme15 .theme-button, .theme15 .nav-button,
-.theme15 .favorite-button,
-.theme15 #theme_color,
-.theme15 option {
-  background-color: red;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme16 .theme-button, .theme16 .nav-button,
-.theme16 .favorite-button,
-.theme16 #theme_color,
-.theme16 option {
-  background-color: darkred;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme17 .theme-button, .theme17 .nav-button,
-.theme17 .favorite-button,
-.theme17 #theme_color,
-.theme17 option {
-  background-color: rgb(246, 194, 38);
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-
-.theme0 .remove-button {
-  background-color: violet;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme1 .remove-button {
-  background-color: violet;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme2 .remove-button {
-  background-color: lightblue;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme3 .remove-button {
-  background-color: blue;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme4 .remove-button {
-  background-color: black;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme5 .remove-button {
-  background-color: rgb(150, 34, 6);
-  color: white;
-  box-shadow: 3px 3px 2px #000000;
-}
-.theme6 .remove-button {
-  background-color: rgb(3, 73, 3);
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme7 .remove-button {
-  background-color: lightgreen;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme8 .remove-button {
-  background-color: yellow;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme9 .remove-button {
-  background-color: orange;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme10 .remove-button {
-  background-color: red;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme11 .remove-button {
-  background-color: darkred;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme12 .remove-button {
-  background-color: white;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme13 .remove-button {
-  background-color: orange;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme14 .remove-button {
-  background-color: red;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme15 .remove-button {
-  background-color: darkred;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme16 .remove-button {
-  background-color: white;
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme17 .remove-button {
-  background-color: black;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-
-.theme0 .form-theme, .theme0 .title-theme {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme1 .form-theme, .theme1 .title-theme {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme2 .form-theme, .theme2 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(192, 238, 243, 0.6980392157), rgba(91, 213, 241, 0.749));
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme3 .form-theme, .theme3 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme4 .form-theme, .theme4 .title-theme {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme5 .form-theme, .theme5 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(206, 93, 62, 0.8235294118), rgba(9, 20, 36, 0.749));
-  color: white;
-  box-shadow: 3px 3px 2px #000000;
-}
-.theme6 .form-theme, .theme6 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme7 .form-theme, .theme7 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme8 .form-theme, .theme8 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme9 .form-theme, .theme9 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme10 .form-theme, .theme10 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(52, 48, 48, 0.6980392157), rgba(33, 2, 3, 0.749));
-  color: white;
-  box-shadow: 3px 3px 2px black;
-}
-.theme11 .form-theme, .theme11 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme12 .form-theme, .theme12 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(96, 148, 226, 0.749));
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme13 .form-theme, .theme13 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme14 .form-theme, .theme14 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(52, 48, 48, 0.6980392157), rgba(33, 2, 3, 0.749));
-  color: white;
-  box-shadow: 3px 3px 2px black;
-}
-.theme15 .form-theme, .theme15 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme16 .form-theme, .theme16 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(96, 148, 226, 0.749));
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme17 .form-theme, .theme17 .title-theme {
-  background: radial-gradient(at 25% 75%, rgb(248, 248, 246), rgba(255, 255, 255, 0.5));
-  color: black;
-  box-shadow: 3px 3px 2px #000000;
-  opacity: 0.75;
-}
-
-.theme0 .input-color {
-  color: black;
-}
-.theme1 .input-color {
-  color: black;
-}
-.theme2 .input-color {
-  color: black;
-}
-.theme3 .input-color {
-  color: black;
-}
-.theme4 .input-color {
-  color: black;
-}
-.theme5 .input-color {
-  color: black;
-}
-.theme6 .input-color {
-  color: black;
-}
-.theme7 .input-color {
-  color: black;
-}
-.theme8 .input-color {
-  color: black;
-}
-.theme9 .input-color {
-  color: black;
-}
-.theme10 .input-color {
-  color: black;
-}
-.theme11 .input-color {
-  color: black;
-}
-.theme12 .input-color {
-  color: black;
-}
-.theme13 .input-color {
-  color: black;
-}
-.theme14 .input-color {
-  color: black;
-}
-.theme15 .input-color {
-  color: black;
-}
-.theme16 .input-color {
-  color: black;
-}
-.theme17 .input-color {
-  background-color: rgb(239, 227, 184);
-  color: black;
 }
 
 @media (max-width: 1540px) {

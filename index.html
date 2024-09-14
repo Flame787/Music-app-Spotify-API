@@ -9,7 +9,7 @@
   </head>
   <body>
 
-    <header id="navigation" class="red" class="flex-container">
+    <header id="navigation" class="red header-style" class="flex-container">
       <div id="top-icon" >
         <img
           id="app-icon"
@@ -19,11 +19,11 @@
           alt="application icon"
         />
       </div>
-      <div id="nav-title" >Music album review</div>
+      <div id="nav-title" >Music player app</div>
       <nav id="navbar" >
         <div id="nav-list">
-          <button class="button nav-button"><a href="index.html">Home</a></button>
-          <button class="button nav-button"><a href="favorites.html">My lists</a></button>
+          <button class="button nav-button"><a href="index.html" class="ancor-style">Home</a></button>
+          <button class="button nav-button"><a href="favorites.html" class="ancor-style">My lists</a></button>
           
             <select id="theme_color" class="button">
               <option class="option" value="theme0">Theme 🎵</option>
@@ -54,18 +54,42 @@
     
     <div>
       <div id="first-container">
-        <div class="visible-title1 title-theme"><h1>Album review</h1></div>
-        <h3>Create your list and share it with others!</h3>
+        <div class="visible-title1 title-theme"><h1>Music player</h1></div>
+        <h3 class="shadow-text">Explore music, create your lists and share with others!</h3>
+
+<!-- 1st form: Search and Audio Player: -->
+
         <form action="" method="get" id="form" class="flex-container form-theme">
-          <div class="flex-item" id="second-input" >
+          <div class="flex-item" id="first-input" >
             <p><label for="album">Artist:</label></p>
             <p><input type="text" id="artist" name="artist" class="input-color" /></p>
           </div>
-          <div class="flex-item" id="first-input">
+          <div class="flex-item" id="second-input">
+            <p><label for="album">Song:</label></p>
+            <p><input type="text" id="song" name="song" class="input-color" required /></p>
+          </div>
+          <div class="flex-item" id="third-input">
             <p><label for="album">Album:</label></p>
             <p><input type="text" id="album" name="album" class="input-color" required /></p>
           </div>
-          <div class="flex-item" id="third-input">
+          
+
+          <div id="submit-button" class="flex-item">
+            <p id="empty"></p>
+            <button type="submit" class="input-button button nav-button">Play</button>
+          </div>
+        </form>
+
+        <!-- 2nd form: Rating songs/albums and Adding to the current list -->
+
+        <form action="" method="get" id="form" class="flex-container form-theme">
+          <div class="flex-item" id="first-input" >
+            <p><label for="album">Currently playing:</label></p>
+            <p><input type="text" id="audio" name="audio" class="input-color" /></p>
+            <p><label for="album">Controls</label></p>
+          </div>
+          
+          <div class="flex-item" id="forth-input">
             <p><label for="review">Rate (1-10):</label></p>
             <p>
               <input class="input-color"
@@ -86,9 +110,10 @@
             <button type="submit" class="input-button button nav-button">Add to list</button>
           </div>
         </form>
+
       </div>
       <div id="results">
-        <div class="visible-title2 title-theme"><h2 id="new-title">Rated albums:</h2></div>
+        <div class="visible-title2 title-theme"><h2 id="new-title">My current list:</h2></div>
         <ul id="added-list"></ul>
       </div>
 

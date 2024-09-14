@@ -95,6 +95,8 @@
 
       const inputColor = document.querySelectorAll(".input-color");
 
+      const headerStyle = document.querySelectorAll(".header-style");
+
       // Results are nodelists of several elements, so we will use forEach-function to target each button:
       // 1. Remove all existing themes from this element:
       themes.forEach((theme) => {
@@ -117,6 +119,10 @@
         });
 
         inputColor.forEach((input) => {
+          input.classList.remove(theme);
+        });
+
+        headerStyle.forEach((input) => {
           input.classList.remove(theme);
         });
       });
@@ -143,10 +149,15 @@
       inputColor.forEach((input) => {
         input.classList.add(selectedTheme);
       });
+       
+      headerStyle.forEach((input) => {
+        input.classList.add(selectedTheme);
+      });
 
       console.log("Selected theme:", selectedTheme);
       console.log("Body classes:", body.classList);
     }
+
 
     let entry, rating, artist, time, item;
 
@@ -204,18 +215,17 @@
       const item = document.createElement("li");
 
       // const div = document.createElement("div");
-      // div.classList.add("form-theme", "item-card"); 
+      // div.classList.add("form-theme", "item-card");
 
       item.innerHTML = `<div class="form-theme item-card"> <p class="whiteParagraph">Album: <span class="whiteText" class="entry">${entry}</span> 
       <br> Artist: <span class="whiteText" class="artist">${artist}</span> 
       <br> Rate: <span class="whiteText" class="rating">${rating}</span> 
       <br> Rated on: <span class="whiteText" class="time">${time}</span></p>  </div>`;
 
-      const itemCardDiv = item.querySelector('.item-card');
+      const itemCardDiv = item.querySelector(".item-card");
 
       addFavoriteButton(itemCardDiv);
       addRemoveButton(itemCardDiv);
-  
 
       return item;
     }
@@ -334,17 +344,17 @@
     // Function createFavorite:
     function createFavorite(entry, artist, rating, time) {
       const item = document.createElement("li");
-      item.innerHTML = `<div class="form-theme item-card"> <p class="entry">Album: <span id="white" >${entry}</span></p>
-      <p class="artist">Artist: <span id="white" >${artist}</span></p>
-      <p class="rating">Rate: <span id="white" >${rating}</span></p>
-      <p class="time">Rated on: <span id="white" >${time}</span></p>  </div>`;
+      item.innerHTML = `<div class="form-theme item-card item-card2"> <p class="entry">Album: <span id="white" >${entry}</span><br>
+      Artist: <span class="artist" id="white" >${artist}</span><br>
+      Rate: <span class="rating" id="white" >${rating}</span><br>
+      Rated on: <span class="time" id="white" >${time}</span></p>  </div>`;
 
       console.log("Created item HTML:", item.innerHTML); // Debugging
 
-      const itemCardDiv = item.querySelector('.item-card');
+      const itemCardDiv = item.querySelector(".item-card");
 
       addRemoveButton(itemCardDiv);
-   
+
       return item;
     }
 
