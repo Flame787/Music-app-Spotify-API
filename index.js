@@ -97,6 +97,10 @@
 
       const headerStyle = document.querySelectorAll(".header-style");
 
+      const headTitle = document.getElementById("head-title");
+
+      let themesWhite = document.querySelectorAll('.theme14, .theme15, .theme16, .theme17');
+
       // Results are nodelists of several elements, so we will use forEach-function to target each button:
       // 1. Remove all existing themes from this element:
       themes.forEach((theme) => {
@@ -153,6 +157,13 @@
       headerStyle.forEach((input) => {
         input.classList.add(selectedTheme);
       });
+
+
+      // white themes have no dark behind title:
+      if (themesWhite) {
+        headTitle.classList.remove("title-theme"); // Uklanja klasu samo jednom
+      };
+
 
       console.log("Selected theme:", selectedTheme);
       console.log("Body classes:", body.classList);

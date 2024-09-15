@@ -51,6 +51,15 @@ body {
   @each $theme, $background in $backgrounds {
     &.#{$theme} {
       background-image: $background !important;
+      // background: $background !important;
+    }
+  }
+}
+
+body {
+  @each $theme, $background in $backgrounds {
+    &.#{$theme} {
+      background: map-get($backgrounds, background) !important;
     }
   }
 }
@@ -79,6 +88,7 @@ body {
   @each $theme, $map in $themes {
     .#{$theme} & {
       background-color: map-get($map, background-color);
+      background-image: map-get($map, background-image);
       color: map-get($map, color);
       border: map-get($map, border);
       box-shadow: map-get($map, box-shadow);
@@ -110,6 +120,7 @@ button a{
   @each $theme, $map in $themes2 {
     .#{$theme} & {
       background-color: map-get($map, background-color);
+      background-image: map-get($map, background-image);
       color: map-get($map, color);
       border: map-get($map, border);
       box-shadow: map-get($map, box-shadow);
@@ -130,14 +141,16 @@ button a{
   }
 }
 
-.title-theme {
-  @extend .form-theme;
-  @each $titleTheme, $map in $titleThemes {
-    .#{$titleTheme} & {
-      background: map-get($map, background);
-    }
-  }
-}
+// .title-theme {
+//   @extend .form-theme;
+//   @each $titleTheme, $map in $titleThemes {
+//     .#{$titleTheme} & {
+//       background: map-get($map, background);
+//     }
+//   }
+// }
+
+
 
 .header-style {
   @each $headerTheme, $map in $headerThemes {
@@ -162,13 +175,49 @@ button a{
 
 body {
   // color: $fontColor1;
-  font-family: $sans-serif1;
+  // font-family: $sans-serif1;
+
+  font-family: $quicksand;
+
+  font-family: "Bruno Ace SC", sans-serif;
+
+  font-family: "Rubik Mono One", monospace;
+
+  font-family: "Permanent Marker", cursive;
+
+  font-family: "Protest Guerrilla", sans-serif;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-family: $sans-serif2;
+  
+
+  font-family: $poppins;
+
+  font-family: "Inter", sans-serif;
+  // letter-spacing: 0.1rem;
+
+  // font-family: "Viga", sans-serif;
+
+  // font-family: "Bowlby One", sans-serif;
+
+
+
   // text-shadow: 2px 2px 4px $textShadowColor1;
   // background-image: url("../pictures/energy-violet.jpg");
   // background-image: $backgrounds;
   background-repeat: repeat;
   background-size: 100%;
 }
+
+h1 {
+  font-size: 5rem;
+  // letter-spacing: 0.3rem;
+}
+
+
+// linear-gradient - to top: 0deg, to bottom: 180deg, to left: 270deg, and to right: 90deg
+
 
 // Navbar (header id="navigation" class="red"):
 
@@ -213,9 +262,7 @@ body {
     // &:last-child {
     //   margin-right: 50px;
     // }
-    &:hover {
-      background-color: $hoverColor1;
-    }
+    
     a {
       @include nav-ancor-text();
       text-decoration: none;
@@ -239,8 +286,8 @@ select {
   display: inline-block;
   // appearance: none;
   border-radius: 15px;
-  width: 12%;
-  padding: 5px 10px 5px 10px;
+  // width: 15%;
+  padding: 5px 20px;
   // background-color: $navButtonColor1;
   color: $fontColor1;
   font-weight: bold;
@@ -285,7 +332,7 @@ select {
   @include flex-container();
   align-items: center;
   width: 80%;
-  margin: 10%;
+  margin: 3% 10%;
   height: 20%;
 }
 /* if height in vh: 20vh is used, it doesn't scale well, if too many elements added to the list (lower flex-container), 
@@ -296,35 +343,50 @@ select {
 
 #first-container {
   border-radius: 15px;
+  
 }
+
 
 #form {
   @include form-design();
 }
 
-.visible-title1,
-.visible-title2 {
-  padding: 0.1%;
-  margin: 5% 35%;
-  border-radius: 15px;
-  border-top: 1px solid rgba(128, 128, 128, 0.485);
-  border-left: 1px solid rgba(128, 128, 128, 0.478);
-  transition: transform 0.3s ease;
+// .visible-title1,
+// .visible-title2 {
+//   padding: 0.1%;
+//   margin: 5% 35%;
+//   border-radius: 15px;
+//   border-top: 1px solid rgba(128, 128, 128, 0.485);
+//   border-left: 1px solid rgba(128, 128, 128, 0.478);
+//   transition: transform 0.3s ease;
+//   position: relative;
+// }
 
   // to have div transparent, but text inside of it fully visible - rgba with transparent effect:
   // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
+
+.visible-title1,
+.visible-title2 {
+  padding: 0.1%;
+  // margin: 5% 35%;
+  // border-radius: 15px;
+  // border-top: 1px solid rgba(128, 128, 128, 0.485);
+  // border-left: 1px solid rgba(128, 128, 128, 0.478);
+  // transition: transform 0.3s ease;
+  // position: relative;
 }
 
-.visible-title1:hover,
-.visible-title2:hover,
-form:hover {
-  transform: translateY(-10px);
-}
+
+// .visible-title1:hover,
+// .visible-title2:hover,
+// form:hover {
+//   transform: translateY(-10px);
+// }
 
 .item-card {
   max-width: 60%;
   margin: auto;
-  border-radius: 10px;
+  border-radius: 50px;
   margin-bottom: 50px;
   display: flex;
   flex-direction: row;
@@ -378,7 +440,7 @@ input {
 
 .input-button:hover {
   background-color: $hoverColor1;
-  color: $textShadowColor1;
+  // color: $textShadowColor1;
   text-shadow: none;
 }
 
@@ -483,7 +545,7 @@ hr {
 
 @media (max-width: 1150px) {
   #nav-list button:last-child {
-    margin-right: 70px;
+    margin-right: 50px;
   }
 
   #nav-list button {

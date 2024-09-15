@@ -5,13 +5,12 @@
 body {
   margin: 0;
   font-size: 1.5rem;
-  font-weight: bold;
   text-align: center;
 }
 
 /* CSS */
 body.theme0 {
-  background-image: url("../pictures/neon-quadrats.jpg") !important;
+  background-image: url("../pictures/led-gradient.jpg") !important;
 }
 body.theme1 {
   background-image: url("../pictures/purple-lights2.jpg") !important;
@@ -56,13 +55,68 @@ body.theme14 {
   background-image: url("../pictures/ice.jpg") !important;
 }
 body.theme15 {
-  background-image: url("../pictures/abstract-violet.jpg") !important;
+  background-image: url("../pictures/fog-neon.jpg") !important;
 }
 body.theme16 {
   background-image: url("../pictures/violet-white.jpg") !important;
 }
 body.theme17 {
   background-image: url("../pictures/white-colored.jpg") !important;
+}
+
+body.theme0 {
+  background: !important;
+}
+body.theme1 {
+  background: !important;
+}
+body.theme2 {
+  background: !important;
+}
+body.theme3 {
+  background: !important;
+}
+body.theme4 {
+  background: !important;
+}
+body.theme5 {
+  background: !important;
+}
+body.theme6 {
+  background: !important;
+}
+body.theme7 {
+  background: !important;
+}
+body.theme8 {
+  background: !important;
+}
+body.theme9 {
+  background: !important;
+}
+body.theme10 {
+  background: !important;
+}
+body.theme11 {
+  background: !important;
+}
+body.theme12 {
+  background: !important;
+}
+body.theme13 {
+  background: !important;
+}
+body.theme14 {
+  background: !important;
+}
+body.theme15 {
+  background: !important;
+}
+body.theme16 {
+  background: !important;
+}
+body.theme17 {
+  background: !important;
 }
 
 body.theme0 {
@@ -142,7 +196,8 @@ body.theme17 {
 .theme0 .favorite-button,
 .theme0 #theme_color,
 .theme0 option {
-  background-color: #a60c3a;
+  background-color: #1f24b7;
+  background-image: linear-gradient(300deg, #d00768 0%, #784BA0 24%, #1016ae 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -262,7 +317,8 @@ body.theme17 {
 .theme15 .favorite-button,
 .theme15 #theme_color,
 .theme15 option {
-  background-color: red;
+  background-color: #2942a4;
+  background-image: linear-gradient(300deg, #d007c3 0%, #784BA0 24%, #2942a4 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -270,7 +326,7 @@ body.theme17 {
 .theme16 .favorite-button,
 .theme16 #theme_color,
 .theme16 option {
-  background-color: rgba(157, 43, 159, 0.749);
+  background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -340,6 +396,7 @@ body.theme17 {
 
 .theme0 .remove-button {
   background-color: rgb(18, 13, 83);
+  background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%, rgb(11, 7, 68) 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -414,7 +471,8 @@ body.theme17 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme15 .remove-button {
-  background-color: darkred;
+  background-color: rgb(18, 13, 83);
+  background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%, rgb(11, 7, 68) 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -429,150 +487,95 @@ body.theme17 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 
-.theme0 .form-theme, .theme0 .title-theme {
-  background: radial-gradient(at 75% 25%, #621c4b, rgba(5, 25, 55, 0.749));
+.theme0 .form-theme {
+  background: radial-gradient(at 75% 25%, rgba(102, 92, 99, 0.1803921569), rgba(5, 25, 55, 0.749));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme1 .form-theme, .theme1 .title-theme {
+.theme1 .form-theme {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme2 .form-theme, .theme2 .title-theme {
+.theme2 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(210, 192, 243, 0.6980392157), rgba(35, 6, 71, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme3 .form-theme, .theme3 .title-theme {
+.theme3 .form-theme {
   background: radial-gradient(at 25% 75%, #6ab3d7, rgba(51, 4, 39, 0.4078431373));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme4 .form-theme, .theme4 .title-theme {
+.theme4 .form-theme {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme5 .form-theme, .theme5 .title-theme {
+.theme5 .form-theme {
   background: radial-gradient(at 75% 25%, rgba(206, 184, 62, 0.9294117647), rgba(203, 28, 28, 0.918));
   color: white;
   box-shadow: 3px 3px 2px #000000;
 }
-.theme6 .form-theme, .theme6 .title-theme {
+.theme6 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(81, 79, 79, 0.8588235294), rgba(9, 3, 1, 0.749));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme7 .form-theme, .theme7 .title-theme {
+.theme7 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme8 .form-theme, .theme8 .title-theme {
+.theme8 .form-theme {
   background: radial-gradient(at 25% 75%, #f3eef1, rgba(33, 44, 66, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme9 .form-theme, .theme9 .title-theme {
+.theme9 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme10 .form-theme, .theme10 .title-theme {
+.theme10 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(52, 48, 48, 0.6980392157), rgba(33, 2, 3, 0.749));
   color: white;
   box-shadow: 3px 3px 2px black;
 }
-.theme11 .form-theme, .theme11 .title-theme {
+.theme11 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme12 .form-theme, .theme12 .title-theme {
+.theme12 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(96, 148, 226, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme13 .form-theme, .theme13 .title-theme {
+.theme13 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme14 .form-theme, .theme14 .title-theme {
+.theme14 .form-theme {
   background: radial-gradient(at 75% 25%, rgba(177, 176, 176, 0.6980392157), rgba(12, 58, 88, 0.749));
   color: white;
   box-shadow: 3px 3px 2px black;
 }
-.theme15 .form-theme, .theme15 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
+.theme15 .form-theme {
+  background: radial-gradient(at 75% 25%, rgba(102, 92, 99, 0.1803921569), rgba(5, 25, 55, 0.749));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme16 .form-theme, .theme16 .title-theme {
+.theme16 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(225, 142, 226, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme17 .form-theme, .theme17 .title-theme {
+.theme17 .form-theme {
   background: radial-gradient(at 25% 75%, rgb(248, 248, 246), rgba(255, 255, 255, 0.5));
   color: black;
   box-shadow: 3px 3px 2px #000000;
-}
-
-.theme0 .title-theme {
-  background: radial-gradient(at 25% 75%, #a60c3a, rgba(9, 20, 36, 0.749));
-}
-.theme1 .title-theme {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
-}
-.theme2 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(239, 230, 244, 0.6980392157), rgba(88, 44, 142, 0.749));
-}
-.theme3 .title-theme {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(1, 8, 20, 0.94));
-}
-.theme4 .title-theme {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
-}
-.theme5 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(206, 184, 62, 0.8235294118), rgba(203, 28, 28, 0.749));
-}
-.theme6 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(54, 52, 51, 0.8588235294), rgba(9, 3, 1, 0.749));
-}
-.theme7 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
-}
-.theme8 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(243, 238, 241, 0.8941176471), rgba(174, 188, 214, 0.749));
-}
-.theme9 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
-}
-.theme10 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(52, 48, 48, 0.6980392157), rgba(33, 2, 3, 0.749));
-}
-.theme11 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
-}
-.theme12 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(96, 148, 226, 0.749));
-}
-.theme13 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
-}
-.theme14 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(52, 48, 48, 0.6980392157), rgba(43, 92, 165, 0.749));
-}
-.theme15 .title-theme {
-  background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
-}
-.theme16 .title-theme {
-  background: radial-gradient(at 75% 25%, rgba(154, 175, 189, 0.6980392157), rgba(92, 6, 100, 0.749));
-}
-.theme17 .title-theme {
-  background: radial-gradient(at 25% 75%, rgb(246, 246, 17), rgba(255, 255, 255, 0.5));
 }
 
 .theme0 .header-style {
@@ -600,7 +603,7 @@ body.theme17 {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
 }
 .theme8 .header-style {
-  background: radial-gradient(at 75% 25%, #f3eef1, rgba(18, 24, 35, 0.749));
+  background: radial-gradient(at 75% 25%, #f3eef1, rgba(33, 44, 66, 0.749));
 }
 .theme9 .header-style {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
@@ -621,7 +624,7 @@ body.theme17 {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
 }
 .theme15 .header-style {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  background: linear-gradient(to bottom, rgba(31, 2, 28, 0.749), rgba(29, 46, 106, 0.4156862745));
 }
 .theme16 .header-style {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
@@ -690,9 +693,21 @@ body.theme17 {
 }
 
 body {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Quicksand", sans-serif;
+  font-family: "Bruno Ace SC", sans-serif;
+  font-family: "Rubik Mono One", monospace;
+  font-family: "Permanent Marker", cursive;
+  font-family: "Protest Guerrilla", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-family: "Inter", sans-serif;
   background-repeat: repeat;
   background-size: 100%;
+}
+
+h1 {
+  font-size: 5rem;
 }
 
 .red {
@@ -745,17 +760,12 @@ body {
   margin: 0 70px;
   padding: 5px 4px;
 }
-#nav-list button:hover {
-  background-color: #ca3535;
-}
 #nav-list button a {
   font-weight: 350;
   font-weight: bold;
   text-decoration: none;
 }
 #nav-list button a:hover {
-  background-color: #ca3535;
-  color: #000000;
   text-shadow: none;
   transform: translateY(-7px);
 }
@@ -775,16 +785,13 @@ select {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   display: inline-block;
   border-radius: 15px;
-  width: 12%;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 20px;
   color: #d1d4c9;
   font-weight: bold;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
 }
 select:hover {
-  background-color: #ca3535;
-  color: #000000;
   text-shadow: none;
   transform: translateY(-7px);
 }
@@ -813,7 +820,7 @@ select option {
   justify-content: space-around;
   align-items: center;
   width: 80%;
-  margin: 10%;
+  margin: 3% 10%;
   height: 20%;
 }
 
@@ -827,33 +834,22 @@ select option {
 }
 
 #form {
-  border-radius: 10px;
+  border-radius: 50px;
   border-top: 1px solid rgba(128, 128, 128, 0.485);
   border-left: 1px solid rgba(128, 128, 128, 0.478);
-  margin-top: 8%;
+  margin-top: 4%;
   transition: transform 0.3s ease;
 }
 
 .visible-title1,
 .visible-title2 {
   padding: 0.1%;
-  margin: 5% 35%;
-  border-radius: 15px;
-  border-top: 1px solid rgba(128, 128, 128, 0.485);
-  border-left: 1px solid rgba(128, 128, 128, 0.478);
-  transition: transform 0.3s ease;
-}
-
-.visible-title1:hover,
-.visible-title2:hover,
-form:hover {
-  transform: translateY(-10px);
 }
 
 .item-card {
   max-width: 60%;
   margin: auto;
-  border-radius: 10px;
+  border-radius: 50px;
   margin-bottom: 50px;
   display: flex;
   flex-direction: row;
@@ -891,7 +887,6 @@ input:hover {
 
 .input-button:hover {
   background-color: #ca3535;
-  color: #000000;
   text-shadow: none;
 }
 
@@ -916,8 +911,6 @@ button {
   transition: transform 0.3s ease;
 }
 button:hover {
-  background-color: #ca3535;
-  color: #000000;
   text-shadow: none;
   transform: translateY(-7px);
 }
@@ -978,8 +971,6 @@ hr {
 }
 .favorite-button:hover,
 .remove-button:hover {
-  background-color: #ca3535;
-  color: #000000;
   text-shadow: none;
   transform: translateY(-7px);
 }
@@ -1053,7 +1044,7 @@ hr {
 }
 @media (max-width: 1150px) {
   #nav-list button:last-child {
-    margin-right: 70px;
+    margin-right: 50px;
   }
   #nav-list button {
     margin: 0 20px;

@@ -3,7 +3,15 @@
 // variable $themes is an object, has many different key-value pairs. Values may consist of several css-atributes.
 
 $backgrounds: (
-  theme0: url("../pictures/neon-quadrats.jpg"),
+
+  theme0: url("../pictures/led-gradient.jpg"),
+
+
+  // theme0: (
+ 
+  // background: linear-gradient(to right, #1D2671, #C33764), /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  // ),
+
   //Theme
   theme1: url("../pictures/purple-lights2.jpg"),
   //Disco
@@ -33,7 +41,7 @@ $backgrounds: (
   //Frost
   theme14: url("../pictures/ice.jpg"),
   //Nord
-  theme15: url("../pictures/abstract-violet.jpg"),
+  theme15: url("../pictures/fog-neon.jpg"),
   //Elegance
   theme16: url("../pictures/violet-white.jpg"),
   //Love
@@ -58,7 +66,7 @@ $headerThemes: (
   //Volcano
   theme7: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
   //Red
-  theme8: (background: radial-gradient(at 75% 25%, #f3eef1, rgba(33, 44, 66, 0.749)),
+  theme8: (background: radial-gradient(at 75% 25%, #f3eef1, rgba(33, 44, 66, 0.749))),
   //Duet
   theme9: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
   //Orange green
@@ -72,7 +80,7 @@ $headerThemes: (
   //Frost
   theme14: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
   //Nord
-  theme15: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme15: (background: linear-gradient(to bottom,  rgba(31, 2, 28, 0.749), #1d2e6a6a)),
   //Elegance
   theme16: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
   //Love
@@ -80,12 +88,23 @@ $headerThemes: (
   //Joy 
 );
 
+// linear-gradient - to top: 0deg, to bottom: 180deg, to left: 270deg, and to right: 90deg
+
+
 // Set of colors for Nav- and Add- buttons:
 
 $themes: (
   theme0: (
     // background-color: $navButtonColor1,
-    background-color: #a60c3a,
+    // background-color: #a60c3a,
+
+background-color: #1f24b7,
+background-image: linear-gradient(300deg, #d00768 0%, #784BA0 24%, #1016ae 100%),
+
+// background-color: #a0153e,
+// background-image: linear-gradient(210deg, #a0153e 0%, #784BA0 12%, #1016ae 100%),
+
+    
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -160,12 +179,16 @@ $themes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme15: (
-    background-color: red,
+    background-color: #2942a4,
+background-image: linear-gradient(300deg, #d007c3 0%, #784BA0 24%, #2942a4 100%),
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme16: (
-    background-color: rgba(157, 43, 159, 0.749),
+    // background-color: rgba(157, 43, 159, 0.749),
+
+    background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%),
+
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -182,6 +205,7 @@ $themes: (
 $themes2: (
   theme0: (
     background-color: rgb(18, 13, 83),
+background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%,  rgb(11, 7, 68) 100%),
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -256,7 +280,8 @@ $themes2: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme15: (
-    background-color: darkred,
+    background-color: rgb(18, 13, 83),
+    background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%,  rgb(11, 7, 68) 100%),
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -323,11 +348,14 @@ $fontColors: map-merge($fontColors, (
 
 
 
+
+
+
 // Set of colors for Forms:
 
 $formThemes: (
   theme0: (
-    background: radial-gradient(at 75% 25%, #621c4b, rgba(5, 25, 55, 0.749)),
+    background: radial-gradient(at 75% 25%, #665c632e, rgba(5, 25, 55, 0.749)),
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -405,8 +433,9 @@ $formThemes: (
     box-shadow: 3px 3px 2px black,
   ),
   theme15: (
-    background: radial-gradient(at 25% 75%, #eda4a4b2, rgba(95, 9, 123, 0.749)),
+    background: radial-gradient(at 75% 25%, #665c632e, rgba(5, 25, 55, 0.749)),
     color: white,
+    
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme16: (

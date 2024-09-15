@@ -59,8 +59,8 @@
 }
 
 @mixin button-hover {
-  background-color: $hoverColor1;
-  color: $textShadowColor1;
+  // background-color: $hoverColor1;
+  // color: $hoverColor1;
   text-shadow: none;
   transform: translateY(-7px);
 }
@@ -82,11 +82,11 @@
 }
 
 @mixin form-design {
-  border-radius: 10px;
+  border-radius: 50px;
   border-top: 1px solid rgba(128, 128, 128, 0.485);
   border-left: 1px solid rgba(128, 128, 128, 0.478);
   // box-shadow: 5px 5px 3px $navButtonColor1;
-  margin-top: 8%;
+  margin-top: 4%;
   transition: transform 0.3s ease;
   
 }
