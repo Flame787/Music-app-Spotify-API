@@ -171,7 +171,18 @@ button a{
   }
 }
 
+// font-color of the paragraph in song cards:
 
+// .whiteParagraph, .whiteText {
+//   @each $theme, $properties in $paragraphColors {
+//     &.#{$theme} {
+//       color: map-get($properties, color) !important;
+//     }
+//   }
+// }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 body {
   // color: $fontColor1;
@@ -195,6 +206,7 @@ body {
   font-family: $poppins;
 
   font-family: "Inter", sans-serif;
+  
   // letter-spacing: 0.1rem;
 
   // font-family: "Viga", sans-serif;
@@ -386,7 +398,7 @@ select {
 .item-card {
   max-width: 60%;
   margin: auto;
-  border-radius: 50px;
+  border-radius: 30px;
   margin-bottom: 50px;
   display: flex;
   flex-direction: row;
@@ -394,6 +406,7 @@ select {
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .item-card:hover {
@@ -473,8 +486,13 @@ li {
   flex-basis: 80%;
 }
 
+.thin {
+  color: rgba(130, 129, 129, 0.853);
+  font-family: 'Poppins', sans-serif !important;
+}
+
 .whiteParagraph {
-  color: $paragraphColor;
+  // color: $fontColor1;
   @include list-paragraph();
 }
 
@@ -484,12 +502,12 @@ li {
 }
 
 .whiteText {
-  color: $fontColor1;
+  // color: $fontColor1;
   @include white-todos();
 }
 
 .blackText {
-  color: $textShadowColor1;
+  // color: $textShadowColor1;
   @include white-todos();
 }
 

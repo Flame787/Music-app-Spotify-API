@@ -37,7 +37,7 @@ body.theme8 {
   background-image: url("../pictures/red-blue.jpg") !important;
 }
 body.theme9 {
-  background-image: url("../pictures/orange-green.jpg") !important;
+  background-image: url("../pictures/dawn.jpg") !important;
 }
 body.theme10 {
   background-image: url("../pictures/abstract-green.jpg") !important;
@@ -156,8 +156,8 @@ body.theme8 {
   text-shadow: none !important;
 }
 body.theme9 {
-  color: #d1d4c9 !important;
-  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+  color: #000000 !important;
+  text-shadow: none !important;
 }
 body.theme10 {
   color: #d1d4c9 !important;
@@ -168,12 +168,12 @@ body.theme11 {
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme12 {
-  color: #d1d4c9 !important;
-  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+  color: #000000 !important;
+  text-shadow: none !important;
 }
 body.theme13 {
-  color: #d1d4c9 !important;
-  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+  color: #000000 !important;
+  text-shadow: none !important;
 }
 body.theme14 {
   color: #000000 !important;
@@ -269,7 +269,8 @@ body.theme17 {
 .theme9 .favorite-button,
 .theme9 #theme_color,
 .theme9 option {
-  background-color: orange;
+  background-color: rgba(42, 140, 133, 0.614);
+  background-image: linear-gradient(350deg, #d03d07 0%, rgba(42, 140, 133, 0.614) 50%, rgba(42, 140, 133, 0.614) 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -301,7 +302,8 @@ body.theme17 {
 .theme13 .favorite-button,
 .theme13 #theme_color,
 .theme13 option {
-  background-color: yellow;
+  background-color: rgb(124, 218, 231);
+  background-image: linear-gradient(300deg, rgb(143, 231, 243) 0%, #6699d7 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -310,6 +312,7 @@ body.theme17 {
 .theme14 #theme_color,
 .theme14 option {
   background-color: rgb(124, 218, 231);
+  background-image: linear-gradient(300deg, rgb(143, 231, 243) 0%, #6699d7 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -441,7 +444,8 @@ body.theme17 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme9 .remove-button {
-  background-color: orange;
+  background-color: rgba(42, 140, 133, 0.614);
+  background-image: linear-gradient(350deg, #d03d07 20%, rgba(6, 71, 67, 0.614) 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -461,12 +465,14 @@ body.theme17 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme13 .remove-button {
-  background-color: orange;
+  background-color: rgb(35, 107, 116);
+  background-image: linear-gradient(300deg, rgb(18, 91, 101) 0%, #0b4996 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme14 .remove-button {
   background-color: rgb(35, 107, 116);
+  background-image: linear-gradient(300deg, rgb(17, 73, 81) 0%, #a8c8f0 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -533,7 +539,7 @@ body.theme17 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme9 .form-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.4862745098), rgba(43, 137, 165, 0.514));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -553,12 +559,12 @@ body.theme17 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme13 .form-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(200, 226, 242, 0.7490196078), rgba(110, 158, 230, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme14 .form-theme {
-  background: radial-gradient(at 75% 25%, rgba(177, 176, 176, 0.6980392157), rgba(12, 58, 88, 0.749));
+  background: radial-gradient(at 75% 25%, rgba(177, 176, 176, 0.6980392157), rgba(42, 100, 140, 0.749));
   color: white;
   box-shadow: 3px 3px 2px black;
 }
@@ -573,7 +579,7 @@ body.theme17 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme17 .form-theme {
-  background: radial-gradient(at 25% 75%, rgb(248, 248, 246), rgba(255, 255, 255, 0.5));
+  background: radial-gradient(at 25% 75%, rgba(248, 248, 246, 0.603), rgba(255, 255, 255, 0.444));
   color: black;
   box-shadow: 3px 3px 2px #000000;
 }
@@ -606,7 +612,7 @@ body.theme17 {
   background: radial-gradient(at 75% 25%, #f3eef1, rgba(33, 44, 66, 0.749));
 }
 .theme9 .header-style {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(203, 215, 223, 0.6352941176), rgba(42, 140, 133, 0.614));
 }
 .theme10 .header-style {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
@@ -618,10 +624,10 @@ body.theme17 {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
 }
 .theme13 .header-style {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 75% 25%, #80b3d5, rgba(15, 56, 84, 0.749));
 }
 .theme14 .header-style {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 75% 25%, #cbd7df, rgba(42, 100, 140, 0.749));
 }
 .theme15 .header-style {
   background: linear-gradient(to bottom, rgba(31, 2, 28, 0.749), rgba(29, 46, 106, 0.4156862745));
@@ -849,7 +855,7 @@ select option {
 .item-card {
   max-width: 60%;
   margin: auto;
-  border-radius: 50px;
+  border-radius: 30px;
   margin-bottom: 50px;
   display: flex;
   flex-direction: row;
@@ -857,6 +863,7 @@ select option {
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease;
+  font-family: "Poppins", sans-serif !important;
 }
 
 .item-card:hover {
@@ -925,11 +932,16 @@ li {
   flex-basis: 80%;
 }
 
+.thin {
+  color: rgba(130, 129, 129, 0.853);
+  font-family: "Poppins", sans-serif !important;
+}
+
 .whiteParagraph {
-  color: rgba(209, 212, 201, 0.5725490196);
   padding: 2%;
   display: inline-block;
   opacity: 0.9;
+  font-weight: 100;
 }
 
 .blackParagraph {
@@ -937,17 +949,16 @@ li {
   padding: 2%;
   display: inline-block;
   opacity: 0.9;
+  font-weight: 100;
 }
 
 .whiteText {
-  color: #d1d4c9;
-  font-weight: 100;
+  font-weight: 200;
   letter-spacing: 1px;
 }
 
 .blackText {
-  color: #000000;
-  font-weight: 100;
+  font-weight: 200;
   letter-spacing: 1px;
 }
 
@@ -1028,7 +1039,7 @@ hr {
 }
 
 .water {
-  background-color: rgba(209, 212, 201, 0.5725490196);
+  background-color: #626360;
 }
 
 @media (max-width: 1540px) {

@@ -29,7 +29,7 @@ $backgrounds: (
   //Red
   theme8: url("../pictures/red-blue.jpg"),
   //Duet
-  theme9: url("../pictures/orange-green.jpg"),
+  theme9: url("../pictures/dawn.jpg"),
   //Orange green
   theme10: url("../pictures/abstract-green.jpg"),
   //Green
@@ -68,7 +68,7 @@ $headerThemes: (
   //Red
   theme8: (background: radial-gradient(at 75% 25%, #f3eef1, rgba(33, 44, 66, 0.749))),
   //Duet
-  theme9: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme9: (background: radial-gradient(at 25% 75%,  #cbd7dfa2, rgba(42, 140, 133, 0.614))),
   //Orange green
   theme10: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
   //Green
@@ -76,9 +76,9 @@ $headerThemes: (
   //Crystal
   theme12: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
   //Azure
-  theme13: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme13: (background: radial-gradient(at 75% 25%, #80b3d5, rgba(15, 56, 84, 0.749))),
   //Frost
-  theme14: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme14: (background: radial-gradient(at 75% 25%, #cbd7df, rgba(42, 100, 140, 0.749))),
   //Nord
   theme15: (background: linear-gradient(to bottom,  rgba(31, 2, 28, 0.749), #1d2e6a6a)),
   //Elegance
@@ -149,7 +149,9 @@ background-image: linear-gradient(300deg, #d00768 0%, #784BA0 24%, #1016ae 100%)
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme9: (
-    background-color: orange,
+    background-color:  rgba(42, 140, 133, 0.614),
+    
+background-image: linear-gradient(350deg, #d03d07 0%, rgba(42, 140, 133, 0.614) 50%,  rgba(42, 140, 133, 0.614) 100%),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -169,14 +171,17 @@ background-image: linear-gradient(300deg, #d00768 0%, #784BA0 24%, #1016ae 100%)
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme13: (
-    background-color: yellow,
+    background-color: rgb(124, 218, 231),
+background-image: linear-gradient(300deg,  rgb(143, 231, 243) 0%,  #6699d7  100%),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme14: (
     background-color: rgb(124, 218, 231),
-    color: black,
-    box-shadow: 3px 3px 2px $boxShadowColor1,
+background-image: linear-gradient(300deg,  rgb(143, 231, 243) 0%,  #6699d7  100%),
+
+color: black,
+box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme15: (
     background-color: #2942a4,
@@ -250,7 +255,9 @@ background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%,  rgb(11, 7, 6
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme9: (
-    background-color: orange,
+    background-color:  rgba(42, 140, 133, 0.614),
+    
+background-image: linear-gradient(350deg, #d03d07 20%,   rgba(6, 71, 67, 0.614) 100%),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -270,12 +277,16 @@ background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%,  rgb(11, 7, 6
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme13: (
-    background-color: orange,
+    // background-color: orange,
+    background-color: rgb(35, 107, 116),
+    background-image: linear-gradient(300deg,  rgb(18, 91, 101) 0%,  #0b4996  100%),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme14: (
     background-color: rgb(35, 107, 116),
+    background-image: linear-gradient(300deg,  rgb(17, 73, 81) 0%,  #a8c8f0  100%),
+    
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -311,7 +322,7 @@ $noShadow: none;
 $fontColors: ();
 
 // themes with white font and shadowing:
-@for $i from 0 through 13 {
+@for $i from 0 through 11 {
   $fontColors: map-merge($fontColors, (
     theme#{$i}: (
       color: $defaultColor,
@@ -320,9 +331,8 @@ $fontColors: ();
   ));
 }
 
-
 // themes with black font, without shadowing:
-@for $i from 14 through 17 {
+@for $i from 12 through 17 {
   $fontColors: map-merge($fontColors, (
     theme#{$i}: (
       color: $noShadowColor,
@@ -345,6 +355,36 @@ $fontColors: map-merge($fontColors, (
     text-shadow: $noShadow, // no shadow
   )
 ));
+
+$fontColors: map-merge($fontColors, (
+  theme9: (
+    color: $noShadowColor,
+    text-shadow: $noShadow, // no shadow
+  )
+));
+
+// themes with white font in the song cards:
+
+// $paragraphColors: ();
+
+// themes with dark font in paragraph:
+// @for $i from 0 through 7 {
+//   $paragraphColors: map-merge($paragraphColors, (
+//     theme#{$i}: (
+//       color: $textShadowColor1,
+//     )
+//   ));
+// }
+
+// themes with white font in paragraph:
+
+// @for $i from 8 through 17 {
+//   $paragraphColors: map-merge($paragraphColors, (
+//     theme#{$i}: (
+//       color: $fontColor1,
+//     )
+//   ));
+// }
 
 
 
@@ -402,7 +442,7 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme9: (
-    background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
+    background: radial-gradient(at 25% 75%, #a4d1ed7c, rgba(43, 137, 165, 0.514)),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -423,12 +463,12 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme13: (
-    background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
+    background: radial-gradient(at 25% 75%, #c8e2f2bf, rgba(110, 158, 230, 0.749)),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme14: (
-    background: radial-gradient(at 75% 25%, #b1b0b0b2, rgba(12, 58, 88, 0.749)),
+    background: radial-gradient(at 75% 25%, #b1b0b0b2, rgba(42, 100, 140, 0.749)),
     color: white,
     box-shadow: 3px 3px 2px black,
   ),
@@ -445,9 +485,7 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme17: (
-      background: radial-gradient(at 25% 75%, rgb(248, 248, 246), rgba(255, 255, 255, 0.5)),
-      // background-color: rgba(255, 255, 255, 0.75),
-    
+      background: radial-gradient(at 25% 75%, rgba(248, 248, 246, 0.603), rgba(255, 255, 255, 0.444)),   
     color: black,
     box-shadow: 3px 3px 2px $textShadowColor1,
     
@@ -535,8 +573,6 @@ $titleThemes: (
     
   ),
 );
-
-
 
 
 // Input colors:

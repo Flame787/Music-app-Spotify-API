@@ -107,10 +107,11 @@
   padding: 2%;
   display: inline-block;
   opacity: 0.9;
+  font-weight: 100;
 }
 
 @mixin white-todos {
-  font-weight: 100;
+  font-weight: 200;
   letter-spacing: 1px;
 }
 

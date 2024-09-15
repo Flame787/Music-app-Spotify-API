@@ -97,9 +97,6 @@
 
       const headerStyle = document.querySelectorAll(".header-style");
 
-      const headTitle = document.getElementById("head-title");
-
-      let themesWhite = document.querySelectorAll('.theme14, .theme15, .theme16, .theme17');
 
       // Results are nodelists of several elements, so we will use forEach-function to target each button:
       // 1. Remove all existing themes from this element:
@@ -158,11 +155,6 @@
         input.classList.add(selectedTheme);
       });
 
-
-      // white themes have no dark behind title:
-      if (themesWhite) {
-        headTitle.classList.remove("title-theme"); // Uklanja klasu samo jednom
-      };
 
 
       console.log("Selected theme:", selectedTheme);
@@ -228,10 +220,10 @@
       // const div = document.createElement("div");
       // div.classList.add("form-theme", "item-card");
 
-      item.innerHTML = `<div class="form-theme item-card"> <p class="whiteParagraph">Album: <span class="whiteText" class="entry">${entry}</span> 
-      <br> Artist: <span class="whiteText" class="artist">${artist}</span> 
-      <br> Rate: <span class="whiteText" class="rating">${rating}</span> 
-      <br> Rated on: <span class="whiteText" class="time">${time}</span></p>  </div>`;
+      item.innerHTML = `<div class="form-theme item-card" > <p><span class="thin"> Album:  </span> <span class="entry">${entry}</span> 
+      <br><span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> 
+      <br> <span class="thin"> Rate:  </span>   <span  class="rating">${rating}</span> 
+      <br> <span class="thin"> Rated on:  </span>   <span class="time">${time}</span></p>  </div>`;
 
       const itemCardDiv = item.querySelector(".item-card");
 
