@@ -41,14 +41,14 @@
       <div id="nav-title">Music player app</div>
       <nav id="navbar">
         <div id="nav-list">
-          <button class="button nav-button">
+          <button class="button nav-button ">
             <a href="index.html" class="ancor-style">Home</a>
           </button>
-          <button class="button nav-button">
+          <button class="button nav-button ">
             <a href="favorites.html" class="ancor-style">My lists</a>
           </button>
 
-          <select id="theme_color" class="button">
+          <select id="theme_color" class="button theme-select-btn">
             <option class="option" value="theme0">Theme 🎵</option>
             <option class="option" value="theme1">Disco 🎶</option>
             <option class="option" value="theme2">Vibe 🎧</option>
@@ -131,12 +131,15 @@
       <!-- 2nd form: Rating songs/albums and Adding to the current list -->
 
       <form action="" method="get" id="form" class="flex-container form-theme">
+        <div class="flex-item" id="music-player">
+          <p><label for="track">Audiotrack</label></p>
+        </div>
         <div class="flex-item" id="first-input">
           <p><label for="album">Currently playing:</label></p>
           <p>
             <input type="text" id="audio" name="audio" class="input-color" />
           </p>
-          <p><label for="album">Controls</label></p>
+          
         </div>
 
         <div class="flex-item" id="forth-input">

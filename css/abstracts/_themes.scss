@@ -3,15 +3,7 @@
 // variable $themes is an object, has many different key-value pairs. Values may consist of several css-atributes.
 
 $backgrounds: (
-
   theme0: url("../pictures/led-gradient.jpg"),
-
-
-  // theme0: (
- 
-  // background: linear-gradient(to right, #1D2671, #C33764), /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  // ),
-
   //Theme
   theme1: url("../pictures/purple-lights2.jpg"),
   //Disco
@@ -50,68 +42,130 @@ $backgrounds: (
 );
 
 $headerThemes: (
-  theme0: (background: radial-gradient(at 25% 75%, #350926, rgba(9, 20, 36, 0.749))),
+  theme0: (
+    background: radial-gradient(at 25% 75%, #0800059e, rgba(9, 20, 36, 0.652)),
+  ),
   //Theme
-  theme1: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme1:
+    (
+      background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    ),
   //Disco
-  theme2: (background: radial-gradient(at 25% 75%, #2b043e, rgba(9, 20, 36, 0.749))),
+  theme2:
+    (
+      background: radial-gradient(at 25% 75%, #2b043e, rgba(9, 20, 36, 0.749)),
+    ),
   //Vibe
-  theme3: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme3:
+    (
+      background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    ),
   //Spaceship
-  theme4: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme4:
+    (
+      background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    ),
   //Retro
-  theme5: (background: radial-gradient(at 25% 75%, rgb(223, 86, 13), rgba(9, 20, 36, 0.749))),
+  theme5:
+    (
+      background:
+        radial-gradient(at 25% 75%, rgb(223, 86, 13), rgba(9, 20, 36, 0.749)),
+    ),
   //Energy
-  theme6: (background: radial-gradient(at 25% 75%, #363433db, rgba(9, 3, 1, 0.749))),
+  theme6:
+    (
+      background: radial-gradient(at 25% 75%, #363433db, rgba(9, 3, 1, 0.749)),
+    ),
   //Volcano
-  theme7: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme7:
+    (
+      background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    ),
   //Red
-  theme8: (background: radial-gradient(at 75% 25%, #f3eef1, rgba(33, 44, 66, 0.749))),
+  theme8:
+    (
+      background: radial-gradient(at 75% 25%, #f3eef1, rgba(33, 44, 66, 0.749)),
+    ),
   //Duet
-  theme9: (background: radial-gradient(at 25% 75%,  #cbd7dfa2, rgba(42, 140, 133, 0.614))),
+  theme9:
+    (
+      background:
+        radial-gradient(at 25% 75%, #cbd7dfa2, rgba(42, 140, 133, 0.614)),
+    ),
   //Orange green
-  theme10: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme10:
+    (
+      background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    ),
   //Green
-  theme11: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme11:
+    (
+      background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    ),
   //Crystal
-  theme12: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme12:
+    (
+      background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    ),
   //Azure
-  theme13: (background: radial-gradient(at 75% 25%, #80b3d5, rgba(15, 56, 84, 0.749))),
+  theme13:
+    (
+      background: radial-gradient(at 75% 25%, #80b3d5, rgba(15, 56, 84, 0.749)),
+    ),
   //Frost
-  theme14: (background: radial-gradient(at 75% 25%, #cbd7df, rgba(42, 100, 140, 0.749))),
+  theme14:
+    (
+      background:
+        radial-gradient(at 75% 25%, #cbd7df, rgba(42, 100, 140, 0.749)),
+    ),
   //Nord
-  theme15: (background: linear-gradient(to bottom,  rgba(31, 2, 28, 0.749), #1d2e6a6a)),
+  theme15:
+    (
+      background: linear-gradient(to bottom, rgba(31, 2, 28, 0.749), #1d2e6a6a),
+    ),
   //Elegance
-  theme16: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
+  theme16:
+    (
+      background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    ),
   //Love
-  theme17: (background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749))),
-  //Joy 
+  theme17:
+    (
+      background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    ),
+  //Joy
 );
 
 // linear-gradient - to top: 0deg, to bottom: 180deg, to left: 270deg, and to right: 90deg
-
 
 // Set of colors for Nav- and Add- buttons:
 
 $themes: (
   theme0: (
-    // background-color: $navButtonColor1,
-    // background-color: #a60c3a,
+    background-color: #070b7c,
+    // background-image:
+    //   linear-gradient(
+    //     320deg,
+    //     #d06c07 7%,
+    //     #d00768 14%,
+    //     #03065d 40%,
+    //     #020322 80%
+    //   ),
 
-background-color: #1f24b7,
-background-image: linear-gradient(300deg, #d00768 0%, #784BA0 24%, #1016ae 100%),
+background-image: linear-gradient(320deg, #d06c07 0%,  #d00768 10%, #070b7c 56%),
 
-// background-color: #a0153e,
-// background-image: linear-gradient(210deg, #a0153e 0%, #784BA0 12%, #1016ae 100%),
-
-    
     color: white,
-    box-shadow: 3px 3px 2px $boxShadowColor1,
+    box-shadow: 3px 3px 2px #04062db6,
+    position: relative,
+    overflow: hidden,
+    transition: transform 0.4s ease-in-out,
   ),
+
   theme1: (
-    background-color: $navButtonColor1,
+    background-color:#070b7c,
+    background-image: linear-gradient(320deg,   #d00768 0%, #070b7c 100%),
     color: white,
-    box-shadow: 3px 3px 2px $boxShadowColor1,
+    box-shadow: 3px 3px 2px #04062db6,
   ),
   theme2: (
     background-color: rgb(174, 127, 229),
@@ -134,7 +188,7 @@ background-image: linear-gradient(300deg, #d00768 0%, #784BA0 24%, #1016ae 100%)
     box-shadow: 3px 3px 2px $textShadowColor1,
   ),
   theme6: (
-    background-color: rgb(222, 162, 12), 
+    background-color: rgb(222, 162, 12),
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -149,9 +203,14 @@ background-image: linear-gradient(300deg, #d00768 0%, #784BA0 24%, #1016ae 100%)
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme9: (
-    background-color:  rgba(42, 140, 133, 0.614),
-    
-background-image: linear-gradient(350deg, #d03d07 0%, rgba(42, 140, 133, 0.614) 50%,  rgba(42, 140, 133, 0.614) 100%),
+    background-color: rgba(42, 140, 133, 0.614),
+    background-image:
+      linear-gradient(
+        350deg,
+        #d03d07 0%,
+        rgba(42, 140, 133, 0.614) 50%,
+        rgba(42, 140, 133, 0.614) 100%
+      ),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -172,28 +231,28 @@ background-image: linear-gradient(350deg, #d03d07 0%, rgba(42, 140, 133, 0.614) 
   ),
   theme13: (
     background-color: rgb(124, 218, 231),
-background-image: linear-gradient(300deg,  rgb(143, 231, 243) 0%,  #6699d7  100%),
+    background-image:
+      linear-gradient(300deg, rgb(143, 231, 243) 0%, #6699d7 100%),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme14: (
     background-color: rgb(124, 218, 231),
-background-image: linear-gradient(300deg,  rgb(143, 231, 243) 0%,  #6699d7  100%),
-
-color: black,
-box-shadow: 3px 3px 2px $boxShadowColor1,
+    background-image:
+      linear-gradient(300deg, rgb(143, 231, 243) 0%, #6699d7 100%),
+    color: black,
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme15: (
     background-color: #2942a4,
-background-image: linear-gradient(300deg, #d007c3 0%, #784BA0 24%, #2942a4 100%),
+    background-image:
+      linear-gradient(300deg, #d007c3 0%, #784ba0 24%, #2942a4 100%),
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme16: (
     // background-color: rgba(157, 43, 159, 0.749),
-
     background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%),
-
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -209,15 +268,19 @@ background-image: linear-gradient(300deg, #d007c3 0%, #784BA0 24%, #2942a4 100%)
 
 $themes2: (
   theme0: (
-    background-color: rgb(18, 13, 83),
-background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%,  rgb(11, 7, 68) 100%),
+    background-color: #020322,
+    background-image:
+      linear-gradient(300deg, #555454 0%, #3e1066 20%, #020322 100%),
     color: white,
-    box-shadow: 3px 3px 2px $boxShadowColor1,
+   
+    box-shadow: 3px 3px 2px #04062db6,
   ),
   theme1: (
     background-color: violet,
+    background-image:
+      linear-gradient(300deg, #555454 0%, #191066 20%, #020322 100%),
     color: white,
-    box-shadow: 3px 3px 2px $boxShadowColor1,
+    box-shadow: 3px 3px 2px #04062db6,
   ),
   theme2: (
     background-color: rgb(29, 5, 48),
@@ -255,9 +318,9 @@ background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%,  rgb(11, 7, 6
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme9: (
-    background-color:  rgba(42, 140, 133, 0.614),
-    
-background-image: linear-gradient(350deg, #d03d07 20%,   rgba(6, 71, 67, 0.614) 100%),
+    background-color: rgba(42, 140, 133, 0.614),
+    background-image:
+      linear-gradient(350deg, #d03d07 20%, rgba(6, 71, 67, 0.614) 100%),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -279,20 +342,20 @@ background-image: linear-gradient(350deg, #d03d07 20%,   rgba(6, 71, 67, 0.614) 
   theme13: (
     // background-color: orange,
     background-color: rgb(35, 107, 116),
-    background-image: linear-gradient(300deg,  rgb(18, 91, 101) 0%,  #0b4996  100%),
+    background-image: linear-gradient(300deg, rgb(18, 91, 101) 0%, #0b4996 100%),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme14: (
     background-color: rgb(35, 107, 116),
-    background-image: linear-gradient(300deg,  rgb(17, 73, 81) 0%,  #a8c8f0  100%),
-    
+    background-image: linear-gradient(300deg, rgb(17, 73, 81) 0%, #a8c8f0 100%),
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme15: (
     background-color: rgb(18, 13, 83),
-    background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%,  rgb(11, 7, 68) 100%),
+    background-image:
+      linear-gradient(300deg, #232121 0%, #3e1066 20%, rgb(11, 7, 68) 100%),
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -323,45 +386,76 @@ $fontColors: ();
 
 // themes with white font and shadowing:
 @for $i from 0 through 11 {
-  $fontColors: map-merge($fontColors, (
-    theme#{$i}: (
-      color: $defaultColor,
-      text-shadow: $commonTextShadow,
+  $fontColors: map-merge(
+    $fontColors,
+    (
+      theme#{$i}:
+        (
+          color: $defaultColor,
+          text-shadow: $commonTextShadow,
+        )
     )
-  ));
+  );
 }
 
 // themes with black font, without shadowing:
 @for $i from 12 through 17 {
-  $fontColors: map-merge($fontColors, (
-    theme#{$i}: (
-      color: $noShadowColor,
-      text-shadow: $noShadow,
+  $fontColors: map-merge(
+    $fontColors,
+    (
+      theme#{$i}:
+        (
+          color: $noShadowColor,
+          text-shadow: $noShadow,
+        )
     )
-  ));
+  );
 }
 
 // exception for theme2 and theme8:
-$fontColors: map-merge($fontColors, (
-  theme2: (
-    color: $defaultColor,
-    text-shadow: $noShadow, // no shadow
+$fontColors: map-merge(
+  $fontColors,
+  (
+    theme2: (
+      color: $defaultColor,
+      text-shadow: $noShadow,
+      // no shadow
+    ),
   )
-));
+);
 
-$fontColors: map-merge($fontColors, (
-  theme8: (
-    color: $defaultColor,
-    text-shadow: $noShadow, // no shadow
+$fontColors: map-merge(
+  $fontColors,
+  (
+    theme8: (
+      color: $defaultColor,
+      text-shadow: $noShadow,
+      // no shadow
+    ),
   )
-));
+);
 
-$fontColors: map-merge($fontColors, (
-  theme9: (
-    color: $noShadowColor,
-    text-shadow: $noShadow, // no shadow
+$fontColors: map-merge(
+  $fontColors,
+  (
+    theme9: (
+      color: $noShadowColor,
+      text-shadow: $noShadow,
+      // no shadow
+    ),
   )
-));
+);
+
+$fontColors: map-merge(
+  $fontColors,
+  (
+    theme12: (
+      color: $defaultColor,
+      text-shadow: $noShadow,
+      // no shadow
+    ),
+  )
+);
 
 // themes with white font in the song cards:
 
@@ -386,11 +480,6 @@ $fontColors: map-merge($fontColors, (
 //   ));
 // }
 
-
-
-
-
-
 // Set of colors for Forms:
 
 $formThemes: (
@@ -400,13 +489,12 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme1: (
-    background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
+    background: radial-gradient(at 25% 75%, #621c4bcc, rgba(9, 20, 36, 0.662)),
     color: white,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme2: (
-    background:
-      radial-gradient(at 25% 75%, #d2c0f3b2, rgba(35, 6, 71, 0.749)),
+    background: radial-gradient(at 25% 75%, #d2c0f3b2, rgba(35, 6, 71, 0.749)),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -426,9 +514,9 @@ $formThemes: (
     box-shadow: 3px 3px 2px $textShadowColor1,
   ),
   theme6: (
-    background: radial-gradient(at 25% 75%,  #514f4fdb, rgba(9, 3, 1, 0.749)),
+    background: radial-gradient(at 25% 75%, #514f4fdb, rgba(9, 3, 1, 0.749)),
     color: white,
-    box-shadow: 3px 3px 2px $boxShadowColor1, 
+    box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme7: (
     background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
@@ -442,7 +530,8 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme9: (
-    background: radial-gradient(at 25% 75%, #a4d1ed7c, rgba(43, 137, 165, 0.514)),
+    background:
+      radial-gradient(at 25% 75%, #a4d1ed7c, rgba(43, 137, 165, 0.514)),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -463,19 +552,21 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme13: (
-    background: radial-gradient(at 25% 75%, #c8e2f2bf, rgba(110, 158, 230, 0.749)),
+    background:
+      radial-gradient(at 25% 75%, #c8e2f2bf, rgba(110, 158, 230, 0.749)),
     color: black,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme14: (
-    background: radial-gradient(at 75% 25%, #b1b0b0b2, rgba(42, 100, 140, 0.749)),
+    background:
+      radial-gradient(at 75% 25%, #b1b0b0b2, rgba(42, 100, 140, 0.749)),
     color: white,
     box-shadow: 3px 3px 2px black,
   ),
   theme15: (
     background: radial-gradient(at 75% 25%, #665c632e, rgba(5, 25, 55, 0.749)),
     color: white,
-    
+
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme16: (
@@ -485,95 +576,78 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme17: (
-      background: radial-gradient(at 25% 75%, rgba(248, 248, 246, 0.603), rgba(255, 255, 255, 0.444)),   
+    background:
+      radial-gradient(
+        at 25% 75%,
+        rgba(248, 248, 246, 0.603),
+        rgba(255, 255, 255, 0.444)
+      ),
     color: black,
     box-shadow: 3px 3px 2px $textShadowColor1,
-    
   ),
 );
-
 
 // Set of colors for Titles:
 
 $titleThemes: (
   theme0: (
     background: radial-gradient(at 25% 75%, #a60c3a, rgba(9, 20, 36, 0.749)),
- 
   ),
   theme1: (
     background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
-  
   ),
   theme2: (
-    background:
-      radial-gradient(at 25% 75%, #efe6f4b2, rgba(88, 44, 142, 0.749)),
-
+    background: radial-gradient(at 25% 75%, #efe6f4b2, rgba(88, 44, 142, 0.749)),
   ),
   theme3: (
     background: radial-gradient(at 25% 75%, #621c4b, rgba(1, 8, 20, 0.94)),
-
   ),
   theme4: (
     background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
-
   ),
   theme5: (
     background: radial-gradient(at 25% 75%, #ceb83ed2, rgba(203, 28, 28, 0.749)),
-
   ),
   theme6: (
-    background: radial-gradient(at 25% 75%,  #363433db, rgba(9, 3, 1, 0.749)),
- 
+    background: radial-gradient(at 25% 75%, #363433db, rgba(9, 3, 1, 0.749)),
   ),
   theme7: (
     background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
-   
   ),
   theme8: (
-    background: radial-gradient(at 25% 75%,  #f3eef1e4, rgba(174, 188, 214, 0.749)),
-
+    background:
+      radial-gradient(at 25% 75%, #f3eef1e4, rgba(174, 188, 214, 0.749)),
   ),
   theme9: (
     background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
- 
   ),
   theme10: (
     background: radial-gradient(at 25% 75%, #343030b2, rgba(33, 2, 3, 0.749)),
-  
   ),
   theme11: (
     background: radial-gradient(at 25% 75%, #eda4a4b2, rgba(95, 9, 123, 0.749)),
- 
   ),
   theme12: (
     background:
       radial-gradient(at 25% 75%, #a4d1edb2, rgba(96, 148, 226, 0.749)),
-   
   ),
   theme13: (
     background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
-  
   ),
   theme14: (
     background: radial-gradient(at 25% 75%, #343030b2, rgba(43, 92, 165, 0.749)),
-  
   ),
   theme15: (
     background: radial-gradient(at 25% 75%, #eda4a4b2, rgba(95, 9, 123, 0.749)),
-  
   ),
   theme16: (
-    background:
-      radial-gradient(at 75% 25%, #9aafbdb2, rgba(92, 6, 100, 0.749)),
-
+    background: radial-gradient(at 75% 25%, #9aafbdb2, rgba(92, 6, 100, 0.749)),
   ),
   theme17: (
-      background: radial-gradient(at 25% 75%, rgb(246, 246, 17), rgba(255, 255, 255, 0.5)),
-    
-    
+    background:
+      radial-gradient(at 25% 75%, rgb(246, 246, 17), rgba(255, 255, 255, 0.5)),
   ),
 );
-
 
 // Input colors:
 
@@ -652,6 +726,5 @@ $inputColors: (
   theme17: (
     background-color: rgb(239, 227, 184),
     color: black,
-   
   ),
 );

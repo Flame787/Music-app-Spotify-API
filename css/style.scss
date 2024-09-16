@@ -56,13 +56,13 @@ body {
   }
 }
 
-body {
-  @each $theme, $background in $backgrounds {
-    &.#{$theme} {
-      background: map-get($backgrounds, background) !important;
-    }
-  }
-}
+// body {
+//   @each $theme, $background in $backgrounds {
+//     &.#{$theme} {
+//       background: map-get($backgrounds, background) !important;
+//     }
+//   }
+// }
 
 body {
   @each $theme, $properties in $fontColors {
@@ -205,7 +205,7 @@ body {
 
   font-family: $poppins;
 
-  font-family: "Inter", sans-serif;
+  // font-family: "Inter", sans-serif;
   
   // letter-spacing: 0.1rem;
 
@@ -227,6 +227,9 @@ h1 {
   // letter-spacing: 0.3rem;
 }
 
+h1, h3 {
+  font-family: "Inter", sans-serif;
+}
 
 // linear-gradient - to top: 0deg, to bottom: 180deg, to left: 270deg, and to right: 90deg
 
@@ -297,7 +300,8 @@ select {
   // -moz-appearance: none;
   display: inline-block;
   // appearance: none;
-  border-radius: 15px;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
   // width: 15%;
   padding: 5px 20px;
   // background-color: $navButtonColor1;
@@ -306,6 +310,7 @@ select {
   // text-shadow: 2px 2px 4px $textShadowColor1;
   font-family: $sans-serif1;
   text-align: center;
+  width: 18%;
 
   &:hover {
     @include button-hover();
@@ -321,7 +326,7 @@ select {
 .option {
   font-size: 0.9rem;
   background-color: $inputColor1;
-  border-radius: 15px;
+  border-radius: 45px;
   // opacity: 0.8 !important;
 }
 
@@ -395,6 +400,16 @@ select {
 //   transform: translateY(-10px);
 // }
 
+#music-player {
+  margin-top: 2%;
+  width: 90%;
+  height: 300px;
+  // border-radius: 30px;
+
+  border: 1px solid white;
+}
+
+
 .item-card {
   max-width: 60%;
   margin: auto;
@@ -450,6 +465,59 @@ input {
   }
 }
 
+button, select {
+      
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 45px;
+
+  transition: transform 0.4s ease-in-out;
+  // Elements button & select have relative positioning, which enables that pseudo-element ::after positions inside them with 'position: absolute'
+// overflow: hidden: enables that eny content which is outside of element border stays hidden - important for 'shine' efect because it passes over the element border.
+// transition: enables transformation on hover.
+
+  // &:hover {
+  //   transform: scale(1.05);
+  //   box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.4);
+  // }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    // background: rgba(255, 255, 255, 0.289);
+    // transform: skewX(-20deg);
+    // transition: left 0.1s ease-in-out;
+    background: linear-gradient(to top, rgba(229, 172, 142, 0), rgba(255, 255, 255, 0.244) 50%, rgba(229, 172, 142, 0));
+  transform: rotateZ(320deg) translate(0em, 7.5em);
+  }
+
+// content: '': creatse an empty ::after pseudo-element, to which we can provide some style.
+// position: absolute: Pseudo-element is positioned absolutely inside the parent element which is positioned relatively (button or select). So it may move freely inside the boderd of teh parent element.
+// top: 0, left: -100%: ::after element starts aoutside of the left side of parent element 
+// width: 200%, height: 100%: Pseudo-element has double the element-width, so it may create effect of crossing over the whole element.
+// background: linear-gradient: defines gradient with light white line in the middle (rgba(255, 255, 255, 0.5)), simulating the shine.
+// transform: rotateZ(60deg) translate(-5em, 7.5em): Pseudo-element rotates for 60 degrees and moves, crosses diagnoally over the element.
+
+  &:hover::after {
+    animation: shine 1s forwards; 
+  }
+}
+
+// &:hover::after: on mouse-hover - the animation for pseudo-element ::after is activated.
+// animation: shine 1s forwards: Animation named 'shine', lasts 1 sec and moves the ::after element across the button.
+
+@keyframes shine {
+  100% {
+    transform: rotateZ(320deg) translate(1em, -9em);
+  }
+}
+
+
 
 .input-button:hover {
   background-color: $hoverColor1;
@@ -486,10 +554,21 @@ li {
   flex-basis: 80%;
 }
 
+.theme-select-btn {
+width: 16% !important;
+}
+
 .thin {
   color: rgba(130, 129, 129, 0.853);
   font-family: 'Poppins', sans-serif !important;
+  font-size: smaller;
 }
+
+.entry, .artist, .rating, .time {
+  font-size: smaller;
+}
+
+
 
 .whiteParagraph {
   // color: $fontColor1;
@@ -556,9 +635,7 @@ hr {
   #nav-list button {
     margin: 0 40px;
   }
-  select {
-    width: 12%;
-  }
+  
 }
 
 @media (max-width: 1150px) {
@@ -569,14 +646,11 @@ hr {
   #nav-list button {
     margin: 0 20px;
   }
-  select {
-    width: 15%;
-  }
+  
 }
 
 @media (max-width: 1113px) {
-  #nav-list button,
-  select {
+  #nav-list button {
     width: 15%;
   }
 }
@@ -609,9 +683,11 @@ hr {
   }
   #nav-list button,
   select {
-    width: 8rem;
+    width: 10rem;
     height: 3rem;
   }
+
+  
 }
 
 @media (max-width: 908px) {
@@ -620,7 +696,7 @@ hr {
   }
   #nav-list button,
   select {
-    width: 8rem;
+    width: 10rem;
     height: 3rem;
   }
 }
@@ -628,7 +704,7 @@ hr {
 @media (max-width: 900px) {
   #nav-list button,
   select {
-    width: 14%;
+    width: 10rem;
   }
 }
 
@@ -640,7 +716,7 @@ hr {
   #nav-list button,
   select {
     margin: 0 15px;
-    width: 8rem;
+    width: 10rem;
     height: 3rem;
   }
 
@@ -653,7 +729,7 @@ hr {
   #nav-list button,
   select {
     margin: 0 10px;
-    width: 8rem;
+    width: 10rem;
     height: 3rem;
   }
 
@@ -690,7 +766,7 @@ hr {
 
   #nav-list button,
   select {
-    width: 35%;
+    width: 10rem;
   }
 
   #navbar {

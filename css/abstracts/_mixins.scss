@@ -31,7 +31,7 @@
 }
 
 @mixin button-style {
-  border-radius: 15px;
+  // border-radius: 15px;
   // transform: skew(-5deg);
   // text-shadow: 2px 2px 4px $textShadowColor1;
   // box-shadow: 3px 3px 2px $boxShadowColor1;
@@ -50,7 +50,7 @@
   padding: 0 3%;
   font-weight: bold;
   // color: $fontColor1;
-  width: 12rem;
+  width: 13rem;
   height: 3rem;
   border-width: 0;
   font-size: 1.5rem;
@@ -94,7 +94,7 @@
 @mixin input-field {
   width: 12rem;
   height: 2.5rem;
-  border-radius: 15px;
+  border-radius: 45px;
   // background-color: $inputColor1;
   color: $fontColor1;
   text-align: center;

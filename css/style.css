@@ -65,61 +65,6 @@ body.theme17 {
 }
 
 body.theme0 {
-  background: !important;
-}
-body.theme1 {
-  background: !important;
-}
-body.theme2 {
-  background: !important;
-}
-body.theme3 {
-  background: !important;
-}
-body.theme4 {
-  background: !important;
-}
-body.theme5 {
-  background: !important;
-}
-body.theme6 {
-  background: !important;
-}
-body.theme7 {
-  background: !important;
-}
-body.theme8 {
-  background: !important;
-}
-body.theme9 {
-  background: !important;
-}
-body.theme10 {
-  background: !important;
-}
-body.theme11 {
-  background: !important;
-}
-body.theme12 {
-  background: !important;
-}
-body.theme13 {
-  background: !important;
-}
-body.theme14 {
-  background: !important;
-}
-body.theme15 {
-  background: !important;
-}
-body.theme16 {
-  background: !important;
-}
-body.theme17 {
-  background: !important;
-}
-
-body.theme0 {
   color: #d1d4c9 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
@@ -168,7 +113,7 @@ body.theme11 {
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme12 {
-  color: #000000 !important;
+  color: #d1d4c9 !important;
   text-shadow: none !important;
 }
 body.theme13 {
@@ -196,18 +141,19 @@ body.theme17 {
 .theme0 .favorite-button,
 .theme0 #theme_color,
 .theme0 option {
-  background-color: #1f24b7;
-  background-image: linear-gradient(300deg, #d00768 0%, #784BA0 24%, #1016ae 100%);
+  background-color: #070b7c;
+  background-image: linear-gradient(320deg, #d06c07 0%, #d00768 10%, #070b7c 56%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme1 .theme-button, .theme1 .nav-button,
 .theme1 .favorite-button,
 .theme1 #theme_color,
 .theme1 option {
-  background-color: #a0153e;
+  background-color: #070b7c;
+  background-image: linear-gradient(320deg, #d00768 0%, #070b7c 100%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme2 .theme-button, .theme2 .nav-button,
 .theme2 .favorite-button,
@@ -321,7 +267,7 @@ body.theme17 {
 .theme15 #theme_color,
 .theme15 option {
   background-color: #2942a4;
-  background-image: linear-gradient(300deg, #d007c3 0%, #784BA0 24%, #2942a4 100%);
+  background-image: linear-gradient(300deg, #d007c3 0%, #784ba0 24%, #2942a4 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -398,15 +344,16 @@ body.theme17 {
 }
 
 .theme0 .remove-button {
-  background-color: rgb(18, 13, 83);
-  background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%, rgb(11, 7, 68) 100%);
+  background-color: #020322;
+  background-image: linear-gradient(300deg, #555454 0%, #3e1066 20%, #020322 100%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme1 .remove-button {
   background-color: violet;
+  background-image: linear-gradient(300deg, #555454 0%, #191066 20%, #020322 100%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme2 .remove-button {
   background-color: rgb(29, 5, 48);
@@ -499,7 +446,7 @@ body.theme17 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme1 .form-theme {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(98, 28, 75, 0.8), rgba(9, 20, 36, 0.662));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -585,7 +532,7 @@ body.theme17 {
 }
 
 .theme0 .header-style {
-  background: radial-gradient(at 25% 75%, #350926, rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(8, 0, 5, 0.6196078431), rgba(9, 20, 36, 0.652));
 }
 .theme1 .header-style {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
@@ -707,13 +654,16 @@ body {
   font-family: "Montserrat", sans-serif;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-family: "Poppins", sans-serif;
-  font-family: "Inter", sans-serif;
   background-repeat: repeat;
   background-size: 100%;
 }
 
 h1 {
   font-size: 5rem;
+}
+
+h1, h3 {
+  font-family: "Inter", sans-serif;
 }
 
 .red {
@@ -760,7 +710,6 @@ h1 {
   text-align: right;
 }
 #nav-list button {
-  border-radius: 15px;
   transition: transform 0.3s ease;
   display: inline-block;
   margin: 0 70px;
@@ -777,25 +726,26 @@ h1 {
 }
 
 select {
-  border-radius: 15px;
   transition: transform 0.3s ease;
   display: inline-block;
   margin: 0 70px;
   padding: 5px 4px;
   padding: 0 3%;
   font-weight: bold;
-  width: 12rem;
+  width: 13rem;
   height: 3rem;
   border-width: 0;
   font-size: 1.5rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   display: inline-block;
-  border-radius: 15px;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
   padding: 5px 20px;
   color: #d1d4c9;
   font-weight: bold;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
+  width: 18%;
 }
 select:hover {
   text-shadow: none;
@@ -809,7 +759,7 @@ select option {
 .option {
   font-size: 0.9rem;
   background-color: #00224d;
-  border-radius: 15px;
+  border-radius: 45px;
 }
 
 #theme-color option {
@@ -852,6 +802,13 @@ select option {
   padding: 0.1%;
 }
 
+#music-player {
+  margin-top: 2%;
+  width: 90%;
+  height: 300px;
+  border: 1px solid white;
+}
+
 .item-card {
   max-width: 60%;
   margin: auto;
@@ -881,7 +838,7 @@ select option {
 input {
   width: 12rem;
   height: 2.5rem;
-  border-radius: 15px;
+  border-radius: 45px;
   color: #d1d4c9;
   text-align: center;
   font-size: 18px;
@@ -892,6 +849,31 @@ input:hover {
   color: #000000;
 }
 
+button, select {
+  position: relative;
+  overflow: hidden;
+  border-radius: 45px;
+  transition: transform 0.4s ease-in-out;
+}
+button::after, select::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(229, 172, 142, 0), rgba(255, 255, 255, 0.244) 50%, rgba(229, 172, 142, 0));
+  transform: rotateZ(320deg) translate(0em, 7.5em);
+}
+button:hover::after, select:hover::after {
+  animation: shine 1s forwards;
+}
+
+@keyframes shine {
+  100% {
+    transform: rotateZ(320deg) translate(1em, -9em);
+  }
+}
 .input-button:hover {
   background-color: #ca3535;
   text-shadow: none;
@@ -909,12 +891,11 @@ p {
 button {
   padding: 0 3%;
   font-weight: bold;
-  width: 12rem;
+  width: 13rem;
   height: 3rem;
   border-width: 0;
   font-size: 1.5rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif, Cochin, Georgia, Times, "Times New Roman", serif, Tahoma, Geneva, Verdana, sans-serif;
-  border-radius: 15px;
   transition: transform 0.3s ease;
 }
 button:hover {
@@ -932,9 +913,18 @@ li {
   flex-basis: 80%;
 }
 
+.theme-select-btn {
+  width: 16% !important;
+}
+
 .thin {
   color: rgba(130, 129, 129, 0.853);
   font-family: "Poppins", sans-serif !important;
+  font-size: smaller;
+}
+
+.entry, .artist, .rating, .time {
+  font-size: smaller;
 }
 
 .whiteParagraph {
@@ -972,7 +962,6 @@ hr {
 
 .favorite-button,
 .remove-button {
-  border-radius: 15px;
   transition: transform 0.3s ease;
   padding: 0;
   margin: 1%;
@@ -1049,9 +1038,6 @@ hr {
   #nav-list button {
     margin: 0 40px;
   }
-  select {
-    width: 12%;
-  }
 }
 @media (max-width: 1150px) {
   #nav-list button:last-child {
@@ -1060,13 +1046,9 @@ hr {
   #nav-list button {
     margin: 0 20px;
   }
-  select {
-    width: 15%;
-  }
 }
 @media (max-width: 1113px) {
-  #nav-list button,
-  select {
+  #nav-list button {
     width: 15%;
   }
 }
@@ -1096,7 +1078,7 @@ hr {
   }
   #nav-list button,
   select {
-    width: 8rem;
+    width: 10rem;
     height: 3rem;
   }
 }
@@ -1106,14 +1088,14 @@ hr {
   }
   #nav-list button,
   select {
-    width: 8rem;
+    width: 10rem;
     height: 3rem;
   }
 }
 @media (max-width: 900px) {
   #nav-list button,
   select {
-    width: 14%;
+    width: 10rem;
   }
 }
 @media (max-width: 880px) {
@@ -1123,7 +1105,7 @@ hr {
   #nav-list button,
   select {
     margin: 0 15px;
-    width: 8rem;
+    width: 10rem;
     height: 3rem;
   }
   #nav-title {
@@ -1134,7 +1116,7 @@ hr {
   #nav-list button,
   select {
     margin: 0 10px;
-    width: 8rem;
+    width: 10rem;
     height: 3rem;
   }
   #nav-title {
@@ -1164,7 +1146,7 @@ hr {
   }
   #nav-list button,
   select {
-    width: 35%;
+    width: 10rem;
   }
   #navbar {
     width: 100%;
