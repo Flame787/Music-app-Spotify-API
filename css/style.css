@@ -155,7 +155,7 @@ body.theme15 {
 .theme3 #theme_color,
 .theme3 option {
   background-color: rgb(1, 1, 11);
-  background-image: linear-gradient(320deg, rgba(131, 197, 215, 0.6117647059) 0%, rgba(54, 37, 99, 0.6941176471) 50%);
+  background-image: linear-gradient(320deg, #b721ff 0%, #1591ad 63%);
   color: white;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -164,63 +164,70 @@ body.theme15 {
 .theme4 #theme_color,
 .theme4 option {
   background-color: #0b6893;
+  background-image: linear-gradient(320deg, #aadeef 0%, #1554ad 63%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme5 .theme-button, .theme5 .nav-button,
 .theme5 .favorite-button,
 .theme5 #theme_color,
 .theme5 option {
   background-color: rgb(223, 178, 13);
+  background-image: linear-gradient(320deg, #e2efaa 0%, #c78f34 33%, #c76234 100%);
   color: #000000;
-  box-shadow: 3px 3px 2px #000000;
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme6 .theme-button, .theme6 .nav-button,
 .theme6 .favorite-button,
 .theme6 #theme_color,
 .theme6 option {
   background-color: rgb(222, 162, 12);
+  background-image: linear-gradient(320deg, #e2efaa 0%, rgb(222, 162, 12) 33%, #cd551d 100%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme7 .theme-button, .theme7 .nav-button,
 .theme7 .favorite-button,
 .theme7 #theme_color,
 .theme7 option {
-  background-color: lightgreen;
+  background-color: rgb(242, 54, 12);
+  background-image: linear-gradient(320deg, #e2efaa 0%, rgb(207, 108, 3) 17%, #ad0505 100%);
   color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme8 .theme-button, .theme8 .nav-button,
 .theme8 .favorite-button,
 .theme8 #theme_color,
 .theme8 option {
-  background-color: rgb(52, 139, 185);
+  background-color: rgb(185, 125, 52);
+  background-image: linear-gradient(320deg, #e2efaa 0%, rgb(222, 162, 12) 33%, #cd551d 100%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme9 .theme-button, .theme9 .nav-button,
 .theme9 .favorite-button,
 .theme9 #theme_color,
 .theme9 option {
-  background-color: red;
+  background-color: rgb(6, 125, 8);
+  background-image: linear-gradient(320deg, #e2efaa 0%, rgb(3, 176, 43) 23%, rgb(1, 84, 2) 100%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme10 .theme-button, .theme10 .nav-button,
 .theme10 .favorite-button,
 .theme10 #theme_color,
 .theme10 option {
-  background-color: darkred;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  background-color: #fffb7d;
+  background-image: linear-gradient(320deg, #f8f478 0%, #0a8723 81%);
+  color: black;
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme11 .theme-button, .theme11 .nav-button,
 .theme11 .favorite-button,
 .theme11 #theme_color,
 .theme11 option {
-  background-color: #0093E9;
-  background-image: linear-gradient(160deg, #0093E9 16%, #80D0C7 100%);
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 16%, #80d0c7 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -292,7 +299,7 @@ body.theme15 {
   color: white;
 }
 .theme10 button a {
-  color: white;
+  color: black;
 }
 .theme11 button a {
   color: black;
@@ -329,45 +336,52 @@ body.theme15 {
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme3 .remove-button {
-  background-color: rgb(65, 7, 75);
-  background-image: linear-gradient(320deg, #5138a5 0%, #04051b 100%);
+  background-color: rgb(24, 7, 75);
+  background-image: linear-gradient(320deg, rgba(114, 159, 175, 0.6117647059) 0%, rgba(74, 45, 124, 0.6941176471) 50%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme4 .remove-button {
-  background-color: rgb(3, 16, 42);
+  background-color: rgb(2, 22, 63);
+  background-image: linear-gradient(320deg, rgba(114, 159, 175, 0.6117647059) 0%, rgba(16, 22, 97, 0.6941176471) 50%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme5 .remove-button {
   background-color: rgb(150, 34, 6);
-  color: white;
+  background-image: linear-gradient(320deg, #efca47 0%, rgb(150, 34, 6) 100%);
+  color: black;
   box-shadow: 3px 3px 2px #000000;
 }
 .theme6 .remove-button {
   background-color: rgb(180, 56, 28);
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  background-image: linear-gradient(320deg, #e5b91a 0%, rgb(127, 27, 2) 100%);
+  color: white;
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme7 .remove-button {
-  background-color: lightgreen;
+  background-color: rgb(112, 24, 5);
+  background-image: linear-gradient(320deg, #8d3804 0%, rgb(55, 1, 1) 100%);
   color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme8 .remove-button {
   background-color: rgb(163, 11, 11);
+  background-image: linear-gradient(320deg, rgb(225, 151, 60) 0%, rgb(3, 131, 99) 100%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme9 .remove-button {
-  background-color: red;
+  background-color: rgb(6, 125, 8);
+  background-image: linear-gradient(320deg, #619c55 0%, rgb(1, 99, 5) 23%, rgb(1, 40, 1) 100%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme10 .remove-button {
-  background-color: darkred;
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  background-color: rgb(0, 139, 67);
+  background-image: linear-gradient(320deg, #619c55 0%, rgb(1, 99, 5) 23%, rgb(4, 67, 4) 100%);
+  color: black;
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme11 .remove-button {
   background-color: white;
@@ -421,12 +435,12 @@ body.theme15 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme4 .form-theme {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 75% 25%, rgba(93, 92, 102, 0.3450980392), rgba(5, 25, 55, 0.749));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme5 .form-theme {
-  background: radial-gradient(at 75% 25%, rgba(206, 184, 62, 0.9294117647), rgba(203, 28, 28, 0.918));
+  background: radial-gradient(at 75% 25%, rgba(206, 184, 62, 0.8196078431), rgba(203, 28, 28, 0.87));
   color: white;
   box-shadow: 3px 3px 2px #000000;
 }
@@ -436,22 +450,22 @@ body.theme15 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme7 .form-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(43, 92, 165, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(165, 102, 70, 0.7490196078), rgba(9, 3, 1, 0.623));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme8 .form-theme {
-  background: radial-gradient(at 25% 75%, #f3eef1, rgba(33, 44, 66, 0.749));
+  background: radial-gradient(at 75% 25%, rgba(210, 192, 92, 0.6588235294), rgba(203, 113, 28, 0.693));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme9 .form-theme {
-  background: radial-gradient(at 25% 75%, rgba(52, 48, 48, 0.6980392157), rgba(33, 2, 3, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(99, 154, 3, 0.381), rgba(2, 111, 84, 0.749));
   color: white;
   box-shadow: 3px 3px 2px black;
 }
 .theme10 .form-theme {
-  background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(74, 116, 3, 0.574), rgba(2, 71, 40, 0.623));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -491,28 +505,28 @@ body.theme15 {
   background: radial-gradient(at 25% 75%, #2b043e, rgba(9, 20, 36, 0.749));
 }
 .theme3 .header-style {
-  background: linear-gradient(320deg, rgba(81, 56, 165, 0.6156862745) 0%, rgba(4, 5, 27, 0.5333333333) 100%);
+  background: linear-gradient(320deg, rgba(81, 56, 165, 0.5254901961) 0%, rgba(4, 5, 27, 0.5333333333) 100%);
 }
 .theme4 .header-style {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(37, 40, 131, 0.6039215686), rgba(9, 20, 36, 0.638));
 }
 .theme5 .header-style {
-  background: radial-gradient(at 25% 75%, rgb(223, 86, 13), rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(223, 87, 13, 0.637), rgba(9, 20, 36, 0.749));
 }
 .theme6 .header-style {
-  background: radial-gradient(at 25% 75%, rgba(54, 52, 51, 0.8588235294), rgba(9, 3, 1, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(54, 52, 51, 0.7960784314), rgba(9, 3, 1, 0.749));
 }
 .theme7 .header-style {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(104, 44, 14, 0.6470588235), rgba(9, 3, 1, 0.584));
 }
 .theme8 .header-style {
-  background: radial-gradient(at 75% 25%, #f3eef1, rgba(33, 44, 66, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(223, 87, 13, 0.403), rgba(3, 131, 99, 0.749));
 }
 .theme9 .header-style {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(99, 154, 3, 0.321), rgba(2, 111, 84, 0.749));
 }
 .theme10 .header-style {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(99, 154, 3, 0.574), rgba(2, 71, 40, 0.764));
 }
 .theme11 .header-style {
   background: radial-gradient(at 25% 75%, rgba(0, 148, 233, 0.7254901961), rgba(13, 36, 70, 0.749));
