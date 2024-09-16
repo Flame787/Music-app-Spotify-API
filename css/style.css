@@ -34,33 +34,30 @@ body.theme7 {
   background-image: url("../pictures/red-triangles.jpg") !important;
 }
 body.theme8 {
-  background-image: url("../pictures/red-blue.jpg") !important;
-}
-body.theme9 {
   background-image: url("../pictures/dawn.jpg") !important;
 }
-body.theme10 {
+body.theme9 {
   background-image: url("../pictures/abstract-green.jpg") !important;
 }
-body.theme11 {
+body.theme10 {
   background-image: url("../pictures/green-triangles.jpg") !important;
 }
-body.theme12 {
+body.theme11 {
   background-image: url("../pictures/blue-water.jpg") !important;
 }
-body.theme13 {
+body.theme12 {
   background-image: url("../pictures/frost.jpg") !important;
 }
-body.theme14 {
+body.theme13 {
   background-image: url("../pictures/ice.jpg") !important;
 }
-body.theme15 {
+body.theme14 {
   background-image: url("../pictures/fog-neon.jpg") !important;
 }
-body.theme16 {
+body.theme15 {
   background-image: url("../pictures/violet-white.jpg") !important;
 }
-body.theme17 {
+body.theme16 {
   background-image: url("../pictures/white-colored.jpg") !important;
 }
 
@@ -101,8 +98,8 @@ body.theme8 {
   text-shadow: none !important;
 }
 body.theme9 {
-  color: #000000 !important;
-  text-shadow: none !important;
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme10 {
   color: #d1d4c9 !important;
@@ -110,10 +107,10 @@ body.theme10 {
 }
 body.theme11 {
   color: #d1d4c9 !important;
-  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
+  text-shadow: none !important;
 }
 body.theme12 {
-  color: #d1d4c9 !important;
+  color: #000000 !important;
   text-shadow: none !important;
 }
 body.theme13 {
@@ -129,10 +126,6 @@ body.theme15 {
   text-shadow: none !important;
 }
 body.theme16 {
-  color: #000000 !important;
-  text-shadow: none !important;
-}
-body.theme17 {
   color: #000000 !important;
   text-shadow: none !important;
 }
@@ -215,16 +208,15 @@ body.theme17 {
 .theme9 .favorite-button,
 .theme9 #theme_color,
 .theme9 option {
-  background-color: rgba(42, 140, 133, 0.614);
-  background-image: linear-gradient(350deg, #d03d07 0%, rgba(42, 140, 133, 0.614) 50%, rgba(42, 140, 133, 0.614) 100%);
-  color: black;
+  background-color: red;
+  color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme10 .theme-button, .theme10 .nav-button,
 .theme10 .favorite-button,
 .theme10 #theme_color,
 .theme10 option {
-  background-color: red;
+  background-color: darkred;
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -232,15 +224,16 @@ body.theme17 {
 .theme11 .favorite-button,
 .theme11 #theme_color,
 .theme11 option {
-  background-color: darkred;
-  color: white;
+  background-color: white;
+  color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme12 .theme-button, .theme12 .nav-button,
 .theme12 .favorite-button,
 .theme12 #theme_color,
 .theme12 option {
-  background-color: white;
+  background-color: rgb(124, 218, 231);
+  background-image: linear-gradient(300deg, rgb(143, 231, 243) 0%, #6699d7 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -257,17 +250,16 @@ body.theme17 {
 .theme14 .favorite-button,
 .theme14 #theme_color,
 .theme14 option {
-  background-color: rgb(124, 218, 231);
-  background-image: linear-gradient(300deg, rgb(143, 231, 243) 0%, #6699d7 100%);
-  color: black;
+  background-color: #2942a4;
+  background-image: linear-gradient(300deg, #d007c3 0%, #784ba0 24%, #2942a4 100%);
+  color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme15 .theme-button, .theme15 .nav-button,
 .theme15 .favorite-button,
 .theme15 #theme_color,
 .theme15 option {
-  background-color: #2942a4;
-  background-image: linear-gradient(300deg, #d007c3 0%, #784ba0 24%, #2942a4 100%);
+  background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -275,15 +267,8 @@ body.theme17 {
 .theme16 .favorite-button,
 .theme16 #theme_color,
 .theme16 option {
-  background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme17 .theme-button, .theme17 .nav-button,
-.theme17 .favorite-button,
-.theme17 #theme_color,
-.theme17 option {
   background-color: rgb(246, 194, 38);
+  background-image: linear-gradient(320deg, rgb(246, 194, 38) 0%, #e76229 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -316,13 +301,13 @@ body.theme17 {
   color: white;
 }
 .theme9 button a {
-  color: black;
+  color: white;
 }
 .theme10 button a {
   color: white;
 }
 .theme11 button a {
-  color: white;
+  color: black;
 }
 .theme12 button a {
   color: black;
@@ -331,15 +316,12 @@ body.theme17 {
   color: black;
 }
 .theme14 button a {
-  color: black;
+  color: white;
 }
 .theme15 button a {
   color: white;
 }
 .theme16 button a {
-  color: white;
-}
-.theme17 button a {
   color: black;
 }
 
@@ -391,52 +373,47 @@ body.theme17 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme9 .remove-button {
-  background-color: rgba(42, 140, 133, 0.614);
-  background-image: linear-gradient(350deg, #d03d07 20%, rgba(6, 71, 67, 0.614) 100%);
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme10 .remove-button {
   background-color: red;
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme11 .remove-button {
+.theme10 .remove-button {
   background-color: darkred;
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme12 .remove-button {
+.theme11 .remove-button {
   background-color: white;
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme13 .remove-button {
+.theme12 .remove-button {
   background-color: rgb(35, 107, 116);
   background-image: linear-gradient(300deg, rgb(18, 91, 101) 0%, #0b4996 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme14 .remove-button {
+.theme13 .remove-button {
   background-color: rgb(35, 107, 116);
   background-image: linear-gradient(300deg, rgb(17, 73, 81) 0%, #a8c8f0 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme15 .remove-button {
+.theme14 .remove-button {
   background-color: rgb(18, 13, 83);
   background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%, rgb(11, 7, 68) 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme16 .remove-button {
+.theme15 .remove-button {
   background-color: rgb(34, 33, 33);
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme17 .remove-button {
+.theme16 .remove-button {
   background-color: black;
-  color: white;
+  background-image: linear-gradient(320deg, #e9723f 0%, #5c1f03 100%);
+  color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 
@@ -486,46 +463,41 @@ body.theme17 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme9 .form-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.4862745098), rgba(43, 137, 165, 0.514));
-  color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
-}
-.theme10 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(52, 48, 48, 0.6980392157), rgba(33, 2, 3, 0.749));
   color: white;
   box-shadow: 3px 3px 2px black;
 }
-.theme11 .form-theme {
+.theme10 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(237, 164, 164, 0.6980392157), rgba(95, 9, 123, 0.749));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme12 .form-theme {
+.theme11 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(96, 148, 226, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme13 .form-theme {
+.theme12 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(200, 226, 242, 0.7490196078), rgba(110, 158, 230, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme14 .form-theme {
+.theme13 .form-theme {
   background: radial-gradient(at 75% 25%, rgba(177, 176, 176, 0.6980392157), rgba(42, 100, 140, 0.749));
   color: white;
   box-shadow: 3px 3px 2px black;
 }
-.theme15 .form-theme {
+.theme14 .form-theme {
   background: radial-gradient(at 75% 25%, rgba(102, 92, 99, 0.1803921569), rgba(5, 25, 55, 0.749));
   color: white;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme16 .form-theme {
+.theme15 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.6980392157), rgba(225, 142, 226, 0.749));
   color: black;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
-.theme17 .form-theme {
+.theme16 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(248, 248, 246, 0.603), rgba(255, 255, 255, 0.444));
   color: black;
   box-shadow: 3px 3px 2px #000000;
@@ -559,7 +531,7 @@ body.theme17 {
   background: radial-gradient(at 75% 25%, #f3eef1, rgba(33, 44, 66, 0.749));
 }
 .theme9 .header-style {
-  background: radial-gradient(at 25% 75%, rgba(203, 215, 223, 0.6352941176), rgba(42, 140, 133, 0.614));
+  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
 }
 .theme10 .header-style {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
@@ -568,80 +540,87 @@ body.theme17 {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
 }
 .theme12 .header-style {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
-}
-.theme13 .header-style {
   background: radial-gradient(at 75% 25%, #80b3d5, rgba(15, 56, 84, 0.749));
 }
-.theme14 .header-style {
+.theme13 .header-style {
   background: radial-gradient(at 75% 25%, #cbd7df, rgba(42, 100, 140, 0.749));
 }
-.theme15 .header-style {
+.theme14 .header-style {
   background: linear-gradient(to bottom, rgba(31, 2, 28, 0.749), rgba(29, 46, 106, 0.4156862745));
 }
-.theme16 .header-style {
+.theme15 .header-style {
   background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
 }
-.theme17 .header-style {
-  background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749));
+.theme16 .header-style {
+  background: radial-gradient(at 75% 25%, rgba(235, 197, 152, 0.749), rgba(236, 138, 18, 0.749));
 }
 
 .theme0 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme1 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme2 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme3 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme4 .input-color {
-  background-color: #728d99;
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme5 .input-color {
-  background-color: #e2da84;
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme6 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme7 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme8 .input-color {
-  background-color: rgba(224, 219, 219, 0.792);
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme9 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme10 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme11 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme12 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme13 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme14 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme15 .input-color {
+  background-color: rgba(242, 237, 222, 0.305);
   color: black;
 }
 .theme16 .input-color {
-  color: black;
-}
-.theme17 .input-color {
-  background-color: rgb(239, 227, 184);
+  background-color: rgba(239, 227, 184, 0.327);
   color: black;
 }
 
@@ -723,6 +702,37 @@ h1, h3 {
 #nav-list button a:hover {
   text-shadow: none;
   transform: translateY(-7px);
+}
+
+.dropdown-menu {
+  display: none; /* Sakrij dropdown menu */
+  position: absolute;
+  top: 100%; /* Sets element right beneath the button */
+  right: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1000; /* Osiguraj da se prikazuje iznad drugih elemenata */
+  width: 100px;
+}
+
+/* Stil za prikaz dropdown menija */
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu li {
+  padding: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 0.9rem;
+}
+
+.dropdown-menu li:hover {
+  background-color: #ad307f;
 }
 
 select {

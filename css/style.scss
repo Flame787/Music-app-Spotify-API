@@ -291,6 +291,40 @@ h1, h3 {
 }
 
 
+.dropdown-menu {
+  display: none; /* Sakrij dropdown menu */
+  position: absolute;
+  top: 100%;   /* Sets element right beneath the button */
+  right: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  // width: 50%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1000; /* Osiguraj da se prikazuje iznad drugih elemenata */
+  width: 100px;
+}
+
+/* Stil za prikaz dropdown menija */
+.dropdown-menu.show {
+  display: block;
+}
+
+
+.dropdown-menu li {
+  padding: 2px;
+  cursor: pointer;
+  // border-bottom: 1px solid #ddd;
+  transition: background-color 0.2s;
+  font-size: 0.9rem;
+}
+
+.dropdown-menu li:hover {
+  background-color: #ad307f;
+}
+
 
 select {
   @include button-style();
