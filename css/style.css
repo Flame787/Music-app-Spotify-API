@@ -43,10 +43,10 @@ body.theme10 {
   background-image: url("../pictures/green-triangles.jpg") !important;
 }
 body.theme11 {
-  background-image: url("../pictures/blue-water.jpg") !important;
+  background-image: url("../pictures/blue-water2.jpg") !important;
 }
 body.theme12 {
-  background-image: url("../pictures/frost.jpg") !important;
+  background-image: url("../pictures/frost2.jpg") !important;
 }
 body.theme13 {
   background-image: url("../pictures/ice.jpg") !important;
@@ -107,15 +107,15 @@ body.theme11 {
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme12 {
-  color: #000000 !important;
-  text-shadow: none !important;
+  color: #d1d4c9 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme13 {
   color: #000000 !important;
   text-shadow: none !important;
 }
 body.theme14 {
-  color: #000000 !important;
+  color: #d1d4c9 !important;
   text-shadow: none !important;
 }
 body.theme15 {
@@ -155,7 +155,7 @@ body.theme15 {
 .theme3 #theme_color,
 .theme3 option {
   background-color: rgb(1, 1, 11);
-  background-image: linear-gradient(320deg, #b721ff 0%, #1591ad 63%);
+  background-image: linear-gradient(320deg, #b721ff 0%, #1591ad 63%, #c1e3eb 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -164,7 +164,7 @@ body.theme15 {
 .theme4 #theme_color,
 .theme4 option {
   background-color: #0b6893;
-  background-image: linear-gradient(320deg, #aadeef 0%, #1554ad 63%);
+  background-image: linear-gradient(320deg, #aadeef 0%, #1554ad 43%, #031b85 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -209,7 +209,7 @@ body.theme15 {
 .theme9 #theme_color,
 .theme9 option {
   background-color: rgb(6, 125, 8);
-  background-image: linear-gradient(320deg, #e2efaa 0%, rgb(3, 176, 43) 23%, rgb(1, 84, 2) 100%);
+  background-image: linear-gradient(320deg, #c5f5aa 0%, rgb(65, 214, 100) 23%, rgb(1, 84, 2) 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -217,8 +217,8 @@ body.theme15 {
 .theme10 .favorite-button,
 .theme10 #theme_color,
 .theme10 option {
-  background-color: #fffb7d;
-  background-image: linear-gradient(320deg, #f8f478 0%, #0a8723 81%);
+  background-color: #baff7d;
+  background-image: linear-gradient(320deg, #dcf3ca 0%, #57c35e 51%, rgb(16, 108, 6) 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -226,46 +226,46 @@ body.theme15 {
 .theme11 .favorite-button,
 .theme11 #theme_color,
 .theme11 option {
-  background-color: #0093e9;
-  background-image: linear-gradient(160deg, #0093e9 16%, #80d0c7 100%);
+  background-color: #0588a8;
+  background-image: linear-gradient(320deg, rgba(86, 235, 248, 0.7254901961) 16%, rgba(31, 107, 108, 0.749) 100%);
   color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme12 .theme-button, .theme12 .nav-button,
 .theme12 .favorite-button,
 .theme12 #theme_color,
 .theme12 option {
   background-color: rgb(124, 218, 231);
-  background-image: linear-gradient(300deg, rgb(143, 231, 243) 0%, #6699d7 100%);
+  background-image: linear-gradient(320deg, rgb(143, 231, 243) 0%, #4da8c4 40%, #106d8a 100%);
   color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme13 .theme-button, .theme13 .nav-button,
 .theme13 .favorite-button,
 .theme13 #theme_color,
 .theme13 option {
   background-color: rgb(124, 218, 231);
-  background-image: linear-gradient(300deg, rgb(143, 231, 243) 0%, #6699d7 100%);
+  background-image: linear-gradient(320deg, rgb(206, 240, 244) 0%, #66c0d7 100%);
   color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme14 .theme-button, .theme14 .nav-button,
 .theme14 .favorite-button,
 .theme14 #theme_color,
 .theme14 option {
   background-color: #2942a4;
-  background-image: linear-gradient(300deg, #d007c3 0%, #784ba0 24%, #2942a4 100%);
+  background-image: linear-gradient(320deg, #d007c3 0%, #784ba0 24%, #2942a4 100%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme15 .theme-button, .theme15 .nav-button,
 .theme15 .favorite-button,
 .theme15 #theme_color,
 .theme15 option {
   background-color: rgb(246, 194, 38);
-  background-image: linear-gradient(320deg, rgb(246, 194, 38) 0%, #e76229 100%);
+  background-image: linear-gradient(320deg, rgb(245, 232, 192) 0%, rgb(246, 194, 38) 23%, #ec7948 100%);
   color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 
 .theme0 button a {
@@ -319,7 +319,7 @@ body.theme15 {
 
 .theme0 .remove-button {
   background-color: #020322;
-  background-image: linear-gradient(320deg, #555454 0%, #3e1066 20%, #020322 100%);
+  background-image: linear-gradient(320deg, #555454 0%, #592382 20%, #020651 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -339,7 +339,7 @@ body.theme15 {
   background-color: rgb(24, 7, 75);
   background-image: linear-gradient(320deg, rgba(114, 159, 175, 0.6117647059) 0%, rgba(74, 45, 124, 0.6941176471) 50%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme4 .remove-button {
   background-color: rgb(2, 22, 63);
@@ -373,125 +373,141 @@ body.theme15 {
 }
 .theme9 .remove-button {
   background-color: rgb(6, 125, 8);
-  background-image: linear-gradient(320deg, #619c55 0%, rgb(1, 99, 5) 23%, rgb(1, 40, 1) 100%);
+  background-image: linear-gradient(320deg, #619c55 0%, rgb(1, 99, 60) 33%, rgb(1, 40, 21) 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme10 .remove-button {
   background-color: rgb(0, 139, 67);
-  background-image: linear-gradient(320deg, #619c55 0%, rgb(1, 99, 5) 23%, rgb(4, 67, 4) 100%);
+  background-image: linear-gradient(320deg, #98cd8e 0%, rgb(1, 99, 5) 23%, rgb(4, 67, 4) 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme11 .remove-button {
   background-color: white;
-  background-image: linear-gradient(160deg, #024971 16%, #20b6a4 100%);
+  background-image: linear-gradient(320deg, #013c5f 26%, #067f71 100%);
   color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme12 .remove-button {
   background-color: rgb(35, 107, 116);
-  background-image: linear-gradient(300deg, rgb(18, 91, 101) 0%, #0b4996 100%);
+  background-image: linear-gradient(320deg, #a8c8f0 0%, rgb(34, 115, 125) 20%, #04264f 100%);
   color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme13 .remove-button {
   background-color: rgb(35, 107, 116);
-  background-image: linear-gradient(300deg, rgb(17, 73, 81) 0%, #a8c8f0 100%);
-  color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  background-image: linear-gradient(320deg, rgb(17, 73, 81) 0%, #a8c8f0 100%);
+  color: black;
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme14 .remove-button {
   background-color: rgb(18, 13, 83);
   background-image: linear-gradient(300deg, #232121 0%, #3e1066 20%, rgb(11, 7, 68) 100%);
   color: white;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme15 .remove-button {
   background-color: black;
-  background-image: linear-gradient(320deg, #e9723f 0%, #5c1f03 100%);
+  background-image: linear-gradient(320deg, rgb(232, 194, 81) 0%, #f38d7b 36%, #7a2715 100%);
   color: black;
-  box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
+  box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 
 .theme0 .form-theme {
   background: radial-gradient(at 75% 25%, rgba(102, 92, 99, 0.1803921569), rgba(5, 25, 55, 0.749));
   color: white;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme1 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(98, 28, 75, 0.8), rgba(9, 20, 36, 0.662));
   color: white;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme2 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(210, 192, 243, 0.4274509804), rgba(35, 6, 71, 0.558));
   color: black;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme3 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(106, 179, 215, 0.5803921569), rgba(51, 4, 39, 0.4078431373));
   color: white;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme4 .form-theme {
   background: radial-gradient(at 75% 25%, rgba(93, 92, 102, 0.3450980392), rgba(5, 25, 55, 0.749));
   color: white;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme5 .form-theme {
   background: radial-gradient(at 75% 25%, rgba(206, 184, 62, 0.8196078431), rgba(203, 28, 28, 0.87));
-  color: white;
+  color: black;
+  text-shadow: none;
   box-shadow: 3px 3px 2px #000000;
 }
 .theme6 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(81, 79, 79, 0.8588235294), rgba(9, 3, 1, 0.749));
   color: white;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme7 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(165, 102, 70, 0.7490196078), rgba(9, 3, 1, 0.623));
   color: black;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme8 .form-theme {
   background: radial-gradient(at 75% 25%, rgba(210, 192, 92, 0.6588235294), rgba(203, 113, 28, 0.693));
   color: black;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme9 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(99, 154, 3, 0.381), rgba(2, 111, 84, 0.749));
   color: white;
+  text-shadow: none;
   box-shadow: 3px 3px 2px black;
 }
 .theme10 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(74, 116, 3, 0.574), rgba(2, 71, 40, 0.623));
   color: white;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme11 .form-theme {
-  background: radial-gradient(at 25% 75%, rgba(164, 209, 237, 0.3098039216), rgba(96, 148, 226, 0.567));
-  color: black;
+  background: radial-gradient(at 25% 75%, rgba(2, 129, 141, 0.6352941176), rgba(2, 51, 52, 0.674));
+  color: white;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme12 .form-theme {
-  background: radial-gradient(at 25% 75%, rgba(200, 226, 242, 0.7490196078), rgba(110, 158, 230, 0.749));
+  background: radial-gradient(at 75% 25%, rgba(177, 176, 176, 0.6980392157), rgba(42, 100, 140, 0.749));
   color: black;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme13 .form-theme {
-  background: radial-gradient(at 75% 25%, rgba(177, 176, 176, 0.6980392157), rgba(42, 100, 140, 0.749));
-  color: white;
+  background: radial-gradient(at 25% 75%, rgba(200, 226, 242, 0.7490196078), rgba(87, 195, 222, 0.5568627451));
+  color: black;
+  text-shadow: none;
   box-shadow: 3px 3px 2px black;
 }
 .theme14 .form-theme {
   background: radial-gradient(at 75% 25%, rgba(102, 92, 99, 0.1803921569), rgba(5, 25, 55, 0.749));
   color: white;
+  text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme15 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(248, 248, 246, 0.603), rgba(255, 255, 255, 0.444));
   color: black;
+  text-shadow: none;
   box-shadow: 3px 3px 2px #000000;
 }
 
@@ -529,19 +545,19 @@ body.theme15 {
   background: radial-gradient(at 25% 75%, rgba(99, 154, 3, 0.574), rgba(2, 71, 40, 0.764));
 }
 .theme11 .header-style {
-  background: radial-gradient(at 25% 75%, rgba(0, 148, 233, 0.7254901961), rgba(13, 36, 70, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(2, 129, 141, 0.7254901961), rgba(2, 51, 52, 0.749));
 }
 .theme12 .header-style {
-  background: radial-gradient(at 75% 25%, #80b3d5, rgba(15, 56, 84, 0.749));
+  background: radial-gradient(at 75% 25%, rgba(128, 179, 213, 0.7490196078), rgba(26, 78, 113, 0.749));
 }
 .theme13 .header-style {
-  background: radial-gradient(at 75% 25%, #cbd7df, rgba(42, 100, 140, 0.749));
+  background: radial-gradient(at 75% 25%, #cbd7df, rgba(67, 161, 185, 0.749));
 }
 .theme14 .header-style {
   background: linear-gradient(to bottom, rgba(31, 2, 28, 0.749), rgba(29, 46, 106, 0.4156862745));
 }
 .theme15 .header-style {
-  background: radial-gradient(at 75% 25%, rgba(235, 197, 152, 0.749), rgba(236, 138, 18, 0.749));
+  background: radial-gradient(at 75% 25%, rgba(235, 198, 152, 0.574), rgba(236, 138, 18, 0.759));
 }
 
 .theme0 .input-color {
@@ -607,6 +623,104 @@ body.theme15 {
 .theme15 .input-color {
   background-color: rgba(239, 227, 184, 0.327);
   color: black;
+}
+
+.theme0 .thin {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme1 .thin {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme2 .thin {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme3 .thin {
+  color: rgba(205, 204, 204, 0.853);
+}
+.theme4 .thin {
+  color: rgba(205, 204, 204, 0.853);
+}
+.theme5 .thin {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme6 .thin {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme7 .thin {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme8 .thin {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme9 .thin {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme10 .thin {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme11 .thin {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme12 .thin {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme13 .thin {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme14 .thin {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme15 .thin {
+  color: rgba(130, 129, 129, 0.853);
+}
+
+.theme0 .thin2 {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme1 .thin2 {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme2 .thin2 {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme3 .thin2 {
+  color: rgba(205, 204, 204, 0.853);
+}
+.theme4 .thin2 {
+  color: rgba(205, 204, 204, 0.853);
+}
+.theme5 .thin2 {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme6 .thin2 {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme7 .thin2 {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme8 .thin2 {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme9 .thin2 {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme10 .thin2 {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme11 .thin2 {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme12 .thin2 {
+  color: rgba(38, 37, 37, 0.853);
+}
+.theme13 .thin2 {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme14 .thin2 {
+  color: rgba(130, 129, 129, 0.853);
+}
+.theme15 .thin2 {
+  color: rgba(130, 129, 129, 0.853);
 }
 
 body {

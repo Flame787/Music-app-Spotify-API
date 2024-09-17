@@ -64,7 +64,6 @@ const themes = [
   "theme13",
   "theme14",
   "theme15",
-  "theme16",
 
 ]; 
 
@@ -95,6 +94,9 @@ function changeTheme(themeName) {
     document.querySelectorAll(".header-style").forEach((input) => {
       input.classList.remove(theme);
     });
+    document.querySelectorAll(".thin").forEach((text) => {
+      text.classList.remove(theme);
+    });
   });
 
   // Dodaj novu temu
@@ -116,6 +118,9 @@ function changeTheme(themeName) {
   });
   document.querySelectorAll(".header-style").forEach((input) => {
     input.classList.add(themeName);
+  });
+  document.querySelectorAll(".thin").forEach((text) => {
+    text.classList.add(themeName);
   });
 
   console.log("Selected theme:", themeName);
@@ -467,10 +472,10 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
     // Function createFavorite:
     function createFavorite(entry, artist, rating, time) {
       const item = document.createElement("li");
-      item.innerHTML = `<div class="form-theme item-card item-card2"> <p class="entry">Album: <span id="white" >${entry}</span><br>
-      Artist: <span class="artist" id="white" >${artist}</span><br>
-      Rate: <span class="rating" id="white" >${rating}</span><br>
-      Rated on: <span class="time" id="white" >${time}</span></p>  </div>`;
+      item.innerHTML = `<div class="form-theme item-card item-card2"> <p class="entry"><span class="thin2">Album: </span><span class="album2" id="white" >${entry}</span><br>
+      <span class="thin2">Artist: </span><span class="artist2" id="white" >${artist}</span><br>
+      <span class="thin2">Rate: </span><span class="rating2" id="white" >${rating}</span><br>
+      <span class="thin2">Rated on: </span><span class="time2" id="white" >${time}</span></p>  </div>`;
 
       console.log("Created item HTML:", item.innerHTML); // Debugging
 

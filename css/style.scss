@@ -136,6 +136,7 @@ button a {
       background: map-get($map, background);
       background-color: map-get($map, background-color);
       color: map-get($map, color);
+      text-shadow: map-get($map, text-shadow);
       box-shadow: map-get($map, box-shadow);
     }
   }
@@ -164,6 +165,24 @@ button a {
   @each $inputColor, $map in $inputColors {
     .#{$inputColor} & {
       background-color: map-get($map, background-color);
+      color: map-get($map, color);
+    }
+  }
+}
+
+
+
+.thin {
+  @each $thinColor, $map in $thinColors {
+    .#{$thinColor} & {
+      color: map-get($map, color);
+    }
+  }
+}
+
+.thin2 {
+  @each $thinColor, $map in $thinColors {
+    .#{$thinColor} & {
       color: map-get($map, color);
     }
   }
