@@ -8,7 +8,6 @@ body {
   text-align: center;
 }
 
-/* CSS */
 body.theme0 {
   background-image: url("../pictures/led-gradient.jpg") !important;
 }
@@ -43,7 +42,7 @@ body.theme10 {
   background-image: url("../pictures/green-triangles.jpg") !important;
 }
 body.theme11 {
-  background-image: url("../pictures/blue-water2.jpg") !important;
+  background-image: url("../pictures/blue-water3.jpg") !important;
 }
 body.theme12 {
   background-image: url("../pictures/frost2.jpg") !important;
@@ -55,7 +54,7 @@ body.theme14 {
   background-image: url("../pictures/fog-neon.jpg") !important;
 }
 body.theme15 {
-  background-image: url("../pictures/white-colored.jpg") !important;
+  background-image: url("../pictures/white-colored2.jpg") !important;
 }
 
 body.theme0 {
@@ -724,13 +723,6 @@ body.theme15 {
 }
 
 body {
-  font-family: "Quicksand", sans-serif;
-  font-family: "Bruno Ace SC", sans-serif;
-  font-family: "Rubik Mono One", monospace;
-  font-family: "Permanent Marker", cursive;
-  font-family: "Protest Guerrilla", sans-serif;
-  font-family: "Montserrat", sans-serif;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-family: "Poppins", sans-serif;
   background-repeat: repeat;
   background-size: 100%;
@@ -805,9 +797,9 @@ h3 {
 }
 
 .dropdown-menu {
-  display: none; /* Sakrij dropdown menu */
+  display: none; /* hide dropdown-menu */
   position: absolute;
-  top: 100%; /* Sets element right beneath the button */
+  top: 70%; /* Sets element right beneath the button - earlier it was 100% but this wasn't ok, it sat too low beneath the button */
   right: 20px;
   background-color: rgba(195, 193, 193, 0.505);
   border: 1px solid #ccc;
@@ -828,7 +820,8 @@ h3 {
   padding: 2px;
   cursor: pointer;
   transition: background-color 0.2s;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  text-shadow: none;
 }
 
 .dropdown-menu li:hover {
@@ -895,6 +888,10 @@ select option {
     Better to use percentage for containers inside the page, then the page will grow larger if needed - scrollable, 
     as long as alements are added to the list, but they will always fit into their container.
  */
+.flex-item {
+  margin: 3%;
+}
+
 #first-container {
   border-radius: 15px;
 }
@@ -913,10 +910,46 @@ select option {
 }
 
 #music-player {
-  margin-top: 2%;
+  margin-top: 5%;
   width: 90%;
   height: 300px;
   border: 1px solid white;
+}
+
+#music-wrapper {
+  margin-top: 5%;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: rgba(123, 125, 128, 0.6235294118);
+}
+
+audio::-webkit-media-controls-mute-button {
+  background-color: #f6f8f9;
+  border-radius: 50%;
+}
+
+audio::-webkit-media-controls-play-button:hover {
+  background-color: #f6f8f9;
+  border-radius: 50%;
+}
+
+audio::-webkit-media-controls-current-time-display {
+  color: #fff;
+}
+
+audio::-webkit-media-controls-timeline {
+  background-color: #c5c5c5;
+  border-radius: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+audio::-webkit-media-controls-volume-slider {
+  background-color: #c5c5c5;
+  border-radius: 25px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .item-card {
@@ -931,6 +964,8 @@ select option {
   align-items: center;
   transition: transform 0.3s ease;
   font-family: "Poppins", sans-serif !important;
+  border-top: 1px solid rgba(128, 128, 128, 0.485);
+  border-left: 1px solid rgba(128, 128, 128, 0.478);
 }
 
 .item-card:hover {
@@ -938,10 +973,11 @@ select option {
 }
 
 .item-card2 {
-  gap: 25%;
+  font-size: smaller;
+  gap: 10%;
 }
 
-.shadow-text {
+h3 {
   font-size: 2rem;
 }
 
@@ -1038,6 +1074,7 @@ li {
 
 .entry,
 .artist,
+.song,
 .rating,
 .time {
   font-size: smaller;
@@ -1154,6 +1191,21 @@ hr {
   #nav-list button {
     margin: 0 40px;
   }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 3% auto;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1.1rem;
+    padding: 2%;
+  }
+  .item-card2 {
+    gap: 0;
+  }
 }
 @media (max-width: 1150px) {
   #nav-list button:last-child {
@@ -1162,10 +1214,33 @@ hr {
   #nav-list button {
     margin: 0 20px;
   }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1.1rem;
+    padding: 2%;
+  }
 }
 @media (max-width: 1113px) {
   #nav-list button {
     width: 15%;
+  }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1.1rem;
   }
 }
 @media (max-width: 1056px) {
@@ -1175,10 +1250,25 @@ hr {
   li p {
     padding: 2% 0;
   }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1.1rem;
+  }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
 }
 @media (max-width: 989px) {
   #nav-title {
     font-size: 1.4rem;
+  }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
   }
 }
 /* so that 'Rate (1-10)' doesn't break in 2 rows */
@@ -1194,6 +1284,17 @@ hr {
     width: 10rem;
     height: 3rem;
   }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1rem;
+  }
 }
 @media (max-width: 908px) {
   #nav-title {
@@ -1204,16 +1305,28 @@ hr {
     width: 10rem;
     height: 3rem;
   }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
 }
 @media (max-width: 900px) {
   #nav-list button,
   select {
     width: 10rem;
   }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
 }
 @media (max-width: 880px) {
   #nav-list button:last-child {
     margin-right: 15px;
+  }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
   }
   #nav-list button,
   select {
@@ -1224,13 +1337,21 @@ hr {
   #nav-title {
     font-size: 1.4rem;
   }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1rem;
+  }
 }
 @media (max-width: 840px) {
-  #nav-list button,
-  select {
-    margin: 0 10px;
-    width: 10rem;
-    height: 3rem;
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
+  .dropdown-menu {
+    top: 115px;
   }
   #nav-title {
     font-size: 1.2rem;
@@ -1239,6 +1360,19 @@ hr {
   .remove-button {
     margin: 3%;
   }
+  h1 {
+    font-size: 3.2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1rem;
+  }
 }
 @media (max-width: 786px) {
   body {
@@ -1246,13 +1380,21 @@ hr {
   }
   .flex-item {
     flex-basis: 70%;
-    margin: 1% auto;
   }
   .flex-container {
     height: 45%;
     width: 85%;
     margin: 5% auto;
     align-content: center;
+    flex-wrap: wrap;
+  }
+  .item-fill {
+    flex-basis: 70%;
+    margin: 3% auto;
+  }
+  .item-fill2 {
+    flex-basis: 70%;
+    margin: 3% auto;
   }
   #nav-list button,
   select {
@@ -1263,12 +1405,15 @@ hr {
   }
   button,
   input {
-    width: 60%;
+    width: 50%;
   }
   button {
     margin-top: 5%;
-    margin-bottom: 10%;
     padding: 0%;
+  }
+  .favorite-button,
+  .remove-button {
+    width: 50%;
   }
   .remove-button {
     margin: 3%;
@@ -1293,5 +1438,53 @@ hr {
   }
   .red {
     height: 160px;
+  }
+  .dropdown-menu {
+    top: 150px;
+  }
+  h1 {
+    font-size: 3.2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1.2rem;
+  }
+  .favorite-button {
+    margin-top: 5%;
+  }
+  .remove-button,
+  .submit-button {
+    margin-bottom: 5%;
+  }
+  .input-button {
+    margin-bottom: 5%;
+  }
+}
+@media (max-width: 512px) {
+  .red {
+    height: 200px;
+  }
+  h1 {
+    font-size: 3.2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+    padding: 5%;
+  }
+  audio {
+    width: 230px;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1rem;
   }
 }/*# sourceMappingURL=style.css.map */

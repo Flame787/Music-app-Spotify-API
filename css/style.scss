@@ -6,63 +6,26 @@
 
 // THEME MODULES:
 
-// On each loop, assign these values to $theme and $map:
-// module-name is a placeholder, should be replaced with any html-element: div, navbar, card, button etc - a container whose style we want to change.
-// in html, we use naming like this :<div class="theme1 navbar">...</div>
+// On each loop, assign values to $theme and $map:
+// Module-name - can be any html-element: div, navbar, card, button etc - a container whose style we want to change.
+// These containers should also be targeted in JS with each-loop to remove previous theme and add newly selected theme.
+// A class with theme number will be added to the element in html :<div class="theme1 navbar">...</div>
 // The & refers to parent selectors, and placing it after .#{$theme} tells Sass to output any parent selectors after the theme name:
-
-// .module-name {
-//   @each $theme, $map in $themes {
-//     .#{$theme} & {
-//       color: map-get($map, color);
-//       background-color: map-get($map, background-color);
-//       font-size: map-get($map, font-size);
-//     }
-//   }
-// }
-
-// .module-name {
-//   h1 {
-//     @each $theme, $map in $themes {
-//       .#{$theme} & {
-//         color: map-get($map, color);
-//       }
-//     }
-//   }
-// }
-
-/* CSS */
-// .theme1 .module-name h1 { color: red; }
-// .theme2 .module-name h1 { color: orange; }
-// .theme3 .module-name h1 { color: yellow; }
-// .theme4 .module-name h1 { color: green; }
-// .theme5 .module-name h1 { color: blue; }
-
-// <body class="theme7">
-// <button class="button nav-button theme7"><a href="index.html">Home</a></button>
-// <button type="button" class="favorite-button button flex-item theme7">Add to favorites</button>
-
-// PAGE-BACKGROUND:
 
 // &.#{$theme} - current element
 // .#{$theme} & { - parent element gets the class
+
+// PAGE-BACKGROUND-IMAGES:
 
 body {
   @each $theme, $background in $backgrounds {
     &.#{$theme} {
       background-image: $background !important;
-      // background: $background !important;
     }
   }
 }
 
-// body {
-//   @each $theme, $background in $backgrounds {
-//     &.#{$theme} {
-//       background: map-get($backgrounds, background) !important;
-//     }
-//   }
-// }
+// FONT-COLORS AND TEXT-SHADOWS:
 
 body {
   @each $theme, $properties in $fontColors {
@@ -73,16 +36,7 @@ body {
   }
 }
 
-// FOR NAV-BUTTONS (html) AND ADD-BUTTONS (JS-file):
-
-// .nav-button {
-//   @each $theme, $map in $themes {
-//     .#{$theme} & {
-//       background-color: map-get($map, background-color);
-//       color: map-get($map, color);
-//     }
-//   }
-// }
+// BUTTONS - NAVIGATION, THEME, SUBMIT/ADD-BUTTONS:
 
 .theme-button {
   @each $theme, $map in $themes {
@@ -96,7 +50,7 @@ body {
   }
 }
 
-// Apply 1 scss-module to several classes (these classes/id-s/elements have to be all targeted in JS, in order to apply themes on them):
+// Apply 1 scss-module to several classes:
 .nav-button,
 .favorite-button,
 #theme_color,
@@ -104,7 +58,7 @@ body {
   @extend .theme-button;
 }
 
-//ancor buttons have the same style like Select buttons:
+//Ancor (Nav-) buttons have the same color like Select/Add buttons:
 
 button a {
   @each $theme, $map in $themes {
@@ -114,7 +68,7 @@ button a {
   }
 }
 
-// FOR REMOVE-BUTTONS (JS-file):
+// REMOVE-BUTTONS (darker gradients):
 
 .remove-button {
   @each $theme, $map in $themes2 {
@@ -128,7 +82,7 @@ button a {
   }
 }
 
-// FORM AND TITLES:
+// FORMS:
 
 .form-theme {
   @each $formTheme, $map in $formThemes {
@@ -142,14 +96,7 @@ button a {
   }
 }
 
-// .title-theme {
-//   @extend .form-theme;
-//   @each $titleTheme, $map in $titleThemes {
-//     .#{$titleTheme} & {
-//       background: map-get($map, background);
-//     }
-//   }
-// }
+// HEADERS (UPPER NAVIGATION DIV):
 
 .header-style {
   @each $headerTheme, $map in $headerThemes {
@@ -159,7 +106,7 @@ button a {
   }
 }
 
-// Input background colors and fonts:
+// INPUT-FIELDS - background-colors and font-colors:
 
 .input-color {
   @each $inputColor, $map in $inputColors {
@@ -170,7 +117,7 @@ button a {
   }
 }
 
-
+// REPEATING CATEGORIES-CLASS ".THIN" (artist, song, album, rate), added in JS:
 
 .thin {
   @each $thinColor, $map in $thinColors {
@@ -188,64 +135,22 @@ button a {
   }
 }
 
-// font-color of the paragraph in song cards:
-
-// .whiteParagraph, .whiteText {
-//   @each $theme, $properties in $paragraphColors {
-//     &.#{$theme} {
-//       color: map-get($properties, color) !important;
-//     }
-//   }
-// }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////// DEFAULT STYLES, INDEPENDENT OF SELECTED THEMES: ////////////////////////////////////////////////
 
 body {
-  // color: $fontColor1;
-  // font-family: $sans-serif1;
-
-  font-family: $quicksand;
-
-  font-family: "Bruno Ace SC", sans-serif;
-
-  font-family: "Rubik Mono One", monospace;
-
-  font-family: "Permanent Marker", cursive;
-
-  font-family: "Protest Guerrilla", sans-serif;
-
-  font-family: "Montserrat", sans-serif;
-
-  font-family: $sans-serif2;
-
   font-family: $poppins;
-
-  // font-family: "Inter", sans-serif;
-
-  // letter-spacing: 0.1rem;
-
-  // font-family: "Viga", sans-serif;
-
-  // font-family: "Bowlby One", sans-serif;
-
-  // text-shadow: 2px 2px 4px $textShadowColor1;
-  // background-image: url("../pictures/energy-violet.jpg");
-  // background-image: $backgrounds;
   background-repeat: repeat;
   background-size: 100%;
 }
 
 h1 {
   font-size: 5rem;
-  // letter-spacing: 0.3rem;
 }
 
 h1,
 h3 {
-  font-family: "Inter", sans-serif;
+  font-family: $inter;
 }
-
-// linear-gradient - to top: 0deg, to bottom: 180deg, to left: 270deg, and to right: 90deg
 
 // Navbar (header id="navigation" class="red"):
 
@@ -254,7 +159,7 @@ h3 {
   height: 120px;
 }
 
-// all children elements of header, which has class .red:
+// all children elements of header (which has class .red): ancor-buttons & dropdown-button:
 .red > * {
   padding: 0 5px 5px;
 }
@@ -287,14 +192,9 @@ h3 {
     @include button-style();
     @include navbar-button();
 
-    // &:last-child {
-    //   margin-right: 50px;
-    // }
-
     a {
       @include nav-ancor-text();
       text-decoration: none;
-      // color: inherit;
 
       &:hover {
         @include button-hover();
@@ -304,9 +204,9 @@ h3 {
 }
 
 .dropdown-menu {
-  display: none; /* Sakrij dropdown menu */
+  display: none; /* hide dropdown-menu */
   position: absolute;
-  top: 100%; /* Sets element right beneath the button */
+  top: 70%; /* Sets element right beneath the button - earlier it was 100% but this wasn't ok, it sat too low beneath the button */
   right: 20px;
   background-color: rgba(195, 193, 193, 0.505);
   border: 1px solid #ccc;
@@ -329,7 +229,8 @@ h3 {
   cursor: pointer;
   // border-bottom: 1px solid #ddd;
   transition: background-color 0.2s;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  text-shadow: none;
 }
 
 .dropdown-menu li:hover {
@@ -402,6 +303,10 @@ select {
     as long as alements are added to the list, but they will always fit into their container.
  */
 
+ .flex-item {
+  margin: 3% ;
+ }
+
 #first-container {
   border-radius: 15px;
 }
@@ -442,12 +347,47 @@ select {
 // }
 
 #music-player {
-  margin-top: 2%;
+  margin-top: 5%;
   width: 90%;
   height: 300px;
   // border-radius: 30px;
-
   border: 1px solid white;
+}
+
+#music-wrapper {
+  margin-top: 5%;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: #7b7d809f;
+}
+
+audio::-webkit-media-controls-mute-button {
+  background-color: #f6f8f9;
+  border-radius: 50%;
+}
+
+audio::-webkit-media-controls-play-button:hover {
+  background-color: #f6f8f9;
+  border-radius: 50%;
+}
+
+audio::-webkit-media-controls-current-time-display {
+  color: #fff;
+}
+
+audio::-webkit-media-controls-timeline {
+  background-color: #c5c5c5;
+  border-radius: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+audio::-webkit-media-controls-volume-slider {
+  background-color: #c5c5c5;
+  border-radius: 25px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .item-card {
@@ -462,6 +402,8 @@ select {
   align-items: center;
   transition: transform 0.3s ease;
   font-family: "Poppins", sans-serif !important;
+  border-top: 1px solid rgba(128, 128, 128, 0.485);
+  border-left: 1px solid rgba(128, 128, 128, 0.478);
 }
 
 .item-card:hover {
@@ -469,7 +411,8 @@ select {
 }
 
 .item-card2 {
-  gap: 25%;
+  font-size: smaller;
+  gap: 10%;
 }
 
 // label {
@@ -492,7 +435,7 @@ select {
 //   color: $fontColor1;
 // }
 
-.shadow-text {
+h3 {
   font-size: 2rem;
 }
 
@@ -609,6 +552,7 @@ li {
 
 .entry,
 .artist,
+.song,
 .rating,
 .time {
   font-size: smaller;
@@ -677,6 +621,21 @@ hr {
   #nav-list button {
     margin: 0 40px;
   }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 3% auto;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1.1rem;
+    padding: 2%;
+  }
+  .item-card2 {
+    gap: 0;
+  }
 }
 
 @media (max-width: 1150px) {
@@ -687,11 +646,34 @@ hr {
   #nav-list button {
     margin: 0 20px;
   }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1.1rem;
+    padding: 2%;
+  }
 }
 
 @media (max-width: 1113px) {
   #nav-list button {
     width: 15%;
+  }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1.1rem;
   }
 }
 
@@ -702,6 +684,17 @@ hr {
   li p {
     padding: 2% 0;
   }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1.1rem;
+  }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
 }
 
 @media (max-width: 989px) {
@@ -710,6 +703,10 @@ hr {
   // }
   #nav-title {
     font-size: 1.4rem;
+  }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
   }
 }
 
@@ -726,6 +723,17 @@ hr {
     width: 10rem;
     height: 3rem;
   }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 908px) {
@@ -737,6 +745,11 @@ hr {
     width: 10rem;
     height: 3rem;
   }
+
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
 }
 
 @media (max-width: 900px) {
@@ -744,11 +757,19 @@ hr {
   select {
     width: 10rem;
   }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
 }
 
 @media (max-width: 880px) {
   #nav-list button:last-child {
     margin-right: 15px;
+  }
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
   }
 
   #nav-list button,
@@ -761,14 +782,30 @@ hr {
   #nav-title {
     font-size: 1.4rem;
   }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 840px) {
-  #nav-list button,
-  select {
-    margin: 0 10px;
-    width: 10rem;
-    height: 3rem;
+  // #nav-list button,
+  // select {
+  //   margin: 0 10px;
+  //   width: 10rem;
+  //   height: 3rem;
+  // }
+
+  .flex-item {
+    flex-basis: 30%;
+    margin: 1% auto;
+  }
+
+  .dropdown-menu {
+    top: 115px;
   }
 
   #nav-title {
@@ -779,6 +816,21 @@ hr {
   .remove-button {
     margin: 3%;
   }
+  h1 {
+    font-size: 3.2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    // padding: 5%;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 786px) {
@@ -788,7 +840,8 @@ hr {
 
   .flex-item {
     flex-basis: 70%;
-    margin: 1% auto;
+    // margin: 10% auto;
+    // padding-top: 10%;
   }
 
   .flex-container {
@@ -796,6 +849,17 @@ hr {
     width: 85%;
     margin: 5% auto;
     align-content: center;
+    flex-wrap: wrap;
+  }
+
+  .item-fill {
+    flex-basis: 70%;
+    margin: 3% auto;
+  }
+
+  .item-fill2 {
+    flex-basis: 70%;
+    margin: 3% auto;
   }
 
   // .red {
@@ -813,13 +877,19 @@ hr {
 
   button,
   input {
-    width: 60%;
+    width: 50%;
   }
 
   button {
     margin-top: 5%;
-    margin-bottom: 10%;
+
     padding: 0%;
+  }
+
+  .favorite-button,
+  .remove-button {
+    width: 50%;
+    // margin-bottom: 1%;
   }
 
   .remove-button {
@@ -849,5 +919,62 @@ hr {
   }
   .red {
     height: 160px;
+  }
+  .dropdown-menu {
+    top: 150px;
+  }
+
+  h1 {
+    font-size: 3.2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    // padding: 5%;
+  }
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1.2rem;
+  }
+  .favorite-button {
+    margin-top: 5%;
+  }
+  .remove-button,
+  .submit-button {
+    margin-bottom: 5%;
+  }
+
+  .input-button {
+    margin-bottom: 5%;
+  }
+}
+
+@media (max-width: 512px) {
+  .red {
+    height: 200px;
+  }
+
+  h1 {
+    font-size: 3.2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    padding: 5%;
+  }
+
+  audio {
+    width: 230px;
+  }
+
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button {
+    font-size: 1rem;
   }
 }

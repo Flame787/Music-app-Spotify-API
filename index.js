@@ -345,10 +345,14 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
       // const div = document.createElement("div");
       // div.classList.add("form-theme", "item-card");
 
-      item.innerHTML = `<div class="form-theme item-card" > <p><span class="thin"> Album:  </span> <span class="entry">${entry}</span> 
-      <br><span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> 
-      <br> <span class="thin"> Rate:  </span>   <span  class="rating">${rating}</span> 
-      <br> <span class="thin"> Rated on:  </span>   <span class="time">${time}</span></p>  </div>`;
+      item.innerHTML = `<div class="form-theme item-card" > 
+      <p class="item-fill flex-item">  
+      <span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> <br> 
+      <span class="thin"> Song: </span> <span class="song"> placeholder </span> <br> 
+      <span class="thin"> Album:  </span> <span class="entry">${entry}</span> <br> 
+      <span class="thin"> Rate:  </span>   <span  class="rating">${rating}</span> <br> 
+      <span class="thin"> Rated on:  </span>   <span class="time">${time}</span>
+      </p>  </div>`;
 
       const itemCardDiv = item.querySelector(".item-card");
 
@@ -472,8 +476,10 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
     // Function createFavorite:
     function createFavorite(entry, artist, rating, time) {
       const item = document.createElement("li");
-      item.innerHTML = `<div class="form-theme item-card item-card2"> <p class="entry"><span class="thin2">Album: </span><span class="album2" id="white" >${entry}</span><br>
+      item.innerHTML = `<div class="form-theme item-card item-card2"> <p class="item-fill2 flex-item">
       <span class="thin2">Artist: </span><span class="artist2" id="white" >${artist}</span><br>
+      <span class="thin2">Song: </span><span class="song2" id="white" > placeholder </span><br>
+      <span class="thin2">Album: </span><span class="album2" id="white" >${entry}</span><br>
       <span class="thin2">Rate: </span><span class="rating2" id="white" >${rating}</span><br>
       <span class="thin2">Rated on: </span><span class="time2" id="white" >${time}</span></p>  </div>`;
 
@@ -504,8 +510,9 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
 
       divElement.innerHTML += removeButton.outerHTML;
 
-      removeButton.innerHTML = "Remove album";
+      removeButton.innerHTML = "Remove from list";
     }
+
 
     // function removeTask:
     function removeTask(event) {
