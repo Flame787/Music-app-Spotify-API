@@ -100,7 +100,7 @@ body {
 .nav-button,
 .favorite-button,
 #theme_color,
-option {
+.dropdown-menu {
   @extend .theme-button;
 }
 
@@ -308,15 +308,15 @@ h3 {
   position: absolute;
   top: 100%; /* Sets element right beneath the button */
   right: 20px;
-  background-color: white;
+  background-color: rgba(195, 193, 193, 0.505);
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 10px;
   // width: 50%;
   list-style: none;
   padding: 0;
   margin: 0;
   z-index: 1000; /* Osiguraj da se prikazuje iznad drugih elemenata */
-  width: 100px;
+  width: 130px;
 }
 
 /* Stil za prikaz dropdown menija */
@@ -329,11 +329,11 @@ h3 {
   cursor: pointer;
   // border-bottom: 1px solid #ddd;
   transition: background-color 0.2s;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 .dropdown-menu li:hover {
-  background-color: #ad307f;
+  background-color: #bebdbd;
 }
 
 select {
