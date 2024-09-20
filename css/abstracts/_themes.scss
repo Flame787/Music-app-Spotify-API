@@ -3,12 +3,12 @@
 // variable $themes is an object, has many different key-value pairs. Values may consist of several css-atributes.
 
 $backgrounds: (
-  theme0: url("../pictures/led-gradient.jpg"),
+  theme0: url("../pictures/purple-net.jpg"),
   //Theme
   theme1: url("../pictures/purple-lights2.jpg"),
   //Disco
   theme2: url("../pictures/violet.jpg"),
-  //Vibe
+  //Night
   theme3: url("../pictures/triangular-neon-laser.jpg"),
   //Future
   theme4: url("../pictures/blue-pixel.jpg"),
@@ -19,7 +19,7 @@ $backgrounds: (
   //Volcano
   theme7: url("../pictures/red-triangles.jpg"),
   //Copper
-  theme8: url("../pictures/dawn.jpg"),
+  theme8: url("../pictures/dawn2.jpg"),
   //Sunrise
   theme9: url("../pictures/abstract-green.jpg"),
   //Green
@@ -31,7 +31,7 @@ $backgrounds: (
   //Frost
   theme13: url("../pictures/ice.jpg"),
   //Nord
-  theme14: url("../pictures/fog-neon.jpg"),
+  theme14: url("../pictures/fog-neon2.jpg"),
   //Purple
   theme15: url("../pictures/white-colored2.jpg"),
   //Joy
@@ -39,7 +39,7 @@ $backgrounds: (
 
 $headerThemes: (
   theme0: (
-    background: radial-gradient(at 25% 75%, #0800059e, rgba(9, 20, 36, 0.652)),
+    background: radial-gradient(at 25% 75%, #0800058e, rgba(9, 20, 36, 0.652)),
   ),
   //Theme
   theme1:
@@ -51,7 +51,7 @@ $headerThemes: (
     (
       background: radial-gradient(at 25% 75%, #2b043e, rgba(9, 20, 36, 0.749)),
     ),
-  //Vibe
+  //Night
   theme3:
     (
       // background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
@@ -155,21 +155,11 @@ $headerThemes: (
 $themes: (
   theme0: (
     background-color: #070b7c,
-    // background-image:
-    //   linear-gradient(
-    //     320deg,
-    //     #d06c07 7%,
-    //     #d00768 14%,
-    //     #03065d 40%,
-    //     #020322 80%
-    //   ),
     background-image:
-      linear-gradient(320deg, #d06c07 0%, #d00768 10%, #070b7c 56%),
+      // linear-gradient(320deg, #d00768 5%, #070b7c 40%),
+      linear-gradient(320deg, #d007a8 0%, #040651 50%),
     color: white,
     box-shadow: 3px 3px 2px #04062db6,
-    // position: relative,
-    // overflow: hidden,
-    // transition: transform 0.4s ease-in-out,,,
   ),
 
   theme1: (
@@ -276,7 +266,6 @@ $themes: (
     background-image:
       linear-gradient(320deg, rgb(245, 232, 192) 0%, rgb(246, 194, 38) 23%, #ec7948 100%),
     color: black,
-    // border: 1px solid black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
 );
@@ -287,7 +276,7 @@ $themes2: (
   theme0: (
     background-color: #020322,
     background-image:
-      linear-gradient(320deg, #555454 0%, #592382 20%, #020651 100%),
+      linear-gradient(320deg, #9e919c 0%, #693194 15%, #170138 100%),
     color: white,
 
     box-shadow: 3px 3px 2px #04062db6,
@@ -388,7 +377,6 @@ $themes2: (
     background-color: black,
     background-image: linear-gradient(320deg, rgb(232, 194, 81) 0%, #f38d7b 36%, #7a2715 100%),
     color: black,
-    // border: 0.5px solid black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
 );
@@ -547,35 +535,11 @@ $thinColors: ();
 }
 
 
-
-// themes with white font in the song cards:
-
-// $paragraphColors: ();
-
-// themes with dark font in paragraph:
-// @for $i from 0 through 7 {
-//   $paragraphColors: map-merge($paragraphColors, (
-//     theme#{$i}: (
-//       color: $textShadowColor1,
-//     )
-//   ));
-// }
-
-// themes with white font in paragraph:
-
-// @for $i from 8 through 17 {
-//   $paragraphColors: map-merge($paragraphColors, (
-//     theme#{$i}: (
-//       color: $fontColor1,
-//     )
-//   ));
-// }
-
 // Set of colors for Forms:
 
 $formThemes: (
   theme0: (
-    background: radial-gradient(at 75% 25%, #665c632e, rgba(5, 25, 55, 0.749)),
+    background: radial-gradient(at 75% 25%, #6b526481, rgba(5, 25, 55, 0.749)),
     color: white,
     text-shadow: none,
     box-shadow: 3px 3px 2px $boxShadowColor1,
@@ -698,64 +662,6 @@ $formThemes: (
     box-shadow: 3px 3px 2px $textShadowColor1,
   ),
 );
-
-// Set of colors for Titles:
-
-// $titleThemes: (
-//   theme0: (
-//     background: radial-gradient(at 25% 75%, #a60c3a, rgba(9, 20, 36, 0.749)),
-//   ),
-//   theme1: (
-//     background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
-//   ),
-//   theme2: (
-//     background: radial-gradient(at 25% 75%, #efe6f4b2, rgba(88, 44, 142, 0.749)),
-//   ),
-//   theme3: (
-//     background: radial-gradient(at 25% 75%, #621c4b, rgba(1, 8, 20, 0.94)),
-//   ),
-//   theme4: (
-//     background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
-//   ),
-//   theme5: (
-//     background: radial-gradient(at 25% 75%, #ceb83ed2, rgba(203, 28, 28, 0.749)),
-//   ),
-//   theme6: (
-//     background: radial-gradient(at 25% 75%, #363433db, rgba(9, 3, 1, 0.749)),
-//   ),
-//   theme7: (
-//     background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
-//   ),
-//   theme8: (
-//     background:
-//       radial-gradient(at 25% 75%, #f3eef1e4, rgba(174, 188, 214, 0.749)),
-//   ),
-
-//   theme9: (
-//     background: radial-gradient(at 25% 75%, #343030b2, rgba(33, 2, 3, 0.749)),
-//   ),
-//   theme10: (
-//     background: radial-gradient(at 25% 75%, #eda4a4b2, rgba(95, 9, 123, 0.749)),
-//   ),
-//   theme11: (
-//     background:
-//       radial-gradient(at 25% 75%, #a4d1edb2, rgba(96, 148, 226, 0.749)),
-//   ),
-//   theme12: (
-//     background: radial-gradient(at 25% 75%, #a4d1edb2, rgba(43, 92, 165, 0.749)),
-//   ),
-//   theme13: (
-//     background: radial-gradient(at 25% 75%, #343030b2, rgba(43, 92, 165, 0.749)),
-//   ),
-//   theme14: (
-//     background: radial-gradient(at 25% 75%, #eda4a4b2, rgba(95, 9, 123, 0.749)),
-//   ),
-
-//   theme15: (
-//     background:
-//       radial-gradient(at 25% 75%, rgb(246, 246, 17), rgba(255, 255, 255, 0.5)),
-//   ),
-// );
 
 // Input colors:
 

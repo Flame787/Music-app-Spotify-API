@@ -215,11 +215,11 @@ h3 {
   list-style: none;
   padding: 0;
   margin: 0;
-  z-index: 1000; /* Osiguraj da se prikazuje iznad drugih elemenata */
+  z-index: 1000; /* shows up in front of other elements */
   width: 130px;
 }
 
-/* Stil za prikaz dropdown menija */
+/* Dropdown-menu when shown */
 .dropdown-menu.show {
   display: block;
 }
@@ -227,7 +227,6 @@ h3 {
 .dropdown-menu li {
   padding: 2px;
   cursor: pointer;
-  // border-bottom: 1px solid #ddd;
   transition: background-color 0.2s;
   font-size: 1rem;
   text-shadow: none;
@@ -241,18 +240,13 @@ select {
   @include button-style();
   @include navbar-button();
   @include submit-button();
-  // -webkit-appearance: none;
-  // -moz-appearance: none;
+
   display: inline-block;
-  // appearance: none;
   border-top-left-radius: 40px;
   border-bottom-right-radius: 40px;
-  // width: 15%;
   padding: 5px 20px;
-  // background-color: $navButtonColor1;
   color: $fontColor1;
   font-weight: bold;
-  // text-shadow: 2px 2px 4px $textShadowColor1;
   font-family: $sans-serif1;
   text-align: center;
   width: 18%;
@@ -272,7 +266,6 @@ select {
   font-size: 0.9rem;
   background-color: $inputColor1;
   border-radius: 45px;
-  // opacity: 0.8 !important;
 }
 
 #theme-color option {
@@ -283,10 +276,6 @@ select {
   text-align: center;
 }
 
-// h1,
-// h2 {
-//   margin-top: 10%;
-// }
 
 // form:
 
@@ -315,42 +304,19 @@ select {
   @include form-design();
 }
 
-// .visible-title1,
-// .visible-title2 {
-//   padding: 0.1%;
-//   margin: 5% 35%;
-//   border-radius: 15px;
-//   border-top: 1px solid rgba(128, 128, 128, 0.485);
-//   border-left: 1px solid rgba(128, 128, 128, 0.478);
-//   transition: transform 0.3s ease;
-//   position: relative;
-// }
-
 // to have div transparent, but text inside of it fully visible - rgba with transparent effect:
 // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
 
 .visible-title1,
 .visible-title2 {
   padding: 0.1%;
-  // margin: 5% 35%;
-  // border-radius: 15px;
-  // border-top: 1px solid rgba(128, 128, 128, 0.485);
-  // border-left: 1px solid rgba(128, 128, 128, 0.478);
-  // transition: transform 0.3s ease;
-  // position: relative;
 }
 
-// .visible-title1:hover,
-// .visible-title2:hover,
-// form:hover {
-//   transform: translateY(-10px);
-// }
 
 #music-player {
   margin-top: 5%;
   width: 90%;
   height: 300px;
-  // border-radius: 30px;
   border: 1px solid white;
 }
 
@@ -415,26 +381,6 @@ audio::-webkit-media-controls-volume-slider {
   gap: 10%;
 }
 
-// label {
-//   text-shadow: none !important;
-// }
-
-// .formViolet {
-//   // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
-//   background: radial-gradient(at 75% 25%, #450930, rgba(29, 54, 92, 0.551));
-//   color: $fontColor1;
-// }
-
-// .formBlue {
-//   background: radial-gradient(at 25% 75%, #0f4d5f, rgba(77, 148, 255, 0));
-//   color: $fontColor1;
-// }
-
-// .formBlack {
-//   background: rgba(0, 0, 0, 0.655);
-//   color: $fontColor1;
-// }
-
 h3 {
   font-size: 2rem;
 }
@@ -460,16 +406,11 @@ select {
   // overflow: hidden: enables that eny content which is outside of element border stays hidden - important for 'shine' efect because it passes over the element border.
   // transition: enables transformation on hover.
 
-  // &:hover {
-  //   transform: scale(1.05);
-  //   box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.4);
-  // }
-
   &::after {
     content: "";
     position: absolute;
     top: 0;
-    left: -100%;
+    left: -80%;
     width: 200%;
     height: 100%;
     // background: rgba(255, 255, 255, 0.289);
@@ -507,7 +448,6 @@ select {
 
 .input-button:hover {
   background-color: $hoverColor1;
-  // color: $textShadowColor1;
   text-shadow: none;
 }
 
@@ -559,23 +499,12 @@ li {
 }
 
 .whiteParagraph {
-  // color: $fontColor1;
   @include list-paragraph();
 }
 
 .blackParagraph {
   color: $inputColor1;
   @include list-paragraph();
-}
-
-.whiteText {
-  // color: $fontColor1;
-  @include white-todos();
-}
-
-.blackText {
-  // color: $textShadowColor1;
-  @include white-todos();
 }
 
 #results {
@@ -603,13 +532,8 @@ hr {
 #new-title {
   display: none;
 }
-
 @include columns();
 
-.water {
-  // for .select:
-  background-color: $paragraphColor;
-}
 
 // MEDIA QUERIES:
 
@@ -657,6 +581,14 @@ hr {
   .submit-button {
     font-size: 1.1rem;
     padding: 2%;
+  }
+  h1 {
+    font-size: 3.3rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    padding: 5%;
   }
 }
 
@@ -789,6 +721,14 @@ hr {
   .submit-button {
     font-size: 1rem;
   }
+  h1 {
+    font-size: 3.1rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    padding: 5%;
+  }
 }
 
 @media (max-width: 840px) {
@@ -817,11 +757,11 @@ hr {
     margin: 3%;
   }
   h1 {
-    font-size: 3.2rem;
+    font-size: 3.1rem;
   }
 
   h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     // padding: 5%;
   }
   a.ancor-style,
@@ -860,6 +800,15 @@ hr {
   .item-fill2 {
     flex-basis: 70%;
     margin: 3% auto;
+  }
+
+  h1 {
+    font-size: 2.9rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    padding: 5%;
   }
 
   // .red {
@@ -925,12 +874,12 @@ hr {
   }
 
   h1 {
-    font-size: 3.2rem;
+    font-size: 2.9rem;
   }
 
   h3 {
-    font-size: 1.5rem;
-    // padding: 5%;
+    font-size: 1.3rem;
+    padding: 5%;
   }
   a.ancor-style,
   .nav-button,
@@ -958,11 +907,11 @@ hr {
   }
 
   h1 {
-    font-size: 3.2rem;
+    font-size: 2.7rem;
   }
 
   h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     padding: 5%;
   }
 
