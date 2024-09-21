@@ -1,49 +1,54 @@
-require("dotenv").config(); // Učitaj dotenv
+require("dotenv").config(); // load 'dotenv' file
+
+// load Express:
 const express = require("express");
 
 const cors = require("cors");
 
-// Inicijaliziraj Express aplikaciju
+// Initialize Express app:
 const app = express();
 
-// Definiraj port
+// Define port:
 const PORT = process.env.PORT || 3000;
 
-//Dodaci, ako treba:
+//Additionally, if needed:
 
 app.use(cors());
 // app.use(morgan('dev'));
 app.use(express.static("public"));
-// - za statične fileove (slike i sl. - staviti u mapu public da bi ih Express mogao poslužiti)
+// - for stacit files (pictures etc), index.JS and all CSS files - put them all in the map 'public' so Express could serve them at request.
 app.use(express.json());
 
-// Definiraj osnovnu rutu - samo za testiranje, kasnije maknuti jer se inače sljedeće rute nikad neće izvršiti:
+// Define main route- only for testing: 
+
 // app.get("/", (req, res) => {
 //   res.send("Hello, World!");
 // });
+// SEND-request can be only ONE! - nothing else can be returned after that. Next SEND-requests following after this one will not be realised!
 
-// Alternativni request:
-// Ako se index.html nalazi u istoj mapi kao i server.js, putanja bi trebala izgledati ovako:
+
+// Alternative request:
+// If index.html is in the same map as server.js (on the same 'hierarchy level'), the path to index.html should look like this:
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-// Definiraj dodatne rute (ako treba):
+// Define additional routes (if needed):
 app.get("/api/data", (req, res) => {
   res.json({ message: "This is some data" });
 });
 
-// Logika za pretraživanje pjesama (npr. poziv na Spotify API):
+// Logic for searching songs (npr. API-call to Spotify API):
 app.get("/api/search", async (req, res) => {
   const query = req.query.q;
 });
 
-// Dorađeni endpoint na serveru za traženje artista, pjesme ili albuma:
+// Edited endpoint for searching artist, song or album:
 app.get("/api/suggestions", (req, res) => {
   const query = req.query.q;
-  // Ovdje dodaj logiku za pretraživanje (npr. u bazi podataka)
-  // Pretpostavljam da ćeš imati funkciju koja vraća rezultate
-  const results = searchDatabaseForSuggestions(query); // Ovo je tvoja logika
+  // Add logic for searching (from API-documentation - Search)
+  // Add logic for returning results
+  const results = searchDatabaseForSuggestions(query); // current logic for saving results
   res.json({ results });
 });
 
@@ -53,14 +58,14 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something broke!");
 });
 
-// Pokreni server
+// Start server:
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
 
-// bash naredba za pokretanje servera: 
-// node server.js
+// Bash command for starting the server: 
+// node server.js  -OR-  nodemon server.js
 
-// Rezultat, ako je sve ok:
+// Result, if status ok:
 // Server is running on port 3000
