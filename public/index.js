@@ -1,12 +1,6 @@
-// require("dotenv").config();
-
-// alternativ:
-// import dotenv from 'dotenv';
-// dotenv.config();
-
 (function () {
   function Todo() {
-    const buttonAdd = document.querySelector(".input-button");
+    const buttonPlay = document.querySelector(".play-button");
     const list = document.getElementById("added-list");
     const favoritesList = document.getElementById("fav_albums");
 
@@ -45,249 +39,208 @@
     // const themeColorSelect = document.getElementById("theme_color");
     // themeColorSelect.addEventListener("change", changeTheme);
 
-//////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
-const themes = [
-  "theme0",
-  "theme1",
-  "theme2",
-  "theme3",
-  "theme4",
-  "theme5",
-  "theme6",
-  "theme7",
-  "theme8",
-  "theme9",
-  "theme10",
-  "theme11",
-  "theme12",
-  "theme13",
-  "theme14",
-  "theme15",
+    const themes = [
+      "theme0",
+      "theme1",
+      "theme2",
+      "theme3",
+      "theme4",
+      "theme5",
+      "theme6",
+      "theme7",
+      "theme8",
+      "theme9",
+      "theme10",
+      "theme11",
+      "theme12",
+      "theme13",
+      "theme14",
+      "theme15",
+    ];
 
-]; 
+    // Function for changing a theme:
+    function changeTheme(themeName) {
+      const body = document.body;
 
+      // Remove existing (previous) themes:
+      themes.forEach((theme) => {
+        body.classList.remove(theme);
+        document
+          .querySelectorAll(
+            ".nav-button, .favorite-button, #theme_color, option"
+          )
+          .forEach((button) => {
+            button.classList.remove(theme);
+          });
+        document.querySelectorAll(".remove-button").forEach((button) => {
+          button.classList.remove(theme);
+        });
+        document.querySelectorAll(".form-theme").forEach((form) => {
+          form.classList.remove(theme);
+        });
+        document.querySelectorAll(".title-theme").forEach((title) => {
+          title.classList.remove(theme);
+        });
+        document.querySelectorAll(".input-color").forEach((input) => {
+          input.classList.remove(theme);
+        });
+        document.querySelectorAll(".header-style").forEach((input) => {
+          input.classList.remove(theme);
+        });
+        document.querySelectorAll(".thin").forEach((text) => {
+          text.classList.remove(theme);
+        });
+      });
 
+      // Add newly selected theme style:
+      body.classList.add(themeName);
+      document
+        .querySelectorAll(".nav-button, .favorite-button, #theme_color, option")
+        .forEach((button) => {
+          button.classList.add(themeName);
+        });
+      document.querySelectorAll(".remove-button").forEach((button) => {
+        button.classList.add(themeName);
+      });
+      document.querySelectorAll(".form-theme").forEach((form) => {
+        form.classList.add(themeName);
+      });
+      document.querySelectorAll(".title-theme").forEach((title) => {
+        title.classList.add(themeName);
+      });
+      document.querySelectorAll(".input-color").forEach((input) => {
+        input.classList.add(themeName);
+      });
+      document.querySelectorAll(".header-style").forEach((input) => {
+        input.classList.add(themeName);
+      });
+      document.querySelectorAll(".thin").forEach((text) => {
+        text.classList.add(themeName);
+      });
 
-// Funkcija za promjenu teme
-function changeTheme(themeName) {
-  const body = document.body;
+      console.log("Selected theme:", themeName);
+      console.log("Body classes:", body.classList);
+    }
 
-  // Ukloni sve postojeće teme
-  themes.forEach((theme) => {
-    body.classList.remove(theme);
-    document.querySelectorAll(".nav-button, .favorite-button, #theme_color, option").forEach((button) => {
-      button.classList.remove(theme);
+    // Dropdown (instead of select-element):
+    document
+      .querySelector(".dropdown-toggle")
+      .addEventListener("click", function () {
+        const menu = document.querySelector(".dropdown-menu");
+        menu.classList.toggle("show");
+      });
+
+    // Hide dropdown on click outside of it:
+    document.addEventListener("click", function (event) {
+      if (
+        !document.querySelector(".dropdown-toggle").contains(event.target) &&
+        !document.querySelector(".dropdown-menu").contains(event.target)
+      ) {
+        document.querySelector(".dropdown-menu").classList.remove("show");
+      }
     });
-    document.querySelectorAll(".remove-button").forEach((button) => {
-      button.classList.remove(theme);
+
+    // Add functionality to choose options:
+    document.querySelectorAll(".dropdown-menu li").forEach(function (option) {
+      option.addEventListener("click", function () {
+        const themeName = option.getAttribute("data-value");
+        document.querySelector(".dropdown-toggle").textContent =
+          option.textContent;
+        document.querySelector(".dropdown-menu").classList.remove("show");
+        changeTheme(themeName);
+      });
     });
-    document.querySelectorAll(".form-theme").forEach((form) => {
-      form.classList.remove(theme);
-    });
-    document.querySelectorAll(".title-theme").forEach((title) => {
-      title.classList.remove(theme);
-    });
-    document.querySelectorAll(".input-color").forEach((input) => {
-      input.classList.remove(theme);
-    });
-    document.querySelectorAll(".header-style").forEach((input) => {
-      input.classList.remove(theme);
-    });
-    document.querySelectorAll(".thin").forEach((text) => {
-      text.classList.remove(theme);
-    });
-  });
 
-  // Dodaj novu temu
-  body.classList.add(themeName);
-  document.querySelectorAll(".nav-button, .favorite-button, #theme_color, option").forEach((button) => {
-    button.classList.add(themeName);
-  });
-  document.querySelectorAll(".remove-button").forEach((button) => {
-    button.classList.add(themeName);
-  });
-  document.querySelectorAll(".form-theme").forEach((form) => {
-    form.classList.add(themeName);
-  });
-  document.querySelectorAll(".title-theme").forEach((title) => {
-    title.classList.add(themeName);
-  });
-  document.querySelectorAll(".input-color").forEach((input) => {
-    input.classList.add(themeName);
-  });
-  document.querySelectorAll(".header-style").forEach((input) => {
-    input.classList.add(themeName);
-  });
-  document.querySelectorAll(".thin").forEach((text) => {
-    text.classList.add(themeName);
-  });
+    ////////////////////////////////////////////////////////////////////////////////
 
-  console.log("Selected theme:", themeName);
-  console.log("Body classes:", body.classList);
-}
-
-
-
-// Dropdown (instead of select-element):
-document.querySelector('.dropdown-toggle').addEventListener('click', function() {
-  const menu = document.querySelector('.dropdown-menu');
-  menu.classList.toggle('show');
-});
-
-// Hide dropdown on click outside of it:
-document.addEventListener('click', function(event) {
-  if (!document.querySelector('.dropdown-toggle').contains(event.target) && !document.querySelector('.dropdown-menu').contains(event.target)) {
-    document.querySelector('.dropdown-menu').classList.remove('show');
-  }
-});
-
-// Add functionality to choose options:
-document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
-  option.addEventListener('click', function() {
-    const themeName = option.getAttribute('data-value');
-    document.querySelector('.dropdown-toggle').textContent = option.textContent;
-    document.querySelector('.dropdown-menu').classList.remove('show');
-    changeTheme(themeName);
-  });
-});
-
-////////////////////////////////////////////////////////////////////////////////
-
-  // const themeColorSelect = document.querySelectorAll('.dropdown-menu li');
+    // const themeColorSelect = document.querySelectorAll('.dropdown-menu li');
     // themeColorSelect.addEventListener("change", changeTheme);
 
     // themeColorSelect.forEach(function(option) {
-  // option.addEventListener('click', function() {
+    // option.addEventListener('click', function() {
     // Fetch value from data-value atribute:
     // let selectedTheme = option.getAttribute('data-value');
-    
+
     // Put chosen option-text as the dropdown current name (current theme name):
     // document.querySelector('.dropdown-toggle').textContent = option.textContent;
-  // });
-// });
+    // });
+    // });
 
+    ////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////
+    // const form = document.getElementById("form");
+    // const button = document.querySelectorAll("button");
 
-    const form = document.getElementById("form");
-    const button = document.querySelectorAll("button");
+    let entry, rating, artist, time, item;
 
-    // const option = document.querySelectorAll("option");
-    // console.log(option);
+/////////////////////////////////   CODE FOR FETCHING ARTISTS, ALBUMS AND SONGS:   ////////////////////////////////////////
 
-    // const themes = [
-    //   "theme0",
-    //   "theme1",
-    //   "theme2",
-    //   "theme3",
-    //   "theme4",
-    //   "theme5",
-    //   "theme6",
-    //   "theme7",
-    //   "theme8",
-    //   "theme9",
-    //   "theme10",
-    //   "theme11",
-    //   "theme12",
-    //   "theme13",
-    //   "theme14",
-    //   "theme15",
-    //   "theme16",
-    //   "theme17",
-    // ]; 
+    const artistInput = document.getElementById("artist");
+    const songInput = document.getElementById("song");
+    const albumInput = document.getElementById("album");
+    const resultsList = document.getElementById("results");
 
-    // Theme changing:
+    function fetchSuggestions(query) {
+      fetch(`http://localhost:3000/api/suggestions?q=${encodeURIComponent(query)}`)
+          .then(response => response.json())
+          .then(data => {
+              // Očisti prethodne rezultate
+              resultsList.innerHTML = '';
+  
+              // Prikaži do 5 rezultata
+              data.results.slice(0, 5).forEach(result => {
+                  const listItem = document.createElement('li');
+                  listItem.textContent = `${result.artist} - ${result.song} (${result.album})`;
+                  resultsList.appendChild(listItem);
+              });
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
+  }
 
-    // function changeTheme() {
-    //   // get value of the selected theme
+  // Event listener za praćenje unosa u sva tri polja
+[artistInput, songInput, albumInput].forEach(input => {
+  input.addEventListener('input', () => {
+      const query = input.value.trim();
+      if (query.length > 0) {
+          fetchSuggestions(query);
+      } else {
+          resultsList.innerHTML = ''; // Očisti rezultate ako je unos prazan
+      }
+  });
+});
 
-    //   const selectedTheme = themeColorSelect.data-value;
+    //   function searchSongs() {
+    //     const query = songSearchInput.value.trim();
+    //     if (!query) {
+    //         alert("Please enter a song name.");
+    //         return;
+    //     }
 
-    //   // get main elements which should be stylized
-    //   // (add buttons, body, navbar, inputs, form, text-blocks, add- and remove-buttons):
-
-    //   const body = document.body;
-
-    //   // all these classes have to have scss-code for switching between different themes ( @each $theme...):
-    //   const buttonTh1 = document.querySelectorAll(
-    //     ".nav-button, .favorite-button, #theme_color, option"
-    //   );
-    //   const buttonTh2 = document.querySelectorAll(".remove-button");
-
-    //   const formTheme = document.querySelectorAll(".form-theme");
-    //   const titleTheme = document.querySelectorAll(".title-theme");
-
-    //   const inputColor = document.querySelectorAll(".input-color");
-
-    //   const headerStyle = document.querySelectorAll(".header-style");
-
-
-    //   // Results are nodelists of several elements, so we will use forEach-function to target each button:
-    //   // 1. Remove all existing themes from this element:
-    //   themes.forEach((theme) => {
-    //     body.classList.remove(theme);
-
-    //     buttonTh1.forEach((button) => {
-    //       button.classList.remove(theme);
-    //     });
-
-    //     buttonTh2.forEach((button) => {
-    //       button.classList.remove(theme);
-    //     });
-
-    //     formTheme.forEach((form) => {
-    //       form.classList.remove(theme);
-    //     });
-
-    //     titleTheme.forEach((title) => {
-    //       title.classList.remove(theme);
-    //     });
-
-    //     inputColor.forEach((input) => {
-    //       input.classList.remove(theme);
-    //     });
-
-    //     headerStyle.forEach((input) => {
-    //       input.classList.remove(theme);
-    //     });
-    //   });
-
-    //   // 2. Add new theme to this element:
-    //   body.classList.add(selectedTheme);
-
-    //   buttonTh1.forEach((button) => {
-    //     button.classList.add(selectedTheme);
-    //   });
-
-    //   buttonTh2.forEach((button) => {
-    //     button.classList.add(selectedTheme);
-    //   });
-
-    //   formTheme.forEach((form) => {
-    //     form.classList.add(selectedTheme);
-    //   });
-
-    //   titleTheme.forEach((title) => {
-    //     title.classList.add(selectedTheme);
-    //   });
-
-    //   inputColor.forEach((input) => {
-    //     input.classList.add(selectedTheme);
-    //   });
-       
-    //   headerStyle.forEach((input) => {
-    //     input.classList.add(selectedTheme);
-    //   });
-
-
-
-    //   console.log("Selected theme:", selectedTheme);
-    //   console.log("Body classes:", body.classList);
+    //     fetch(`http://localhost:3000/api/search?q=${encodeURIComponent(query)}`)
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             resultsList.innerHTML = '';
+    //             data.songs.forEach(song => {
+    //                 const listItem = document.createElement('li');
+    //                 listItem.textContent = `${song.artist} - ${song.title}`;
+    //                 resultsList.appendChild(listItem);
+    //             });
+    //         })
+    //         .catch(error => {
+    //             console.error('Error:', error);
+    //         });
     // }
 
 
-    let entry, rating, artist, time, item;
 
     // Load lists from localStorage on init:
     function loadLists() {
@@ -338,7 +291,7 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
       localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
     }
 
-    // creating new task:
+    // Creating new task / new item on list:
     function createTask(entry, artist, rating, time) {
       const item = document.createElement("li");
 
@@ -364,7 +317,7 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
 
     // console.log(paragraph);
 
-    // adding new task on the list:
+    // Adding new task on the list:
     function addTask(event) {
       event.preventDefault();
       const entry = document.getElementById("album").value.trim();
@@ -374,6 +327,7 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
 
       // test:
       //const time = new Date(2023, 11, 17).toLocaleDateString();
+
       const item = createTask(entry, artist, rating, time);
       list.appendChild(item);
       document.getElementById("album").value = "";
@@ -383,10 +337,10 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
     }
 
     this.init = function () {
-      // body initially has a default theme:
+      // body initially has a default theme0:
       document.body.classList.add("theme0");
       // new task (item) added on the add-button click:
-      buttonAdd.addEventListener("click", addTask);
+      buttonPlay.addEventListener("click", addTask);
       loadLists();
     };
 
@@ -395,34 +349,13 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
       const favoriteButton = document.createElement("button");
       favoriteButton.setAttribute("type", "button");
       favoriteButton.classList.add("favorite-button", "button", "flex-item");
-      // favoriteButton.classList.add("buttonTh1");
-      // favoriteButton.classList.add("button");
-      // favoriteButton.classList.add("flex-item");
       favoriteButton.addEventListener("click", setFavorite);
       favoriteButton.innerHTML = "Add to favorites";
-
-      // div.insertBefore(favoriteButton, div.firstChild);
-
-      // itemCardDiv.appendChild(favoriteButton);
-
       itemCardDiv.insertBefore(favoriteButton, itemCardDiv.firstChild);
 
       const listTitle = document.getElementById("new-title");
       listTitle.style.display = "block";
     }
-
-    // function that applies theme to all newly created fav-buttons:
-    // function setThemeToFavButton(theme, selectedTheme) {
-    //   const button = document.querySelectorAll(".favorite-button");
-
-    //   button.forEach((button) => {
-    //     button.classList.remove(theme);
-    //   });
-    //   button.forEach((button) => {
-    //     button.classList.add(selectedTheme);
-    //   });
-    // }
-    // setThemeToFavButton();
 
     // Function setFavorite:
     function setFavorite(event) {
@@ -432,7 +365,8 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
       const rating = item.querySelector(".rating").textContent;
       const time = item.querySelector(".time").textContent;
 
-      console.log("Extracted values:", { entry, artist, rating, time }); // Debugging
+      // Debugging:
+      console.log("Extracted values:", { entry, artist, rating, time });
 
       if (!entry || !artist || !rating || !time) {
         console.error("Some elements are missing in the item:", {
@@ -512,7 +446,6 @@ document.querySelectorAll('.dropdown-menu li').forEach(function(option) {
 
       removeButton.innerHTML = "Remove from list";
     }
-
 
     // function removeTask:
     function removeTask(event) {

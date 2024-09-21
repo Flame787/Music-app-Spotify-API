@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recenzije albuma</title>
 
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="icon" href="pictures/app-icon.png" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" href="/pictures/app-icon.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,7 +32,7 @@
       <div id="top-icon">
         <img
           id="app-icon"
-          src="pictures/app-icon.png"
+          src="/pictures/app-icon.png"
           width="50"
           height="50"
           alt="application icon"
@@ -42,10 +42,10 @@
       <nav id="navbar">
         <div id="nav-list">
           <button class="button nav-button">
-            <a href="index.html" class="ancor-style">Home</a>
+            <a href="/index.html" class="ancor-style">Home</a>
           </button>
           <button class="button nav-button">
-            <a href="favorites.html" class="ancor-style">My lists</a>
+            <a href="/favorites.html" class="ancor-style">My lists</a>
           </button>
 
           <button class="dropdown-toggle button nav-button">Theme</button>
@@ -88,13 +88,13 @@
 
       <form action="" method="get" id="form" class="flex-container form-theme">
         <div class="flex-item" id="first-input">
-          <p><label for="album">Artist:</label></p>
+          <p><label for="artist">Artist:</label></p>
           <p>
             <input type="text" id="artist" name="artist" class="input-color" />
           </p>
         </div>
         <div class="flex-item" id="second-input">
-          <p><label for="album">Song:</label></p>
+          <p><label for="song">Song:</label></p>
           <p>
             <input
               type="text"
@@ -120,7 +120,7 @@
 
         <div id="submit-button" class="flex-item">
           <p id="empty"></p>
-          <button type="submit" class="input-button button nav-button">
+          <button type="submit" class="input-button button play-button nav-button">
             Play
           </button>
         </div>
@@ -132,8 +132,8 @@
         <div class="flex-item" id="music-player">
           <div id="music-wrapper">
             <audio controls>
-
-              <source src="horse.mp3" type="audio/mpeg">
+            <!-- placeholder for a real fetched song: -->
+              <!-- <source src="horse.mp3" type="audio/mpeg"> -->
              .
             </audio>
           </div>
@@ -164,7 +164,7 @@
 
         <div id="submit-button" class="flex-item">
           <p id="empty"></p>
-          <button type="submit" class="input-button button nav-button">
+          <button type="submit" class="input-button add-button button nav-button">
             Add to list
           </button>
         </div>
@@ -188,6 +188,17 @@
         </div>
       </div>
     </div>
-    <script src="index.js"></script>
+    <script src="/index.js"></script>
   </body>
 </html>
+
+
+<!-- Node.js added - new file 'server.js' added. 
+'public' file added. 
+Whole CSS, index.js and pictures are now in folder 'public'.
+All paths in html and in themes.scss were changed: '/'' was added in front (so the page works only on localhost:3000, not as usually in browser). 
+Additional dependencies installed in package.json: cors, dotenv, express.
+Nodemon installed to refresh server with each code change.
+To start the page on localhost:3000, open bash and enter command: 
+nodemon server.js (or before the nodemon, it was: node server.js)
+-->
