@@ -18,6 +18,11 @@ import https from "https";
 import bodyParser from "body-parser";
 import fetch from "node-fetch";
 import path from "path";
+import { fileURLToPath } from "url";
+
+// Izračunaj __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Initialize Express app:
 const app = express();
@@ -27,7 +32,7 @@ const PORT = process.env.PORT || 3000;
 
 // Client ID i Client Secret iz .env datoteke
 const clientId = process.env.client_id;
-const clientSecret = process.env.client_secret
+const clientSecret = process.env.client_secret;
 
 // Middleware:
 app.use(cors());
