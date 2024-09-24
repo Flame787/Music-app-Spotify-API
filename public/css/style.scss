@@ -356,6 +356,10 @@ audio::-webkit-media-controls-volume-slider {
   padding-right: 8px;
 }
 
+// .play-button{
+//   align-self: flex-end;
+// }
+
 .item-card {
   max-width: 60%;
   margin: auto;
@@ -560,12 +564,15 @@ hr {
   .item-card2 {
     gap: 0;
   }
+  // .play-button {
+
+  // }
+  #empty {
+    display: none;
+  }
 }
 
 @media (max-width: 1150px) {
-  #nav-list button:last-child {
-    margin-right: 50px;
-  }
 
   #nav-list button {
     margin: 0 20px;
@@ -574,14 +581,7 @@ hr {
     flex-basis: 30%;
     margin: 1% auto;
   }
-  a.ancor-style,
-  .nav-button,
-  .favorite-button,
-  .remove-button,
-  .submit-button {
-    font-size: 1.1rem;
-    padding: 2%;
-  }
+
   h1 {
     font-size: 3.3rem;
   }
@@ -590,23 +590,16 @@ hr {
     font-size: 1.5rem;
     padding: 5%;
   }
+  #empty {
+    display: none;
+  }
 }
 
 @media (max-width: 1113px) {
   #nav-list button {
     width: 15%;
   }
-  .flex-item {
-    flex-basis: 30%;
-    margin: 1% auto;
-  }
-  a.ancor-style,
-  .nav-button,
-  .favorite-button,
-  .remove-button,
-  .submit-button {
-    font-size: 1.1rem;
-  }
+
 }
 
 @media (max-width: 1056px) {
@@ -616,13 +609,7 @@ hr {
   li p {
     padding: 2% 0;
   }
-  a.ancor-style,
-  .nav-button,
-  .favorite-button,
-  .remove-button,
-  .submit-button {
-    font-size: 1.1rem;
-  }
+
   .flex-item {
     flex-basis: 30%;
     margin: 1% auto;
@@ -630,16 +617,11 @@ hr {
 }
 
 @media (max-width: 989px) {
-  // .red {
-  //   height: 200px;
-  // }
+
   #nav-title {
     font-size: 1.4rem;
   }
-  .flex-item {
-    flex-basis: 30%;
-    margin: 1% auto;
-  }
+
 }
 
 /* so that 'Rate (1-10)' doesn't break in 2 rows */
@@ -655,10 +637,7 @@ hr {
     width: 10rem;
     height: 3rem;
   }
-  .flex-item {
-    flex-basis: 30%;
-    margin: 1% auto;
-  }
+
   a.ancor-style,
   .nav-button,
   .favorite-button,
@@ -672,55 +651,26 @@ hr {
   #nav-title {
     font-size: 1.4rem;
   }
-  #nav-list button,
-  select {
-    width: 10rem;
-    height: 3rem;
-  }
 
-  .flex-item {
-    flex-basis: 30%;
-    margin: 1% auto;
-  }
 }
 
-@media (max-width: 900px) {
-  #nav-list button,
-  select {
-    width: 10rem;
-  }
-  .flex-item {
-    flex-basis: 30%;
-    margin: 1% auto;
-  }
-}
+
 
 @media (max-width: 880px) {
   #nav-list button:last-child {
     margin-right: 15px;
   }
-  .flex-item {
-    flex-basis: 30%;
-    margin: 1% auto;
-  }
+
 
   #nav-list button,
   select {
     margin: 0 15px;
-    width: 10rem;
-    height: 3rem;
   }
 
   #nav-title {
     font-size: 1.4rem;
   }
-  a.ancor-style,
-  .nav-button,
-  .favorite-button,
-  .remove-button,
-  .submit-button {
-    font-size: 1rem;
-  }
+
   h1 {
     font-size: 3.1rem;
   }
@@ -732,17 +682,6 @@ hr {
 }
 
 @media (max-width: 840px) {
-  // #nav-list button,
-  // select {
-  //   margin: 0 10px;
-  //   width: 10rem;
-  //   height: 3rem;
-  // }
-
-  .flex-item {
-    flex-basis: 30%;
-    margin: 1% auto;
-  }
 
   .dropdown-menu {
     top: 115px;
@@ -762,15 +701,8 @@ hr {
 
   h3 {
     font-size: 1.4rem;
-    // padding: 5%;
   }
-  a.ancor-style,
-  .nav-button,
-  .favorite-button,
-  .remove-button,
-  .submit-button {
-    font-size: 1rem;
-  }
+ 
 }
 
 @media (max-width: 786px) {
@@ -780,8 +712,6 @@ hr {
 
   .flex-item {
     flex-basis: 70%;
-    // margin: 10% auto;
-    // padding-top: 10%;
   }
 
   .flex-container {
@@ -811,11 +741,6 @@ hr {
     padding: 5%;
   }
 
-  // .red {
-  //   height: 200px;
-  // }
-
-  #nav-list button,
   select {
     width: 10rem;
   }
@@ -825,20 +750,14 @@ hr {
   }
 
   button,
-  input {
+  input, .favorite-button,
+  .remove-button {
     width: 50%;
   }
 
   button {
     margin-top: 5%;
-
     padding: 0%;
-  }
-
-  .favorite-button,
-  .remove-button {
-    width: 50%;
-    // margin-bottom: 1%;
   }
 
   .remove-button {
@@ -857,9 +776,7 @@ hr {
   #empty {
     display: none;
   }
-}
 
-@media (max-width: 786px) {
   #nav-list {
     text-align: center;
   }
@@ -919,11 +836,4 @@ hr {
     width: 230px;
   }
 
-  a.ancor-style,
-  .nav-button,
-  .favorite-button,
-  .remove-button,
-  .submit-button {
-    font-size: 1rem;
-  }
 }

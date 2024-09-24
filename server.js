@@ -42,7 +42,6 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true })); // Parsiranje tijela zahtjeva u URL
 
 // Define main route- only for testing:
-
 // app.get("/", (req, res) => {
 //   res.send("Hello, World!");
 // });
@@ -67,6 +66,9 @@ async function getAccessToken() {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: params,
   });
+
+   // Log access token
+   console.log("Access Token:", data.access_token);
 
   const data = await response.json();
   return data.access_token; // Vraćamo access token
