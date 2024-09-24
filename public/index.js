@@ -1,8 +1,9 @@
 (function () {
   function Todo() {
     const buttonPlay = document.querySelector(".play-button");
-    const list = document.getElementById("added-list");
-    const favoritesList = document.getElementById("fav_albums");
+    const submitToListButton = document.querySelector(".add-button");
+    const list = document.getElementById("added-list"); // first list (ul) that gets tasks appended
+    const favoritesList = document.getElementById("fav_albums"); // second list (ul) with favorite songs
 
     // Navbar behavior:
 
@@ -36,10 +37,7 @@
       }
     });
 
-    // const themeColorSelect = document.getElementById("theme_color");
-    // themeColorSelect.addEventListener("change", changeTheme);
-
-    //////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////   Themes   ///////////////////////////////////////////
 
     const themes = [
       "theme0",
@@ -153,65 +151,54 @@
       });
     });
 
-    ////////////////////////////////////////////////////////////////////////////////
-
-    // const themeColorSelect = document.querySelectorAll('.dropdown-menu li');
-    // themeColorSelect.addEventListener("change", changeTheme);
-
-    // themeColorSelect.forEach(function(option) {
-    // option.addEventListener('click', function() {
-    // Fetch value from data-value atribute:
-    // let selectedTheme = option.getAttribute('data-value');
-
-    // Put chosen option-text as the dropdown current name (current theme name):
-    // document.querySelector('.dropdown-toggle').textContent = option.textContent;
-    // });
-    // });
-
-    ////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////   CODE FOR FETCHING ARTISTS, ALBUMS AND SONGS:   ////////////////////////////////////////
 
     // const form = document.getElementById("form");
     // const button = document.querySelectorAll("button");
 
-    let entry, rating, artist, time, item;
-
-/////////////////////////////////   CODE FOR FETCHING ARTISTS, ALBUMS AND SONGS:   ////////////////////////////////////////
+    let album, rating, artist, song, time, item;
 
     const artistInput = document.getElementById("artist");
     const songInput = document.getElementById("song");
     const albumInput = document.getElementById("album");
     const resultsList = document.getElementById("results");
 
-    function fetchSuggestions(query) {
-      fetch(`http://localhost:3000/api/suggestions?q=${encodeURIComponent(query)}`)
-          .then(response => response.json())
-          .then(data => {
-              // Očisti prethodne rezultate
-              resultsList.innerHTML = '';
-  
-              // Prikaži do 5 rezultata
-              data.results.slice(0, 5).forEach(result => {
-                  const listItem = document.createElement('li');
-                  listItem.textContent = `${result.artist} - ${result.song} (${result.album})`;
-                  resultsList.appendChild(listItem);
-              });
-          })
-          .catch(error => {
-              console.error('Error:', error);
-          });
-  }
 
-  // Event listener za praćenje unosa u sva tri polja
-[artistInput, songInput, albumInput].forEach(input => {
-  input.addEventListener('input', () => {
-      const query = input.value.trim();
-      if (query.length > 0) {
+/////// ovo doraditi - što uopće radi, što je query??   //////////////////////
+
+    function fetchSuggestions(query) {
+      fetch(
+        `http://localhost:3000/api/suggestions?q=${encodeURIComponent(query)}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          // Očisti prethodne rezultate
+          resultsList.innerHTML = "";
+
+          // Prikaži do 5 rezultata
+          data.results.slice(0, 5).forEach((result) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${result.artist} - ${result.song} (${result.album})`;
+            resultsList.appendChild(listItem);
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+
+
+    // Event listener za praćenje unosa u sva tri polja
+    [artistInput, songInput, albumInput].forEach((input) => {
+      input.addEventListener("input", () => {
+        const query = input.value.trim();
+        if (query.length > 0) {
           fetchSuggestions(query);
-      } else {
-          resultsList.innerHTML = ''; // Očisti rezultate ako je unos prazan
-      }
-  });
-});
+        } else {
+          resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
+        }
+      });
+    });
 
     //   function searchSongs() {
     //     const query = songSearchInput.value.trim();
@@ -240,8 +227,6 @@
     //         });
     // }
 
-
-
     // Load lists from localStorage on init:
     function loadLists() {
       const savedList = localStorage.getItem("addedList");
@@ -251,7 +236,7 @@
         const items = JSON.parse(savedList);
         items.forEach((item) =>
           list.appendChild(
-            createTask(item.entry, item.artist, item.rating, item.time)
+            createTask(item.artist, item.song, item.album, item.rating, item.time)
           )
         );
       }
@@ -260,7 +245,7 @@
         const items = JSON.parse(savedFavorites);
         items.forEach((item) =>
           favoritesList.appendChild(
-            createFavorite(item.entry, item.artist, item.rating, item.time)
+            createFavorite(item.artist, item.song, item.album, item.rating, item.time)
           )
         );
       }
@@ -271,8 +256,9 @@
       const addedItems = [];
       list.querySelectorAll("li").forEach((item) => {
         addedItems.push({
-          entry: item.querySelector(".entry").textContent,
           artist: item.querySelector(".artist").textContent,
+          song: item.querySelector(".song").textContent,
+          album: item.querySelector(".album").textContent,
           rating: item.querySelector(".rating").textContent,
           time: item.querySelector(".time").textContent,
         });
@@ -282,8 +268,9 @@
       const favoriteItems = [];
       favoritesList.querySelectorAll("li").forEach((item) => {
         favoriteItems.push({
-          entry: item.querySelector(".entry").textContent,
           artist: item.querySelector(".artist").textContent,
+          song: item.querySelector(".song").textContent,
+          album: item.querySelector(".album").textContent,
           rating: item.querySelector(".rating").textContent,
           time: item.querySelector(".time").textContent,
         });
@@ -291,8 +278,18 @@
       localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
     }
 
-    // Creating new task / new item on list:
-    function createTask(entry, artist, rating, time) {
+    // doraditi logiku Search funkcije !!! - što se dohvaća pomoću API-ja i kako se prikazuje
+    
+
+    // doraditi Play-funkciju:
+
+    function playSong(event) {
+      event.preventDefault();
+
+    }
+
+    // Creating new task / new item on a submit/play-list:
+    function createTask(artist, song, album, rating, time) {
       const item = document.createElement("li");
 
       // const div = document.createElement("div");
@@ -301,8 +298,8 @@
       item.innerHTML = `<div class="form-theme item-card" > 
       <p class="item-fill flex-item">  
       <span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> <br> 
-      <span class="thin"> Song: </span> <span class="song"> placeholder </span> <br> 
-      <span class="thin"> Album:  </span> <span class="entry">${entry}</span> <br> 
+      <span class="thin"> Song: </span> <span class="song">${song}</span> <br> 
+      <span class="thin"> Album:  </span> <span class="album">${album}</span> <br> 
       <span class="thin"> Rate:  </span>   <span  class="rating">${rating}</span> <br> 
       <span class="thin"> Rated on:  </span>   <span class="time">${time}</span>
       </p>  </div>`;
@@ -320,18 +317,20 @@
     // Adding new task on the list:
     function addTask(event) {
       event.preventDefault();
-      const entry = document.getElementById("album").value.trim();
       const artist = document.getElementById("artist").value.trim();
+      const song = document.getElementById("song").value.trim();
+      const album = document.getElementById("album").value.trim();
       const rating = document.getElementById("review").value;
       const time = new Date().toLocaleDateString();
 
       // test:
       //const time = new Date(2023, 11, 17).toLocaleDateString();
 
-      const item = createTask(entry, artist, rating, time);
+      const item = createTask(artist, song, album, rating, time);
       list.appendChild(item);
-      document.getElementById("album").value = "";
       document.getElementById("artist").value = "";
+      document.getElementById("song").value = "";
+      document.getElementById("album").value = "";
       document.getElementById("review").value = "";
       saveLists();
     }
@@ -340,7 +339,8 @@
       // body initially has a default theme0:
       document.body.classList.add("theme0");
       // new task (item) added on the add-button click:
-      buttonPlay.addEventListener("click", addTask);
+      submitToListButton.addEventListener("click", addTask);
+      buttonPlay.addEventListener("click", playSong);
       loadLists();
     };
 
@@ -360,18 +360,20 @@
     // Function setFavorite:
     function setFavorite(event) {
       const item = event.target.parentNode;
-      const entry = item.querySelector(".entry").textContent;
       const artist = item.querySelector(".artist").textContent;
+      const song = item.querySelector(".song").textContent;
+      const album = item.querySelector(".album").textContent;
       const rating = item.querySelector(".rating").textContent;
       const time = item.querySelector(".time").textContent;
 
       // Debugging:
-      console.log("Extracted values:", { entry, artist, rating, time });
+      console.log("Extracted values:", { song, album, artist, rating, time });
 
-      if (!entry || !artist || !rating || !time) {
+      if (!artist || !song || !album || !rating || !time) {
         console.error("Some elements are missing in the item:", {
-          entry,
           artist,
+          song,
+          album,
           rating,
           time,
         });
@@ -379,9 +381,9 @@
       }
 
       // Create favorite item:
-      const favoriteItem = createFavorite(entry, artist, rating, time);
+      const favoriteItem = createFavorite(artist, song, album, rating, time);
 
-      // if (!entryElement || !artistElement || !ratingElement || !timeElement) {
+      // if (!songElement || !albumElement || !artistElement || !ratingElement || !timeElement) {
       //   console.error("Cannot find necessary elements in the item.");
       //   return;
       // }
@@ -397,9 +399,9 @@
         });
         if (!found) {
           favoritesList.appendChild(favoriteItem);
-          console.log(`Added '${entry}' on the favorites list.`);
+          console.log(`Added '${song}' on the favorites list.`);
         } else {
-          console.log(`'${entry}' is already on the list.`);
+          console.log(`'${song}' is already on the list.`);
         }
       }
 
@@ -408,12 +410,12 @@
     }
 
     // Function createFavorite:
-    function createFavorite(entry, artist, rating, time) {
+    function createFavorite(artist, song, album, rating, time) {
       const item = document.createElement("li");
       item.innerHTML = `<div class="form-theme item-card item-card2"> <p class="item-fill2 flex-item">
       <span class="thin2">Artist: </span><span class="artist2" id="white" >${artist}</span><br>
-      <span class="thin2">Song: </span><span class="song2" id="white" > placeholder </span><br>
-      <span class="thin2">Album: </span><span class="album2" id="white" >${entry}</span><br>
+      <span class="thin2">Song: </span><span class="song2" id="white" > ${song} </span><br>
+      <span class="thin2">Album: </span><span class="album2" id="white" >${album}</span><br>
       <span class="thin2">Rate: </span><span class="rating2" id="white" >${rating}</span><br>
       <span class="thin2">Rated on: </span><span class="time2" id="white" >${time}</span></p>  </div>`;
 
