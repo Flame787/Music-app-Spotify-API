@@ -163,30 +163,135 @@
     const albumInput = document.getElementById("album");
     const resultsList = document.getElementById("results");
 
+    // Function to get access token from the server
+    async function getAccessToken() {
+      const response = await fetch("/api/token"); // API call to your server to get the access token / Fetch token from the server
+      if (!response.ok) {
+        throw new Error("Failed to fetch token");
+      }
+      const data = await response.json(); // Parse JSON response
+      return data.accessToken;
+    }
 
-/////// ovo doraditi - što uopće radi, što je query??   //////////////////////
+    artistInput.addEventListener("input", function () {
+      let query = this.value;
+      if (query.length > 2) {
+        // Start searching after 3 characters
+        searchSpotify(query, "artist", "artistSuggestions");
+      }
+    });
 
-    function fetchSuggestions(query) {
+    songInput.addEventListener("input", function () {
+      let query = this.value;
+      if (query.length > 2) {
+        searchSpotify(query, "track", "songSuggestions");
+      }
+    });
+
+    albumInput.addEventListener("input", function () {
+      let query = this.value;
+      if (query.length > 2) {
+        searchSpotify(query, "album", "albumSuggestions");
+      }
+    });
+
+    // Function to perform API call to Spotify
+    async function searchSpotify(query, type, suggestionListId, accessToken) {
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      };
+
       fetch(
-        `http://localhost:3000/api/suggestions?q=${encodeURIComponent(query)}`
+        `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=5`,
+        {
+          method: "GET",
+          headers: headers,
+        }
       )
         .then((response) => response.json())
         .then((data) => {
-          // Očisti prethodne rezultate
-          resultsList.innerHTML = "";
-
-          // Prikaži do 5 rezultata
-          data.results.slice(0, 5).forEach((result) => {
-            const listItem = document.createElement("li");
-            listItem.textContent = `${result.artist} - ${result.song} (${result.album})`;
-            resultsList.appendChild(listItem);
-          });
+          displaySuggestions(data, type, suggestionListId);
         })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+        .catch((error) => console.error("Error:", error));
     }
 
+    // Function to display suggestions in a dropdown
+    function displaySuggestions(data, type, suggestionListId) {
+      const suggestionList = document.getElementById(suggestionListId);
+      suggestionList.innerHTML = ""; // Clear previous suggestions
+
+      let items = [];
+      if (type === "artist" && data.artists) {
+        items = data.artists.items;
+      } else if (type === "track" && data.tracks) {
+        items = data.tracks.items;
+      } else if (type === "album" && data.albums) {
+        items = data.albums.items;
+      }
+
+      items.forEach((item) => {
+        let li = document.createElement("li");
+        li.textContent = item.name;
+        li.addEventListener("click", () =>
+          selectSuggestion(item, type, suggestionListId)
+        );
+        suggestionList.appendChild(li);
+      });
+    }
+
+    // Function to handle user selection of a suggestion
+    function selectSuggestion(item, type, suggestionListId) {
+      const selectedResults = document.getElementById("selectedResults");
+      let li = document.createElement("li");
+      li.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${
+        item.name
+      }`;
+      selectedResults.appendChild(li);
+
+      document.getElementById(suggestionListId).innerHTML = ""; // Clear suggestions after selection
+    }
+
+    /////// Primjer funkcije za slanje API poziva  //////////////////////
+
+    // Kada implementiraš rutu /api/suggestions, možeš je testirati direktno putem preglednika ili Postmana da vidiš vraća li ispravan JSON odgovor.
+
+    // ako type nije postavljen, zadaje se defaultna vrijednost 'artist,album,track':
+    async function fetchSuggestions(query, type = 'artist,album,track') {
+      try {
+        const response = await fetch(`/api/suggestions?q=${query}&type=${type}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch suggestions');
+        }
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error fetching suggestions:', error);
+      }
+    }
+
+    /////// ovo doraditi - što uopće radi, što je query??   //////////////////////
+
+    // function fetchSuggestions(query, type) {
+    //   fetch(
+    //     `http://localhost:3000/api/suggestions?q=${encodeURIComponent(query)}`
+    //   )
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       // Očisti prethodne rezultate
+    //       resultsList.innerHTML = "";
+
+    //       // Prikaži do 5 rezultata
+    //       data.results.slice(0, 5).forEach((result) => {
+    //         const listItem = document.createElement("li");
+    //         listItem.textContent = `${result.artist} - ${result.song} (${result.album})`;
+    //         resultsList.appendChild(listItem);
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error:", error);
+    //     });
+    // }
 
     // Event listener za praćenje unosa u sva tri polja
     [artistInput, songInput, albumInput].forEach((input) => {
@@ -236,7 +341,13 @@
         const items = JSON.parse(savedList);
         items.forEach((item) =>
           list.appendChild(
-            createTask(item.artist, item.song, item.album, item.rating, item.time)
+            createTask(
+              item.artist,
+              item.song,
+              item.album,
+              item.rating,
+              item.time
+            )
           )
         );
       }
@@ -245,7 +356,13 @@
         const items = JSON.parse(savedFavorites);
         items.forEach((item) =>
           favoritesList.appendChild(
-            createFavorite(item.artist, item.song, item.album, item.rating, item.time)
+            createFavorite(
+              item.artist,
+              item.song,
+              item.album,
+              item.rating,
+              item.time
+            )
           )
         );
       }
@@ -279,13 +396,11 @@
     }
 
     // doraditi logiku Search funkcije !!! - što se dohvaća pomoću API-ja i kako se prikazuje
-    
 
     // doraditi Play-funkciju:
 
     function playSong(event) {
       event.preventDefault();
-
     }
 
     // Creating new task / new item on a submit/play-list:

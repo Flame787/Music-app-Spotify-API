@@ -67,9 +67,6 @@
             <li role="option" data-value="theme14">Purple 🟪</li>
             <li role="option" data-value="theme15">Joy ☀️</li>
           </ul>
-
-      
-
         </div>
       </nav>
     </header>
@@ -85,46 +82,42 @@
       </div>
 
       <!-- 1st form: Search and Audio Player: -->
-
+      <h2>Search:</h2>
       <form action="" method="get" id="form" class="flex-container form-theme">
         <div class="flex-item" id="first-input">
           <p><label for="artist">Artist:</label></p>
           <p>
             <input type="text" id="artist" name="artist" class="input-color" />
           </p>
+          <ul id="artistSuggestions" class="suggestions"></ul>
         </div>
         <div class="flex-item" id="second-input">
           <p><label for="song">Song:</label></p>
           <p>
-            <input
-              type="text"
-              id="song"
-              name="song"
-              class="input-color"
-             
-            />
+            <input type="text" id="song" name="song" class="input-color" />
           </p>
+          <ul id="songSuggestions" class="suggestions"></ul>
         </div>
         <div class="flex-item" id="third-input">
           <p><label for="album">Album:</label></p>
           <p>
-            <input
-              type="text"
-              id="album"
-              name="album"
-              class="input-color"
-              
-            />
+            <input type="text" id="album" name="album" class="input-color" />
           </p>
+          <ul id="albumSuggestions" class="suggestions"></ul>
         </div>
 
         <div id="submit-button" class="flex-item">
-       <p id="empty"></p>
-          <button type="submit" class="input-button button play-button nav-button">
+          <p id="empty"></p>
+          <button
+            type="submit"
+            class="input-button button play-button nav-button"
+          >
             Play
           </button>
         </div>
       </form>
+
+      <h2>Currently playing:</h2>
 
       <!-- 2nd form: Rating songs/albums and Adding to the current list -->
 
@@ -132,17 +125,17 @@
         <div class="flex-item" id="music-player">
           <div id="music-wrapper">
             <audio controls>
-            <!-- placeholder for a real fetched song: -->
+              <!-- placeholder for a real fetched song: -->
               <!-- <source src="horse.mp3" type="audio/mpeg"> -->
-             .
+              .
             </audio>
           </div>
         </div>
         <div class="flex-item" id="first-input">
-          <p><label for="album">Currently playing:</label></p>
-          <p>
-            <input type="text" id="audio" name="audio" class="input-color" />
-          </p>
+          <p><label for="album">Current track:</label></p>
+          <div id="results">
+            <ul id="selectedResults"></ul>  
+          </div>
         </div>
 
         <div class="flex-item" id="forth-input">
@@ -163,9 +156,12 @@
         </div>
 
         <div id="submit-button" class="flex-item">
-   <p></p>
-          <button type="submit" class="input-button add-button button nav-button">
-            Add to list
+          <p></p>
+          <button
+            type="submit"
+            class="input-button add-button button nav-button"
+          >
+            Add to playlist
           </button>
         </div>
       </form>
@@ -191,7 +187,6 @@
     <script src="/index.js"></script>
   </body>
 </html>
-
 
 <!-- Node.js added - new file 'server.js' added. 
 'public' file added. 

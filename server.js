@@ -9,7 +9,7 @@ dotenv.config();
 // const bodyParser = require("body-parser");
 // const fetch = require("node-fetch");
 // const path = require("path"); // Za rad s datotekama i direktorijima
-// preporučljiv kada se baviš putanjama datoteka kako bi osigurao da su one unakrsno kompatibilne za različite operativne sustave (npr. Windows, macOS, Linux). 
+// preporučljiv kada se baviš putanjama datoteka kako bi osigurao da su one unakrsno kompatibilne za različite operativne sustave (npr. Windows, macOS, Linux).
 // ako planiraš koristiti relativne putanje, path može spriječiti moguće greške s krivo definiranom putanjom, posebno kada koristiš metode poput res.sendFile() za posluživanje statičnih datoteka.
 
 import express from "express";
@@ -53,8 +53,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
+// Global variable for storing access token
+let accessToken = null;
 
-// Funkcija za dohvaćanje access tokena:
+// Funkcion to fetch access tokena:
 async function getAccessToken() {
   const params = new URLSearchParams();
   params.append("grant_type", "client_credentials");
@@ -67,13 +69,55 @@ async function getAccessToken() {
     body: params,
   });
 
-   // Log access token
-   console.log("Access Token:", data.access_token);
+  // Log access token
+  console.log("Access Token:", data.access_token);
 
   const data = await response.json();
-  return data.access_token; // Vraćamo access token
+
+  accessToken = data.access_token;
+  return accessToken;
 }
 
+// Endpoint to provide the access token
+app.get('/api/token', async (req, res) => {
+  try {
+    if (!accessToken) {
+      accessToken = await getAccessToken();  // Fetch the token only if it doesn't exist
+    }
+    res.json({ accessToken });  // Return token as JSON
+  } catch (error) {
+    console.error('Error fetching access token:', error);
+    res.status(500).json({ error: 'Failed to fetch access token' });
+  }
+});
+
+// Ruta za prijedloge (sugestije) na temelju unosa
+app.get("/api/suggestions", async (req, res) => {
+  const query = req.query.q;  // Korisnički unos
+  const type = req.query.type || 'artist,album,track';  // Tip pretrage, npr. artist, album, track
+  
+  const token = await getAccessToken();  // Dohvati access token
+  
+  // URL za pretragu na Spotify API-ju
+  const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=5`;
+
+  try {
+    const response = await fetch(searchUrl, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (response.ok) {
+      const searchResults = await response.json();
+      res.json(searchResults);  // Vrati rezultate pretrage kao JSON
+    } else {
+      res.status(response.status).json({ error: "Search failed" });
+    }
+  } catch (error) {
+    console.error("Error fetching suggestions:", error);
+    res.status(500).json({ error: "Failed to fetch suggestions" });
+  }
+});
 
 // Ruta za dohvaćanje informacija o artistu
 app.get("/artist/:id", async (req, res) => {
@@ -117,8 +161,6 @@ app.get("/api/search", async (req, res) => {
   }
 });
 
-
-
 // Define additional routes (if needed):
 // app.get("/api/data", (req, res) => {
 //   res.json({ message: "This is some data" });
@@ -132,8 +174,8 @@ app.get("/api/search", async (req, res) => {
 // Edited endpoint for searching artist, song or album:
 // app.get("/api/suggestions", (req, res) => {
 //   const query = req.query.q;
-  // Add logic for searching (from API-documentation - Search)
-  // Add logic for returning results
+// Add logic for searching (from API-documentation - Search)
+// Add logic for returning results
 //   const results = searchDatabaseForSuggestions(query); // current logic for saving results
 //   res.json({ results });
 // });
