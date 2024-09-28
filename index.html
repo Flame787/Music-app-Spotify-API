@@ -82,29 +82,76 @@
       </div>
 
       <!-- 1st form: Search and Audio Player: -->
-      <h2>Search:</h2>
+  
       <form action="" method="get" id="form" class="flex-container form-theme">
-        <div class="flex-item" id="first-input">
-          <p><label for="artist">Artist:</label></p>
-          <p>
-            <input type="text" id="artist" name="artist" class="input-color" />
-          </p>
-          <ul id="artistSuggestions" class="suggestions"></ul>
+        <div class="flex-item-big">
+          <div id="zero-input">
+            <p><label for="search-all">Search all:</label></p>
+            <p>
+              <input
+                type="text"
+                id="search-all"
+                name="search-all"
+                class="input-color"
+              />
+            </p>
+          </div>
+          <div id="submit-button" class="flex-item">
+            <!-- <p id="empty"></p> -->
+            <button
+              type="submit"
+              class="input-button button play-button nav-button"
+            >
+              Search
+            </button>
+          </div>
         </div>
-        <div class="flex-item" id="second-input">
-          <p><label for="song">Song:</label></p>
-          <p>
-            <input type="text" id="song" name="song" class="input-color" />
-          </p>
-          <ul id="songSuggestions" class="suggestions"></ul>
-        </div>
-        <div class="flex-item" id="third-input">
-          <p><label for="album"> Album:</label></p>
-          <p>
-            <input type="text" id="album" name="album" class="input-color" />
-          </p>
-          <ul id="albumSuggestions" class="suggestions"></ul>
-        </div>
+        <div class="flex-item-big flex-container">
+            <p>/ Search by category:</p>
+            
+          </div>
+            <div class="flex-item" id="first-input">
+              <p><label for="artist">Artist:</label></p>
+              <p>
+                <input
+                  type="text"
+                  id="artist"
+                  name="artist"
+                  class="input-color"
+                />
+              </p>
+
+              <!-- <ul id="artistSuggestions" class="suggestions"></ul> -->
+            </div>
+
+            <div class="flex-item" id="second-input">
+             
+                <p><label for="song">Song:</label></p>
+                <p>
+                  <input
+                    type="text"
+                    id="song"
+                    name="song"
+                    class="input-color"
+                  />
+                </p>
+
+              <!-- <ul id="songSuggestions" class="suggestions"></ul> -->
+            </div>
+
+              <div class="flex-item" id="third-input">
+                <p><label for="album"> Album:</label></p>
+                <p>
+                  <input
+                    type="text"
+                    id="album"
+                    name="album"
+                    class="input-color"
+                  />
+                </p>
+
+                <!-- <ul id="albumSuggestions" class="suggestions"></ul> -->
+              </div>
 
         <div id="submit-button" class="flex-item">
           <p id="empty"></p>
@@ -112,7 +159,7 @@
             type="submit"
             class="input-button button play-button nav-button"
           >
-            Play
+            Search
           </button>
         </div>
       </form>
@@ -134,7 +181,7 @@
         <div class="flex-item" id="first-input">
           <p><label for="album">Current track:</label></p>
           <div id="results">
-            <ul id="selectedResults"></ul>  
+            <ul id="selectedResults"></ul>
           </div>
         </div>
 

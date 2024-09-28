@@ -262,6 +262,8 @@ select {
   }
 }
 
+
+
 .option {
   font-size: 0.9rem;
   background-color: $inputColor1;
@@ -537,6 +539,20 @@ hr {
   display: none;
 }
 @include columns();
+
+#search-all {
+  width: 50% !important;
+}
+
+.flex-item-big {
+  flex-basis: 80%;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.flex-item {
+  margin-top: 0;
+}
 
 
 // MEDIA QUERIES:

@@ -982,7 +982,6 @@ h3 {
 }
 
 input {
-  width: 12rem;
   height: 2.5rem;
   border-radius: 45px;
   color: #d1d4c9;
@@ -1168,6 +1167,20 @@ hr {
 
 .d-col-12 {
   flex-basis: 100%;
+}
+
+#search-all {
+  width: 50% !important;
+}
+
+.flex-item-big {
+  flex-basis: 80%;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.flex-item {
+  margin-top: 0;
 }
 
 @media (max-width: 1540px) {

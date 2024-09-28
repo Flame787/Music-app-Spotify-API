@@ -117,23 +117,42 @@ app.get('/api/token', async (req, res) => {
 });
 
 // ENDPOINT GET ARTIST: https://api.spotify.com/v1/artists/{id}
-// ENDPOINT GET SEVERAL ARTISTS: 
-// ENDPOINT GET ARTIST'S ALBUMS:
-// ENDPOINT GET ARTIST'S TOP TRACKS: 
+// http GET https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg \
+//  Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
+// dodatni keys: genres [array of strings], images [array with usually one {object}, only important key: "url" - get the 1st object + url-key there]
+
+// ENDPOINT GET SEVERAL ARTISTS: https://api.spotify.com/v1/artists
+// http GET 'https://api.spotify.com/v1/artists?ids=2CIMQHirSU0MQqyYHq0eOx%2C57dN52uHvrHOxijzpIgu3E%2C1vCWHaC5f2uS3yhpwWbIA6' \
+//   Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
+// struktura: { objekt "artists": [array s objektima, svaki je zaseban objekt sa keyevima: genres, followers, images, name...]}
+
+// ENDPOINT GET ARTIST'S ALBUMS: https://api.spotify.com/v1/artists/{id}/albums
+// http GET https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/albums \
+  // Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
+// struktura: { object -> razni keys, npr. limit, total, items [array s {objektima - svaki ima ove keys: total_tracks, id, images, name, artists...}]}
+
+
+// ENDPOINT GET ARTIST'S TOP TRACKS: https://api.spotify.com/v1/artists/{id}/top-tracks
+// struktura: { object "tracks": [array s objektima "album", {svaki od njih ima keys: images, name, artistsduration_mstrack_number...}]}
 
 
 // ENDPOINT GET ALBUM: https://api.spotify.com/v1/albums/{id}
 // http GET https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy \
   // Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
-// dodatni keys: name ("string"), total_tracks (number), release_date, artists.name[0,1,2...] - lista, tracks.name[lista], genres
+// dodatni keys: name ("string"), total_tracks (integer), release_date, artists.name[0,1,2...] - array, tracks.name[array], genres
 // ...album cover picture, npr: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"
 // release_date_precision - The precision with which release_date value is known. Allowed values: "year", "month", "day". Example: "year"
 
-// ENDPOINT GET SEVERAL ALBUMS:
-// ENDPOINT GET ALBUM TRACKS:
+// ENDPOINT GET SEVERAL ALBUMS: https://api.spotify.com/v1/albums 
+// - parametri: id, market (npr. ES). 
+// ids - a comma-separated list of the Spotify IDs for the albums. Maximum: 20 IDs.
+// dodatni keys: items [array] -> {object za svaki item/album} -> svaki object ima artists, duration_ms, name...
+
+// ENDPOINT GET ALBUM TRACKS: https://api.spotify.com/v1/albums/{id}/tracks
+// limit: The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
 
 // ENDPOINT GET TRACK:  https://api.spotify.com/v1/tracks/{id}  
-// - parametri: id, market (npr. ES)
+// - parametri: id, market 
 
 // ENDPOINT GET SEVERAL TRACKS: https://api.spotify.com/v1/tracks 
 // - parametri: ids (više id-eva), market 
