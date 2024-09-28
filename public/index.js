@@ -4,6 +4,7 @@
     const submitToListButton = document.querySelector(".add-button");
     const list = document.getElementById("added-list"); // first list (ul) that gets tasks appended
     const favoritesList = document.getElementById("fav_albums"); // second list (ul) with favorite songs
+    const searchInput = document.getElementById("search-all");
 
     // Navbar behavior:
 
@@ -242,12 +243,12 @@
 
     // Function to handle user selection of a suggestion
     function selectSuggestion(item, type, suggestionListId) {
-      const selectedResults = document.getElementById("selectedResults");
+      const selectedTrack = document.getElementById("selected-track");
       let li = document.createElement("li");
       li.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${
         item.name
       }`;
-      selectedResults.appendChild(li);
+      selectedTrack.appendChild(li);
 
       document.getElementById(suggestionListId).innerHTML = ""; // Clear suggestions after selection
     }
@@ -257,16 +258,18 @@
     // Kada implementiraš rutu /api/suggestions, možeš je testirati direktno putem preglednika ili Postmana da vidiš vraća li ispravan JSON odgovor.
 
     // ako type nije postavljen, zadaje se defaultna vrijednost 'artist,album,track':
-    async function fetchSuggestions(query, type = 'artist,album,track') {
+    async function fetchSuggestions(query, type = "artist,album,track") {
       try {
-        const response = await fetch(`/api/suggestions?q=${query}&type=${type}`);
+        const response = await fetch(
+          `/api/suggestions?q=${query}&type=${type}`
+        );
         if (!response.ok) {
-          throw new Error('Failed to fetch suggestions');
+          throw new Error("Failed to fetch suggestions");
         }
         const data = await response.json();
         return data;
       } catch (error) {
-        console.error('Error fetching suggestions:', error);
+        console.error("Error fetching suggestions:", error);
       }
     }
 
@@ -293,12 +296,23 @@
     //     });
     // }
 
-    // Event listener za praćenje unosa u sva tri polja
+    // NOVO:
+    // Event-listener za praćenje unosa u glavno polje - Search All:
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim();
+      if (query.length > 0) {
+        fetchSuggestions(query); // Poziv funkcije za dohvat prijedloga
+      } else {
+        resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
+      }
+    });
+
+    // Event-listener za praćenje unosa u sva tri ova polja s posebnim kategorijama:
     [artistInput, songInput, albumInput].forEach((input) => {
       input.addEventListener("input", () => {
         const query = input.value.trim();
         if (query.length > 0) {
-          fetchSuggestions(query);
+          fetchSuggestions2(query);
         } else {
           resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
         }

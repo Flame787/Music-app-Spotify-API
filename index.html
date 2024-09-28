@@ -96,8 +96,8 @@
               />
             </p>
           </div>
+
           <div id="submit-button" class="flex-item">
-            <!-- <p id="empty"></p> -->
             <button
               type="submit"
               class="input-button button play-button nav-button"
@@ -106,8 +106,9 @@
             </button>
           </div>
         </div>
+
         <div class="flex-item-big flex-container">
-            <p>/ Search by category:</p>
+            <p> Search by category:</p>
             
           </div>
             <div class="flex-item" id="first-input">
@@ -153,7 +154,7 @@
                 <!-- <ul id="albumSuggestions" class="suggestions"></ul> -->
               </div>
 
-        <div id="submit-button" class="flex-item">
+        <!-- <div id="submit-button" class="flex-item">
           <p id="empty"></p>
           <button
             type="submit"
@@ -161,7 +162,38 @@
           >
             Search
           </button>
+        </div> -->
+
+      </form>
+
+      <form action="" method="get" id="form" class="flex-container form-theme">
+
+        <div class="flex-item" id="current-play"></div>
+          <p><label for="album">Results:</label></p>
+          <div id="results">
+            <ul id="selectedResults">
+              <!-- ovdje se formira lista s rednim brojevima (ol), u kojoj su podsekcije:
+               Artists:
+               ...
+               Albums:
+               ...
+               Songs:
+               ...
+               Svaka podsekcija sadrži neki broj (limit) list-itema (npr. do max 10 rezultata).
+               Za albume i pjesme - svaki pojedini rezultat (li) dobiva button Play na kraju svojeg retka!
+               Svaki artist ima ove informacije: artist, genres, slika. 
+               Klikom na button pored (Find music ili nešto slično) otvara se samo taj artist (nestaju ostali rezultati), 
+               prikažu se redom nazivi svih albuma, 
+               i popularne pjesme (sa slikama covera pripadajućih albuma). Pored svih albuma i pjesama su buttoni Play.
+               
+               Svaki album ima ove informacije: artist, ime albuma, broj pjesama, trajanje albuma, godina izdanja, cover slika albuma.
+               Svaka pjesma ima ove informacije: artist, ime albuma na kojem se nalazi, trajanje pjesme, godina izdanja albuma, cover slika albuma.
+
+              -->
+            </ul>
+          </div>
         </div>
+
       </form>
 
       <h2>Currently playing:</h2>
@@ -174,14 +206,17 @@
             <audio controls>
               <!-- placeholder for a real fetched song: -->
               <!-- <source src="horse.mp3" type="audio/mpeg"> -->
-              .
+              ...
             </audio>
           </div>
         </div>
-        <div class="flex-item" id="first-input">
+        <div class="flex-item" id="current-play">
           <p><label for="album">Current track:</label></p>
-          <div id="results">
-            <ul id="selectedResults"></ul>
+          <div id="current-track">
+            <ul id="selected-track">
+              <!-- this fills out dinamically, depending on currently playing song. It is displaying: current song, album, artist and duration. 
+               Song, artist and album - values are also copied when user adds this song to his playlist - they fill out new list items. -->
+            </ul>
           </div>
         </div>
 
