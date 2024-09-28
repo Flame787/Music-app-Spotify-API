@@ -116,6 +116,53 @@ app.get('/api/token', async (req, res) => {
   }
 });
 
+// ENDPOINT GET ARTIST: https://api.spotify.com/v1/artists/{id}
+// ENDPOINT GET SEVERAL ARTISTS: 
+// ENDPOINT GET ARTIST'S ALBUMS:
+// ENDPOINT GET ARTIST'S TOP TRACKS: 
+
+
+// ENDPOINT GET ALBUM: https://api.spotify.com/v1/albums/{id}
+// http GET https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy \
+  // Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
+// dodatni keys: name ("string"), total_tracks (number), release_date, artists.name[0,1,2...] - lista, tracks.name[lista], genres
+// ...album cover picture, npr: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"
+// release_date_precision - The precision with which release_date value is known. Allowed values: "year", "month", "day". Example: "year"
+
+// ENDPOINT GET SEVERAL ALBUMS:
+// ENDPOINT GET ALBUM TRACKS:
+
+// ENDPOINT GET TRACK:  https://api.spotify.com/v1/tracks/{id}  
+// - parametri: id, market (npr. ES)
+
+// ENDPOINT GET SEVERAL TRACKS: https://api.spotify.com/v1/tracks 
+// - parametri: ids (više id-eva), market 
+
+// ENDPOINT SEARCH FOR ITEM: (tracks, albums, shows, episode, playlists, audiobooks...) - https://api.spotify.com/v1/search
+// - parametri: q, type, market (ES), limit, offset...
+// http GET 'https://api.spotify.com/v1/search?q=remaster%2520track%3ADoxy%2520artist%3AMiles%2520Davis&type=album' \
+// Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
+
+// ENDPOINT PLAYER:
+ /* Get Playback State
+Transfer Playback
+Get Available Devices
+Get Currently Playing Track
+Start/Resume Playback
+Pause Playback
+Skip To Next
+Skip To Previous
+Seek To Position
+Set Repeat Mode
+Set Playback Volume
+Toggle Playback Shuffle
+Get Recently Played Tracks
+Get the User's Queue
+Add Item to Playback Queue */
+
+// *** market = country code, 2 letters. HR - Croatia, GB - United Kingdom, US - United states of America, DE - Germany, ES - Spain...
+
+
 // Ruta za prijedloge (sugestije) na temelju unosa
 app.get("/api/suggestions", async (req, res) => {
   const query = req.query.q;  // Korisnički unos
