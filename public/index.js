@@ -253,18 +253,18 @@
       document.getElementById(suggestionListId).innerHTML = ""; // Clear suggestions after selection
     }
 
-    /////// Primjer funkcije za slanje API poziva  //////////////////////
+    /////// Primjer funkcije za slanje API poziva - frontend! - index.js:  //////////////////////
 
-    // Kada implementiraš rutu /api/suggestions, možeš je testirati direktno putem preglednika ili Postmana da vidiš vraća li ispravan JSON odgovor.
+    // after implementing the route /api/suggestions, test it in browser or Postman to check if it returns correct JSON answer.
 
-    // ako type nije postavljen, zadaje se defaultna vrijednost 'artist,album,track':
-    async function fetchSuggestions(query, type = "artist,album,track") {
+    // if the 'type' is not set, it will be a default value: 'artist,album,track':
+    async function fetchSearchResults(query, type = "artist,album,track") {
       try {
         const response = await fetch(
-          `/api/suggestions?q=${query}&type=${type}`
+          `/api/search?q=${query}&type=${type}`
         );
         if (!response.ok) {
-          throw new Error("Failed to fetch suggestions");
+          throw new Error("Failed to fetch results");
         }
         const data = await response.json();
         return data;
@@ -301,7 +301,7 @@
     searchInput.addEventListener("input", () => {
       const query = searchInput.value.trim();
       if (query.length > 0) {
-        fetchSuggestions(query); // Poziv funkcije za dohvat prijedloga
+        fetchSearchResults(query); // Poziv funkcije za dohvat prijedloga
       } else {
         resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
       }
