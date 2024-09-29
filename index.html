@@ -81,17 +81,17 @@
         </div>
       </div>
 
-      <!-- 1st form: Search and Audio Player: -->
+      <!-- 1st form: Search: -->
   
-      <form action="" method="get" id="form" class="flex-container form-theme">
+      <form action="" method="get" id="search-form" class="form flex-container form-theme">
         <div class="flex-item-big">
           <div id="zero-input">
-            <p><label for="search-all">Search all:</label></p>
+            <p><label for="search-all-input">Search all:</label></p>
             <p>
               <input
                 type="text"
-                id="search-all"
-                name="search-all"
+                id="search-all-input"
+                name="search-all-input"
                 class="input-color"
               />
             </p>
@@ -166,12 +166,14 @@
 
       </form>
 
-      <form action="" method="get" id="form" class="flex-container form-theme">
+      <!-- 2nd form - Results of the Search: -->
 
-        <div class="flex-item" id="current-play"></div>
-          <p><label for="album">Results:</label></p>
-          <div id="results">
-            <ul id="selectedResults">
+      <form action="" method="get"  class="form flex-container form-theme">
+
+        <div class="flex-item" id="current-play">
+          <p>Results:</p>
+          <div id="results-container">
+            <!-- <ol> -->
               <!-- ovdje se formira lista s rednim brojevima (ol), u kojoj su podsekcije:
                Artists:
                ...
@@ -190,7 +192,7 @@
                Svaka pjesma ima ove informacije: artist, ime albuma na kojem se nalazi, trajanje pjesme, godina izdanja albuma, cover slika albuma.
 
               -->
-            </ul>
+            <!-- </ol> -->
           </div>
         </div>
 
@@ -198,9 +200,9 @@
 
       <h2>Currently playing:</h2>
 
-      <!-- 2nd form: Rating songs/albums and Adding to the current list -->
+      <!-- 3rd form: Music player + Rating songs/albums and Adding them to the current list -->
 
-      <form action="" method="get" id="form" class="flex-container form-theme">
+      <form action="" method="get"  class="form flex-container form-theme">
         <div class="flex-item" id="music-player">
           <div id="music-wrapper">
             <audio controls>

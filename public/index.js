@@ -4,7 +4,9 @@
     const submitToListButton = document.querySelector(".add-button");
     const list = document.getElementById("added-list"); // first list (ul) that gets tasks appended
     const favoritesList = document.getElementById("fav_albums"); // second list (ul) with favorite songs
-    const searchInput = document.getElementById("search-all");
+    const searchInput = document.getElementById("search-all-input");
+    const searchButton = document.getElementById("submit-button");
+    const searchForm = document.getElementById("search-form");
 
     // Navbar behavior:
 
@@ -123,7 +125,7 @@
       console.log("Body classes:", body.classList);
     }
 
-    // Dropdown (instead of select-element):
+    // Dropdown for theme-picking (instead of select-element):
     document
       .querySelector(".dropdown-toggle")
       .addEventListener("click", function () {
@@ -164,7 +166,9 @@
     const albumInput = document.getElementById("album");
     const resultsList = document.getElementById("results");
 
-    // Function to get access token from the server
+    // Function to get access token from the server:
+
+    /*
     async function getAccessToken() {
       const response = await fetch("/api/token"); // API call to your server to get the access token / Fetch token from the server
       if (!response.ok) {
@@ -195,8 +199,10 @@
         searchSpotify(query, "album", "albumSuggestions");
       }
     });
+    */
 
     // Function to perform API call to Spotify
+    /*
     async function searchSpotify(query, type, suggestionListId, accessToken) {
       const headers = {
         Authorization: `Bearer ${accessToken}`,
@@ -216,8 +222,11 @@
         })
         .catch((error) => console.error("Error:", error));
     }
+    */
 
-    // Function to display suggestions in a dropdown
+    // Function to display suggestions in a dropdown:
+
+    /*
     function displaySuggestions(data, type, suggestionListId) {
       const suggestionList = document.getElementById(suggestionListId);
       suggestionList.innerHTML = ""; // Clear previous suggestions
@@ -240,8 +249,10 @@
         suggestionList.appendChild(li);
       });
     }
+    */
 
     // Function to handle user selection of a suggestion
+    /*
     function selectSuggestion(item, type, suggestionListId) {
       const selectedTrack = document.getElementById("selected-track");
       let li = document.createElement("li");
@@ -252,17 +263,16 @@
 
       document.getElementById(suggestionListId).innerHTML = ""; // Clear suggestions after selection
     }
+      */
 
-    /////// Primjer funkcije za slanje API poziva - frontend! - index.js:  //////////////////////
+    /////// Function to send Api-request for Search results - from Frontend to Backend: //////////////////////
 
-    // after implementing the route /api/suggestions, test it in browser or Postman to check if it returns correct JSON answer.
+    // after implementing the route (named '/api/search' or similar), test it in browser or Postman to check if it returns correct JSON answer.
 
     // if the 'type' is not set, it will be a default value: 'artist,album,track':
     async function fetchSearchResults(query, type = "artist,album,track") {
       try {
-        const response = await fetch(
-          `/api/search?q=${query}&type=${type}`
-        );
+        const response = await fetch(`/api/search?q=${query}&type=${type}`);
         if (!response.ok) {
           throw new Error("Failed to fetch results");
         }
@@ -271,6 +281,63 @@
       } catch (error) {
         console.error("Error fetching suggestions:", error);
       }
+    }
+
+    // Function to display all fetched Search-results on the page:
+
+    async function displaySearchResults(query) {
+      const results = await fetchSearchResults(query);
+      console.log(results); // Log the results to see what you get
+      const resultsContainer = document.getElementById("results-container"); // Your container element
+      resultsContainer.innerHTML = ""; // Clear previous results
+
+      if (!results) {
+        console.error("No results found");
+        return; // Exit if results are undefined
+      }
+
+      const ol = document.createElement("ol"); // Create an ordered list
+
+      // Assuming results contain an array of items
+      // results.items.forEach((item) => {
+      //   const li = document.createElement("li");
+      //   li.textContent = item.name; // Adjust to the property you want to display
+      //   ol.appendChild(li); // Append list item to the ordered list
+      // });
+
+      // resultsContainer.appendChild(ol);
+      // Append the ordered list to the container
+
+      // Check and display tracks
+      if (results.tracks && results.tracks.items.length > 0) {
+        results.tracks.items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `Track: ${item.name} - Artist: ${item.artists[0].name}`; // Adjust to your needs
+          ol.appendChild(li);
+        });
+      }
+
+      // Check and display albums
+      if (results.albums && results.albums.items.length > 0) {
+        results.albums.items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `Album: ${item.name} - Release Date: ${item.release_date}`;
+          ol.appendChild(li);
+        });
+      }
+
+      // Check and display artists
+      if (results.artists && results.artists.items.length > 0) {
+        results.artists.items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `Artist: ${item.name} - Genres: ${item.genres.join(
+            ", "
+          )}`;
+          ol.appendChild(li);
+        });
+      }
+
+      resultsContainer.appendChild(ol);
     }
 
     /////// ovo doraditi - što uopće radi, što je query??   //////////////////////
@@ -298,12 +365,36 @@
 
     // NOVO:
     // Event-listener za praćenje unosa u glavno polje - Search All:
-    searchInput.addEventListener("input", () => {
-      const query = searchInput.value.trim();
-      if (query.length > 0) {
-        fetchSearchResults(query); // Poziv funkcije za dohvat prijedloga
+    // searchInput.addEventListener("input", () => {
+    //   const query = searchInput.value.trim();
+    //   if (query.length > 0) {
+    //     fetchSearchResults(query); // Poziv funkcije za dohvat prijedloga
+    //   } else {
+    //     resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
+    //   }
+    // });
+
+    // praćenje submita u search-form-u i prikaz search-rezultata:
+
+    // searchForm.addEventListener("submit", (event) => {
+    //   event.preventDefault(); // Prevent the default form submission
+    //   console.log("Form submitted");
+    //   const query = searchInput.value; // Get the input value
+    //   console.log("Query:", query);
+    //   displaySearchResults(query); // Call the function with the user's query
+    // });
+
+    searchButton.addEventListener("click", (event) => {
+      const query = searchInput.value.trim(); // Get the input value
+      if (query.length >= 2) {
+        event.preventDefault(); // Prevent the default form submission
+
+        console.log("Form submitted");
+
+        console.log("Query:", query);
+        displaySearchResults(query); // Call the function with the user's query
       } else {
-        resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
+        console.log("Please enter your query - query not big enough.");
       }
     });
 

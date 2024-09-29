@@ -302,7 +302,7 @@ select {
   border-radius: 15px;
 }
 
-#form {
+.form {
   @include form-design();
 }
 
@@ -540,7 +540,7 @@ hr {
 }
 @include columns();
 
-#search-all {
+#search-all-input {
   width: 50% !important;
 }
 
