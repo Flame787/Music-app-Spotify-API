@@ -297,14 +297,19 @@
       }
 
       const ulArtists = document.createElement("ul"); // Create an unordered list for artists
-      const olAlbums = document.createElement("ol"); // Create an ordered list for albums
-      const olSongs = document.createElement("ol"); // Create an ordered list for songs
+      const ulAlbums = document.createElement("ul"); // Create an ordered list for albums
+      const ulSongs = document.createElement("ul"); // Create an ordered list for songs
       const titleArtists = document.createElement("h4");
       const titleAlbums = document.createElement("h4");
       const titleSongs = document.createElement("h4");
+      // [titleArtists, titleAlbums, titleSongs].forEach(element => element.createElement("h4"));
+      // ulArtists.classList.add("flex-container");
+      // ulAlbums.classList.add("flex-container");
+      // ulSongs.classList.add("flex-container");
+      [ulArtists, ulAlbums, ulSongs].forEach(element => element.classList.add("flex-container-ol"));
 
       // show subtitle inside results:
-      resultsContainer.appendChild(titleArtists);
+      ulArtists.appendChild(titleArtists);
       titleArtists.innerHTML = "Artists:";
 
       // Results displaying, depending on API-data structure (...to be modified):
@@ -319,26 +324,34 @@
           if (item.images && item.images.length > 0) {
             img.src = item.images[0].url; // Set the image source
             img.alt = `${item.name} Artist`;
-            img.width = 200; // Set the width (in pixels)
-            img.height = 200; // Set the height (in pixels)
+            img.classList.add("result-image");
+          
             // Insert the image before the text content
             li.insertBefore(img, li.firstChild);
           }
 
           // Create a <div> for the text and append it
-          const textDivArtist = document.createElement("div");
-
-          textDivArtist.textContent = `- ${
-            item.name
-          } - ${item.genres.join(", ")}`;
-          li.appendChild(textDivArtist);
+          const textDivArtist1 = document.createElement("div");
+          
+          const textDivArtist2 = document.createElement("div");
+          // textDivArtist.textContent = `${item.name} - ${item.genres.join(
+          //   ", "
+          // )}`;
+          textDivArtist1.textContent = `${item.name}`;
+          li.appendChild(textDivArtist1);
+          textDivArtist2.textContent = `${item.genres.join(
+            ", "
+          )}`;
+          li.appendChild(textDivArtist2);
+          li.classList.add("li-item-style", "result-flex-item");
+          textDivArtist1.classList.add("result-item-name");
 
           ulArtists.appendChild(li);
           resultsContainer.appendChild(ulArtists);
         });
       }
 
-      resultsContainer.appendChild(titleAlbums);
+      ulAlbums.appendChild(titleAlbums);
       titleAlbums.innerHTML = "Albums:";
 
       // Check and display albums
@@ -346,12 +359,16 @@
         results.albums.items.forEach((item) => {
           const li = document.createElement("li");
           const img = document.createElement("img");
-          img.src = item.images[0].url; // Set the image source
-          img.alt = `${item.name} Album Cover`;
-          img.width = 200; // Set the width (in pixels)
-          img.height = 200; // Set the height (in pixels)
-          // Insert the image before the text content
-          li.insertBefore(img, li.firstChild);
+         
+
+          // Provjera da li artist ima slike i da li je prva slika dostupna (id some is missing, doesn't matter, others will show up)
+          if (item.images && item.images.length > 0) {
+            img.src = item.images[0].url; // Set the image source
+            img.alt = `${item.name} Album Cover`;
+            img.classList.add("result-image");
+            // Insert the image before the text content
+            li.insertBefore(img, li.firstChild);
+          }
 
           // Create a <div> for the text and append it
           const textDivAlbum = document.createElement("div");
@@ -359,28 +376,56 @@
           // li.appendChild(document.createTextNode(`${item.name} - by: ${item.artists[0].name} - release date: ${item.release_date} - album tracks nr: ${item.total_tracks}`));
           textDivAlbum.textContent = `${item.name} - by: ${item.artists[0].name} - release date: ${item.release_date} - album tracks nr: ${item.total_tracks}`;
           li.appendChild(textDivAlbum);
+          li.classList.add("li-item-style", "result-flex-item");
 
-          olAlbums.appendChild(li);
-          resultsContainer.appendChild(olAlbums);
+          ulAlbums.appendChild(li);
+          resultsContainer.appendChild(ulAlbums);
         });
       }
 
-      resultsContainer.appendChild(titleSongs);
+      ulSongs.appendChild(titleSongs);
       titleSongs.innerHTML = "Songs:";
 
       // Check and display tracks
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
           const li = document.createElement("li");
-          li.textContent = `${item.name} - by: ${item.artists[0].name}`; // Adjust to your needs
-          olSongs.appendChild(li);
-          resultsContainer.appendChild(olSongs);
+          const img = document.createElement("img");
+
+          // Provjera da li artist ima slike i da li je prva slika dostupna (id some is missing, doesn't matter, others will show up)
+          if (item.album && item.album.images && item.album.images.length > 0) {
+            img.src = item.album.images[0].url; // Set the image source
+            img.alt = `${item.name} Album Cover`;
+            img.classList.add("result-image");
+            // Insert the image before the text content
+            li.insertBefore(img, li.firstChild);
+          }
+  
+          // Create a <div> for the text and append it
+          const textDivSong = document.createElement("div");
+
+          textDivSong.textContent = `${item.name} - by: ${item.artists[0].name}`; // Adjust to your needs
+          li.appendChild(textDivSong);
+          li.classList.add("li-item-style", "result-flex-item");
+
+          ulSongs.appendChild(li);
+          resultsContainer.appendChild(ulSongs);
         });
       }
-    }
+    } 
 
+    // dodati button play i button 'add to list' koji se appendaju ispod svake stavke
+    // jedino artist nema te buttone, nego ima button za "explore music" ili slično, čime se otvaraju 10 njegovih albuma i pjesama.
     // dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa)
     // brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?)
+    // vizualno odmaknuti kategorije rezultata
+
+    // u Copper temi i Night temi i Frost tema staviti kontrastno: staviti bijela slova unutar formsa, a ne crna jer se ne vide
+    // Energy tema - crna su slova, ali treba ih malo podebljati
+
+    // možda (nice to have): dodati "expended search"?? - button kojim se pretraga po nekoj kategoriji može povećati, pa prikaže gradijalno svaki put još 10 rezultata.
+
+
 
     /////// ovo doraditi - što uopće radi, što je query??   //////////////////////
 
@@ -429,18 +474,59 @@
     // Praćenje submita u search-form-u i prikaz search-rezultata:
 
     searchButton.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent the default form submission
+
+      handleSearch(); // Pozovi handleSearch() umjesto displaySearchResults
+    });
+    
+    // function for focusing on the Search Results:
+    async function handleSearch() {
       const query = searchInput.value.trim(); // Get the input value
       if (query.length >= 2) {
-        event.preventDefault(); // Prevent the default form submission
-
         console.log("Form submitted");
-
         console.log("Query:", query);
-        displaySearchResults(query); // Call the function with the user's query
+        await displaySearchResults(query); // Koristi fetchSearchResults unutar displaySearchResults
+        document.getElementById("search-results").focus(); // Focus on the results-container
       } else {
         console.log("Please enter your query - query not big enough.");
       }
+    }
+    
+    // Praćenje pritiska na Enter tipku i poziv handleSearch()
+    searchInput.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Prevent form submission on Enter
+        handleSearch();
+      }
     });
+
+    // searchButton.addEventListener("click", (event) => {
+    //   const query = searchInput.value.trim(); // Get the input value
+    //   if (query.length >= 2) {
+    //     event.preventDefault(); // Prevent the default form submission
+
+    //     console.log("Form submitted");
+
+    //     console.log("Query:", query);
+    //     displaySearchResults(query); // Call the function with the user's query
+    //   } else {
+    //     console.log("Please enter your query - query not big enough.");
+    //   }
+    // });
+
+// function for focusing on the Search Results:
+  //   async function handleSearch() {
+  //     const query = searchInput.value;
+  //     await displaySearchResults(query); // Koristi fetchSearchResults unutar displaySearchResults
+  //     document.getElementById("search-results").focus();
+  // }
+  
+  // searchInput.addEventListener("keypress", function(event) {
+  //     if (event.key === "Enter") {
+  //         handleSearch();
+  //     }
+  // });
+
 
     // Event-listener za praćenje unosa u sva tri ova polja s posebnim kategorijama:
     [artistInput, songInput, albumInput].forEach((input) => {

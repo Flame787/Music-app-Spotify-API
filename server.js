@@ -231,7 +231,7 @@ app.get("/api/search", async (req, res) => {
   const accessToken = await getAccessToken(); // Dohvati access token
 
   // URL za pretragu na Spotify API-ju
-  const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=10`;
+  const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=9`;
 
   try {
     const response = await fetch(searchUrl, {

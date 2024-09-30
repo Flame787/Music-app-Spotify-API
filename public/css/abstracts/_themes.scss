@@ -394,7 +394,7 @@ $noShadow: none;
 $fontColors: ();
 
 // themes with white font and shadowing:
-@for $i from 0 through 12 {
+@for $i from 0 through 14 {
   $fontColors: map-merge(
     $fontColors,
     (
@@ -422,16 +422,16 @@ $fontColors: ();
 }
 
 // exception for theme2 and theme8:
-$fontColors: map-merge(
-  $fontColors,
-  (
-    theme2: (
-      color: $defaultColor,
-      text-shadow: $noShadow,
-      // no shadow
-    ),
-  )
-);
+// $fontColors: map-merge(
+//   $fontColors,
+//   (
+//     theme2: (
+//       color: $defaultColor,
+//       text-shadow: $noShadow,
+//       // no shadow
+//     ),
+//   )
+// );
 
 $fontColors: map-merge(
   $fontColors,
@@ -551,8 +551,8 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme2: (
-    background: radial-gradient(at 25% 75%, #d2c0f36d, rgba(35, 6, 71, 0.558)),
-    color: black,
+    background: radial-gradient(at 25% 75%, #d2c0f38a, rgba(35, 6, 71, 0.644)),
+    color: white,
     text-shadow: none,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -569,7 +569,7 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme5: (
-    background: radial-gradient(at 75% 25%, #ceb83ed1, rgba(203, 28, 28, 0.87)),
+    background: radial-gradient(at 75% 25%, #ceb83ee3, rgba(203, 28, 28, 0.916)),
     color: black,
     text-shadow: none,
     box-shadow: 3px 3px 2px $textShadowColor1,
@@ -582,7 +582,7 @@ $formThemes: (
   ),
   theme7: (
     background: radial-gradient(at 25% 75%, #a56646bf, rgba(9, 3, 1, 0.623)),
-    color: black,
+    color: white,
     text-shadow: none,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
@@ -630,8 +630,8 @@ $formThemes: (
   theme12: (
     background:
       // radial-gradient(at 25% 75%, #c8e2f2bf, rgba(110, 158, 230, 0.749)),
-      radial-gradient(at 75% 25%, #b1b0b0b2, rgba(42, 100, 140, 0.749)),
-    color: black,
+      radial-gradient(at 75% 25%, #b1b0b0c6, rgba(42, 101, 140, 0.8)),
+    color: white,
     text-shadow: none,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),

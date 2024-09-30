@@ -67,7 +67,7 @@ body.theme1 {
 }
 body.theme2 {
   color: #d1d4c9 !important;
-  text-shadow: none !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme3 {
   color: #d1d4c9 !important;
@@ -426,8 +426,8 @@ body.theme15 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme2 .form-theme {
-  background: radial-gradient(at 25% 75%, rgba(210, 192, 243, 0.4274509804), rgba(35, 6, 71, 0.558));
-  color: black;
+  background: radial-gradient(at 25% 75%, rgba(210, 192, 243, 0.5411764706), rgba(35, 6, 71, 0.644));
+  color: white;
   text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -444,7 +444,7 @@ body.theme15 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme5 .form-theme {
-  background: radial-gradient(at 75% 25%, rgba(206, 184, 62, 0.8196078431), rgba(203, 28, 28, 0.87));
+  background: radial-gradient(at 75% 25%, rgba(206, 184, 62, 0.8901960784), rgba(203, 28, 28, 0.916));
   color: black;
   text-shadow: none;
   box-shadow: 3px 3px 2px #000000;
@@ -457,7 +457,7 @@ body.theme15 {
 }
 .theme7 .form-theme {
   background: radial-gradient(at 25% 75%, rgba(165, 102, 70, 0.7490196078), rgba(9, 3, 1, 0.623));
-  color: black;
+  color: white;
   text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -486,8 +486,8 @@ body.theme15 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme12 .form-theme {
-  background: radial-gradient(at 75% 25%, rgba(177, 176, 176, 0.6980392157), rgba(42, 100, 140, 0.749));
-  color: black;
+  background: radial-gradient(at 75% 25%, rgba(177, 176, 176, 0.7764705882), rgba(42, 101, 140, 0.8));
+  color: white;
   text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -1181,6 +1181,39 @@ hr {
 
 .flex-item {
   margin-top: 0;
+}
+
+#search-results:focus {
+  outline: none;
+}
+
+.result-image {
+  border-radius: 45px;
+  width: 200px;
+  height: 200px;
+}
+
+.li-item-style {
+  padding: 0 2% 7%;
+  font-size: 1.2rem;
+}
+
+.flex-container-ol {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.result-flex-item {
+  flex-basis: 30%;
+}
+
+.result-item-name {
+  font-size: 1.5rem !important;
+  font-weight: bold;
+  padding: 2% 0;
 }
 
 @media (max-width: 1540px) {

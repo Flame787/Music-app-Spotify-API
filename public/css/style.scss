@@ -554,6 +554,41 @@ hr {
   margin-top: 0;
 }
 
+// API-generated results:
+
+#search-results:focus {
+  outline: none;
+}
+
+.result-image {
+  border-radius: 45px;
+  width: 200px; 
+  height: 200px; 
+}
+
+.li-item-style {
+  padding: 0 2% 7%;
+  font-size: 1.2rem;
+}
+
+.flex-container-ol{
+width: 100%;
+display:flex;
+flex-wrap: wrap;
+justify-content: space-around;
+align-content: center;
+}
+
+.result-flex-item {
+  flex-basis: 30%;
+}
+
+.result-item-name{
+  font-size: 1.5rem !important;
+  font-weight: bold;
+  padding: 2% 0;
+}
+
 
 // MEDIA QUERIES:
 
