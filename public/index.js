@@ -296,16 +296,16 @@
         return; // Exit if results are undefined
       }
 
-     
       const ulArtists = document.createElement("ul"); // Create an unordered list for artists
+      const olAlbums = document.createElement("ol"); // Create an ordered list for albums
+      const olSongs = document.createElement("ol"); // Create an ordered list for songs
       const titleArtists = document.createElement("h4");
       const titleAlbums = document.createElement("h4");
       const titleSongs = document.createElement("h4");
-      const olAlbums = document.createElement("ol"); // Create an ordered list for albums
-      const olSongs = document.createElement("ol"); // Create an ordered list for songs
 
+      // show subtitle inside results:
       resultsContainer.appendChild(titleArtists);
-      titleArtists.innerHTML = "Artists:"
+      titleArtists.innerHTML = "Artists:";
 
       // Results displaying, depending on API-data structure (...to be modified):
 
@@ -313,45 +313,74 @@
       if (results.artists && results.artists.items.length > 0) {
         results.artists.items.forEach((item) => {
           const li = document.createElement("li");
-          li.textContent = `${item.name} - genres: ${item.genres.join(
-            ", "
-          )}`;
-          resultsContainer.appendChild(ulArtists);
+          const img = document.createElement("img");
+
+          // Provjera da li artist ima slike i da li je prva slika dostupna (id some is missing, doesn't matter, others will show up)
+          if (item.images && item.images.length > 0) {
+            img.src = item.images[0].url; // Set the image source
+            img.alt = `${item.name} Artist`;
+            img.width = 200; // Set the width (in pixels)
+            img.height = 200; // Set the height (in pixels)
+            // Insert the image before the text content
+            li.insertBefore(img, li.firstChild);
+          }
+
+          // Create a <div> for the text and append it
+          const textDivArtist = document.createElement("div");
+
+          textDivArtist.textContent = `- ${
+            item.name
+          } - ${item.genres.join(", ")}`;
+          li.appendChild(textDivArtist);
+
           ulArtists.appendChild(li);
+          resultsContainer.appendChild(ulArtists);
         });
       }
 
       resultsContainer.appendChild(titleAlbums);
-      titleAlbums.innerHTML = "Albums:"
+      titleAlbums.innerHTML = "Albums:";
 
       // Check and display albums
       if (results.albums && results.albums.items.length > 0) {
         results.albums.items.forEach((item) => {
           const li = document.createElement("li");
-          li.textContent = `${item.name} - artist: ${item.artists[0].name} - release Date: ${item.release_date}`;
-          resultsContainer.appendChild(olAlbums);
+          const img = document.createElement("img");
+          img.src = item.images[0].url; // Set the image source
+          img.alt = `${item.name} Album Cover`;
+          img.width = 200; // Set the width (in pixels)
+          img.height = 200; // Set the height (in pixels)
+          // Insert the image before the text content
+          li.insertBefore(img, li.firstChild);
+
+          // Create a <div> for the text and append it
+          const textDivAlbum = document.createElement("div");
+          // li.textContent = `${item.name} - by: ${item.artists[0].name} - release date: ${item.release_date} - album tracks nr: ${item.total_tracks}`;
+          // li.appendChild(document.createTextNode(`${item.name} - by: ${item.artists[0].name} - release date: ${item.release_date} - album tracks nr: ${item.total_tracks}`));
+          textDivAlbum.textContent = `${item.name} - by: ${item.artists[0].name} - release date: ${item.release_date} - album tracks nr: ${item.total_tracks}`;
+          li.appendChild(textDivAlbum);
+
           olAlbums.appendChild(li);
+          resultsContainer.appendChild(olAlbums);
         });
       }
 
       resultsContainer.appendChild(titleSongs);
-      titleSongs.innerHTML = "Songs:"
+      titleSongs.innerHTML = "Songs:";
 
       // Check and display tracks
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
           const li = document.createElement("li");
           li.textContent = `${item.name} - by: ${item.artists[0].name}`; // Adjust to your needs
-          resultsContainer.appendChild(olSongs);
           olSongs.appendChild(li);
+          resultsContainer.appendChild(olSongs);
         });
       }
-
     }
 
     // dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa)
-// brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?)
-
+    // brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?)
 
     /////// ovo doraditi - što uopće radi, što je query??   //////////////////////
 
