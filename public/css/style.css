@@ -1187,6 +1187,11 @@ hr {
   outline: none;
 }
 
+.result-category {
+  width: 100%;
+  margin: 0 auto 5%;
+}
+
 .result-image {
   border-radius: 45px;
   width: 200px;

@@ -166,105 +166,6 @@
     const albumInput = document.getElementById("album");
     const resultsList = document.getElementById("results");
 
-    // Function to get access token from the server:
-
-    /*
-    async function getAccessToken() {
-      const response = await fetch("/api/token"); // API call to your server to get the access token / Fetch token from the server
-      if (!response.ok) {
-        throw new Error("Failed to fetch token");
-      }
-      const data = await response.json(); // Parse JSON response
-      return data.accessToken;
-    }
-
-    artistInput.addEventListener("input", function () {
-      let query = this.value;
-      if (query.length > 2) {
-        // Start searching after 3 characters
-        searchSpotify(query, "artist", "artistSuggestions");
-      }
-    });
-
-    songInput.addEventListener("input", function () {
-      let query = this.value;
-      if (query.length > 2) {
-        searchSpotify(query, "track", "songSuggestions");
-      }
-    });
-
-    albumInput.addEventListener("input", function () {
-      let query = this.value;
-      if (query.length > 2) {
-        searchSpotify(query, "album", "albumSuggestions");
-      }
-    });
-    */
-
-    // Function to perform API call to Spotify
-    /*
-    async function searchSpotify(query, type, suggestionListId, accessToken) {
-      const headers = {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      };
-
-      fetch(
-        `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=5`,
-        {
-          method: "GET",
-          headers: headers,
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          displaySuggestions(data, type, suggestionListId);
-        })
-        .catch((error) => console.error("Error:", error));
-    }
-    */
-
-    // Function to display suggestions in a dropdown:
-
-    /*
-    function displaySuggestions(data, type, suggestionListId) {
-      const suggestionList = document.getElementById(suggestionListId);
-      suggestionList.innerHTML = ""; // Clear previous suggestions
-
-      let items = [];
-      if (type === "artist" && data.artists) {
-        items = data.artists.items;
-      } else if (type === "track" && data.tracks) {
-        items = data.tracks.items;
-      } else if (type === "album" && data.albums) {
-        items = data.albums.items;
-      }
-
-      items.forEach((item) => {
-        let li = document.createElement("li");
-        li.textContent = item.name;
-        li.addEventListener("click", () =>
-          selectSuggestion(item, type, suggestionListId)
-        );
-        suggestionList.appendChild(li);
-      });
-    }
-    */
-
-    // Function to handle user selection of a suggestion
-    /*
-    function selectSuggestion(item, type, suggestionListId) {
-      const selectedTrack = document.getElementById("selected-track");
-      let li = document.createElement("li");
-      li.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${
-        item.name
-      }`;
-      selectedTrack.appendChild(li);
-
-      document.getElementById(suggestionListId).innerHTML = ""; // Clear suggestions after selection
-    }
-      */
-
     /////// Function to send Api-request for Search results - from Frontend to Backend: //////////////////////
 
     // after implementing the route (named '/api/search' or similar), test it in browser or Postman to check if it returns correct JSON answer.
@@ -306,7 +207,9 @@
       // ulArtists.classList.add("flex-container");
       // ulAlbums.classList.add("flex-container");
       // ulSongs.classList.add("flex-container");
-      [ulArtists, ulAlbums, ulSongs].forEach(element => element.classList.add("flex-container-ol"));
+      [ulArtists, ulAlbums, ulSongs].forEach((element) =>
+        element.classList.add("flex-container-ol")
+      );
 
       // show subtitle inside results:
       ulArtists.appendChild(titleArtists);
@@ -314,7 +217,8 @@
 
       // Results displaying, depending on API-data structure (...to be modified):
 
-      // Check and display artists
+      // Check and display ARTISTS:
+
       if (results.artists && results.artists.items.length > 0) {
         results.artists.items.forEach((item) => {
           const li = document.createElement("li");
@@ -325,26 +229,25 @@
             img.src = item.images[0].url; // Set the image source
             img.alt = `${item.name} Artist`;
             img.classList.add("result-image");
-          
+
             // Insert the image before the text content
             li.insertBefore(img, li.firstChild);
           }
 
           // Create a <div> for the text and append it
           const textDivArtist1 = document.createElement("div");
-          
           const textDivArtist2 = document.createElement("div");
           // textDivArtist.textContent = `${item.name} - ${item.genres.join(
           //   ", "
           // )}`;
           textDivArtist1.textContent = `${item.name}`;
           li.appendChild(textDivArtist1);
-          textDivArtist2.textContent = `${item.genres.join(
-            ", "
-          )}`;
+          textDivArtist2.textContent = `${item.genres.join(", ")}`;
           li.appendChild(textDivArtist2);
           li.classList.add("li-item-style", "result-flex-item");
-          textDivArtist1.classList.add("result-item-name");
+
+          titleArtists.classList.add("result-category"); // centered title "Artists:"
+          textDivArtist1.classList.add("result-item-name"); // bold and bigger font
 
           ulArtists.appendChild(li);
           resultsContainer.appendChild(ulArtists);
@@ -354,12 +257,12 @@
       ulAlbums.appendChild(titleAlbums);
       titleAlbums.innerHTML = "Albums:";
 
-      // Check and display albums
+      // Check and display ALBUMS:
+
       if (results.albums && results.albums.items.length > 0) {
         results.albums.items.forEach((item) => {
           const li = document.createElement("li");
           const img = document.createElement("img");
-         
 
           // Provjera da li artist ima slike i da li je prva slika dostupna (id some is missing, doesn't matter, others will show up)
           if (item.images && item.images.length > 0) {
@@ -371,12 +274,24 @@
           }
 
           // Create a <div> for the text and append it
-          const textDivAlbum = document.createElement("div");
+
+          const textDivAlbum1 = document.createElement("div");
+          const textDivAlbum2 = document.createElement("div");
+          const textDivAlbum3 = document.createElement("div");
+          const textDivAlbum4 = document.createElement("div");
+          // const [textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4] = Array.from({ length: 4 }, () => document.createElement("div"));
           // li.textContent = `${item.name} - by: ${item.artists[0].name} - release date: ${item.release_date} - album tracks nr: ${item.total_tracks}`;
           // li.appendChild(document.createTextNode(`${item.name} - by: ${item.artists[0].name} - release date: ${item.release_date} - album tracks nr: ${item.total_tracks}`));
-          textDivAlbum.textContent = `${item.name} - by: ${item.artists[0].name} - release date: ${item.release_date} - album tracks nr: ${item.total_tracks}`;
-          li.appendChild(textDivAlbum);
+          textDivAlbum1.textContent = `${item.name}`;
+          textDivAlbum2.textContent = `By: ${item.artists[0].name}`;
+          textDivAlbum3.textContent = `Release date: ${item.release_date}`;
+          textDivAlbum4.textContent = `Album tracks number: ${item.total_tracks}`;
+          // li.appendChild(textDivAlbum);
+          li.append(textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4);
           li.classList.add("li-item-style", "result-flex-item");
+
+          titleAlbums.classList.add("result-category"); // centered title "Albums:"
+          textDivAlbum1.classList.add("result-item-name"); // bold and bigger font
 
           ulAlbums.appendChild(li);
           resultsContainer.appendChild(ulAlbums);
@@ -386,7 +301,8 @@
       ulSongs.appendChild(titleSongs);
       titleSongs.innerHTML = "Songs:";
 
-      // Check and display tracks
+      // Check and display TRACKS / SONGS:
+
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
           const li = document.createElement("li");
@@ -400,19 +316,24 @@
             // Insert the image before the text content
             li.insertBefore(img, li.firstChild);
           }
-  
-          // Create a <div> for the text and append it
-          const textDivSong = document.createElement("div");
 
-          textDivSong.textContent = `${item.name} - by: ${item.artists[0].name}`; // Adjust to your needs
-          li.appendChild(textDivSong);
+          // Create a <div> for the text and append it
+          const textDivSong1 = document.createElement("div");
+          const textDivSong2 = document.createElement("div");
+          textDivSong1.textContent = `${item.name}`; 
+          textDivSong2.textContent = `By: ${item.artists[0].name}`; 
+          li.append(textDivSong1, textDivSong2);
           li.classList.add("li-item-style", "result-flex-item");
+
+          titleSongs.classList.add("result-category"); // centered title "Songs:"
+          textDivSong1.classList.add("result-item-name"); // bold and bigger font
+
 
           ulSongs.appendChild(li);
           resultsContainer.appendChild(ulSongs);
         });
       }
-    } 
+    }
 
     // dodati button play i button 'add to list' koji se appendaju ispod svake stavke
     // jedino artist nema te buttone, nego ima button za "explore music" ili slično, čime se otvaraju 10 njegovih albuma i pjesama.
@@ -425,52 +346,6 @@
 
     // možda (nice to have): dodati "expended search"?? - button kojim se pretraga po nekoj kategoriji može povećati, pa prikaže gradijalno svaki put još 10 rezultata.
 
-
-
-    /////// ovo doraditi - što uopće radi, što je query??   //////////////////////
-
-    // function fetchSuggestions(query, type) {
-    //   fetch(
-    //     `http://localhost:3000/api/suggestions?q=${encodeURIComponent(query)}`
-    //   )
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       // Očisti prethodne rezultate
-    //       resultsList.innerHTML = "";
-
-    //       // Prikaži do 5 rezultata
-    //       data.results.slice(0, 5).forEach((result) => {
-    //         const listItem = document.createElement("li");
-    //         listItem.textContent = `${result.artist} - ${result.song} (${result.album})`;
-    //         resultsList.appendChild(listItem);
-    //       });
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error:", error);
-    //     });
-    // }
-
-    // NOVO:
-    // Event-listener za praćenje unosa u glavno polje - Search All:
-    // searchInput.addEventListener("input", () => {
-    //   const query = searchInput.value.trim();
-    //   if (query.length > 0) {
-    //     fetchSearchResults(query); // Poziv funkcije za dohvat prijedloga
-    //   } else {
-    //     resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
-    //   }
-    // });
-
-    // praćenje submita u search-form-u i prikaz search-rezultata:
-
-    // searchForm.addEventListener("submit", (event) => {
-    //   event.preventDefault(); // Prevent the default form submission
-    //   console.log("Form submitted");
-    //   const query = searchInput.value; // Get the input value
-    //   console.log("Query:", query);
-    //   displaySearchResults(query); // Call the function with the user's query
-    // });
-
     // Praćenje submita u search-form-u i prikaz search-rezultata:
 
     searchButton.addEventListener("click", (event) => {
@@ -478,7 +353,7 @@
 
       handleSearch(); // Pozovi handleSearch() umjesto displaySearchResults
     });
-    
+
     // function for focusing on the Search Results:
     async function handleSearch() {
       const query = searchInput.value.trim(); // Get the input value
@@ -491,42 +366,14 @@
         console.log("Please enter your query - query not big enough.");
       }
     }
-    
+
     // Praćenje pritiska na Enter tipku i poziv handleSearch()
-    searchInput.addEventListener("keypress", function(event) {
+    searchInput.addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
         event.preventDefault(); // Prevent form submission on Enter
         handleSearch();
       }
     });
-
-    // searchButton.addEventListener("click", (event) => {
-    //   const query = searchInput.value.trim(); // Get the input value
-    //   if (query.length >= 2) {
-    //     event.preventDefault(); // Prevent the default form submission
-
-    //     console.log("Form submitted");
-
-    //     console.log("Query:", query);
-    //     displaySearchResults(query); // Call the function with the user's query
-    //   } else {
-    //     console.log("Please enter your query - query not big enough.");
-    //   }
-    // });
-
-// function for focusing on the Search Results:
-  //   async function handleSearch() {
-  //     const query = searchInput.value;
-  //     await displaySearchResults(query); // Koristi fetchSearchResults unutar displaySearchResults
-  //     document.getElementById("search-results").focus();
-  // }
-  
-  // searchInput.addEventListener("keypress", function(event) {
-  //     if (event.key === "Enter") {
-  //         handleSearch();
-  //     }
-  // });
-
 
     // Event-listener za praćenje unosa u sva tri ova polja s posebnim kategorijama:
     [artistInput, songInput, albumInput].forEach((input) => {
@@ -539,33 +386,6 @@
         }
       });
     });
-
-    //   function searchSongs() {
-    //     const query = songSearchInput.value.trim();
-    //     if (!query) {
-    //         alert("Please enter a song name.");
-    //         return;
-    //     }
-
-    //     fetch(`http://localhost:3000/api/search?q=${encodeURIComponent(query)}`)
-    //         .then(response => {
-    //             if (!response.ok) {
-    //                 throw new Error('Network response was not ok');
-    //             }
-    //             return response.json();
-    //         })
-    //         .then(data => {
-    //             resultsList.innerHTML = '';
-    //             data.songs.forEach(song => {
-    //                 const listItem = document.createElement('li');
-    //                 listItem.textContent = `${song.artist} - ${song.title}`;
-    //                 resultsList.appendChild(listItem);
-    //             });
-    //         })
-    //         .catch(error => {
-    //             console.error('Error:', error);
-    //         });
-    // }
 
     // Load lists from localStorage on init:
     function loadLists() {
