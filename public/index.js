@@ -6,7 +6,7 @@
     const favoritesList = document.getElementById("fav_albums"); // second list (ul) with favorite songs
     const searchInput = document.getElementById("search-all-input");
     const searchButton = document.getElementById("submit-button");
-    const searchForm = document.getElementById("search-form");
+    // const searchForm = document.getElementById("search-form");
 
     // Navbar behavior:
 
@@ -296,49 +296,62 @@
         return; // Exit if results are undefined
       }
 
-      const ol = document.createElement("ol"); // Create an ordered list
+     
+      const ulArtists = document.createElement("ul"); // Create an unordered list for artists
+      const titleArtists = document.createElement("h4");
+      const titleAlbums = document.createElement("h4");
+      const titleSongs = document.createElement("h4");
+      const olAlbums = document.createElement("ol"); // Create an ordered list for albums
+      const olSongs = document.createElement("ol"); // Create an ordered list for songs
 
-      // Assuming results contain an array of items
-      // results.items.forEach((item) => {
-      //   const li = document.createElement("li");
-      //   li.textContent = item.name; // Adjust to the property you want to display
-      //   ol.appendChild(li); // Append list item to the ordered list
-      // });
+      resultsContainer.appendChild(titleArtists);
+      titleArtists.innerHTML = "Artists:"
 
-      // resultsContainer.appendChild(ol);
-      // Append the ordered list to the container
-
-      // Check and display tracks
-      if (results.tracks && results.tracks.items.length > 0) {
-        results.tracks.items.forEach((item) => {
-          const li = document.createElement("li");
-          li.textContent = `Track: ${item.name} - Artist: ${item.artists[0].name}`; // Adjust to your needs
-          ol.appendChild(li);
-        });
-      }
-
-      // Check and display albums
-      if (results.albums && results.albums.items.length > 0) {
-        results.albums.items.forEach((item) => {
-          const li = document.createElement("li");
-          li.textContent = `Album: ${item.name} - Release Date: ${item.release_date}`;
-          ol.appendChild(li);
-        });
-      }
+      // Results displaying, depending on API-data structure (...to be modified):
 
       // Check and display artists
       if (results.artists && results.artists.items.length > 0) {
         results.artists.items.forEach((item) => {
           const li = document.createElement("li");
-          li.textContent = `Artist: ${item.name} - Genres: ${item.genres.join(
+          li.textContent = `${item.name} - genres: ${item.genres.join(
             ", "
           )}`;
-          ol.appendChild(li);
+          resultsContainer.appendChild(ulArtists);
+          ulArtists.appendChild(li);
         });
       }
 
-      resultsContainer.appendChild(ol);
+      resultsContainer.appendChild(titleAlbums);
+      titleAlbums.innerHTML = "Albums:"
+
+      // Check and display albums
+      if (results.albums && results.albums.items.length > 0) {
+        results.albums.items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `${item.name} - artist: ${item.artists[0].name} - release Date: ${item.release_date}`;
+          resultsContainer.appendChild(olAlbums);
+          olAlbums.appendChild(li);
+        });
+      }
+
+      resultsContainer.appendChild(titleSongs);
+      titleSongs.innerHTML = "Songs:"
+
+      // Check and display tracks
+      if (results.tracks && results.tracks.items.length > 0) {
+        results.tracks.items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `${item.name} - by: ${item.artists[0].name}`; // Adjust to your needs
+          resultsContainer.appendChild(olSongs);
+          olSongs.appendChild(li);
+        });
+      }
+
     }
+
+    // dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa)
+// brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?)
+
 
     /////// ovo doraditi - što uopće radi, što je query??   //////////////////////
 
@@ -383,6 +396,8 @@
     //   console.log("Query:", query);
     //   displaySearchResults(query); // Call the function with the user's query
     // });
+
+    // Praćenje submita u search-form-u i prikaz search-rezultata:
 
     searchButton.addEventListener("click", (event) => {
       const query = searchInput.value.trim(); // Get the input value
