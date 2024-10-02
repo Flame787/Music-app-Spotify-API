@@ -177,8 +177,6 @@
 //   displaySearchResults(query); // Call the search results function
 // });
 
-
-
     /////// Function to send Api-request for Search results - from Frontend to Backend: //////////////////////
 
     // after implementing the route (named '/api/search' or similar), test it in browser or Postman to check if it returns correct JSON answer.
@@ -405,8 +403,7 @@
         await displaySearchResults(query); // Koristi fetchSearchResults unutar displaySearchResults
         document.getElementById("search-results").focus(); // Focus on the results-container
       } else {
-        console.log("Please enter your query - query not big enough.");
-        displayMessage(formContainer, "Please enter your query - query not big enough.");
+        displayMessage(formContainer, "Please enter your query.");
       }
     }
 
