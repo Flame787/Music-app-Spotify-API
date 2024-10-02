@@ -166,6 +166,19 @@
     const albumInput = document.getElementById("album");
     const resultsList = document.getElementById("results");
 
+// NOVO:
+
+// Add event listener to the search form
+// document.getElementById('search-form').addEventListener('submit', function (e) {
+//   console.log("Event listener triggered"); // Ovdje dodajte
+//   e.preventDefault(); // Prevent form submission
+//   const query = document.getElementById('search-all-input').value; // Get query from input
+//   console.log("Query from input:", query); // Provjera vrijednosti
+//   displaySearchResults(query); // Call the search results function
+// });
+
+
+
     /////// Function to send Api-request for Search results - from Frontend to Backend: //////////////////////
 
     // after implementing the route (named '/api/search' or similar), test it in browser or Postman to check if it returns correct JSON answer.
@@ -184,17 +197,38 @@
       }
     }
 
+    
+    // Funkcija za prikaz upozorenja ako je input-polje prazno:
+    function displayMessage(container, text) {
+      const message = document.createElement("p");
+      message.textContent = text;
+      message.classList.add("warning-message"); // Optional: Add a class for styling
+      container.appendChild(message); // Append message to the container
+    }
+
     // Function to display all fetched Search-results on the page:
 
     async function displaySearchResults(query) {
-      const results = await fetchSearchResults(query);
-      console.log(results); // Log the results to see what you get
       const resultsContainer = document.getElementById("results-container"); // Your container element
       resultsContainer.innerHTML = ""; // Clear previous results
 
-      if (!results) {
-        console.error("No results found");
-        return; // Exit if results are undefined
+      const results = await fetchSearchResults(query);
+      console.log(results); // Log the results to see what you get
+
+      // if (!results) {
+      //   console.error("No results found");
+      //   return; // Exit if results are undefined
+      // }
+
+      // Provjera je li dobiveni rezultat prazan
+      if (
+        !results ||
+        (results.artists.items.length === 0 &&
+          results.albums.items.length === 0 &&
+          results.tracks.items.length === 0)
+      ) {
+        displayMessage(resultsContainer, "No results found.");
+        return; // Exit if all 3 results categories are undefined or empty
       }
 
       const ulArtists = document.createElement("ul"); // Create an unordered list for artists
@@ -224,15 +258,18 @@
           const li = document.createElement("li");
           const img = document.createElement("img");
 
-          // Provjera da li artist ima slike i da li je prva slika dostupna (id some is missing, doesn't matter, others will show up)
+          // Provjera da li artist ima slike i da li je prva slika dostupna (if some is missing, doesn't matter, others will show up)
           if (item.images && item.images.length > 0) {
             img.src = item.images[0].url; // Set the image source
-            img.alt = `${item.name} Artist`;
-            img.classList.add("result-image");
-
-            // Insert the image before the text content
-            li.insertBefore(img, li.firstChild);
+          } else {
+            // Ako nema slika, postavi placeholder sliku:
+            img.src = "./pictures/image-placeholder.jpg"; // Put the path to your placeholder image here
           }
+          img.alt = `${item.name} Artist`;
+          img.classList.add("result-image");
+
+          // Insert the image before the text content
+          li.insertBefore(img, li.firstChild);
 
           // Create a <div> for the text and append it
           const textDivArtist1 = document.createElement("div");
@@ -320,14 +357,13 @@
           // Create a <div> for the text and append it
           const textDivSong1 = document.createElement("div");
           const textDivSong2 = document.createElement("div");
-          textDivSong1.textContent = `${item.name}`; 
-          textDivSong2.textContent = `By: ${item.artists[0].name}`; 
+          textDivSong1.textContent = `${item.name}`;
+          textDivSong2.textContent = `By: ${item.artists[0].name}`;
           li.append(textDivSong1, textDivSong2);
           li.classList.add("li-item-style", "result-flex-item");
 
           titleSongs.classList.add("result-category"); // centered title "Songs:"
           textDivSong1.classList.add("result-item-name"); // bold and bigger font
-
 
           ulSongs.appendChild(li);
           resultsContainer.appendChild(ulSongs);
@@ -339,7 +375,7 @@
     // jedino artist nema te buttone, nego ima button za "explore music" ili slično, čime se otvaraju 10 njegovih albuma i pjesama.
     // dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa)
     // brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?)
-    // vizualno odmaknuti kategorije rezultata
+    // tamo gdje se ne pojavljuju slike 8jer ih nema) staviti neku placeholder-sliku ili obavijest da slika nedostaje.
 
     // u Copper temi i Night temi i Frost tema staviti kontrastno: staviti bijela slova unutar formsa, a ne crna jer se ne vide
     // Energy tema - crna su slova, ali treba ih malo podebljati
@@ -357,13 +393,20 @@
     // function for focusing on the Search Results:
     async function handleSearch() {
       const query = searchInput.value.trim(); // Get the input value
-      if (query.length >= 2) {
+
+      const formContainer = document.getElementById("zero-input"); // Container near the input field
+
+      // Uklonite ranije poruke upozorenja
+    formContainer.querySelector(".warning-message")?.remove();
+
+      if (query.length >= 1) {
         console.log("Form submitted");
         console.log("Query:", query);
         await displaySearchResults(query); // Koristi fetchSearchResults unutar displaySearchResults
         document.getElementById("search-results").focus(); // Focus on the results-container
       } else {
         console.log("Please enter your query - query not big enough.");
+        displayMessage(formContainer, "Please enter your query - query not big enough.");
       }
     }
 

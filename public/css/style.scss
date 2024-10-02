@@ -560,6 +560,13 @@ hr {
   outline: none;
 }
 
+// if querry is smaller than 1, or empty: 
+.warning-message {
+  color: red;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
 .result-category{
   width: 100%;
   margin: 0 auto 5%;
@@ -569,6 +576,7 @@ hr {
   border-radius: 45px;
   width: 200px; 
   height: 200px; 
+  box-shadow: 2px 2px 2px rgb(60, 60, 60);
 }
 
 .li-item-style {
