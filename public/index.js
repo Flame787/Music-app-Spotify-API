@@ -166,16 +166,16 @@
     const albumInput = document.getElementById("album");
     const resultsList = document.getElementById("results");
 
-// NOVO:
+    // NOVO:
 
-// Add event listener to the search form
-// document.getElementById('search-form').addEventListener('submit', function (e) {
-//   console.log("Event listener triggered"); // Ovdje dodajte
-//   e.preventDefault(); // Prevent form submission
-//   const query = document.getElementById('search-all-input').value; // Get query from input
-//   console.log("Query from input:", query); // Provjera vrijednosti
-//   displaySearchResults(query); // Call the search results function
-// });
+    // Add event listener to the search form
+    // document.getElementById('search-form').addEventListener('submit', function (e) {
+    //   console.log("Event listener triggered"); // Ovdje dodajte
+    //   e.preventDefault(); // Prevent form submission
+    //   const query = document.getElementById('search-all-input').value; // Get query from input
+    //   console.log("Query from input:", query); // Provjera vrijednosti
+    //   displaySearchResults(query); // Call the search results function
+    // });
 
     /////// Function to send Api-request for Search results - from Frontend to Backend: //////////////////////
 
@@ -195,7 +195,6 @@
       }
     }
 
-    
     // Funkcija za prikaz upozorenja ako je input-polje prazno:
     function displayMessage(container, text) {
       const message = document.createElement("p");
@@ -232,9 +231,9 @@
       const ulArtists = document.createElement("ul"); // Create an unordered list for artists
       const ulAlbums = document.createElement("ul"); // Create an ordered list for albums
       const ulSongs = document.createElement("ul"); // Create an ordered list for songs
-      const titleArtists = document.createElement("h4");
-      const titleAlbums = document.createElement("h4");
-      const titleSongs = document.createElement("h4");
+      const titleArtists = document.createElement("h3");
+      const titleAlbums = document.createElement("h3");
+      const titleSongs = document.createElement("h3");
       // [titleArtists, titleAlbums, titleSongs].forEach(element => element.createElement("h4"));
       // ulArtists.classList.add("flex-container");
       // ulAlbums.classList.add("flex-container");
@@ -254,9 +253,7 @@
       if (results.artists && results.artists.items.length > 0) {
         results.artists.items.forEach((item) => {
           const li = document.createElement("li");
-          
-          const div = document.createElement("div");  //new
-          
+          const div = document.createElement("div"); //new
           const img = document.createElement("img");
 
           // Provjera da li artist ima slike i da li je prva slika dostupna (if some is missing, doesn't matter, others will show up)
@@ -269,13 +266,11 @@
           img.alt = `${item.name} Artist`;
           img.classList.add("result-image");
 
-          // Insert the image before the text content
-
-          li.insertBefore(div, li.firstChild);  //new
-          
+          // Insert the div-image before the text content:
+          li.insertBefore(div, li.firstChild); //new
 
           // li.insertBefore(img, li.firstChild);
-          div.appendChild(img);                   //new
+          div.appendChild(img); //new
           div.classList.add("image-container"); //new
 
           // Create a <div> for the text and append it
@@ -284,10 +279,18 @@
           // textDivArtist.textContent = `${item.name} - ${item.genres.join(
           //   ", "
           // )}`;
+
+          const showMoreButton = document.createElement("button");  // NEW - SHOW-MORE BUTTON
+
           textDivArtist1.textContent = `${item.name}`;
           li.appendChild(textDivArtist1);
           textDivArtist2.textContent = `${item.genres.join(", ")}`;
           li.appendChild(textDivArtist2);
+
+          li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
+          showMoreButton.textContent = `Discography`;   // NEW - SHOW-MORE BUTTON
+          showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+
           li.classList.add("li-item-style", "result-flex-item");
 
           titleArtists.classList.add("result-category"); // centered title "Artists:"
@@ -306,6 +309,7 @@
       if (results.albums && results.albums.items.length > 0) {
         results.albums.items.forEach((item) => {
           const li = document.createElement("li");
+          const div = document.createElement("div"); //new
           const img = document.createElement("img");
 
           // Provjera da li artist ima slike i da li je prva slika dostupna (id some is missing, doesn't matter, others will show up)
@@ -313,8 +317,13 @@
             img.src = item.images[0].url; // Set the image source
             img.alt = `${item.name} Album Cover`;
             img.classList.add("result-image");
-            // Insert the image before the text content
-            li.insertBefore(img, li.firstChild);
+
+            // Insert the div-image before the text content:
+            li.insertBefore(div, li.firstChild); //new
+
+            // li.insertBefore(img, li.firstChild);
+            div.appendChild(img); //new
+            div.classList.add("image-container"); //new
           }
 
           // Create a <div> for the text and append it
@@ -331,7 +340,15 @@
           textDivAlbum3.textContent = `Release date: ${item.release_date}`;
           textDivAlbum4.textContent = `Album tracks number: ${item.total_tracks}`;
           // li.appendChild(textDivAlbum);
+
+          const showMoreButton = document.createElement("button");  // NEW - SHOW-MORE BUTTON
+
           li.append(textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4);
+
+          li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
+          showMoreButton.textContent = `Track list`;   // NEW - SHOW-MORE BUTTON
+          showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+
           li.classList.add("li-item-style", "result-flex-item");
 
           titleAlbums.classList.add("result-category"); // centered title "Albums:"
@@ -350,6 +367,7 @@
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
           const li = document.createElement("li");
+          const div = document.createElement("div"); //new
           const img = document.createElement("img");
 
           // Provjera da li artist ima slike i da li je prva slika dostupna (id some is missing, doesn't matter, others will show up)
@@ -357,8 +375,13 @@
             img.src = item.album.images[0].url; // Set the image source
             img.alt = `${item.name} Album Cover`;
             img.classList.add("result-image");
-            // Insert the image before the text content
-            li.insertBefore(img, li.firstChild);
+
+            // Insert the div-image before the text content:
+            li.insertBefore(div, li.firstChild); //new
+
+            // li.insertBefore(img, li.firstChild);
+            div.appendChild(img); //new
+            div.classList.add("image-container"); //new
           }
 
           // Create a <div> for the text and append it
@@ -366,7 +389,16 @@
           const textDivSong2 = document.createElement("div");
           textDivSong1.textContent = `${item.name}`;
           textDivSong2.textContent = `By: ${item.artists[0].name}`;
+
+          const showMoreButton = document.createElement("button");  // NEW - SHOW-MORE BUTTON
+
+
           li.append(textDivSong1, textDivSong2);
+
+          li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
+          showMoreButton.textContent = `Add to playlist`;   // NEW - SHOW-MORE BUTTON
+          showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+
           li.classList.add("li-item-style", "result-flex-item");
 
           titleSongs.classList.add("result-category"); // centered title "Songs:"
@@ -378,11 +410,15 @@
       }
     }
 
-    // dodati button play i button 'add to list' koji se appendaju ispod svake stavke
+    // + dodati button play (IKONA preko slike, na HOVER) - DONE
+    // + dodati button 'discography' za artiste, 'tracks' za albume i 'add to list' za songse - DONE
+    // ovi buttoni izvršavaju daljnje radnje ili otvaraju novi sadržaj - dodati im funkcije
     // jedino artist nema te buttone, nego ima button za "explore music" ili slično, čime se otvaraju 10 njegovih albuma i pjesama.
-    // dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa)
-    // brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?)
-    // tamo gdje se ne pojavljuju slike 8jer ih nema) staviti neku placeholder-sliku ili obavijest da slika nedostaje.
+    // + dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa) - DONE
+    // + brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?) - bez brojki!
+    // + tamo gdje se ne pojavljuju slike (jer ih nema) staviti neku placeholder-sliku ili obavijest da slika nedostaje. - DONE
+
+    // buttonići - boja u nekim temama nije dovoljno kontrastna od pozadine - treba biti svjetlija ili tamnija nijansa da se buttonići istaknu više
 
     // u Copper temi i Night temi i Frost tema staviti kontrastno: staviti bijela slova unutar formsa, a ne crna jer se ne vide
     // Energy tema - crna su slova, ali treba ih malo podebljati
@@ -404,7 +440,7 @@
       const formContainer = document.getElementById("zero-input"); // Container near the input field
 
       // Uklonite ranije poruke upozorenja
-    formContainer.querySelector(".warning-message")?.remove();
+      formContainer.querySelector(".warning-message")?.remove();
 
       if (query.length >= 1) {
         console.log("Form submitted");
@@ -683,10 +719,7 @@
   window.addEventListener("load", todo.init);
 })();
 
-// API KEY:
 
-// const apikey = process.env.API_KEY;
-//
 
 // Error kod dodavanja novih itema na favorite listu:
 // index.js:338 Uncaught TypeError: Cannot read properties of null (reading 'textContent')

@@ -126,7 +126,7 @@ body.theme15 {
 .theme0 .theme-button, .theme0 .nav-button,
 .theme0 .favorite-button,
 .theme0 #theme_color,
-.theme0 .dropdown-menu {
+.theme0 .dropdown-menu, .theme0 .show-more-button {
   background-color: #070b7c;
   background-image: linear-gradient(320deg, #d007a8 0%, #040651 50%);
   color: white;
@@ -135,7 +135,7 @@ body.theme15 {
 .theme1 .theme-button, .theme1 .nav-button,
 .theme1 .favorite-button,
 .theme1 #theme_color,
-.theme1 .dropdown-menu {
+.theme1 .dropdown-menu, .theme1 .show-more-button {
   background-color: #070b7c;
   background-image: linear-gradient(320deg, #d00768 0%, #070b7c 100%);
   color: white;
@@ -144,7 +144,7 @@ body.theme15 {
 .theme2 .theme-button, .theme2 .nav-button,
 .theme2 .favorite-button,
 .theme2 #theme_color,
-.theme2 .dropdown-menu {
+.theme2 .dropdown-menu, .theme2 .show-more-button {
   background-color: rgb(174, 127, 229);
   background-image: linear-gradient(320deg, #8c59ab 0%, #252763 100%);
   color: black;
@@ -153,7 +153,7 @@ body.theme15 {
 .theme3 .theme-button, .theme3 .nav-button,
 .theme3 .favorite-button,
 .theme3 #theme_color,
-.theme3 .dropdown-menu {
+.theme3 .dropdown-menu, .theme3 .show-more-button {
   background-color: rgb(1, 1, 11);
   background-image: linear-gradient(320deg, #b721ff 0%, #1591ad 63%, #c1e3eb 100%);
   color: white;
@@ -162,7 +162,7 @@ body.theme15 {
 .theme4 .theme-button, .theme4 .nav-button,
 .theme4 .favorite-button,
 .theme4 #theme_color,
-.theme4 .dropdown-menu {
+.theme4 .dropdown-menu, .theme4 .show-more-button {
   background-color: #0b6893;
   background-image: linear-gradient(320deg, #aadeef 0%, #1554ad 43%, #031b85 100%);
   color: white;
@@ -171,7 +171,7 @@ body.theme15 {
 .theme5 .theme-button, .theme5 .nav-button,
 .theme5 .favorite-button,
 .theme5 #theme_color,
-.theme5 .dropdown-menu {
+.theme5 .dropdown-menu, .theme5 .show-more-button {
   background-color: rgb(223, 178, 13);
   background-image: linear-gradient(320deg, #e2efaa 0%, #c78f34 33%, #c76234 100%);
   color: #000000;
@@ -180,7 +180,7 @@ body.theme15 {
 .theme6 .theme-button, .theme6 .nav-button,
 .theme6 .favorite-button,
 .theme6 #theme_color,
-.theme6 .dropdown-menu {
+.theme6 .dropdown-menu, .theme6 .show-more-button {
   background-color: rgb(222, 162, 12);
   background-image: linear-gradient(320deg, #e2efaa 0%, rgb(222, 162, 12) 33%, #cd551d 100%);
   color: white;
@@ -189,7 +189,7 @@ body.theme15 {
 .theme7 .theme-button, .theme7 .nav-button,
 .theme7 .favorite-button,
 .theme7 #theme_color,
-.theme7 .dropdown-menu {
+.theme7 .dropdown-menu, .theme7 .show-more-button {
   background-color: rgb(242, 54, 12);
   background-image: linear-gradient(320deg, #e2efaa 0%, rgb(207, 108, 3) 17%, #ad0505 100%);
   color: black;
@@ -198,7 +198,7 @@ body.theme15 {
 .theme8 .theme-button, .theme8 .nav-button,
 .theme8 .favorite-button,
 .theme8 #theme_color,
-.theme8 .dropdown-menu {
+.theme8 .dropdown-menu, .theme8 .show-more-button {
   background-color: rgb(185, 125, 52);
   background-image: linear-gradient(320deg, #e2efaa 0%, rgb(222, 162, 12) 33%, #cd551d 100%);
   color: white;
@@ -207,7 +207,7 @@ body.theme15 {
 .theme9 .theme-button, .theme9 .nav-button,
 .theme9 .favorite-button,
 .theme9 #theme_color,
-.theme9 .dropdown-menu {
+.theme9 .dropdown-menu, .theme9 .show-more-button {
   background-color: rgb(6, 125, 8);
   background-image: linear-gradient(320deg, #c5f5aa 0%, rgb(65, 214, 100) 23%, rgb(1, 84, 2) 100%);
   color: white;
@@ -216,7 +216,7 @@ body.theme15 {
 .theme10 .theme-button, .theme10 .nav-button,
 .theme10 .favorite-button,
 .theme10 #theme_color,
-.theme10 .dropdown-menu {
+.theme10 .dropdown-menu, .theme10 .show-more-button {
   background-color: #baff7d;
   background-image: linear-gradient(320deg, #dcf3ca 0%, #57c35e 51%, rgb(16, 108, 6) 100%);
   color: black;
@@ -225,7 +225,7 @@ body.theme15 {
 .theme11 .theme-button, .theme11 .nav-button,
 .theme11 .favorite-button,
 .theme11 #theme_color,
-.theme11 .dropdown-menu {
+.theme11 .dropdown-menu, .theme11 .show-more-button {
   background-color: #a6cad2;
   background-image: linear-gradient(320deg, #dbf4f4 0%, rgba(86, 235, 248, 0.7254901961) 20%, rgba(31, 107, 108, 0.749) 100%);
   color: black;
@@ -234,7 +234,7 @@ body.theme15 {
 .theme12 .theme-button, .theme12 .nav-button,
 .theme12 .favorite-button,
 .theme12 #theme_color,
-.theme12 .dropdown-menu {
+.theme12 .dropdown-menu, .theme12 .show-more-button {
   background-color: rgb(124, 218, 231);
   background-image: linear-gradient(320deg, rgb(143, 231, 243) 0%, #4da8c4 40%, #106d8a 100%);
   color: black;
@@ -243,7 +243,7 @@ body.theme15 {
 .theme13 .theme-button, .theme13 .nav-button,
 .theme13 .favorite-button,
 .theme13 #theme_color,
-.theme13 .dropdown-menu {
+.theme13 .dropdown-menu, .theme13 .show-more-button {
   background-color: rgb(124, 218, 231);
   background-image: linear-gradient(320deg, rgb(206, 240, 244) 0%, #66c0d7 100%);
   color: black;
@@ -252,7 +252,7 @@ body.theme15 {
 .theme14 .theme-button, .theme14 .nav-button,
 .theme14 .favorite-button,
 .theme14 #theme_color,
-.theme14 .dropdown-menu {
+.theme14 .dropdown-menu, .theme14 .show-more-button {
   background-color: #2942a4;
   background-image: linear-gradient(320deg, #d007c3 0%, #784ba0 24%, #2942a4 100%);
   color: white;
@@ -261,7 +261,7 @@ body.theme15 {
 .theme15 .theme-button, .theme15 .nav-button,
 .theme15 .favorite-button,
 .theme15 #theme_color,
-.theme15 .dropdown-menu {
+.theme15 .dropdown-menu, .theme15 .show-more-button {
   background-color: rgb(246, 194, 38);
   background-image: linear-gradient(320deg, rgb(245, 232, 192) 0%, rgb(246, 194, 38) 23%, #ec7948 100%);
   color: black;
@@ -415,7 +415,7 @@ body.theme15 {
 }
 
 .theme0 .form-theme {
-  background: radial-gradient(at 75% 25%, rgba(107, 82, 100, 0.5058823529), rgba(5, 25, 55, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(79, 43, 91, 0.8588235294), rgba(5, 25, 55, 0.875));
   color: white;
   text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
@@ -1257,6 +1257,10 @@ li .image-container:hover::before {
 
 li .image-container img {
   display: block; /* Osigurava ispravno prikazivanje slike */
+}
+
+.show-more-button {
+  margin-top: 5%;
 }
 
 @media (max-width: 1540px) {

@@ -54,7 +54,7 @@ body {
 .nav-button,
 .favorite-button,
 #theme_color,
-.dropdown-menu {
+.dropdown-menu, .show-more-button {
   @extend .theme-button;
 }
 
@@ -633,6 +633,10 @@ li .image-container:hover::before {
 
 li .image-container img {
   display: block; /* Osigurava ispravno prikazivanje slike */
+}
+
+.show-more-button {
+margin-top: 5%;
 }
 
 
