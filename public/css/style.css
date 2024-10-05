@@ -1211,25 +1211,6 @@ hr {
   font-size: 1.2rem;
 }
 
-/* Osnovni stil za play button preko slike */
-.play-button-icon {
-  display: none; /* Skriveno po defaultu */
-  position: absolute; /* Pozicija apsolutno unutar roditelja */
-  top: 50%; /* Poravnanje na sredinu slike, unutar li-itema */
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centriranje */
-  width: 100px; /* Širina gumba, prilagodite po potrebi */
-  height: 100px; /* Visina gumba, prilagodite po potrebi */
-  z-index: 1; /* Osigurajte da se prikazuje iznad slike */
-}
-
-/* Hover efekt */
-.li-item-style:hover .play-button-icon {
-  display: block; /* Prikazati play button na hover */
-  opacity: 0.8; /* Polutransparentan */
-  transition: opacity 0.3s; /* Glatka tranzicija */
-}
-
 .flex-container-ol {
   width: 100%;
   display: flex;
@@ -1246,6 +1227,36 @@ hr {
   font-size: 1.5rem !important;
   font-weight: bold;
   padding: 2% 0;
+}
+
+li .image-container {
+  position: relative;
+  display: inline-block; /* ili drugi prikladni display tip */
+}
+
+li .image-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 70%;
+  background-image: url("/pictures/play-button.png");
+  background-size: cover; /* Prilagodi veličinu slike prema kontejneru */
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0; /* Inicijalno postavite transparentnost na 0 */
+  transition: opacity 0.3s ease; /* Prijelaz za glatki efekt */
+  /* Transformacija za centriranje slike */
+  transform: translate(-50%, -50%);
+}
+
+li .image-container:hover::before {
+  opacity: 0.8; /* Povećajte opacity kako bi se transparentna slika vidjela */
+}
+
+li .image-container img {
+  display: block; /* Osigurava ispravno prikazivanje slike */
 }
 
 @media (max-width: 1540px) {

@@ -254,6 +254,9 @@
       if (results.artists && results.artists.items.length > 0) {
         results.artists.items.forEach((item) => {
           const li = document.createElement("li");
+          
+          const div = document.createElement("div");  //new
+          
           const img = document.createElement("img");
 
           // Provjera da li artist ima slike i da li je prva slika dostupna (if some is missing, doesn't matter, others will show up)
@@ -267,7 +270,13 @@
           img.classList.add("result-image");
 
           // Insert the image before the text content
-          li.insertBefore(img, li.firstChild);
+
+          li.insertBefore(div, li.firstChild);  //new
+          
+
+          // li.insertBefore(img, li.firstChild);
+          div.appendChild(img);                   //new
+          div.classList.add("image-container"); //new
 
           // Create a <div> for the text and append it
           const textDivArtist1 = document.createElement("div");
