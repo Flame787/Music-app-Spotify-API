@@ -290,6 +290,7 @@
           li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
           showMoreButton.textContent = `Discography`;   // NEW - SHOW-MORE BUTTON
           showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+          showMoreButton.setAttribute("id", "discography-button");
 
           li.classList.add("li-item-style", "result-flex-item");
 
@@ -348,6 +349,7 @@
           li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
           showMoreButton.textContent = `Track list`;   // NEW - SHOW-MORE BUTTON
           showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+          showMoreButton.setAttribute("id", "tracklist-button");
 
           li.classList.add("li-item-style", "result-flex-item");
 
@@ -398,6 +400,7 @@
           li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
           showMoreButton.textContent = `Add to playlist`;   // NEW - SHOW-MORE BUTTON
           showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+          showMoreButton.setAttribute("id", "add-to-playlist-button");
 
           li.classList.add("li-item-style", "result-flex-item");
 
@@ -410,23 +413,6 @@
       }
     }
 
-    // + dodati button play (IKONA preko slike, na HOVER) - DONE
-    // + dodati button 'discography' za artiste, 'tracks' za albume i 'add to list' za songse - DONE
-    // ovi buttoni izvršavaju daljnje radnje ili otvaraju novi sadržaj - dodati im funkcije
-    // jedino artist nema te buttone, nego ima button za "explore music" ili slično, čime se otvaraju 10 njegovih albuma i pjesama.
-    // + dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa) - DONE
-    // + brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?) - bez brojki!
-    // + tamo gdje se ne pojavljuju slike (jer ih nema) staviti neku placeholder-sliku ili obavijest da slika nedostaje. - DONE
-
-    // list iteme na manjim rezolucijama oiredati prvo 2 u redak, pa tek onda 1 u redak
-    // list-itemi bi trebali imati donju marginu veću na manjim rezolucijama, da se vertikalno više razdvoje međusobno
-
-    // buttonići - boja u nekim temama nije dovoljno kontrastna od pozadine - treba biti svjetlija ili tamnija nijansa da se buttonići istaknu više
-
-    // u Copper temi i Night temi i Frost tema staviti kontrastno: staviti bijela slova unutar formsa, a ne crna jer se ne vide
-    // Energy tema - crna su slova, ali treba ih malo podebljati
-
-    // možda (nice to have): dodati "expended search"?? - button kojim se pretraga po nekoj kategoriji može povećati, pa prikaže gradijalno svaki put još 10 rezultata.
 
     // Praćenje submita u search-form-u i prikaz search-rezultata:
 
@@ -753,3 +739,79 @@
 
 // <button onclick="changeStylesheet('light.css')">Lights on</button>
 // <button onclick="changeStylesheet('dark.css')">Lights off</button>
+
+
+// ------------------------ NEXT STEPS TO DO: ----------------------------------------------------------------------------------
+
+    // + dodati button play (IKONA preko slike, na HOVER) - DONE
+    // + dodati button 'discography' za artiste, 'tracks' za albume i 'add to list' za songse - DONE
+    // -> ovi buttoni izvršavaju daljnje radnje ili otvaraju novi sadržaj - dodati im funkcije
+    // -> jedino artist nema te buttone, nego ima button za "explore music" ili slično, čime se otvaraju 10 njegovih albuma i pjesama.
+    // + dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa) - DONE
+    // + brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?) - bez brojki!
+    // + tamo gdje se ne pojavljuju slike (jer ih nema) staviti neku placeholder-sliku ili obavijest da slika nedostaje. - DONE
+
+    // list iteme na manjim rezolucijama poredati prvo 2 u redak, pa tek onda 1 u redak - NOT YET WORKING!
+    // + list-itemi bi trebali imati donju marginu veću na manjim rezolucijama, da se vertikalno više razdvoje međusobno - DONE
+
+    // buttonići - boja u nekim temama nije dovoljno kontrastna od pozadine - treba biti svjetlija ili tamnija nijansa da se buttonići istaknu više
+
+    // + u Copper temi i Night temi i Frost tema staviti kontrastno: staviti bijela slova unutar formsa, a ne crna jer se ne vide - DONE
+    // Energy tema - crna su slova, ali treba ih malo podebljati
+
+    // možda (nice to have): dodati "expended search"?? - button kojim se pretraga po nekoj kategoriji može povećati, pa prikaže gradijalno na svaki click još 10 rezultata.
+
+    // + dodijeli zasebne IDs buttonima Discography / Track list / Add to playlist - DONE
+
+    /* NOVI TASKS (06.10.2024.):
+
++ dati dodatni id buttonu Discography (za Artist-rezultate) - DONE -> id: "discography-button"
+- dodati event listener
+- novi Api call kad se klikne na button Discography:
+- dohvaća albume i pjesme samo od odabranog artista (q = artist, a parametri su slično kao i dosad za albume i pjesme)
+- umjesto rezultata, u tom formu se prikažu albumi i pjesme dohvaćeni s apija, koji opet imaju buttone Track list / Add to playlist (i isto ih se može svirati)
+
++ dati dodatni id buttonu Track list (za Tracks-rezultate) - DONE -> id: "tracklist-button"
+- dodati event listener
+- novi Api call kad se klikne na button Track list:
+- dohvaća pjesme samo sa odabranog albuma i prikaže ih redom 
+- umjesto rezultata, u tom formu se prikažu redom pjesme sa odabranog albuma dohvaćene s apija, 
+- pjesme sa slikama koje imaju play-ikonu da se mogu odmah pojedinačno svirati
+- dodatni button koji pokreće Play all - cijeli album
+- pjesme naravno imaju buttone Add to playlist 
+
++ dati dodatni id buttonu Add to playlist (za Songs-rezultate) - DONE -> id: "tracklist-button"
+- dodati event listener
+- pjesme se dodaju na donju Playlistu koju se može dalje obrađivati, te na 2. stranicu: My playlists (i kasnije možda čak spremaju u bazu)
+
+- Play opcija preko slike - podesiti da se pojavi kad se hovera preko bilo kojeg dijela li (list itema), tako da li ima opciju hover, a ne samo img.
+
+- napravi funkciju playSong() ima ove podfunkcije:
+- event-listener kad se klikne na bilo koji dio cijelog li (list itema), pokrene se player
+- automatski se fokus prebaci u donji form gdje je Audio player i pjesma počne svirati
+- volume je automatski set na 50% ili manje
+- pjesma se može zaustaviti na play/pause
+- u prozoru Playera se pojavi slika covera albuma s kojeg je pjesma
+- opcije premotavanja? Vidjeti jel ih Player ima
+- opcije Next / Back (iduća ili ranija pjesma)? (onda dohvaća sljedeći ili prethodni item s liste tog albuma) - moguće da postoji api-endpoint za to, ili preko petlje koja prolazi kroz cijelu listu na tom albumu
+- ispod Playera piše dinamički artist, album i song koji svira
+- Rate i Add to playlist buttoni su isto unutar Playera, blizu tog ispisa pjesme, i imaju svoje funkcije kao i prije (za dodavanje na listu) - samo podesiti da sad dohvaćaju podatke poslane s Api-ja
+
+- maknuti iz Search-forma opcije Artist, Album, Song i njihov kod preobličiti, tako da pod tim id-evima označava i sprema stvari dohvaćene s api-callova
+- umjesto njih, staviti opciju Search by: Artist, Album, Song kao neki checkbox-form, gdje korisnik može označiti jednu ili više stvari i dobiva samo djelomične api-rezultate ovisno o kategorijama koje je označio (modifikacija već postojećeg Searcha)
+- napraviti da Results nije stalno vidljiv na stranici, nego tek nakon što je korisnik kliknuo na Search i bio je unesen bar 1 znak
+
+- preobličiti funkciju Add to favorites, osmisliti logiku gdje se spremaju i bilježe playliste (možda na 2. podstranici)
+- i koja je razlika između Favorites i obične playliste? Ocjene? Samo da bi se zabilježilo najbolje stvari ikad na jednu veliku posebnu listu?
+- playliste - i dalje bi imale button Add to favorites i Remove, ali sad se prikazuje i slika album covera, s ikonom Play koja radi
+- na koji način sortirati pjesme na listi? Možda dodati neke decentne buttone samo sa strelicama za Up/Down kod svake pjesme?
+- Favorites pjesme -  dodati na vrh liste button koji služi kao filter:
+       Order by: A to Z, Z to A, Rate
+- da li napraviti da je Rate promjenjiv na listi Favorites???
+- podstranice s My playlists i Favorites imaju također Audio Player u donjem dijelu i radi na isti princip kao i na prvoj stranici (fokusira se na njega i on svira pjesme redom kojim su na toj playlisti, a ne više redom po trackovima dohvaćenim s apija)
+- može biti spremljeno više playlist i možemo svakoj playlisti dati ime
+dok uređujemo playlistu prvi put, ona se sprema dolje na prvoj stranici i vidljiva je dok traje cookie (često i nakon nekoliko sessiona),
+na 1. stranici kod playliste je button 'See all playlists' koji vodi na 2. podstranicu, i na njoj se također sprema dinamički ova playlista, i spremljene su prethodne liste
+playlista ostaje spremljena (možda u bazi - trajno?) na 2. stranici (My playlists) i tu se može dalje uvijek slušati i modificirati 
+
+*/
