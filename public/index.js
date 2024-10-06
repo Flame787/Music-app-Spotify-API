@@ -745,13 +745,13 @@
 
     // + dodati button play (IKONA preko slike, na HOVER) - DONE
     // + dodati button 'discography' za artiste, 'tracks' za albume i 'add to list' za songse - DONE
-    // -> ovi buttoni izvršavaju daljnje radnje ili otvaraju novi sadržaj - dodati im funkcije
+    // -> ovi buttoni kod rezultata izvršavaju daljnje radnje ili otvaraju novi sadržaj - dodati im funkcije
     // -> jedino artist nema te buttone, nego ima button za "explore music" ili slično, čime se otvaraju 10 njegovih albuma i pjesama.
     // + dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa) - DONE
     // + brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?) - bez brojki!
     // + tamo gdje se ne pojavljuju slike (jer ih nema) staviti neku placeholder-sliku ili obavijest da slika nedostaje. - DONE
 
-    // list iteme na manjim rezolucijama poredati prvo 2 u redak, pa tek onda 1 u redak - NOT YET WORKING!
+    // - list iteme na manjim rezolucijama poredati prvo 2 u redak, pa tek onda 1 u redak - NOT YET WORKING!
     // + list-itemi bi trebali imati donju marginu veću na manjim rezolucijama, da se vertikalno više razdvoje međusobno - DONE
 
     // buttonići - boja u nekim temama nije dovoljno kontrastna od pozadine - treba biti svjetlija ili tamnija nijansa da se buttonići istaknu više
@@ -766,12 +766,14 @@
     /* NOVI TASKS (06.10.2024.):
 
 + dati dodatni id buttonu Discography (za Artist-rezultate) - DONE -> id: "discography-button"
+- prevent default
 - dodati event listener
 - novi Api call kad se klikne na button Discography:
 - dohvaća albume i pjesme samo od odabranog artista (q = artist, a parametri su slično kao i dosad za albume i pjesme)
 - umjesto rezultata, u tom formu se prikažu albumi i pjesme dohvaćeni s apija, koji opet imaju buttone Track list / Add to playlist (i isto ih se može svirati)
 
 + dati dodatni id buttonu Track list (za Tracks-rezultate) - DONE -> id: "tracklist-button"
+- prevent default
 - dodati event listener
 - novi Api call kad se klikne na button Track list:
 - dohvaća pjesme samo sa odabranog albuma i prikaže ih redom 
@@ -781,6 +783,7 @@
 - pjesme naravno imaju buttone Add to playlist 
 
 + dati dodatni id buttonu Add to playlist (za Songs-rezultate) - DONE -> id: "tracklist-button"
+- prevent default
 - dodati event listener
 - pjesme se dodaju na donju Playlistu koju se može dalje obrađivati, te na 2. stranicu: My playlists (i kasnije možda čak spremaju u bazu)
 

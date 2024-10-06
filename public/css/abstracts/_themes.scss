@@ -170,7 +170,7 @@ $themes: (
   ),
   theme2: (
     background-color: rgb(174, 127, 229),
-    background-image: linear-gradient(320deg, #8c59ab 0%, #252763 100%),
+    background-image: linear-gradient(320deg, #b798ca 0%, #6b38a5 50%),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -189,7 +189,7 @@ $themes: (
   theme5: (
     background-color: rgb(223, 178, 13),
     background-image:
-      linear-gradient(320deg, #e2efaa 0%, #c78f34 33%, #c76234 100%),
+      linear-gradient(320deg, #e2efaa 0%, #c78f34 63%, #aa471a 100%),
     color: $textShadowColor1,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -221,10 +221,10 @@ $themes: (
       linear-gradient(
         320deg,
         #c5f5aa 0%,
-        rgb(65, 214, 100) 23%,
+        rgb(65, 214, 100) 43%,
         rgb(1, 84, 2) 100%
       ),
-    color: white,
+    color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
   theme10: (
@@ -242,14 +242,14 @@ $themes: (
   theme12: (
     background-color: rgb(124, 218, 231),
     background-image:
-      linear-gradient(320deg, rgb(143, 231, 243) 0%, #4da8c4 40%, #106d8a 100%),
+      linear-gradient(320deg, rgb(143, 231, 243) 0%, #4da8c4 60%, #106d8a 100%),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
   theme13: (
     background-color: rgb(124, 218, 231),
     background-image:
-      linear-gradient(320deg, rgb(206, 240, 244) 0%, #66c0d7 100%),
+      linear-gradient(320deg, rgb(206, 240, 244) 50%, #3bbedf 100%),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -264,7 +264,7 @@ $themes: (
   theme15: (
     background-color: rgb(246, 194, 38),
     background-image:
-      linear-gradient(320deg, rgb(245, 232, 192) 0%, rgb(246, 194, 38) 23%, #ec7948 100%),
+      linear-gradient(320deg, rgb(245, 232, 192) 0%, rgb(246, 194, 38) 43%, #ec7948 100%),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -386,7 +386,7 @@ $themes2: (
 // defining common values:
 
 $commonTextShadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
-$defaultColor: $fontColor1;
+$defaultColor: $fontColor2;
 $noShadowColor: $textShadowColor1;
 $noShadow: none;
 
@@ -421,28 +421,18 @@ $fontColors: ();
   );
 }
 
-// exception for theme2 and theme8:
+
 // $fontColors: map-merge(
 //   $fontColors,
 //   (
-//     theme2: (
+//     theme8: (
 //       color: $defaultColor,
-//       text-shadow: $noShadow,
+//       // text-shadow: $noShadow,
+//       text-shadow: $commonTextShadow,
 //       // no shadow
 //     ),
 //   )
 // );
-
-$fontColors: map-merge(
-  $fontColors,
-  (
-    theme8: (
-      color: $defaultColor,
-      text-shadow: $noShadow,
-      // no shadow
-    ),
-  )
-);
 
 $fontColors: map-merge(
   $fontColors,
@@ -460,8 +450,9 @@ $fontColors: map-merge(
   (
     theme14: (
       color: $defaultColor,
-      text-shadow: $noShadow,
+      // text-shadow: $noShadow,
       // no shadow
+      text-shadow: $commonTextShadow,
     ),
   )
 );
@@ -513,14 +504,6 @@ $thinColors: ();
   );
 }
 
-// $thinColors: map-merge(
-//   $thinColors,
-//   (
-//     theme4: (
-//       color: $retroThinText,
-//     ),
-//   )
-// );
 
 @for $i from 3 through 4 {
   $thinColors: map-merge(

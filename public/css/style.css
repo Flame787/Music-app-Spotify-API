@@ -59,55 +59,55 @@ body.theme15 {
 }
 
 body.theme0 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme1 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme2 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme3 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme4 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme5 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme6 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme7 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme8 {
-  color: #d1d4c9 !important;
-  text-shadow: none !important;
+  color: #f5f5f4 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme9 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme10 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme11 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme12 {
-  color: #d1d4c9 !important;
+  color: #f5f5f4 !important;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme13 {
@@ -115,8 +115,8 @@ body.theme13 {
   text-shadow: none !important;
 }
 body.theme14 {
-  color: #d1d4c9 !important;
-  text-shadow: none !important;
+  color: #f5f5f4 !important;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8) !important;
 }
 body.theme15 {
   color: #000000 !important;
@@ -149,7 +149,7 @@ body.theme15 {
 .theme2 .dropdown-menu,
 .theme2 .show-more-button {
   background-color: rgb(174, 127, 229);
-  background-image: linear-gradient(320deg, #8c59ab 0%, #252763 100%);
+  background-image: linear-gradient(320deg, #b798ca 0%, #6b38a5 50%);
   color: black;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -179,7 +179,7 @@ body.theme15 {
 .theme5 .dropdown-menu,
 .theme5 .show-more-button {
   background-color: rgb(223, 178, 13);
-  background-image: linear-gradient(320deg, #e2efaa 0%, #c78f34 33%, #c76234 100%);
+  background-image: linear-gradient(320deg, #e2efaa 0%, #c78f34 63%, #aa471a 100%);
   color: #000000;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -219,8 +219,8 @@ body.theme15 {
 .theme9 .dropdown-menu,
 .theme9 .show-more-button {
   background-color: rgb(6, 125, 8);
-  background-image: linear-gradient(320deg, #c5f5aa 0%, rgb(65, 214, 100) 23%, rgb(1, 84, 2) 100%);
-  color: white;
+  background-image: linear-gradient(320deg, #c5f5aa 0%, rgb(65, 214, 100) 43%, rgb(1, 84, 2) 100%);
+  color: black;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme10 .theme-button, .theme10 .nav-button,
@@ -249,7 +249,7 @@ body.theme15 {
 .theme12 .dropdown-menu,
 .theme12 .show-more-button {
   background-color: rgb(124, 218, 231);
-  background-image: linear-gradient(320deg, rgb(143, 231, 243) 0%, #4da8c4 40%, #106d8a 100%);
+  background-image: linear-gradient(320deg, rgb(143, 231, 243) 0%, #4da8c4 60%, #106d8a 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -259,7 +259,7 @@ body.theme15 {
 .theme13 .dropdown-menu,
 .theme13 .show-more-button {
   background-color: rgb(124, 218, 231);
-  background-image: linear-gradient(320deg, rgb(206, 240, 244) 0%, #66c0d7 100%);
+  background-image: linear-gradient(320deg, rgb(206, 240, 244) 50%, #3bbedf 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -279,7 +279,7 @@ body.theme15 {
 .theme15 .dropdown-menu,
 .theme15 .show-more-button {
   background-color: rgb(246, 194, 38);
-  background-image: linear-gradient(320deg, rgb(245, 232, 192) 0%, rgb(246, 194, 38) 23%, #ec7948 100%);
+  background-image: linear-gradient(320deg, rgb(245, 232, 192) 0%, rgb(246, 194, 38) 43%, #ec7948 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -312,7 +312,7 @@ body.theme15 {
   color: white;
 }
 .theme9 button a {
-  color: white;
+  color: black;
 }
 .theme10 button a {
   color: black;
@@ -785,7 +785,7 @@ h3 {
 
 #nav-title {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  color: #d1d4c9;
+  color: #f5f5f4;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   letter-spacing: 2px;
   font-weight: bold;
@@ -995,7 +995,7 @@ audio::-webkit-media-controls-volume-slider {
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: 2.2rem;
 }
 
 input {
@@ -1278,7 +1278,7 @@ li .image-container img {
 .show-more-button {
   margin-top: 5%;
   font-size: 1.1rem;
-  width: 60%;
+  width: 70%;
 }
 
 @media (max-width: 1540px) {
@@ -1333,7 +1333,7 @@ li .image-container img {
     font-size: 3.3rem;
   }
   h3 {
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     padding: 5%;
   }
   #empty {
@@ -1403,7 +1403,7 @@ li .image-container img {
     font-size: 3.1rem;
   }
   h3 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     padding: 5%;
   }
 }
@@ -1422,12 +1422,15 @@ li .image-container img {
     font-size: 3.1rem;
   }
   h3 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 }
 @media (max-width: 786px) {
   body {
     font-size: 1rem;
+  }
+  .red {
+    height: 200px;
   }
   .flex-item {
     flex-basis: 70%;
@@ -1451,7 +1454,7 @@ li .image-container img {
     font-size: 2.9rem;
   }
   h3 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     padding: 5%;
   }
   select {
@@ -1490,10 +1493,7 @@ li .image-container img {
     text-align: center;
   }
   #nav-list button {
-    width: 6rem;
-  }
-  .red {
-    height: 160px;
+    width: 7rem;
   }
   .dropdown-menu {
     top: 150px;
@@ -1536,5 +1536,10 @@ li .image-container img {
   }
   audio {
     width: 230px;
+  }
+}
+@media (max-width: 389px) {
+  .red {
+    height: 300px;
   }
 }/*# sourceMappingURL=style.css.map */
