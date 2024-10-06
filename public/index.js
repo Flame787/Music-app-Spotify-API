@@ -418,14 +418,8 @@
         // const results = await fetchSearchResults(artistName, "album");
         const results = await fetchSearchResults(artistName);
 
-        // Clear the previous albums list
-        // const resultsContainer = document.getElementById("results-container");
-        // const albumsList = document.createElement("ul");
-        // albumsList.classList.add("album-list");
-
         // Clear the previous results from the results-container:
-
-        resultsContainer.innerHTML = ""; // Clear the container
+        resultsContainer.innerHTML = "";
 
         // Create an unordered list for the artist's albums:
         const ulAlbums = document.createElement("ul");
@@ -442,6 +436,8 @@
             const div = document.createElement("div"); // For the image
             const img = document.createElement("img");
 
+            const showMoreButton = document.createElement("button");
+
             if (album.images && album.images.length > 0) {
               img.src = album.images[0].url;
             } else {
@@ -454,12 +450,36 @@
             div.appendChild(img);
             li.appendChild(div);
 
-            const textDiv = document.createElement("div");
-            textDiv.textContent = `${album.name} - Released: ${album.release_date}`;
-            textDiv.classList.add("result-item-name");
-            li.appendChild(textDiv);
+            // Create a <div> for the text and append it
+
+            const textDivAlbum1 = document.createElement("div");
+            const textDivAlbum2 = document.createElement("div");
+            const textDivAlbum3 = document.createElement("div");
+            const textDivAlbum4 = document.createElement("div");
+            textDivAlbum1.textContent = `${album.name}`;
+            textDivAlbum2.textContent = `By: ${album.artists[0].name}`;
+            textDivAlbum3.textContent = `Release date: ${album.release_date}`;
+            textDivAlbum4.textContent = `Album tracks number: ${album.total_tracks}`;
+
+            // const textDiv = document.createElement("div");
+            // textDiv.textContent = `${album.name} - Released: ${album.release_date}`;
+            // textDiv.classList.add("result-item-name");
+            // li.appendChild(textDiv);
+
+            li.append(
+              textDivAlbum1,
+              textDivAlbum2,
+              textDivAlbum3,
+              textDivAlbum4
+            );
+
+            li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
+            showMoreButton.textContent = `Track list`; // NEW - SHOW-MORE BUTTON
+            showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+            showMoreButton.setAttribute("id", "tracklist-button");
 
             li.classList.add("li-item-style", "result-flex-item");
+            textDivAlbum1.classList.add("result-item-name"); // bold and bigger font
             ulAlbums.appendChild(li);
           });
 
@@ -859,11 +879,13 @@
 /* NOVI TASKS (06.10.2024.):
 
 + dati dodatni id buttonu Discography (za Artist-rezultate) - DONE -> id: "discography-button"
-- prevent default
-- dodati event listener
-- novi Api call kad se klikne na button Discography:
-- dohvaća albume i pjesme samo od odabranog artista (q = artist, a parametri su slično kao i dosad za albume i pjesme)
-- umjesto rezultata, u tom formu se prikažu albumi i pjesme dohvaćeni s apija, koji opet imaju buttone Track list / Add to playlist (i isto ih se može svirati)
++ prevent default
++ dodati event listener
++ novi Api call kad se klikne na button Discography:
++ dohvaća albume i pjesme samo od odabranog artista (q = artist, a parametri su slično kao i dosad za albume i pjesme)
++ umjesto rezultata, u tom formu se prikažu albumi dohvaćeni s apija, 
+- dohvaćeni albumi imaju button Track list (i isto ih se može svirati) - cross refferencing
+- dodati da se prikažu i pjesme tog artista, dohvaćene s apija, i imaju buttone Add to playlist
 
 + dati dodatni id buttonu Track list (za Tracks-rezultate) - DONE -> id: "tracklist-button"
 - prevent default
