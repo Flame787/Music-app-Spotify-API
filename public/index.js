@@ -784,7 +784,8 @@
 - dodati event listener
 - pjesme se dodaju na donju Playlistu koju se može dalje obrađivati, te na 2. stranicu: My playlists (i kasnije možda čak spremaju u bazu)
 
-- Play opcija preko slike - podesiti da se pojavi kad se hovera preko bilo kojeg dijela li (list itema), tako da li ima opciju hover, a ne samo img.
++ Play button transparent image preko slike - podesiti da se pojavi kad se hovera preko bilo kojeg dijela li (list itema), 
+tako da cijeli list item ima opciju hover, a ne samo img - DONE
 
 - napravi funkciju playSong() ima ove podfunkcije:
 - event-listener kad se klikne na bilo koji dio cijelog li (list itema), pokrene se player

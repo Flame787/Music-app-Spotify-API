@@ -1267,7 +1267,7 @@ li .image-container::before {
   transform: translate(-50%, -50%);
 }
 
-li .image-container:hover::before {
+li:hover .image-container::before {
   opacity: 0.8; /* Povećajte opacity kako bi se transparentna slika vidjela */
 }
 
