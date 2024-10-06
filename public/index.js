@@ -177,9 +177,7 @@
     //   displaySearchResults(query); // Call the search results function
     // });
 
-    /////// Function to send Api-request for Search results - from Frontend to Backend: //////////////////////
-
-    // after implementing the route (named '/api/search' or similar), test it in browser or Postman to check if it returns correct JSON answer.
+    ///////_______________ Function to send Api-request for Search results - from Frontend to Backend: __________________//////////////////////
 
     // if the 'type' is not set, it will be a default value: 'artist,album,track':
     async function fetchSearchResults(query, type = "artist,album,track") {
@@ -203,7 +201,7 @@
       container.appendChild(message); // Append message to the container
     }
 
-    // Function to display all fetched Search-results on the page:
+    ///////_______________  Function to display all fetched Search-results on the page: __________________//////////////////////
 
     async function displaySearchResults(query) {
       const resultsContainer = document.getElementById("results-container"); // Your container element
@@ -211,11 +209,6 @@
 
       const results = await fetchSearchResults(query);
       console.log(results); // Log the results to see what you get
-
-      // if (!results) {
-      //   console.error("No results found");
-      //   return; // Exit if results are undefined
-      // }
 
       // Provjera je li dobiveni rezultat prazan
       if (
@@ -268,19 +261,16 @@
 
           // Insert the div-image before the text content:
           li.insertBefore(div, li.firstChild); //new
-
-          // li.insertBefore(img, li.firstChild);
           div.appendChild(img); //new
           div.classList.add("image-container"); //new
 
-          // Create a <div> for the text and append it
+          // Create a <div> for the text and append it:
           const textDivArtist1 = document.createElement("div");
           const textDivArtist2 = document.createElement("div");
           // textDivArtist.textContent = `${item.name} - ${item.genres.join(
           //   ", "
           // )}`;
-
-          const showMoreButton = document.createElement("button");  // NEW - SHOW-MORE BUTTON
+          const showMoreButton = document.createElement("button"); // NEW - SHOW-MORE BUTTON
 
           textDivArtist1.textContent = `${item.name}`;
           li.appendChild(textDivArtist1);
@@ -288,12 +278,17 @@
           li.appendChild(textDivArtist2);
 
           li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
-          showMoreButton.textContent = `Discography`;   // NEW - SHOW-MORE BUTTON
+          showMoreButton.textContent = `Discography`; // NEW - SHOW-MORE BUTTON
           showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
           showMoreButton.setAttribute("id", "discography-button");
 
-          li.classList.add("li-item-style", "result-flex-item");
+          // Event listener for the Discography button:
+          showMoreButton.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent default button behavior
+            handleDiscographyButtonClick(item.name); // Calls the function to fetch albums and passes artist-name to the function
+          });
 
+          li.classList.add("li-item-style", "result-flex-item");
           titleArtists.classList.add("result-category"); // centered title "Artists:"
           textDivArtist1.classList.add("result-item-name"); // bold and bigger font
 
@@ -305,7 +300,7 @@
       ulAlbums.appendChild(titleAlbums);
       titleAlbums.innerHTML = "Albums:";
 
-      // Check and display ALBUMS:
+      //  - - - - - Check and display ALBUMS:  - - - - - - - - - - - - - - - - - - - - - -
 
       if (results.albums && results.albums.items.length > 0) {
         results.albums.items.forEach((item) => {
@@ -342,12 +337,12 @@
           textDivAlbum4.textContent = `Album tracks number: ${item.total_tracks}`;
           // li.appendChild(textDivAlbum);
 
-          const showMoreButton = document.createElement("button");  // NEW - SHOW-MORE BUTTON
+          const showMoreButton = document.createElement("button"); // NEW - SHOW-MORE BUTTON
 
           li.append(textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4);
 
           li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
-          showMoreButton.textContent = `Track list`;   // NEW - SHOW-MORE BUTTON
+          showMoreButton.textContent = `Track list`; // NEW - SHOW-MORE BUTTON
           showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
           showMoreButton.setAttribute("id", "tracklist-button");
 
@@ -364,7 +359,7 @@
       ulSongs.appendChild(titleSongs);
       titleSongs.innerHTML = "Songs:";
 
-      // Check and display TRACKS / SONGS:
+      //  - - - - - Check and display TRACKS / SONGS:  - - - - - - - - - - - - - - - - - - - - - -
 
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
@@ -392,13 +387,12 @@
           textDivSong1.textContent = `${item.name}`;
           textDivSong2.textContent = `By: ${item.artists[0].name}`;
 
-          const showMoreButton = document.createElement("button");  // NEW - SHOW-MORE BUTTON
-
+          const showMoreButton = document.createElement("button"); // NEW - SHOW-MORE BUTTON
 
           li.append(textDivSong1, textDivSong2);
 
           li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
-          showMoreButton.textContent = `Add to playlist`;   // NEW - SHOW-MORE BUTTON
+          showMoreButton.textContent = `Add to playlist`; // NEW - SHOW-MORE BUTTON
           showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
@@ -413,6 +407,108 @@
       }
     }
 
+    // ____________________________________________________________
+
+    // New function to fetch albums by artist name:
+
+    async function handleDiscographyButtonClick(artistName) {
+      const resultsContainer = document.getElementById("results-container");
+      try {
+        // Fetch albums for the selected artist
+        // const results = await fetchSearchResults(artistName, "album");
+        const results = await fetchSearchResults(artistName);
+
+        // Clear the previous albums list
+        // const resultsContainer = document.getElementById("results-container");
+        // const albumsList = document.createElement("ul");
+        // albumsList.classList.add("album-list");
+
+        // Clear the previous results from the results-container:
+
+        resultsContainer.innerHTML = ""; // Clear the container
+
+        // Create an unordered list for the artist's albums:
+        const ulAlbums = document.createElement("ul");
+        ulAlbums.classList.add("flex-container-ol");
+
+        const titleAlbums = document.createElement("h3");
+        titleAlbums.textContent = `Albums by ${artistName}:`;
+        titleAlbums.classList.add("result-category");
+        ulAlbums.appendChild(titleAlbums);
+
+        if (results.albums && results.albums.items.length > 0) {
+          results.albums.items.forEach((album) => {
+            const li = document.createElement("li");
+            const div = document.createElement("div"); // For the image
+            const img = document.createElement("img");
+
+            if (album.images && album.images.length > 0) {
+              img.src = album.images[0].url;
+            } else {
+              img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+            }
+            img.alt = `${album.name} Album Cover`;
+            img.classList.add("result-image");
+
+            div.classList.add("image-container");
+            div.appendChild(img);
+            li.appendChild(div);
+
+            const textDiv = document.createElement("div");
+            textDiv.textContent = `${album.name} - Released: ${album.release_date}`;
+            textDiv.classList.add("result-item-name");
+            li.appendChild(textDiv);
+
+            li.classList.add("li-item-style", "result-flex-item");
+            ulAlbums.appendChild(li);
+          });
+
+          // Append the list to the results container:
+          resultsContainer.appendChild(ulAlbums);
+        } else {
+          // Show a message if no albums are found:
+          displayMessage(resultsContainer, "No albums found for this artist.");
+        }
+      } catch (error) {
+        console.error("Error fetching discography:", error);
+        displayMessage(resultsContainer, "Error fetching discography.");
+      }
+    }
+
+    // Adding event listener for each discography button
+    //     document.addEventListener("click", (event) => {
+    //       if (event.target && event.target.id === "discography-button") {
+    //         event.preventDefault(); // Prevents the page refresh
+    //         const artistName =
+    //           event.target.parentElement.querySelector(
+    //             ".result-item-div"
+    //           ).textContent;
+    // // fetches li (list item, which is parent-element of 2 div-s (img and text), and of this button) -> and then fetches div with class ".result-item-div", which contains Artist name
+    //         handleDiscographyButtonClick(artistName); // Fetch and display albums
+    //       }
+    //     });
+
+    document.addEventListener("click", (event) => {
+      if (event.target && event.target.id === "discography-button") {
+        event.preventDefault(); // Prevents the page refresh
+
+        const parentLi = event.target.parentElement; // Get the parent <li>
+        console.log("Parent LI:", parentLi); // Log parent LI to see its structure
+
+        const resultItemDiv =
+          event.target.parentElement.querySelector(".result-item-name");
+
+        if (resultItemDiv) {
+          // Check if the element exists
+          const artistName = resultItemDiv.textContent;
+          handleDiscographyButtonClick(artistName); // Fetch and display albums
+        } else {
+          console.error("Artist name element not found."); // Log an error if not found
+        }
+      }
+    });
+
+    // ____________________________________________________________
 
     // Praćenje submita u search-form-u i prikaz search-rezultata:
 
@@ -708,8 +804,6 @@
   window.addEventListener("load", todo.init);
 })();
 
-
-
 // Error kod dodavanja novih itema na favorite listu:
 // index.js:338 Uncaught TypeError: Cannot read properties of null (reading 'textContent')
 //     at HTMLButtonElement.setFavorite (index.js:338:49)
@@ -740,30 +834,29 @@
 // <button onclick="changeStylesheet('light.css')">Lights on</button>
 // <button onclick="changeStylesheet('dark.css')">Lights off</button>
 
-
 // ------------------------ NEXT STEPS TO DO: ----------------------------------------------------------------------------------
 
-    // + dodati button play (IKONA preko slike, na HOVER) - DONE
-    // + dodati button 'discography' za artiste, 'tracks' za albume i 'add to list' za songse - DONE
-    // -> ovi buttoni kod rezultata izvršavaju daljnje radnje ili otvaraju novi sadržaj - dodati im funkcije
-    // -> jedino artist nema te buttone, nego ima button za "explore music" ili slično, čime se otvaraju 10 njegovih albuma i pjesama.
-    // + dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa) - DONE
-    // + brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?) - bez brojki!
-    // + tamo gdje se ne pojavljuju slike (jer ih nema) staviti neku placeholder-sliku ili obavijest da slika nedostaje. - DONE
+// + dodati button play (IKONA preko slike, na HOVER) - DONE
+// + dodati button 'discography' za artiste, 'tracks' za albume i 'add to list' za songse - DONE
+// -> ovi buttoni kod rezultata izvršavaju daljnje radnje ili otvaraju novi sadržaj - dodati im funkcije
+// -> jedino artist nema te buttone, nego ima button za "explore music" ili slično, čime se otvaraju 10 njegovih albuma i pjesama.
+// + dodati funkciju da se nakon pritiska na search button ili Enter tipku odmah fokusira na dobivene rezultate (pomak fokusa) - DONE
+// + brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?) - bez brojki!
+// + tamo gdje se ne pojavljuju slike (jer ih nema) staviti neku placeholder-sliku ili obavijest da slika nedostaje. - DONE
 
-    // - list iteme na manjim rezolucijama poredati prvo 2 u redak, pa tek onda 1 u redak - NOT YET WORKING!
-    // + list-itemi bi trebali imati donju marginu veću na manjim rezolucijama, da se vertikalno više razdvoje međusobno - DONE
+// - list iteme na manjim rezolucijama poredati prvo 2 u redak, pa tek onda 1 u redak - NOT YET WORKING!
+// + list-itemi bi trebali imati donju marginu veću na manjim rezolucijama, da se vertikalno više razdvoje međusobno - DONE
 
-    // + buttonići - boja u nekim temama nije dovoljno kontrastna od pozadine - treba biti svjetlija ili tamnija nijansa da se buttonići istaknu više - DONE
+// + buttonići - boja u nekim temama nije dovoljno kontrastna od pozadine - treba biti svjetlija ili tamnija nijansa da se buttonići istaknu više - DONE
 
-    // + u Copper temi i Night temi i Frost tema staviti kontrastno: staviti bijela slova unutar formsa, a ne crna jer se ne vide - DONE
-    // + Energy tema - crna su slova, ali treba ih malo podebljati - DONE, povećan h3 font-size za cijeli app
+// + u Copper temi i Night temi i Frost tema staviti kontrastno: staviti bijela slova unutar formsa, a ne crna jer se ne vide - DONE
+// + Energy tema - crna su slova, ali treba ih malo podebljati - DONE, povećan h3 font-size za cijeli app
 
-    // možda (nice to have): dodati "expended search"?? - button kojim se pretraga po nekoj kategoriji može povećati, pa prikaže gradijalno na svaki click još 10 rezultata.
+// možda (nice to have): dodati "expended search"?? - button kojim se pretraga po nekoj kategoriji može povećati, pa prikaže gradijalno na svaki click još 10 rezultata.
 
-    // + dodijeli zasebne IDs buttonima Discography / Track list / Add to playlist - DONE
+// + dodijeli zasebne IDs buttonima Discography / Track list / Add to playlist - DONE
 
-    /* NOVI TASKS (06.10.2024.):
+/* NOVI TASKS (06.10.2024.):
 
 + dati dodatni id buttonu Discography (za Artist-rezultate) - DONE -> id: "discography-button"
 - prevent default
