@@ -3,7 +3,7 @@
 // variable $themes is an object, has many different key-value pairs. Values may consist of several css-atributes.
 
 $backgrounds: (
-  theme0: url("../pictures/purple-net.jpg"),
+  theme0: url("../pictures/Abstract-Swirl7.jpg"),
   //Theme
   theme1: url("../pictures/purple-lights2.jpg"),
   //Disco
@@ -440,7 +440,6 @@ $fontColors: map-merge(
     theme11: (
       color: $defaultColor,
       text-shadow: $commonTextShadow,
-      // no shadow
     ),
   )
 );
@@ -450,8 +449,6 @@ $fontColors: map-merge(
   (
     theme14: (
       color: $defaultColor,
-      // text-shadow: $noShadow,
-      // no shadow
       text-shadow: $commonTextShadow,
     ),
   )
