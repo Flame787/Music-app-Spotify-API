@@ -982,14 +982,17 @@
 ** trenutno postoje 2x event-listener za Discography button, svaki unutar jedne funkcije - provjeriti koji je dovoljan (+ prilagoditi), a koji brišemo
 
 + dati dodatni id buttonu Track list (za Tracks-rezultate) - DONE -> id: "tracklist-button"
-- prevent default
-- dodati event listener
-- novi Api call kad se klikne na button Track list:
-- dohvaća pjesme samo sa odabranog albuma i prikaže ih redom 
-- umjesto rezultata, u tom formu se prikažu redom pjesme sa odabranog albuma dohvaćene s apija, 
-- pjesme sa slikama koje imaju play-ikonu da se mogu odmah pojedinačno svirati
-- dodatni button koji pokreće Play all - cijeli album
-- pjesme naravno imaju buttone Add to playlist 
++ prevent default
++ dodati event listener
++ novi Api call kad se klikne na button Track list:
++ dohvaća pjesme samo sa odabranog albuma i prikaže ih redom 
++ umjesto rezultata, u tom formu se prikažu redom pjesme sa odabranog albuma dohvaćene s apija, 
++ pjesme s play-buttonom da se mogu odmah pojedinačno svirati
++ dodatni button koji pokreće Play all - cijeli album
++ pjesme imaju i buttone Add to playlist 
+- dodati funkcionalnost svim Add to playlist buttonima:
+(3. funkcija, ona preuzima neke podatke o pjesmi, poslane putem show-more-button-event-handlera, i prikazuje odabrane pjesme na novoj playlisti)
+- kod ispisa Track list, img s coverom albuma još nema mogućnost play-ikone preko slike na hover, vidjeti zašto se to nije prenijelo (fali neka klasa ili sl.)?
 
 + dati dodatni id buttonu Add to playlist (za Songs-rezultate) - DONE -> id: "tracklist-button"
 - prevent default
@@ -999,7 +1002,7 @@
 + Play button transparent image preko slike - podesiti da se pojavi kad se hovera preko bilo kojeg dijela li (list itema), 
 tako da cijeli list item ima opciju hover, a ne samo img - DONE
 
-- napravi funkciju playSong() ima ove podfunkcije:
+- napravi funkciju playSong() koja ima ove podfunkcije:
 - event-listener kad se klikne na bilo koji dio cijelog li (list itema), pokrene se player
 - automatski se fokus prebaci u donji form gdje je Audio player i pjesma počne svirati
 - volume je automatski set na 50% ili manje
@@ -1026,5 +1029,10 @@ tako da cijeli list item ima opciju hover, a ne samo img - DONE
 dok uređujemo playlistu prvi put, ona se sprema dolje na prvoj stranici i vidljiva je dok traje cookie (često i nakon nekoliko sessiona),
 na 1. stranici kod playliste je button 'See all playlists' koji vodi na 2. podstranicu, i na njoj se također sprema dinamički ova playlista, i spremljene su prethodne liste
 playlista ostaje spremljena (možda u bazi - trajno?) na 2. stranici (My playlists) i tu se može dalje uvijek slušati i modificirati 
+
+- suziti širinu prvog forma u kojem je Search (nema potrebe da je tako širok i glomazan, dok ostali mogu biti kako jesu široki)
+- suziti širinu Search-input polja i Search-buttona, te prilagoditi za nekoliko media queriesa
+
+- Results container/form je trenutno stalno vidljiv jer je hardkodiran na idex.html-u - učiniti da je nevidljiv, i da se prikazuje samo kad se dohvate neki rezultati
 
 */
