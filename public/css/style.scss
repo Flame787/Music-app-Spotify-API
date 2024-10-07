@@ -55,7 +55,7 @@ body {
 .favorite-button,
 #theme_color,
 .dropdown-menu,
-.show-more-button {
+.show-more-button, .play-button {
   @extend .theme-button;
 }
 
@@ -599,6 +599,40 @@ hr {
   padding: 2% 0;
 }
 
+.flex-container-tracks {
+  // width: 70%;  // column with results is narrow in the center of the page
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;  // center all tracks in one column
+  justify-content: center;
+  align-content: center;
+}
+
+.flex-container-tracks li {
+  margin-bottom: 15%;
+}
+
+.flex-container-tracks img {
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.flex-container-tracks .play-button {
+  width: 40%;
+  margin-right: 10%;
+  margin-left: 10%;  // centers the Play button above another button, both take 60%
+}
+
+.flex-container-tracks .show-more-button {
+  width: 60%;
+}
+
+
+// this doesn't apply at all:
+// .flex-container-tracks .result-flex-item {
+//   flex-basis: 30%;
+// }
+
 // Adding Play-button layer (background element) - on Hover over each picture:
 
 li .image-container {
@@ -642,6 +676,12 @@ li .image-container img {
   width: 70%;
 }
 
+.play-button {
+  margin-top: 5%;
+  font-size: 1.1rem;
+  width: 50%;
+}
+
 // MEDIA QUERIES:
 
 @media (max-width: 1540px) {
@@ -660,7 +700,7 @@ li .image-container img {
   .nav-button,
   .favorite-button,
   .remove-button,
-  .submit-button, .show-more-button {
+  .submit-button, .show-more-button, .play-button {
     font-size: 1.1rem;
     padding: 2%;
   }
@@ -761,7 +801,7 @@ li .image-container img {
   .nav-button,
   .favorite-button,
   .remove-button,
-  .submit-button,  .show-more-button {
+  .submit-button,  .show-more-button, .play-button {
     font-size: 1rem;
   }
 }
@@ -921,7 +961,7 @@ li .image-container img {
   .nav-button,
   .favorite-button,
   .remove-button,
-  .submit-button, .show-more-button {
+  .submit-button, .show-more-button, .play-button {
     font-size: 1.1rem;
   }
   .favorite-button {

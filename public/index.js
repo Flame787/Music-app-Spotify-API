@@ -540,62 +540,70 @@
 
         console.log(tracksData);
 
-        // test API:
-        // tracksData.albums.items.forEach((album) => {
-        //   console.log(tracksData); // check the album object structure
-        // });
-        console.log(tracksData);
-
         // Clear the previous results from the results-container:
         resultsContainer.innerHTML = "";
 
         // Create an unordered list for the artist's albums:
         const ulTracks = document.createElement("ul");
-        ulTracks.classList.add("flex-container-ol");
+        ulTracks.classList.add("flex-container-tracks");
 
-        const titleTracks = document.createElement("h3");
+        const titleTracks1 = document.createElement("h3");
+        const titleTracks2 = document.createElement("h3");
         const titleSmall = document.createElement("h4");
         const img = document.createElement("img");
         const div = document.createElement("div");
 
-        titleTracks.textContent = `${albumName} - album by: ${albumArtist}`;
+        // razdvoji naslov: ime albuma i ime autora u 2 retka (jer su imena albuma često dugačka):
+        titleTracks1.textContent = `${albumName}`;
+        titleTracks1.classList.add("result-category");
+        titleTracks2.textContent = `Album by: ${albumArtist}`;
+        titleTracks2.classList.add("result-category");
         titleSmall.textContent = `Track list:`;
-        titleTracks.classList.add("result-category");
+        
 
-        // ** preuzima se s drugačijeg endpointa - https://api.spotify.com/v1/albums/{id} - možda da to uzmemo kao generalni 2. endpoint i za tracks?
+        // ?? trebamo li drugačiji (kraći, općenitiji) endpoint?? - https://api.spotify.com/v1/albums/{id} - možda da to uzmemo kao generalni 2. endpoint i za tracks?
 
-        // Assuming the album image is passed into the function as a parameter:
-        // const albumImages = tracksData.images || [];
-        // if (albumImages.length > 0) {
-        //   img.src = albumImages[0].url;
-        // } else {
-        //   img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
-        // }
-        // img.alt = `${albumName} Album Cover`;
-        // img.classList.add("result-image");
+       // displaying album cover picture before all tracks:
+        if (albumImageUrl) {
+          img.src = albumImageUrl;
+        } else {
+          img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+        }
+        img.alt = `${albumName} Album Cover`;
+        img.classList.add("result-image");
 
         div.classList.add("image-container");
         div.appendChild(img);
 
-        ulTracks.appendChild(titleTracks);
+        ulTracks.appendChild(titleTracks1);
+        ulTracks.appendChild(titleTracks2);
+        ulTracks.appendChild(div);  // appenda se div sa slikom covera albuma
         ulTracks.appendChild(titleSmall);
-        ulTracks.appendChild(div);
 
         // Loop through each track and add it to the list:
         tracksData.items.forEach((track) => {
           const li = document.createElement("li");
-          li.textContent = `${track.track_number}. ${track.name}`;
+          const div = document.createElement("div");
+          div.textContent = `${track.track_number}. ${track.name}`;
           li.classList.add("li-item-style");
           li.classList.add("result-item-name", "result-flex-item");
+
+          const playButton = document.createElement("button");
+          playButton.textContent = `Play  ▶`; // NEW - PLAY-BUTTON
+          playButton.classList.add("play-button");
 
           const showMoreButton = document.createElement("button");
           showMoreButton.textContent = `Add to playlist`; // NEW - SHOW-MORE BUTTON
           showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
+          li.appendChild(div);
+          li.appendChild(playButton);  // NEW! PLAYBUTTON ON INDIVIDUAL TRACKS!
           li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
 
-          // ** LATER ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST! **
+          // ** LATER ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST! 
+          // (define which multiple variables it passes to the function Add to playlist) 
+          // - f.e. track.name, albumName, albumArtist, albumImageUrl, track.duration_ms, track.is_playable (true / false)
 
           ulTracks.appendChild(li);
         });
@@ -635,7 +643,8 @@
         console.log("Form submitted");
         console.log("Query:", query);
         await displaySearchResults(query); // Koristi fetchSearchResults unutar displaySearchResults
-        document.getElementById("search-results").focus(); // Focus on the results-container
+        // document.getElementById("search-results").focus(); // Focus on the results-container
+        document.getElementById("search-results").scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
         displayMessage(formContainer, "Please enter your query.");
       }
