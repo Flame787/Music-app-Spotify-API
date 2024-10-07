@@ -286,6 +286,7 @@
           showMoreButton.addEventListener("click", (event) => {
             event.preventDefault(); // Prevent default button behavior
             handleDiscographyButtonClick(item.name); // Calls the function to fetch albums and passes artist-name to the function
+            console.log("discography fetched");
           });
 
           li.classList.add("li-item-style", "result-flex-item");
@@ -347,9 +348,15 @@
           showMoreButton.setAttribute("id", "tracklist-button");
 
           li.classList.add("li-item-style", "result-flex-item");
-
           titleAlbums.classList.add("result-category"); // centered title "Albums:"
           textDivAlbum1.classList.add("result-item-name"); // bold and bigger font
+
+          // Event listener for the 'Track list' button:
+          showMoreButton.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent default button behavior
+            handleTrackListButtonClick(item.name); // Calls the function to fetch albums and passes artist-name to the function
+            console.log("discography fetched");
+          });
 
           ulAlbums.appendChild(li);
           resultsContainer.appendChild(ulAlbums);
@@ -477,6 +484,16 @@
             showMoreButton.textContent = `Track list`; // NEW - SHOW-MORE BUTTON
             showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
             showMoreButton.setAttribute("id", "tracklist-button");
+            // new: add event-listener to the button 'Track list' under each album:
+            showMoreButton.addEventListener("click", () => {
+              handleTrackListButtonClick(
+                album.id,
+                album.name,
+                album.artists[0].name
+              ); // Fetch and display track list for the selected album
+            });
+
+            console.log(album);
 
             li.classList.add("li-item-style", "result-flex-item");
             textDivAlbum1.classList.add("result-item-name"); // bold and bigger font
@@ -495,38 +512,122 @@
       }
     }
 
-    // Adding event listener for each discography button
-    //     document.addEventListener("click", (event) => {
-    //       if (event.target && event.target.id === "discography-button") {
-    //         event.preventDefault(); // Prevents the page refresh
-    //         const artistName =
-    //           event.target.parentElement.querySelector(
-    //             ".result-item-div"
-    //           ).textContent;
-    // // fetches li (list item, which is parent-element of 2 div-s (img and text), and of this button) -> and then fetches div with class ".result-item-div", which contains Artist name
-    //         handleDiscographyButtonClick(artistName); // Fetch and display albums
-    //       }
-    //     });
+    // Track list function:
 
-    document.addEventListener("click", (event) => {
-      if (event.target && event.target.id === "discography-button") {
-        event.preventDefault(); // Prevents the page refresh
+    async function handleTrackListButtonClick(albumId, albumName, albumArtist) {
+      console.log("Album ID:", albumId);
+      const resultsContainer = document.getElementById("results-container");
+      try {
+        // Fetch albums for the selected artist
+        // const results = await fetchSearchResults(artistName, "album");
+        const tracksResponse = await fetch(
+          `/api/albums/${albumId}/tracks`
+        );
+        const tracksData = await tracksResponse.json();
 
-        const parentLi = event.target.parentElement; // Get the parent <li>
-        console.log("Parent LI:", parentLi); // Log parent LI to see its structure
+        console.log(tracksData);
 
-        const resultItemDiv =
-          event.target.parentElement.querySelector(".result-item-name");
+        // test API:
+        // results.albums.items.forEach((album) => {
+        //   console.log(album); // check the album object structure
+        // });
 
-        if (resultItemDiv) {
-          // Check if the element exists
-          const artistName = resultItemDiv.textContent;
-          handleDiscographyButtonClick(artistName); // Fetch and display albums
+        // Clear the previous results from the results-container:
+        resultsContainer.innerHTML = "";
+
+        // Create an unordered list for the artist's albums:
+        const ulTracks = document.createElement("ul");
+        ulTracks.classList.add("flex-container-ol");
+
+        const titleTracks = document.createElement("h3");
+        const titleSmall = document.createElement("h4");
+        const img = document.createElement("img");
+        const div = document.createElement("div");
+        titleTracks.textContent = `${albumName} - album by: ${albumArtist}`;
+        titleSmall.textContent = `Track list:`;
+        titleTracks.classList.add("result-category");
+
+        const albumImages = tracksData.images || [];
+        if (albumImages.length > 0) {
+          img.src = albumImages[0].url;
         } else {
-          console.error("Artist name element not found."); // Log an error if not found
+          img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
         }
+        img.alt = `${albumName} Album Cover`;
+        img.classList.add("result-image");
+
+        div.classList.add("image-container");
+        div.appendChild(img);
+
+        ulTracks.appendChild(titleTracks);
+        ulTracks.appendChild(titleSmall);
+        ulTracks.appendChild(div);
+
+        // Loop through each track and add it to the list:
+        tracksData.items.forEach((track) => {
+          const li = document.createElement("li");
+          li.textContent = `${track.track_number}. ${track.name}`;
+          li.classList.add("li-item-style");
+          li.classList.add("result-item-name", "result-flex-item");
+
+          const showMoreButton = document.createElement("button");
+          li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
+          showMoreButton.textContent = `Add to playlist`; // NEW - SHOW-MORE BUTTON
+          showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+          showMoreButton.setAttribute("id", "add-to-playlist-button");
+
+          // ** ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST! **
+
+          ulTracks.appendChild(li);
+        });
+
+        // if (results.albums && results.albums.items.length > 0)
+        //   {
+        // results.albums.items.forEach((album) => {
+        //   const li = document.createElement("li");
+        //   const div = document.createElement("div"); // For the image
+        //   const img = document.createElement("img");
+
+        // Create a <div> for the text and append it
+        // const textDivSong1 = document.createElement("div");
+        // const textDivSong2 = document.createElement("div");
+        // textDivSong1.textContent = `${album.items[0].name}`;
+        // textDivSong2.textContent = `By: ${album.artists[0].name}`;
+        // li.append(textDivSong1, textDivSong2);
+
+        // const textDivAlbum1 = document.createElement("div");
+        // const textDivAlbum2 = document.createElement("div");
+        // const textDivAlbum3 = document.createElement("div");
+        // const textDivAlbum4 = document.createElement("div");
+        // textDivAlbum1.textContent = `${album.name}`;
+        // textDivAlbum2.textContent = `By: ${album.artists[0].name}`;
+        // textDivAlbum3.textContent = `Release date: ${album.release_date}`;
+        // textDivAlbum4.textContent = `Album tracks number: ${album.total_tracks}`;
+
+        // const textDiv = document.createElement("div");
+        // textDiv.textContent = `${album.name} - Released: ${album.release_date}`;
+        // textDiv.classList.add("result-item-name");
+        // li.appendChild(textDiv);
+
+        // li.append(
+        //   textDivAlbum1,
+        //   textDivAlbum2,
+        //   textDivAlbum3,
+        //   textDivAlbum4
+        // );
+
+        // li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
+        // showMoreButton.textContent = `Track list`; // NEW - SHOW-MORE BUTTON
+        // showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+        // showMoreButton.setAttribute("id", "tracklist-button");
+
+        // Append the list to the results container:
+        resultsContainer.appendChild(ulTracks);
+      } catch (error) {
+        console.error("Error fetching tracks:", error);
+        displayMessage(resultsContainer, "Error fetching track list.");
       }
-    });
+    }
 
     // ____________________________________________________________
 
@@ -884,8 +985,9 @@
 + novi Api call kad se klikne na button Discography:
 + dohvaća albume i pjesme samo od odabranog artista (q = artist, a parametri su slično kao i dosad za albume i pjesme)
 + umjesto rezultata, u tom formu se prikažu albumi dohvaćeni s apija, 
-- dohvaćeni albumi imaju button Track list (i isto ih se može svirati) - cross refferencing
++ dohvaćeni albumi imaju sve parametre kao i u Results, i imaju button Track list (i isto ih se može svirati) - DONE
 - dodati da se prikažu i pjesme tog artista, dohvaćene s apija, i imaju buttone Add to playlist
+** trenutno postoje 2x event-listener za Discography button, svaki unutar jedne funkcije - provjeriti koji je dovoljan (+ prilagoditi), a koji brišemo
 
 + dati dodatni id buttonu Track list (za Tracks-rezultate) - DONE -> id: "tracklist-button"
 - prevent default

@@ -251,6 +251,29 @@ app.get("/api/search", async (req, res) => {
   }
 });
 
+// Ruta za dohvaćanje informacija o albumu:
+app.get('/api/albums/:albumId/tracks', async (req, res) => {
+  const albumId = req.params.albumId;
+
+  try {
+    const response = await fetch(`https://api.spotify.com/v1/albums/${albumId}/tracks`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}` // Dodajte svoj pristupni token
+      }
+    });
+
+  //   http GET https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks \
+  // Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
+
+    const tracksData = await response.json();
+    res.json(tracksData);
+  } catch (error) {
+    console.error('Error fetching tracks:', error);
+    res.status(500).send('Error fetching tracks');
+  }
+});
+
 // Ruta za dohvaćanje informacija o artistu
 app.get("/artist/:id", async (req, res) => {
   const artistId = req.params.id; // ID artista iz URL-a
