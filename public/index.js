@@ -354,7 +354,14 @@
           // Event listener for the 'Track list' button:
           showMoreButton.addEventListener("click", (event) => {
             event.preventDefault(); // Prevent default button behavior
-            handleTrackListButtonClick(item.name); // Calls the function to fetch albums and passes artist-name to the function
+            // Calls the function to fetch albums:
+            handleTrackListButtonClick(
+              item.id, // passes album-id to this function (we use album-id later to fetch individual tracks - Track list)
+              item.name, // passes album name
+              item.artists[0].name, // passes artist name
+              item.images[0].url // passes album cover image url
+            );
+
             console.log("discography fetched");
           });
 
@@ -414,9 +421,7 @@
       }
     }
 
-    // ____________________________________________________________
-
-    // New function to fetch albums by artist name:
+    // ------------ New function to fetch albums (discography) by artist name: ---------------------------------
 
     async function handleDiscographyButtonClick(artistName) {
       const resultsContainer = document.getElementById("results-container");
@@ -485,15 +490,20 @@
             showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
             showMoreButton.setAttribute("id", "tracklist-button");
             // new: add event-listener to the button 'Track list' under each album:
-            showMoreButton.addEventListener("click", () => {
-              handleTrackListButtonClick(
-                album.id,
-                album.name,
-                album.artists[0].name
-              ); // Fetch and display track list for the selected album
-            });
 
-            console.log(album);
+            // ***COPY SAME showMoreButton.addEventListener FROM PREVIOUS PLACE WHERE IT WAS CALLED (IT SHOULD HAVE SAME FUNCTIONS ON ALL PLACES):
+            showMoreButton.addEventListener("click", (event) => {
+              event.preventDefault(); // Prevent default button behavior
+              // Calls the function to fetch albums:
+              handleTrackListButtonClick(
+                album.id, // passes album-id to this function (we use album-id later to fetch individual tracks - Track list)
+                album.name, // passes album name
+                album.artists[0].name, // passes artist name
+                album.images[0].url // passes album cover image url
+              );
+
+              console.log(album);
+            });
 
             li.classList.add("li-item-style", "result-flex-item");
             textDivAlbum1.classList.add("result-item-name"); // bold and bigger font
@@ -512,25 +522,29 @@
       }
     }
 
-    // Track list function:
+    // ------------- New function to display album's Track list based on album-id: ---------------------------
 
-    async function handleTrackListButtonClick(albumId, albumName, albumArtist) {
+    async function handleTrackListButtonClick(
+      albumId,
+      albumName,
+      albumArtist,
+      albumImageUrl
+    ) {
       console.log("Album ID:", albumId);
       const resultsContainer = document.getElementById("results-container");
       try {
         // Fetch albums for the selected artist
         // const results = await fetchSearchResults(artistName, "album");
-        const tracksResponse = await fetch(
-          `/api/albums/${albumId}/tracks`
-        );
+        const tracksResponse = await fetch(`/api/albums/${albumId}/tracks`);
         const tracksData = await tracksResponse.json();
 
         console.log(tracksData);
 
         // test API:
-        // results.albums.items.forEach((album) => {
-        //   console.log(album); // check the album object structure
+        // tracksData.albums.items.forEach((album) => {
+        //   console.log(tracksData); // check the album object structure
         // });
+        console.log(tracksData);
 
         // Clear the previous results from the results-container:
         resultsContainer.innerHTML = "";
@@ -543,18 +557,22 @@
         const titleSmall = document.createElement("h4");
         const img = document.createElement("img");
         const div = document.createElement("div");
+
         titleTracks.textContent = `${albumName} - album by: ${albumArtist}`;
         titleSmall.textContent = `Track list:`;
         titleTracks.classList.add("result-category");
 
-        const albumImages = tracksData.images || [];
-        if (albumImages.length > 0) {
-          img.src = albumImages[0].url;
-        } else {
-          img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
-        }
-        img.alt = `${albumName} Album Cover`;
-        img.classList.add("result-image");
+        // ** preuzima se s drugačijeg endpointa - https://api.spotify.com/v1/albums/{id} - možda da to uzmemo kao generalni 2. endpoint i za tracks?
+
+        // Assuming the album image is passed into the function as a parameter:
+        // const albumImages = tracksData.images || [];
+        // if (albumImages.length > 0) {
+        //   img.src = albumImages[0].url;
+        // } else {
+        //   img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+        // }
+        // img.alt = `${albumName} Album Cover`;
+        // img.classList.add("result-image");
 
         div.classList.add("image-container");
         div.appendChild(img);
@@ -571,58 +589,23 @@
           li.classList.add("result-item-name", "result-flex-item");
 
           const showMoreButton = document.createElement("button");
-          li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
           showMoreButton.textContent = `Add to playlist`; // NEW - SHOW-MORE BUTTON
           showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
-          // ** ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST! **
+          li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
+
+          // ** LATER ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST! **
 
           ulTracks.appendChild(li);
         });
 
-        // if (results.albums && results.albums.items.length > 0)
-        //   {
-        // results.albums.items.forEach((album) => {
-        //   const li = document.createElement("li");
-        //   const div = document.createElement("div"); // For the image
-        //   const img = document.createElement("img");
-
-        // Create a <div> for the text and append it
-        // const textDivSong1 = document.createElement("div");
-        // const textDivSong2 = document.createElement("div");
-        // textDivSong1.textContent = `${album.items[0].name}`;
-        // textDivSong2.textContent = `By: ${album.artists[0].name}`;
-        // li.append(textDivSong1, textDivSong2);
-
-        // const textDivAlbum1 = document.createElement("div");
-        // const textDivAlbum2 = document.createElement("div");
-        // const textDivAlbum3 = document.createElement("div");
-        // const textDivAlbum4 = document.createElement("div");
-        // textDivAlbum1.textContent = `${album.name}`;
-        // textDivAlbum2.textContent = `By: ${album.artists[0].name}`;
-        // textDivAlbum3.textContent = `Release date: ${album.release_date}`;
-        // textDivAlbum4.textContent = `Album tracks number: ${album.total_tracks}`;
-
-        // const textDiv = document.createElement("div");
-        // textDiv.textContent = `${album.name} - Released: ${album.release_date}`;
-        // textDiv.classList.add("result-item-name");
-        // li.appendChild(textDiv);
-
-        // li.append(
-        //   textDivAlbum1,
-        //   textDivAlbum2,
-        //   textDivAlbum3,
-        //   textDivAlbum4
-        // );
-
-        // li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
-        // showMoreButton.textContent = `Track list`; // NEW - SHOW-MORE BUTTON
-        // showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
-        // showMoreButton.setAttribute("id", "tracklist-button");
-
         // Append the list to the results container:
         resultsContainer.appendChild(ulTracks);
+
+        // Scroll to the results container to focus on the tracklist:
+        document.getElementById("search-results").scrollIntoView({ behavior: "smooth", block: "start" });
+
       } catch (error) {
         console.error("Error fetching tracks:", error);
         displayMessage(resultsContainer, "Error fetching track list.");

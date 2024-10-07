@@ -63,7 +63,7 @@ app.get("/", (req, res) => {
 // Global variable for storing access token (initially has no value):
 let accessToken = null;
 let tokenExpirationTime = null; // New variable to track expiration time of the access token
-let isFetchingToken = false;  // New variable for tracking the status of token fetching
+let isFetchingToken = false; // New variable for tracking the status of token fetching
 
 // Asyncronous function to fetch access token (async - await terminology):
 // function sends a POST request to Spotify API to retrieve an OAuth access token.
@@ -74,7 +74,7 @@ async function getAccessToken() {
     return accessToken; // returns the already existing token, if still valid
   }
 
-  // Function that checks if the token is already in the process of being fetched 
+  // Function that checks if the token is already in the process of being fetched
   // (so we can prevent sending a 2nd API-request and getting another access token, if the user types in input-field faster, than the first request was finished)
   if (isFetchingToken) {
     // If the token is already in the process of fetching, wait until it is finished
@@ -82,13 +82,13 @@ async function getAccessToken() {
       const checkToken = setInterval(() => {
         if (!isFetchingToken) {
           clearInterval(checkToken);
-          resolve(accessToken);  // returns fetched access token
+          resolve(accessToken); // returns fetched access token
         }
-      }, 100);  // interval checks every 100ms
+      }, 100); // interval checks every 100ms
     });
   }
 
-  isFetchingToken = true;  // token is already in the process of being fetched = true
+  isFetchingToken = true; // token is already in the process of being fetched = true
 
   // URLSearchParams creates an object, which manages with URL-encoded parameters which should be sent in the body of our POST request.
   const params = new URLSearchParams();
@@ -118,7 +118,7 @@ async function getAccessToken() {
   // Date.now() - function returns current timestamp in milliseconds.
   // tokenExpirationTime: Calculates and stores the exact time / timestamp (in milliseconds) when the token will expire. This allows checking that the token is still valid before it is used in subsequent requests.
 
-  isFetchingToken = false;  // fetching of the token is completed.
+  isFetchingToken = false; // fetching of the token is completed.
 
   /////////////////////////////////////////////////////////////
   function displayCurrentTime() {
@@ -131,7 +131,7 @@ async function getAccessToken() {
     const currentTime = `${hours.toString().padStart(2, "0")}:${minutes
       .toString()
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-      // function padStart() is used to reach needed number of characters, f.e. a 0 is added in front, if the number is single-digit. 
+    // function padStart() is used to reach needed number of characters, f.e. a 0 is added in front, if the number is single-digit.
 
     console.log("Current time:", currentTime);
   }
@@ -222,7 +222,7 @@ Add Item to Playback Queue */
 
 // *** market = country code, 2 letters. HR - Croatia, GB - United Kingdom, US - United states of America, DE - Germany, ES - Spain...
 
-// Backend defines an AOI-endpoint (call it /api/suggestions or /api/search or similar). 
+// Backend defines an AOI-endpoint (call it /api/suggestions or /api/search or similar).
 // When a request was sent from frontend to this endpoint, server is handling user request, fetching results, and returning them in json-format:
 app.get("/api/search", async (req, res) => {
   const query = req.query.q; // Korisnički unos
@@ -252,25 +252,33 @@ app.get("/api/search", async (req, res) => {
 });
 
 // Ruta za dohvaćanje informacija o albumu:
-app.get('/api/albums/:albumId/tracks', async (req, res) => {
-  const albumId = req.params.albumId;
+app.get("/api/albums/:id/tracks", async (req, res) => {
+  const albumId = req.params.id;
+
+  const accessToken = await getAccessToken(); // Dohvati access token
+
+  const searchUrl = `https://api.spotify.com/v1/albums/${albumId}/tracks`;
+
+    //   http GET https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks \
+    // Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
 
   try {
-    const response = await fetch(`https://api.spotify.com/v1/albums/${albumId}/tracks`, {
+    const response = await fetch(searchUrl, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${accessToken}` // Dodajte svoj pristupni token
-      }
+        Authorization: `Bearer ${accessToken}`, // Dodajte svoj pristupni token
+      },
     });
 
-  //   http GET https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks \
-  // Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
-
-    const tracksData = await response.json();
-    res.json(tracksData);
+    if (response.ok) {
+      const tracksData = await response.json();
+      res.json(tracksData); // return results as JSON-file
+    } else {
+      res.status(response.status).json({ error: "Search failed" });
+    }
   } catch (error) {
-    console.error('Error fetching tracks:', error);
-    res.status(500).send('Error fetching tracks');
+    console.error("Error fetching tracks:", error);
+    res.status(500).send("Error fetching tracks");
   }
 });
 
