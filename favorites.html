@@ -27,6 +27,7 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
     <header id="navigation" class="red header-style" class="flex-container">
       <div id="top-icon">
@@ -78,7 +79,10 @@
           <h3 class="shadow-text">Keep all your favorite music in one place</h3>
         </div>
       </div>
+    </div>
+    <!-- 1st form: Search: -->
 
+    
       <!-- 1st form: Search: -->
 
       <form
@@ -109,33 +113,6 @@
             </button>
           </div>
         </div>
-
-        <div>
-        <div >
-          <p>Search by category:</p>
-        </div>
-
-        <div>
-          <p><label for="artist">Artist:</label></p>
-          <p>
-            <input type="text" id="artist" name="artist"  />
-          </p>
-        </div>
-
-        <div class="flex-item" id="second-input">
-          <p><label for="song">Song:</label></p>
-          <p>
-            <input type="text" id="song" name="song" />
-          </p>
-        </div>
-
-        <div class="flex-item" id="third-input">
-          <p><label for="album"> Album:</label></p>
-          <p>
-            <input type="text" id="album" name="album" />
-          </p>
-        </div>
-      </div>
 
       </form>
 
@@ -239,6 +216,29 @@
         </div>
       </div>
     </div>
-    <script src="/index.js"></script>
+
+
+    <script src="/favorites.js"></script>
   </body>
 </html>
+
+
+<!-- dodati drugačiju pozadinu ili drugačiji format za My playlists, tako da se rezlikuje od Home pagea što više -->
+
+<!-- 
+Cijeli favorites.JS je isti kao index.JS, samo je ovo zakomentirano jer je radilo probleme, budući da smo te inpute maknuli iz Search-forma:
+(bio je error u console-logu vezna uz točno taj event-listener):
+
+ // Event-listener za praćenje unosa u sva tri ova polja s posebnim kategorijama:
+    // [artistInput, songInput, albumInput].forEach((input) => {
+    //   input.addEventListener("input", () => {
+    //     const query = input.value.trim();
+    //     if (query.length > 0) {
+    //       fetchSuggestions2(query);
+    //     } else {
+    //       resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
+    //     }
+    //   });
+    // });
+
+-->

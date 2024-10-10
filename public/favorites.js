@@ -659,16 +659,16 @@
     });
 
     // Event-listener za praćenje unosa u sva tri ova polja s posebnim kategorijama:
-    [artistInput, songInput, albumInput].forEach((input) => {
-      input.addEventListener("input", () => {
-        const query = input.value.trim();
-        if (query.length > 0) {
-          fetchSuggestions2(query);
-        } else {
-          resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
-        }
-      });
-    });
+    // [artistInput, songInput, albumInput].forEach((input) => {
+    //   input.addEventListener("input", () => {
+    //     const query = input.value.trim();
+    //     if (query.length > 0) {
+    //       fetchSuggestions2(query);
+    //     } else {
+    //       resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
+    //     }
+    //   });
+    // });
 
     // Load lists from localStorage on init:
     function loadLists() {
