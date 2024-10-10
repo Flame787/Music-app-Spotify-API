@@ -60,6 +60,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
+app.get("/favorites", (req, res) => {
+  res.sendFile(path.join(__dirname + "/favorites.html"));
+});
+
 // Global variable for storing access token (initially has no value):
 let accessToken = null;
 let tokenExpirationTime = null; // New variable to track expiration time of the access token

@@ -42,10 +42,10 @@
       <nav id="navbar">
         <div id="nav-list">
           <button class="button nav-button">
-            <a href="/index.html" class="ancor-style">Home</a>
+            <a href="/" class="ancor-style">Home</a>
           </button>
           <button class="button nav-button">
-            <a href="/favorites.html" class="ancor-style">My lists</a>
+            <a href="/favorites" class="ancor-style">Playlists</a>
           </button>
 
           <button class="dropdown-toggle button nav-button">Theme</button>
@@ -75,15 +75,18 @@
       <div id="first-container">
         <div class="visible-title1 title-theme" id="head-title">
           <h1>Music player</h1>
-          <h3 class="shadow-text">
-            Explore music and create your playlists
-          </h3>
+          <h3 class="shadow-text">Explore music and create your playlists</h3>
         </div>
       </div>
 
       <!-- 1st form: Search: -->
-  
-      <form action="" method="get" id="search-form" class="form flex-container form-theme">
+
+      <form
+        action=""
+        method="get"
+        id="search-form"
+        class="form flex-container form-theme"
+      >
         <div class="flex-item-big">
           <div id="zero-input">
             <p><label for="search-all-input">Search all:</label></p>
@@ -108,48 +111,29 @@
         </div>
 
         <div class="flex-item-big flex-container">
-            <p> Search by category:</p>
-            
-          </div>
-            <div class="flex-item" id="first-input">
-              <p><label for="artist">Artist:</label></p>
-              <p>
-                <input
-                  type="text"
-                  id="artist"
-                  name="artist"
-                  class="input-color"
-                />
-              </p>
+          <p>Search by category:</p>
+        </div>
 
-            </div>
+        <div class="flex-item" id="first-input">
+          <p><label for="artist">Artist:</label></p>
+          <p>
+            <input type="text" id="artist" name="artist" class="input-color" />
+          </p>
+        </div>
 
-            <div class="flex-item" id="second-input">
-             
-                <p><label for="song">Song:</label></p>
-                <p>
-                  <input
-                    type="text"
-                    id="song"
-                    name="song"
-                    class="input-color"
-                  />
-                </p>
+        <div class="flex-item" id="second-input">
+          <p><label for="song">Song:</label></p>
+          <p>
+            <input type="text" id="song" name="song" class="input-color" />
+          </p>
+        </div>
 
-            </div>
-
-              <div class="flex-item" id="third-input">
-                <p><label for="album"> Album:</label></p>
-                <p>
-                  <input
-                    type="text"
-                    id="album"
-                    name="album"
-                    class="input-color"
-                  />
-                </p>
-
-              </div>
+        <div class="flex-item" id="third-input">
+          <p><label for="album"> Album:</label></p>
+          <p>
+            <input type="text" id="album" name="album" class="input-color" />
+          </p>
+        </div>
 
         <!-- <div id="submit-button" class="flex-item">
           <p id="empty"></p>
@@ -165,13 +149,12 @@
 
       <!-- 2nd form - Results of the Search: -->
 
-      <form action="" method="get"  class="form flex-container form-theme">
-
-        <div class="flex-item" >
+      <form action="" method="get" class="form flex-container form-theme">
+        <div class="flex-item">
           <p id="search-results" tabindex="0">Results:</p>
           <div id="results-container" class="flex-container-results">
             <!-- <ol class="flex-container-ol"> -->
-              <!-- ovdje se formira lista s rednim brojevima (ol), u kojoj su podsekcije:
+            <!-- ovdje se formira lista s rednim brojevima (ol), u kojoj su podsekcije:
                Artists:
                ...
                Albums:
@@ -192,14 +175,13 @@
             <!-- </ol> -->
           </div>
         </div>
-
       </form>
 
       <h2>Currently playing:</h2>
 
       <!-- 3rd form: Music player + Rating songs/albums and Adding them to the current list -->
 
-      <form action="" method="get"  class="form flex-container form-theme">
+      <form action="" method="get" class="form flex-container form-theme">
         <div class="flex-item" id="music-player">
           <div id="music-wrapper">
             <audio controls>
