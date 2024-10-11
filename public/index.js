@@ -559,11 +559,10 @@
         titleTracks2.textContent = `Album by: ${albumArtist}`;
         titleTracks2.classList.add("result-category");
         titleSmall.textContent = `Track list:`;
-        
 
         // ?? trebamo li drugačiji (kraći, općenitiji) endpoint?? - https://api.spotify.com/v1/albums/{id} - možda da to uzmemo kao generalni 2. endpoint i za tracks?
 
-       // displaying album cover picture before all tracks:
+        // displaying album cover picture before all tracks:
         if (albumImageUrl) {
           img.src = albumImageUrl;
         } else {
@@ -577,10 +576,10 @@
 
         ulTracks.appendChild(titleTracks1);
         ulTracks.appendChild(titleTracks2);
-        ulTracks.appendChild(div);  // appenda se div sa slikom covera albuma
+        ulTracks.appendChild(div); // appenda se div sa slikom covera albuma
         ulTracks.appendChild(titleSmall);
 
-        // Loop through each track and add it to the list:
+        // Loop through each track and add it to the displayed list:
         tracksData.items.forEach((track) => {
           const li = document.createElement("li");
           const div = document.createElement("div");
@@ -590,7 +589,10 @@
 
           const playButton = document.createElement("button");
           playButton.textContent = `Play  ▶`; // NEW - PLAY-BUTTON
-          playButton.classList.add("play-button");
+          playButton.classList.add("play-button", "play-starter");
+          // NEW!!:
+          // playButton.setAttribute("data-track-id", track.id); // Attach track ID to button
+          playButton.setAttribute("data-preview-url", track.preview_url); // Attach track ID to button
 
           const showMoreButton = document.createElement("button");
           showMoreButton.textContent = `Add to playlist`; // NEW - SHOW-MORE BUTTON
@@ -598,11 +600,11 @@
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
           li.appendChild(div);
-          li.appendChild(playButton);  // NEW! PLAYBUTTON ON INDIVIDUAL TRACKS!
+          li.appendChild(playButton); // NEW! PLAYBUTTON ON INDIVIDUAL TRACKS!
           li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
 
-          // ** LATER ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST! 
-          // (define which multiple variables it passes to the function Add to playlist) 
+          // ** LATER ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST!
+          // (define which multiple variables it passes to the function Add to playlist)
           // - f.e. track.name, albumName, albumArtist, albumImageUrl, track.duration_ms, track.is_playable (true / false)
 
           ulTracks.appendChild(li);
@@ -611,13 +613,92 @@
         // Append the list to the results container:
         resultsContainer.appendChild(ulTracks);
 
-        // Scroll to the results container to focus on the tracklist:
-        document.getElementById("search-results").scrollIntoView({ behavior: "smooth", block: "start" });
+        /* Dodavanje event-listenera na sve Play-buttone i ikone: */
 
+        // eventlistener dati play-buttonu i svakoj play-ikoni putem klase "play-starter":
+        const playStarters = document.querySelectorAll(".play-starter");
+
+        playStarters.forEach((playSymbol) => {
+          playSymbol.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent default button behavior
+
+            // focus on audio-player:
+            document
+              .getElementById("audio-player")
+              .scrollIntoView({ behavior: "smooth", block: "start" });
+
+            // Get the track ID from the clicked button
+            // const trackId = playSymbol.getAttribute("data-track-id");
+
+            // playTrack(
+            //   trackId // passes track.id value to the next function which will use it
+            // );
+
+            // Get the preview URL from the clicked button
+            const previewUrl = playSymbol.getAttribute("data-preview-url");
+
+            // console.log("Function playTrack tries to play the track with this id:", track.id, track.name);
+            // console.log(
+            //   "Function playTrack tries to play the track with this url:",
+            //   previewUrl
+            // );
+
+            if (previewUrl) {
+              console.log("Playing track preview from URL:", previewUrl);
+
+              // Call playTrack with the preview URL
+              playTrack(previewUrl);
+            } else {
+              console.error("No preview URL available for this track.");
+            }
+          });
+        });
+
+        // Scroll to the results container to focus on the tracklist:
+        document
+          .getElementById("search-results")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
       } catch (error) {
         console.error("Error fetching tracks:", error);
         displayMessage(resultsContainer, "Error fetching track list.");
       }
+    }
+
+    /* FOR NOW, THIS CODE CAN ONLY PLAY PREVIEW SONGS, AND NOT ALL SONGS EVEN HAVE A PREVIEW.
+
+    Playing track preview from URL: undefined.
+    GET http://localhost:3000/undefined 404 (Not Found)Understand this error
+index.js:696 Error playing track: NotSupportedError: Failed to load because no supported source was found.
+
+    STEPS: 
+    - correct the code so that at least some tracks with preview can be played - OR:
+    - warn Cu that selected song doesn't have preview - if this is the case - OR:
+    - Set up & Include the Spotify Web Playback SDK (already a Premium user and have access token),
+    then it is possible to play full songs (device_id also used...)
+    
+    */
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    // Function to play the selected track:
+    function playTrack(previewUrl) {
+      const audioPlayer = document.getElementById("audio-player");
+
+      // Set the source of the audio player to the selected track URL
+      audioPlayer.src = previewUrl;
+
+      // Load the new track (required if you're changing the src dynamically)
+      audioPlayer.load();
+
+      // Automatically play the track after loading
+      audioPlayer
+        .play()
+        .then(() => {
+          console.log("Track is playing");
+        })
+        .catch((error) => {
+          console.error("Error playing track:", error);
+        });
     }
 
     // ____________________________________________________________
@@ -644,7 +725,9 @@
         console.log("Query:", query);
         await displaySearchResults(query); // Koristi fetchSearchResults unutar displaySearchResults
         // document.getElementById("search-results").focus(); // Focus on the results-container
-        document.getElementById("search-results").scrollIntoView({ behavior: "smooth", block: "start" });
+        document
+          .getElementById("search-results")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
         displayMessage(formContainer, "Please enter your query.");
       }
@@ -735,11 +818,7 @@
 
     // doraditi logiku Search funkcije !!! - što se dohvaća pomoću API-ja i kako se prikazuje
 
-    // doraditi Play-funkciju:
-
-    function playSong(event) {
-      event.preventDefault();
-    }
+    // _________________________________________________________________________________________________
 
     // Creating new task / new item on a submit/play-list:
     function createTask(artist, song, album, rating, time) {
@@ -793,18 +872,18 @@
       document.body.classList.add("theme0");
       // new task (item) added on the add-button click:
       submitToListButton.addEventListener("click", addTask);
-      buttonPlay.addEventListener("click", playSong);
+      // buttonPlay.addEventListener("click", playSong);
       loadLists();
     };
 
     // ***** Call init function when the DOM is fully loaded
-// document.addEventListener("DOMContentLoaded", this.init.bind(this));
+    // document.addEventListener("DOMContentLoaded", this.init.bind(this));
 
-// Set initial theme when the page loads
-document.addEventListener("DOMContentLoaded", function() {
-  const defaultTheme = "theme0"; // Set your default theme here
-  changeTheme(defaultTheme);
-});
+    // Set initial theme when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+      const defaultTheme = "theme0"; // Set your default theme here
+      changeTheme(defaultTheme);
+    });
 
     // add button FavoriteButton:
     function addFavoriteButton(itemCardDiv) {
@@ -1006,10 +1085,41 @@ document.addEventListener("DOMContentLoaded", function() {
 + dati dodatni id buttonu Add to playlist (za Songs-rezultate) - DONE -> id: "tracklist-button"
 - prevent default
 - dodati event listener
-- pjesme se dodaju na donju Playlistu koju se može dalje obrađivati, te na 2. stranicu: My playlists (i kasnije možda čak spremaju u bazu)
+- pjesme se dodaju na donju trenutno aktivnu Playlistu koju se može dalje obrađivati, te na 2. stranicu: My playlists (i kasnije možda čak spremaju u bazu)
+
+- na 2. stranici (Favorites) pjesma iz aktualne playliste se može dodati u bilo koju već postojeću playlistu, ili se može kreirati nova playlista:
+
+"NEW SONG" 
+- 1. ADD TO AN EXISTING PLAYLIST -> 2. CHOOSE... (DROPDOWN OF ALL PLAYLIST NAMES) - 3. ADD TRACK -> 4. info se pojavi (običan tekst): TRACK ADDED.
+/ - 1. ADD TO A NEW PLAYLIST -> 2. NAME: _____________ - 3. SAVE PLAYLIST -> 4. info se pojavi (običan tekst): TRACK ADDED.
+
+
+
 
 + Play button transparent image preko slike - podesiti da se pojavi kad se hovera preko bilo kojeg dijela li (list itema), 
 tako da cijeli list item ima opciju hover, a ne samo img - DONE
+
+Spotify’s Player API - https://engineering.atspotify.com/2022/04/spotifys-player-api/
+
+Get Playback State: https://developer.spotify.com/documentation/web-api/reference/get-information-about-the-users-current-playback
+
+Get Playback State
+Transfer Playback
+Get Available Devices
+Get Currently Playing Track
+Start/Resume Playback
+Pause Playback
+Skip To Next
+Skip To Previous
+Seek To Position
+Set Repeat Mode
+Set Playback Volume
+Toggle Playback Shuffle
+Get Recently Played Tracks
+Get the User's Queue
+Add Item to Playback Queue
+
+
 
 - napravi funkciju playSong() koja ima ove podfunkcije:
 - event-listener kad se klikne na bilo koji dio cijelog li (list itema), pokrene se player

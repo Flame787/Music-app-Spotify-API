@@ -255,7 +255,7 @@ app.get("/api/search", async (req, res) => {
   }
 });
 
-// Ruta za dohvaćanje informacija o albumu:
+// Ruta za dohvaćanje informacija o albumu - koristi se za funkciju 'handleTrackListButtonClick' u index.js-u (prikaz pjesama s albuma):
 app.get("/api/albums/:id/tracks", async (req, res) => {
   const albumId = req.params.id;
 
@@ -263,8 +263,8 @@ app.get("/api/albums/:id/tracks", async (req, res) => {
 
   const searchUrl = `https://api.spotify.com/v1/albums/${albumId}/tracks`;
 
-    //   http GET https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks \
-    // Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
+  //   http GET https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks \
+  // Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
 
   try {
     const response = await fetch(searchUrl, {
@@ -282,11 +282,104 @@ app.get("/api/albums/:id/tracks", async (req, res) => {
     }
   } catch (error) {
     console.error("Error fetching tracks:", error);
-    res.status(500).send("Error fetching tracks");
+    res.status(500).send("Error fetching album tracks");
   }
 });
 
-// Ruta za dohvaćanje informacija o artistu
+// Ruta za dohvaćanje informacija o tracku / pjesmi - koristi track.id, koji nam treba dalje za Player (ako ćemo to trebati):
+app.get("/api/tracks/:id", async (req, res) => {
+  const trackId = req.params.id;
+
+  const accessToken = await getAccessToken(); // Dohvati access token
+
+  const searchUrl = `https://api.spotify.com/v1/tracks/${trackId}`;
+
+  try {
+    const response = await fetch(searchUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`, // Dodajte svoj pristupni token
+      },
+    });
+
+    if (response.ok) {
+      const songData = await response.json();
+      res.json(songData); // return results as JSON-file
+    } else {
+      res.status(response.status).json({ error: "Track cannot be fetched" });
+    }
+  } catch (error) {
+    console.error("Error fetching track:", error);
+    res.status(500).send("Error fetching chosen track");
+  }
+});
+
+// Ruta za korištenje Spotify Playera - pokazuje koja pjesma trenutno svira (currently playing):
+app.get("/api/me/player/currently-playing", async (req, res) => {
+  // const playback = req.track.id;
+
+  const accessToken = await getAccessToken(); // Dohvati access token
+
+  const searchUrl = `https://api.spotify.com/v1/me/player/currently-playing`;
+
+  try {
+    const response = await fetch(searchUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`, // Dodajte svoj pristupni token
+      },
+    });
+    if (response.ok) {
+      const playingTrack = await response.json();
+      res.json(playingTrack); // return results as JSON-file
+    } else {
+      res
+        .status(response.status)
+        .json({ error: "Failed to fetch currently playing track" });
+    }
+  } catch (error) {
+    console.error("Error fetching track:", error);
+    res.status(500).send("Error fetching currently playing song");
+  }
+});
+
+
+// Ruta za korištenje Spotify Playera - za sviranje neke pjesme koristi njen track.id:
+app.get("/api/me/player/play", async (req, res) => {
+  const playback = req.track.id;
+
+  const accessToken = await getAccessToken(); // Dohvati access token
+
+  const searchUrl = `https://api.spotify.com/v1/me/player/play`;
+
+  try {
+    const response = await fetch(searchUrl, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${accessToken}`, // Dodajte svoj pristupni token
+      },
+      body: {
+        context_uri: `{"uris": ["spotify:track:${playback}"]}`,
+      }
+    });
+
+    if (response.ok) {
+      const playingTrack = await response.json();
+      res.json(playingTrack); // return results as JSON-file
+    } else {
+      res
+        .status(response.status)
+        .json({ error: "Failed to play the track." });
+    }
+  } catch (error) {
+    console.error("Error fetching track:", error);
+    res.status(500).send("Failed to play the track.");
+  }
+});
+
+// ---------------------------------------------------------------------------------
+
+// Ruta za dohvaćanje informacija o artistu - ne koristi se zasad?
 app.get("/artist/:id", async (req, res) => {
   const artistId = req.params.id; // ID artista iz URL-a
   const accessToken = await getAccessToken(); // Dohvati access token
