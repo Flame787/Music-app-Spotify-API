@@ -703,6 +703,84 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
 
     // ____________________________________________________________
 
+    /* NOVO - 13.10. - PLAYER SDK: */
+
+    // async function fetchUserAccessToken() {
+    //   try {
+    //     const response = await fetch("/api/get-user-access-token");
+    //     if (!response.ok) {
+    //       throw new Error("Failed to fetch access token");
+    //     }
+    //     const data = await response.json();
+    //     return data.token; // Vraća userAccessToken
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
+
+    // // Kada je SDK spreman, dohvatite userAccessToken:
+    // window.onSpotifyWebPlaybackSDKReady = async () => {
+    //   const token = await fetchUserAccessToken();
+
+    //   if (token) {
+    //     const player = new Spotify.Player({
+    //       name: "Web Playback SDK",
+    //       getOAuthToken: (cb) => {
+    //         cb(token);
+    //       },
+    //       volume: 0.5,
+    //     });
+
+    //     // Ostatak koda za inicijalizaciju playera
+    //   } else {
+    //     console.error("User access token not found");
+    //   }
+    // };
+
+    this.init = async () => {
+      const token = await fetchUserAccessToken();
+      if (token) {
+        this.initializeSpotifyPlayer(token); // Pozovite funkciju za inicijalizaciju Spotify playera
+      } else {
+        console.error("User access token not found");
+      }
+    };
+
+    this.initializeSpotifyPlayer = (token) => {
+      const player = new Spotify.Player({
+        name: "Web Playback SDK",
+        getOAuthToken: (cb) => {
+          cb(token);
+        },
+        volume: 0.5,
+      });
+
+      // Ostatak koda za inicijalizaciju playera
+      player.connect();
+    };
+
+    /* 
+    server.js:
+
+    app.get("/api/get-user-access-token", (req, res) => {
+      if (userAccessToken) {
+        res.json({ token: userAccessToken });
+      } else {
+        res.status(401).send("Unauthorized"); // Ako token ne postoji, vrati status 401
+      }
+    });
+    Dohvaćanje userAccessToken: Kada se korisnik prijavi putem Spotify OAuth i dobije userAccessToken, 
+    on se pohranjuje u varijablu userAccessToken.
+    Nova API ruta: Nova ruta (/api/get-user-access-token) vraća userAccessToken klijentu ako je postavljen. 
+    U suprotnom, vraća status 401 (Unauthorized).
+
+    index.js:
+    Klijentska funkcija: U index.js, fetchUserAccessToken šalje zahtjev serveru da dobije token. 
+    Kada se SDK učita, poziva se ta funkcija kako bi se dobio token koji se koristi za inicijalizaciju Spotify playera.
+     */
+
+    // _____________________________________________________________
+
     // Praćenje submita u search-form-u i prikaz search-rezultata:
 
     searchButton.addEventListener("click", (event) => {

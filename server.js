@@ -37,7 +37,10 @@ const PORT = process.env.PORT || 3000;
 const clientId = process.env.client_id;
 const clientSecret = process.env.client_secret;
 
-const redirect_uri = "http://localhost:3000";
+// very important that the callback link (redirect page after user login) is: localhost:3000/callback 
+// -> and this link should be also set in Spotify Dashboard as the only redirect-link!
+const redirect_uri = "http://localhost:3000/callback";
+
 const auth_endpoint = "https://accounts.spotify.com/authorize";
 const response_type = "token";
 
@@ -48,26 +51,102 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true })); // Parsing the body of our request into URL
 
-// Define main route- only for testing:
-// app.get("/", (req, res) => {
-//   res.send("Hello, World!");
-// });
+// Global variable for storing access token (initially has no value):
+let clientAccessToken = null; // token from Client Credentials Flow, for searching public data
+let userAccessToken = null; // NEW: Authorization Code Flow, to control User Playback SDK, approach user data etc.
+
+// Define main routes:
 // SEND-request can be only ONE! - nothing else can be returned after that. Next SEND-requests following after this one will not be realised!
 
-// Route for serving 'index.html':
-// If index.html is in the same map as server.js (on the same 'hierarchy level'), the path to index.html should look like this:
+// Route for serving 'index.html' (home page: '/'):
+// If index.html is in the same map as server.js (on the same 'hierarchy level'), the path should look like this:
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/index.html"));
+
+  console.log("Checking userAccessToken...");
+  console.log("Current userAccessToken:", userAccessToken); // Ispis trenutnog tokena
+
+  if (!userAccessToken) {
+    // Ako nema pristupnog tokena, preusmjeri korisnika na login
+    console.log("No userAccessToken found, trying to reach login page");
+    res.redirect("/login");
+  } else {
+    // Ako već postoji dohvaćen token za Player SDK, posluži početnu stranicu
+    console.log("User access token found:", userAccessToken);
+    res.sendFile(path.join(__dirname + "/index.html"));
+  }
 });
+
+// NEW: Ruta za Login - potrebna da bi se koristio Player SDK:
+
+app.get("/login", (req, res) => {
+  // const auth_endpoint = "https://accounts.spotify.com/authorize"; // Spotify authorization endpoint, već je definirano gore. 
+  const scopes =
+    "streaming user-read-email user-read-private user-modify-playback-state user-read-playback-state"; // Scopes for the permissions we need
+  const authUrl = `${auth_endpoint}?response_type=code&client_id=${clientId}&scope=${encodeURIComponent(
+    scopes
+  )}&redirect_uri=${encodeURIComponent(redirect_uri)}`;
+  res.redirect(authUrl);
+});
+
+// NEW:  Ruta za Callback (slanje user access tokena nakon autorizacije na Spotify stranici):
+
+app.get("/callback", async (req, res) => {
+  const code = req.query.code;
+
+  if (!code) {
+    console.log("Authorization code not found.");
+    return res.send("Authorization code not found.");
+  }
+
+  const params = new URLSearchParams();
+  params.append("grant_type", "authorization_code");
+  params.append("code", code);
+  params.append("redirect_uri", redirect_uri);
+  params.append("client_id", clientId);
+  params.append("client_secret", clientSecret);
+
+  try {
+    const response = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params,
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      userAccessToken = data.access_token;
+      console.log("User access token received:", userAccessToken); 
+      res.redirect("/");  // redirects to home page
+    } else {
+      console.log(`Error fetching access token: ${data.error}`);
+      res.send(`Error fetching access token: ${data.error}`);
+    }
+  } catch (error) {
+    console.log(`Error during token request: ${error.message}`);
+    res.send(`Error during token request: ${error.message}`);
+  }
+});
+
+// Nova ruta za dohvaćanje userAccessTokena:
+app.get("/api/get-user-access-token", (req, res) => {
+  if (userAccessToken) {
+    res.json({ token: userAccessToken });
+  } else {
+    res.status(401).send("Unauthorized"); // Ako token ne postoji, vrati status 401
+  }
+});
+
+// Autentifikacija radi, userAccessToken se dodjeljuje. Ako je user već ulogiran, automatski redirecta na home page bez potrebe za prijavom.
+// Testirano paralelno u 2 browsera (Chrome i Mozilla).
+// Čak i kad se izlogiram iz Spotify app-a, userAccessToken je i dalje aktivan.
+// Isti userAccessToken se prikazuje u server-konzoli za oba browsera (console-loga se kad god reloadamo stranicu u nekom browseru).
+// Znači da je userAccessToken dodijeljen na temelju device_id, koji je isti neovisno u kojem browseru se koristi, i traje i dalje (cca sat vremena).
+
 
 app.get("/favorites", (req, res) => {
   res.sendFile(path.join(__dirname + "/favorites.html"));
 });
 
-// Global variable for storing access token (initially has no value):
-let clientAccessToken = null; // token from Client Credentials Flow, for searching public data
-
-let userAccessToken = null;    // NEW: Authorization Code Flow, to control User Playback SDK, approach user data etc.
 
 let tokenExpirationTime = null; // New variable to track expiration time of the access token
 let isFetchingToken = false; // New variable for tracking the status of token fetching
@@ -119,7 +198,7 @@ async function getAccessToken() {
     // if response.ok is false (which means the response is an HTTP status code of 4xx or 5xx), then an error has occurred.
     throw new Error(`Error fetching token: ${data.error}`);
   }
-  clientAccessToken = data.access_token; // ff the request was successful, the access_token field, which contains the access token, is extracted from the response (data).
+  clientAccessToken = data.access_token; // if the request was successful, the access_token field, which contains the access token, is extracted from the response (data).
   tokenExpirationTime = Date.now() + data.expires_in * 1000; // The API returns the data expires_in, which represents the number of seconds the token is valid (eg 3600 seconds, which is 1 hour) -
   // Date.now() - function returns current timestamp in milliseconds.
   // tokenExpirationTime: Calculates and stores the exact time / timestamp (in milliseconds) when the token will expire. This allows checking that the token is still valid before it is used in subsequent requests.
@@ -345,7 +424,6 @@ app.get("/api/me/player/currently-playing", async (req, res) => {
   }
 });
 
-
 // Ruta za korištenje Spotify Playera - za sviranje neke pjesme koristi njen track.id:
 app.get("/api/me/player/play", async (req, res) => {
   const playback = req.track.id;
@@ -362,16 +440,14 @@ app.get("/api/me/player/play", async (req, res) => {
       },
       body: {
         context_uri: `{"uris": ["spotify:track:${playback}"]}`,
-      }
+      },
     });
 
     if (response.ok) {
       const playingTrack = await response.json();
       res.json(playingTrack); // return results as JSON-file
     } else {
-      res
-        .status(response.status)
-        .json({ error: "Failed to play the track." });
+      res.status(response.status).json({ error: "Failed to play the track." });
     }
   } catch (error) {
     console.error("Error fetching track:", error);
