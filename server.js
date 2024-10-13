@@ -65,17 +65,20 @@ app.get("/favorites", (req, res) => {
 });
 
 // Global variable for storing access token (initially has no value):
-let accessToken = null;
+let clientAccessToken = null; // token from Client Credentials Flow, for searching public data
+
+let userAccessToken = null;    // NEW: Authorization Code Flow, to control User Playback SDK, approach user data etc.
+
 let tokenExpirationTime = null; // New variable to track expiration time of the access token
 let isFetchingToken = false; // New variable for tracking the status of token fetching
 
 // Asyncronous function to fetch access token (async - await terminology):
 // function sends a POST request to Spotify API to retrieve an OAuth access token.
 // the request uses 'client_credentials'- grant type to authenticate the app.
-// the access token is stored in a global variable 'accessToken'.
+// the access token is stored in a global variable 'accessToken' -> later renamed to 'clientAccessToken'.
 async function getAccessToken() {
-  if (accessToken && Date.now() < tokenExpirationTime) {
-    return accessToken; // returns the already existing token, if still valid
+  if (clientAccessToken && Date.now() < tokenExpirationTime) {
+    return clientAccessToken; // returns the already existing token, if still valid
   }
 
   // Function that checks if the token is already in the process of being fetched
@@ -86,7 +89,7 @@ async function getAccessToken() {
       const checkToken = setInterval(() => {
         if (!isFetchingToken) {
           clearInterval(checkToken);
-          resolve(accessToken); // returns fetched access token
+          resolve(clientAccessToken); // returns fetched access token
         }
       }, 100); // interval checks every 100ms
     });
@@ -108,8 +111,7 @@ async function getAccessToken() {
     body: params, // as the body of the request, we send the URL-encoded parameters (params) that we previously defined (grant_type, client_id, and client_secret).
   });
 
-  // Log access token
-
+  // Log access token:
   const data = await response.json(); // takes the response received from the API, and calls the json() method,
   // which parses the response body from JSON format into a JavaScript object.
   // Since JSON parsing is asynchronous, await is used to stop the function until the JSON is parsed.
@@ -117,7 +119,7 @@ async function getAccessToken() {
     // if response.ok is false (which means the response is an HTTP status code of 4xx or 5xx), then an error has occurred.
     throw new Error(`Error fetching token: ${data.error}`);
   }
-  accessToken = data.access_token; // ff the request was successful, the access_token field, which contains the access token, is extracted from the response (data).
+  clientAccessToken = data.access_token; // ff the request was successful, the access_token field, which contains the access token, is extracted from the response (data).
   tokenExpirationTime = Date.now() + data.expires_in * 1000; // The API returns the data expires_in, which represents the number of seconds the token is valid (eg 3600 seconds, which is 1 hour) -
   // Date.now() - function returns current timestamp in milliseconds.
   // tokenExpirationTime: Calculates and stores the exact time / timestamp (in milliseconds) when the token will expire. This allows checking that the token is still valid before it is used in subsequent requests.
@@ -142,20 +144,20 @@ async function getAccessToken() {
   displayCurrentTime();
   /////////////////////////////////////////////////////////////
 
-  console.log("Access Token:", data.access_token);
+  console.log("Client Access Token:", clientAccessToken);
   console.log("Expiration Timestamp:", tokenExpirationTime);
-  return accessToken; // an accessToken is returned, allowing the function caller to use that token for future API requests.
+  return clientAccessToken; // an accessToken is returned, allowing the function caller to use that token for future API requests.
 }
 
 // Endpoint to provide the fetched access token - function defines Express.js route /api/token which enables returning the Spotify access token via API.
 // defining route:
 app.get("/api/token", async (req, res) => {
   try {
-    if (!accessToken || Date.now() >= tokenExpirationTime) {
+    if (!clientAccessToken || Date.now() >= tokenExpirationTime) {
       // Check if access token is missing, or if it's expired
-      accessToken = await getAccessToken(); // 1. If there is no token (either already expired, or not existing yet), it calls the already defined function 'getAccessToken'
+      clientAccessToken = await getAccessToken(); // 1. If there is no token (either already expired, or not existing yet), it calls the already defined function 'getAccessToken'
     }
-    res.json({ accessToken }); // 2. Otherwise, if there is already a token fetched, this function returns the token as JSON
+    res.json({ clientAccessToken }); // 2. Otherwise, if there is already a token fetched, this function returns the token as JSON
   } catch (error) {
     // 3. option: error handling
     console.error("Error fetching access token:", error);
@@ -232,7 +234,7 @@ app.get("/api/search", async (req, res) => {
   const query = req.query.q; // Korisnički unos
   const type = req.query.type || "artist,album,track"; // Tip pretrage, npr. artist, album, track
 
-  const accessToken = await getAccessToken(); // Dohvati access token
+  const clientAccessToken = await getAccessToken(); // Dohvati access token
 
   // URL za pretragu na Spotify API-ju
   const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=9`;
@@ -240,7 +242,7 @@ app.get("/api/search", async (req, res) => {
   try {
     const response = await fetch(searchUrl, {
       method: "GET",
-      headers: { Authorization: `Bearer ${accessToken}` },
+      headers: { Authorization: `Bearer ${clientAccessToken}` },
     });
 
     if (response.ok) {
@@ -259,7 +261,7 @@ app.get("/api/search", async (req, res) => {
 app.get("/api/albums/:id/tracks", async (req, res) => {
   const albumId = req.params.id;
 
-  const accessToken = await getAccessToken(); // Dohvati access token
+  const clientAccessToken = await getAccessToken(); // Dohvati access token
 
   const searchUrl = `https://api.spotify.com/v1/albums/${albumId}/tracks`;
 
@@ -270,7 +272,7 @@ app.get("/api/albums/:id/tracks", async (req, res) => {
     const response = await fetch(searchUrl, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${accessToken}`, // Dodajte svoj pristupni token
+        Authorization: `Bearer ${clientAccessToken}`, // Dodajte svoj pristupni token
       },
     });
 
@@ -290,7 +292,7 @@ app.get("/api/albums/:id/tracks", async (req, res) => {
 app.get("/api/tracks/:id", async (req, res) => {
   const trackId = req.params.id;
 
-  const accessToken = await getAccessToken(); // Dohvati access token
+  const clientAccessToken = await getAccessToken(); // Dohvati access token
 
   const searchUrl = `https://api.spotify.com/v1/tracks/${trackId}`;
 
@@ -298,7 +300,7 @@ app.get("/api/tracks/:id", async (req, res) => {
     const response = await fetch(searchUrl, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${accessToken}`, // Dodajte svoj pristupni token
+        Authorization: `Bearer ${clientAccessToken}`, // Dodajte svoj pristupni token
       },
     });
 
@@ -318,7 +320,7 @@ app.get("/api/tracks/:id", async (req, res) => {
 app.get("/api/me/player/currently-playing", async (req, res) => {
   // const playback = req.track.id;
 
-  const accessToken = await getAccessToken(); // Dohvati access token
+  const clientAccessToken = await getAccessToken(); // Dohvati access token
 
   const searchUrl = `https://api.spotify.com/v1/me/player/currently-playing`;
 
@@ -326,7 +328,7 @@ app.get("/api/me/player/currently-playing", async (req, res) => {
     const response = await fetch(searchUrl, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${accessToken}`, // Dodajte svoj pristupni token
+        Authorization: `Bearer ${clientAccessToken}`, // Dodajte svoj pristupni token
       },
     });
     if (response.ok) {
@@ -348,7 +350,7 @@ app.get("/api/me/player/currently-playing", async (req, res) => {
 app.get("/api/me/player/play", async (req, res) => {
   const playback = req.track.id;
 
-  const accessToken = await getAccessToken(); // Dohvati access token
+  const clientAccessToken = await getAccessToken(); // Dohvati access token
 
   const searchUrl = `https://api.spotify.com/v1/me/player/play`;
 
@@ -356,7 +358,7 @@ app.get("/api/me/player/play", async (req, res) => {
     const response = await fetch(searchUrl, {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${accessToken}`, // Dodajte svoj pristupni token
+        Authorization: `Bearer ${clientAccessToken}`, // Dodajte svoj pristupni token
       },
       body: {
         context_uri: `{"uris": ["spotify:track:${playback}"]}`,
@@ -382,14 +384,14 @@ app.get("/api/me/player/play", async (req, res) => {
 // Ruta za dohvaćanje informacija o artistu - ne koristi se zasad?
 app.get("/artist/:id", async (req, res) => {
   const artistId = req.params.id; // ID artista iz URL-a
-  const accessToken = await getAccessToken(); // Dohvati access token
+  const clientAccessToken = await getAccessToken(); // Dohvati access token
 
   // URL za dohvaćanje informacija o artistu
   const artistUrl = `https://api.spotify.com/v1/artists/${artistId}`;
 
   const response = await fetch(artistUrl, {
     method: "GET",
-    headers: { Authorization: `Bearer ${accessToken}` }, // Postavi access token
+    headers: { Authorization: `Bearer ${clientAccessToken}` }, // Postavi access token
   });
 
   if (response.ok) {
@@ -403,14 +405,14 @@ app.get("/artist/:id", async (req, res) => {
 // Ruta za pretragu pjesama (npr. API-call to Spotify API):
 app.get("/api/search", async (req, res) => {
   const query = req.query.q; // Pretraga pjesme
-  const token = await getAccessToken(); // Dohvati access token
+  const clientAccessToken = await getAccessToken(); // Dohvati access token
 
   // URL za pretragu na Spotify API-ju
   const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=track`;
 
   const response = await fetch(searchUrl, {
     method: "GET",
-    headers: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${clientAccessToken}` },
   });
 
   if (response.ok) {

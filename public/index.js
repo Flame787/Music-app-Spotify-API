@@ -1005,7 +1005,7 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
   window.addEventListener("load", todo.init);
 })();
 
-// 13.10. RADI PREVIEW - npr.   Judas Priest - Album: Screaming for Vengeance
+// 13.10.2024. RADI PREVIEW, svira na audio-playeru - npr.   Judas Priest - Album: Screaming for Vengeance / Led Zeppelin - Album: Led Zeppelin
 
 // Error kod dodavanja novih itema na favorite listu:
 // index.js:338 Uncaught TypeError: Cannot read properties of null (reading 'textContent')
