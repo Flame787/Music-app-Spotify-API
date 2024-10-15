@@ -742,7 +742,7 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
       if (token) {
         this.initializeSpotifyPlayer(token); // Pozovite funkciju za inicijalizaciju Spotify playera
       } else {
-        console.error("User access token not found");
+        console.error("User access token is not valid or not found");
       }
     };
 
@@ -755,8 +755,12 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
         volume: 0.5,
       });
 
-      // Ostatak koda za inicijalizaciju playera
+      // Spajanje playera:
       player.connect();
+
+      // - - - - - - - - - - - - - - - - - - - - - - - - - - NOVO 15.10. - - - - - - - - - - - - - - - - - -
+
+     
     };
 
     /* 

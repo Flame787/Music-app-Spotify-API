@@ -54,27 +54,106 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parsing the body of our r
 // Global variable for storing access token (initially has no value):
 let clientAccessToken = null; // token from Client Credentials Flow, for searching public data
 let userAccessToken = null; // NEW: Authorization Code Flow, to control User Playback SDK, approach user data etc.
+let userRefreshToken = null; // Pohranjujemo refresh token
+let userTokenExpirationTime = null;
 
 // Define main routes:
 // SEND-request can be only ONE! - nothing else can be returned after that. Next SEND-requests following after this one will not be realised!
 
 // Route for serving 'index.html' (home page: '/'):
 // If index.html is in the same map as server.js (on the same 'hierarchy level'), the path should look like this:
-app.get("/", (req, res) => {
 
-  console.log("Checking userAccessToken...");
-  console.log("Current userAccessToken:", userAccessToken); // Ispis trenutnog tokena
+// OVO ĆEMO SAD ZA PROBU ZAKOMENTIRATI:
+// app.get("/", (req, res) => {
 
-  if (!userAccessToken) {
-    // Ako nema pristupnog tokena, preusmjeri korisnika na login
-    console.log("No userAccessToken found, trying to reach login page");
-    res.redirect("/login");
+//   console.log("Checking userAccessToken...");
+//   console.log("Current userAccessToken:", userAccessToken); // Ispis trenutnog tokena
+
+//   if (!userAccessToken) {
+//     // Ako nema pristupnog tokena, preusmjeri korisnika na login
+//     console.log("No userAccessToken found, trying to reach login page");
+//     res.redirect("/login");
+//   } else {
+//     // Ako već postoji dohvaćen token za Player SDK, posluži početnu stranicu
+//     console.log("User access token found:", userAccessToken);
+//     res.sendFile(path.join(__dirname + "/index.html"));
+//   }
+// });
+
+// novo 15.10.:
+
+
+// app.get("/set-token", (req, res) => {
+//   // Pretpostavimo da ovdje postavljaš token i spremaš vrijeme kada istječe
+//   const expiresIn = 3600; // Access token traje 3600 sekundi (1 sat)
+//   userTokenExpirationTime = Date.now() + expiresIn * 1000;
+//   userAccessToken = "yourAccessTokenHere";
+  
+//   res.send("Token postavljen!");
+// });
+
+
+
+
+const refreshUserAccessToken = async () => {
+  // const refreshToken = userAccessToken; // Tvoj refresh token
+  // const clientId = clientId;
+  // const clientSecret = clientSecret;
+  
+  const response = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Basic ' + Buffer.from(clientId + ':' + clientSecret).toString('base64'),
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: new URLSearchParams({
+      'grant_type': 'refresh_token',
+      'refresh_token': userRefreshToken
+    })
+  });
+
+  const data = await response.json();
+  if (response.ok) {
+    console.log("New access token received:", data.access_token);
+
+    userAccessToken = data.access_token;
+    userTokenExpirationTime = Date.now() + data.expires_in * 1000; // Postavi vrijeme isteka
+    return data.access_token; // Vrati novi access token
+
   } else {
-    // Ako već postoji dohvaćen token za Player SDK, posluži početnu stranicu
-    console.log("User access token found:", userAccessToken);
-    res.sendFile(path.join(__dirname + "/index.html"));
+    throw new Error("Failed to refresh access token");
   }
+};
+
+// Funkcija koja provjerava je li access token istekao:
+const isUserTokenExpired = () => {
+  return Date.now() >= tokenExpirationTime;
+};
+
+
+app.get("/", async (req, res) => {
+  console.log("Checking userAccessToken...");
+
+  if (!userAccessToken || isUserTokenExpired()) {
+    console.log("Access token is missing or expired, refreshing token...");
+    
+    try {
+      // Osvježi token ako je istekao
+      const newToken = await refreshUserAccessToken(); // Funkcija za osvježavanje tokena
+      userAccessToken = newToken;
+      tokenExpirationTime = Date.now() + 3600 * 1000; // Postavi novi rok isteka
+    } catch (error) {
+      console.error("Error refreshing token:", error);
+      return res.redirect("/login"); // Ako osvježavanje ne uspije, preusmjeri na login page
+    }
+  }
+
+  // Ako je token valjan, posluži početnu stranicu:
+  console.log("User access token found:", userAccessToken);
+  res.sendFile(path.join(__dirname + "/index.html"));
 });
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - -- - 
 
 // NEW: Ruta za Login - potrebna da bi se koristio Player SDK:
 
@@ -115,11 +194,20 @@ app.get("/callback", async (req, res) => {
     const data = await response.json();
     if (response.ok) {
       userAccessToken = data.access_token;
+
+       // Provjera postojanja refresh tokena
+       if (data.refresh_token) {
+        userRefreshToken = data.refresh_token; // Pohrani refresh token
+      }
+      // userRefreshToken = data.refresh_token; // Pohrani refresh token
+      userTokenExpirationTime = Date.now() + data.expires_in * 1000; // Postavi vrijeme isteka tokena
+
       console.log("User access token received:", userAccessToken); 
+      console.log("Token expires in:", data.expires_in, "seconds");
       res.redirect("/");  // redirects to home page
     } else {
-      console.log(`Error fetching access token: ${data.error}`);
-      res.send(`Error fetching access token: ${data.error}`);
+      console.log(`Error fetching access token: ${response.status} - ${data.error}`);
+      res.send(`Error fetching access token: ${data.error_description}`);
     }
   } catch (error) {
     console.log(`Error during token request: ${error.message}`);
