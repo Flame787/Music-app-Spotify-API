@@ -737,8 +737,27 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
     //   }
     // };
 
+    const fetchUserAccessToken = async () => {
+      try {
+          const response = await fetch("/api/get-user-access-token");
+          if (!response.ok) {
+              throw new Error("Failed to fetch access token");
+          }
+          const data = await response.json();
+          return data.token; // Vraća userAccessToken
+      } catch (error) {
+          console.error("Error fetching user access token:", error);
+          return null; // Vraća null ako dođe do greške
+      }
+  };
+
+    // funkcija poziva fetchUserAccessToken() da dobije access token,
+    // Ako je token validan, poziva: this.initializeSpotifyPlayer(token) za inicijalizaciju Spotify playera:
     this.init = async () => {
+      console.log("Inicijalizacija započeta...");
+      console.log("Spotify Web Playback SDK učitan 1:", window.Spotify);
       const token = await fetchUserAccessToken();
+      console.log("Access Token:", token);
       if (token) {
         this.initializeSpotifyPlayer(token); // Pozovite funkciju za inicijalizaciju Spotify playera
       } else {
@@ -746,7 +765,11 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
       }
     };
 
+    // funkcija initializeSpotifyPlayer kreira instancu Spotify.Player s imenom "Web Playback SDK"
+    // i prosljeđuje getOAuthToken funkciju, koja poziva callback sa tokenom:
     this.initializeSpotifyPlayer = (token) => {
+      console.log("Inicijalizacija Spotify playera s tokenom:", token); // Ispis tokena
+
       const player = new Spotify.Player({
         name: "Web Playback SDK",
         getOAuthToken: (cb) => {
@@ -756,11 +779,31 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
       });
 
       // Spajanje playera:
-      player.connect();
+      // player.connect();
+
+      player.connect().then((success) => {
+        if (success) {
+          console.log(
+            "The Web Playback SDK successfully connected to Spotify!"
+          );
+        } else {
+          console.error("Failed to connect to Spotify.");
+        }
+      });
 
       // - - - - - - - - - - - - - - - - - - - - - - - - - - NOVO 15.10. - - - - - - - - - - - - - - - - - -
 
-     
+      // Preslušavanje eventa kad je player spreman
+      player.addListener("ready", ({ device_id }) => {
+        console.log("Ready with Device ID", device_id);
+        // Sada možeš koristiti device_id za upravljanje reprodukcijom
+        this.device_id = device_id;
+      });
+
+      // Preslušavanje errora
+      player.addListener("not_ready", ({ device_id }) => {
+        console.log("Device ID has gone offline", device_id);
+      });
     };
 
     /* 
@@ -1084,7 +1127,33 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
 
   const todo = new Todo();
 
-  window.addEventListener("load", todo.init);
+  // window.addEventListener("load", todo.init);
+
+  // Dodaj event listener za load:
+  window.addEventListener("load", () => {
+    // Inicijaliziraj SDK
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      console.log("Spotify Web Playback SDK učitan 2:", window.Spotify);
+      todo.init(); // Poziv init nakon što se SDK učita
+    };
+
+    // U slučaju da se SDK ne učita, možeš dodati fallback
+    setTimeout(() => {
+      if (typeof Spotify === "undefined") {
+        console.error("Spotify SDK nije učitan nakon 10 sekundi.");
+      }
+    }, 10000); // Provjeri nakon 10 sekundi
+
+    // Provjeri učitavanje SDK-a
+    // const checkSDKLoaded = setInterval(() => {
+    //   if (typeof Spotify !== "undefined") {
+    //     clearInterval(checkSDKLoaded); // Zaustavi provjeru ako je SDK učitan
+    //     todo.init(); // Pozovi init ako je SDK učitan
+    //   } else {
+    //     console.warn("Spotify SDK is not loaded yet. Retrying...");
+    //   }
+    // }, 1000); // Provjeri svake sekunde
+  });
 })();
 
 // 13.10.2024. RADI PREVIEW, svira na audio-playeru - npr.   Judas Priest - Album: Screaming for Vengeance / Led Zeppelin - Album: Led Zeppelin
