@@ -147,41 +147,13 @@
 
       </form>
 
-      <!-- 2nd form - Results of the Search: -->
-
-      <form action="" method="get" class="form flex-container form-theme">
-        <div class="flex-item">
-          <p id="search-results" tabindex="0">Results:</p>
-          <div id="results-container" class="flex-container-results">
-            <!-- <ol class="flex-container-ol"> -->
-            <!-- ovdje se formira lista s rednim brojevima (ol), u kojoj su podsekcije:
-               Artists:
-               ...
-               Albums:
-               ...
-               Songs:
-               ...
-               Svaka podsekcija sadrži neki broj (limit) list-itema (npr. do max 10 rezultata).
-               Za albume i pjesme - svaki pojedini rezultat (li) dobiva button Play na kraju svojeg retka!
-               Svaki artist ima ove informacije: artist, genres, slika. 
-               Klikom na button pored (Find music ili nešto slično) otvara se samo taj artist (nestaju ostali rezultati), 
-               prikažu se redom nazivi svih albuma, 
-               i popularne pjesme (sa slikama covera pripadajućih albuma). Pored svih albuma i pjesama su buttoni Play.
-               
-               Svaki album ima ove informacije: artist, ime albuma, broj pjesama, trajanje albuma, godina izdanja, cover slika albuma.
-               Svaka pjesma ima ove informacije: artist, ime albuma na kojem se nalazi, trajanje pjesme, godina izdanja albuma, cover slika albuma.
-
-              -->
-            <!-- </ol> -->
-          </div>
-        </div>
-      </form>
 
       <h2>Currently playing:</h2>
 
       <!-- 3rd form: Music player + Rating songs/albums and Adding them to the current list -->
 
       <form action="" method="get" class="form flex-container form-theme">
+
         <div class="flex-item" id="music-player">
           <div id="music-wrapper">
             <audio controls id="audio-player">
@@ -228,6 +200,38 @@
           </button>
         </div>
       </form>
+
+      <!-- 2nd form - Results of the Search: -->
+
+      <form action="" method="get" class="form flex-container form-theme">
+        <div class="flex-item">
+          <p id="search-results" tabindex="0">Results:</p>
+          <div id="results-container" class="flex-container-results">
+            <!-- <ol class="flex-container-ol"> -->
+            <!-- ovdje se formira lista s rednim brojevima (ol), u kojoj su podsekcije:
+               Artists:
+               ...
+               Albums:
+               ...
+               Songs:
+               ...
+               Svaka podsekcija sadrži neki broj (limit) list-itema (npr. do max 10 rezultata).
+               Za albume i pjesme - svaki pojedini rezultat (li) dobiva button Play na kraju svojeg retka!
+               Svaki artist ima ove informacije: artist, genres, slika. 
+               Klikom na button pored (Find music ili nešto slično) otvara se samo taj artist (nestaju ostali rezultati), 
+               prikažu se redom nazivi svih albuma, 
+               i popularne pjesme (sa slikama covera pripadajućih albuma). Pored svih albuma i pjesama su buttoni Play.
+               
+               Svaki album ima ove informacije: artist, ime albuma, broj pjesama, trajanje albuma, godina izdanja, cover slika albuma.
+               Svaka pjesma ima ove informacije: artist, ime albuma na kojem se nalazi, trajanje pjesme, godina izdanja albuma, cover slika albuma.
+
+              -->
+            <!-- </ol> -->
+          </div>
+        </div>
+      </form>
+
+      
     </div>
     <div id="results">
       <div class="visible-title2 title-theme">
