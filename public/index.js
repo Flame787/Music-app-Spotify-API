@@ -664,36 +664,109 @@
               console.log("Album:", previewAlbum);
               console.log("Cover:", previewCover);
 
-              // showing cover of currently playing track's album:
+              // Showing cover of currently playing track's album:
 
               const musicWrapper = document.getElementById("music-wrapper");
+
+              // Provjerava postoji li već slika albuma i uklanja je ako postoji:
+              const existingAlbumCover =
+                musicWrapper.querySelector(".album-cover-image");
+              if (existingAlbumCover) {
+                existingAlbumCover.remove(); // Ukloni postojeću sliku albuma
+              }
+
               const currentlyPlayingCover = document.createElement("div");
+              currentlyPlayingCover.classList.add("album-cover-image");
               const img = document.createElement("img");
-        const div = document.createElement("div");
+              const div = document.createElement("div");
 
-        // displaying album cover picture (if existing):
-        if (previewCover) {
-          img.src = previewCover;
-        } else {
-          img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
-        }
-        img.alt = `${previewAlbum} Album Cover`;
-        img.classList.add("result-image");
+              // Displaying album cover picture (if existing):
+              if (previewCover) {
+                img.src = previewCover;
+              } else {
+                img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+              }
+              img.alt = `${previewAlbum} Album Cover`;
+              img.classList.add("result-image");
 
-        div.classList.add("image-container");
-        div.appendChild(img);
-        currentlyPlayingCover.appendChild(div);
-        musicWrapper.insertBefore(currentlyPlayingCover, musicWrapper.firstChild);
+              div.classList.add("image-container");
+              div.appendChild(img);
+              // currentlyPlayingCover.innerHTML = "";
+              currentlyPlayingCover.appendChild(div);
+              musicWrapper.insertBefore(
+                currentlyPlayingCover,
+                musicWrapper.firstChild
+              );
 
-        ////////////////////////////////////////////////////////////////////////////
+              // Add info about currently playing song into audio-player:
+              const currentTrackData = document.getElementById("current-play");
+              // OČISTI prethodne podatke o pjesmi:
+              currentTrackData.innerHTML = "";
+
+              const currentTrackInfo = document.createElement("div");
+
+              const currentTrackInfoDiv1 = document.createElement("div");
+              const currentTrackInfoDiv2 = document.createElement("div");
+              const currentTrackInfoDiv3 = document.createElement("div");
+              const currentTrackInfoDiv4 = document.createElement("div");
+              const currentTrackInfoDiv5 = document.createElement("div");
+
+              currentTrackInfoDiv1.textContent = `${previewName}`;
+              currentTrackInfoDiv2.textContent = `By:`;
+              currentTrackInfoDiv3.textContent = `${previewArtist}`;
+              currentTrackInfoDiv4.textContent = `Album:`;
+              currentTrackInfoDiv5.textContent = `${previewAlbum}`;
+
+              currentTrackInfoDiv1.classList.add("result-item-name"); // bold and bigger font for the song name
+
+              currentTrackInfo.appendChild(currentTrackInfoDiv1);
+              currentTrackInfo.appendChild(currentTrackInfoDiv2);
+              currentTrackInfo.appendChild(currentTrackInfoDiv3);
+              currentTrackInfo.appendChild(currentTrackInfoDiv4);
+              currentTrackInfo.appendChild(currentTrackInfoDiv5);
+
+              currentTrackInfo.classList.add("current-track");
+              currentTrackData.appendChild(currentTrackInfo);
+
+              ////////////////////////////////////////////////////////////////////////////
 
               // show preview's track name, artist, album name and cover:
             } else {
+
+              // const noPreview = document.createElement("div");
+              // noPreview.textContent = `No preview URL available for this track.`;
+              // noPreview.classList.add("warning-message");
+              // currentTrackData.appendChild(noPreview);
+          //     const noPreview = document.createElement("div");
+          // currentPlay = document.getElementById("current-play"); 
+          // noPreview.textContent = `No preview URL available for this track.`;
+          // noPreview.classList.add("warning-message");
+          // currentPlay.appendChild(noPreview);
+
               console.error("No preview URL available for this track.");
               console.log("Track:", previewName);
               console.log("Artist:", previewArtist);
               console.log("Album:", previewAlbum);
               console.log("Cover:", previewCover);
+
+              // Add info about currently playing song into audio-player:
+              const currentTrackData = document.getElementById("current-play");
+              const currentTrackInfo = document.createElement("div");
+
+              const currentTrackInfoDiv1 = document.createElement("div");
+              const currentTrackInfoDiv2 = document.createElement("div");
+              const currentTrackInfoDiv3 = document.createElement("div");
+
+              currentTrackInfoDiv1.textContent = `${previewName}`;
+              currentTrackInfoDiv2.textContent = `Artist: ${previewArtist}`;
+              currentTrackInfoDiv3.textContent = `Album: ${previewAlbum}`;
+
+              currentTrackInfo.appendChild(currentTrackInfoDiv1);
+              currentTrackInfo.appendChild(currentTrackInfoDiv2);
+              currentTrackInfo.appendChild(currentTrackInfoDiv3);
+
+              currentTrackInfo.classList.add("current-track");
+              currentTrackData.appendChild(currentTrackInfo);
             }
           });
         });
@@ -729,6 +802,12 @@
           console.log("Track is playing");
         })
         .catch((error) => {
+          const noPreview = document.createElement("div");
+          currentPlay = document.getElementById("current-play"); 
+          noPreview.textContent = `No preview URL available for this track.`;
+          noPreview.classList.add("warning-message");
+          currentPlay.appendChild(noPreview);
+
           console.error("Error playing track:", error);
         });
     }
