@@ -704,6 +704,8 @@
               currentTrackData.innerHTML = "";
 
               const currentTrackInfo = document.createElement("div");
+              // urediti taj div, dati mu neke bordere ili tamniju pozadinu
+              // smanjiti širinu playera na stranici (i svih formsa - preširoki su)
 
               const currentTrackInfoDiv1 = document.createElement("div");
               const currentTrackInfoDiv2 = document.createElement("div");
@@ -718,6 +720,8 @@
               currentTrackInfoDiv5.textContent = `${previewAlbum}`;
 
               currentTrackInfoDiv1.classList.add("result-item-name"); // bold and bigger font for the song name
+              currentTrackInfoDiv3.classList.add("result-item-name");
+              currentTrackInfoDiv5.classList.add("result-item-name");
 
               currentTrackInfo.appendChild(currentTrackInfoDiv1);
               currentTrackInfo.appendChild(currentTrackInfoDiv2);
@@ -804,7 +808,7 @@
         .catch((error) => {
           const noPreview = document.createElement("div");
           currentPlay = document.getElementById("current-play"); 
-          noPreview.textContent = `No preview URL available for this track.`;
+          noPreview.textContent = `No preview available for this track.`;
           noPreview.classList.add("warning-message");
           currentPlay.appendChild(noPreview);
 

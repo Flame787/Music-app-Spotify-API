@@ -1313,6 +1313,10 @@ li .image-container img {
   width: 50%;
 }
 
+.form-player .flex-item {
+  flex-basis: 40%;
+}
+
 @media (max-width: 1540px) {
   #nav-list button:last-child {
     margin-right: 150px;
