@@ -37,7 +37,7 @@ const PORT = process.env.PORT || 3000;
 const clientId = process.env.client_id;
 const clientSecret = process.env.client_secret;
 
-// very important that the callback link (redirect page after user login) is: localhost:3000/callback 
+// very important that the callback link (redirect page after user login) is: localhost:3000/callback
 // -> and this link should be also set in Spotify Dashboard as the only redirect-link!
 const redirect_uri = "http://localhost:3000/callback";
 
@@ -82,34 +82,32 @@ let userTokenExpirationTime = null;
 
 // novo 15.10.:
 
-
 // app.get("/set-token", (req, res) => {
 //   // Pretpostavimo da ovdje postavljaš token i spremaš vrijeme kada istječe
 //   const expiresIn = 3600; // Access token traje 3600 sekundi (1 sat)
 //   userTokenExpirationTime = Date.now() + expiresIn * 1000;
 //   userAccessToken = "yourAccessTokenHere";
-  
+
 //   res.send("Token postavljen!");
 // });
-
-
-
 
 const refreshUserAccessToken = async () => {
   // const refreshToken = userAccessToken; // Tvoj refresh token
   // const clientId = clientId;
   // const clientSecret = clientSecret;
-  
-  const response = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
+
+  const response = await fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
     headers: {
-      'Authorization': 'Basic ' + Buffer.from(clientId + ':' + clientSecret).toString('base64'),
-      'Content-Type': 'application/x-www-form-urlencoded'
+      Authorization:
+        "Basic " +
+        Buffer.from(clientId + ":" + clientSecret).toString("base64"),
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: new URLSearchParams({
-      'grant_type': 'refresh_token',
-      'refresh_token': userRefreshToken
-    })
+      grant_type: "refresh_token",
+      refresh_token: userRefreshToken,
+    }),
   });
 
   const data = await response.json();
@@ -119,7 +117,6 @@ const refreshUserAccessToken = async () => {
     userAccessToken = data.access_token;
     userTokenExpirationTime = Date.now() + data.expires_in * 1000; // Postavi vrijeme isteka
     return data.access_token; // Vrati novi access token
-
   } else {
     throw new Error("Failed to refresh access token");
   }
@@ -130,13 +127,12 @@ const isUserTokenExpired = () => {
   return Date.now() >= tokenExpirationTime;
 };
 
-
 app.get("/", async (req, res) => {
   console.log("Checking userAccessToken...");
 
   if (!userAccessToken || isUserTokenExpired()) {
     console.log("Access token is missing or expired, refreshing token...");
-    
+
     try {
       // Osvježi token ako je istekao
       const newToken = await refreshUserAccessToken(); // Funkcija za osvježavanje tokena
@@ -153,12 +149,12 @@ app.get("/", async (req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - -- - 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - -- -
 
 // NEW: Ruta za Login - potrebna da bi se koristio Player SDK:
 
 app.get("/login", (req, res) => {
-  // const auth_endpoint = "https://accounts.spotify.com/authorize"; // Spotify authorization endpoint, već je definirano gore. 
+  // const auth_endpoint = "https://accounts.spotify.com/authorize"; // Spotify authorization endpoint, već je definirano gore.
   const scopes =
     "streaming user-read-email user-read-private user-modify-playback-state user-read-playback-state"; // Scopes for the permissions we need
   const authUrl = `${auth_endpoint}?response_type=code&client_id=${clientId}&scope=${encodeURIComponent(
@@ -195,18 +191,20 @@ app.get("/callback", async (req, res) => {
     if (response.ok) {
       userAccessToken = data.access_token;
 
-       // Provjera postojanja refresh tokena
-       if (data.refresh_token) {
+      // Provjera postojanja refresh tokena
+      if (data.refresh_token) {
         userRefreshToken = data.refresh_token; // Pohrani refresh token
       }
       // userRefreshToken = data.refresh_token; // Pohrani refresh token
       userTokenExpirationTime = Date.now() + data.expires_in * 1000; // Postavi vrijeme isteka tokena
 
-      console.log("User access token received:", userAccessToken); 
+      console.log("User access token received:", userAccessToken);
       console.log("Token expires in:", data.expires_in, "seconds");
-      res.redirect("/");  // redirects to home page
+      res.redirect("/"); // redirects to home page
     } else {
-      console.log(`Error fetching access token: ${response.status} - ${data.error}`);
+      console.log(
+        `Error fetching access token: ${response.status} - ${data.error}`
+      );
       res.send(`Error fetching access token: ${data.error_description}`);
     }
   } catch (error) {
@@ -217,10 +215,15 @@ app.get("/callback", async (req, res) => {
 
 // Nova ruta za dohvaćanje userAccessTokena:
 app.get("/api/get-user-access-token", (req, res) => {
-  if (userAccessToken) {
-    res.json({ token: userAccessToken });
-  } else {
-    res.status(401).send("Unauthorized"); // Ako token ne postoji, vrati status 401
+  try {
+    if (userAccessToken) {
+      res.json({ token: userAccessToken });
+    } else {
+      res.status(401).send("Unauthorized"); // Ako token ne postoji, vrati status 401
+    }
+  } catch (error) {
+    console.error("Error fetching user access token:", error);
+    res.status(500).send("Internal Server Error"); // Vrati status 500 u slučaju greške
   }
 });
 
@@ -230,11 +233,9 @@ app.get("/api/get-user-access-token", (req, res) => {
 // Isti userAccessToken se prikazuje u server-konzoli za oba browsera (console-loga se kad god reloadamo stranicu u nekom browseru).
 // Znači da je userAccessToken dodijeljen na temelju device_id, koji je isti neovisno u kojem browseru se koristi, i traje i dalje (cca sat vremena).
 
-
 app.get("/favorites", (req, res) => {
   res.sendFile(path.join(__dirname + "/favorites.html"));
 });
-
 
 let tokenExpirationTime = null; // New variable to track expiration time of the access token
 let isFetchingToken = false; // New variable for tracking the status of token fetching

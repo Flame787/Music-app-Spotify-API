@@ -590,9 +590,14 @@
           const playButton = document.createElement("button");
           playButton.textContent = `Play  ▶`; // NEW - PLAY-BUTTON
           playButton.classList.add("play-button", "play-starter");
-          // NEW!!:
+          // Save important data about playing track via playButton attributes:
+          // (so they can be fetched later from the clicked button (playbutton / playSymbol): track URL, name, artist, album, cover):
           // playButton.setAttribute("data-track-id", track.id); // Attach track ID to button
-          playButton.setAttribute("data-preview-url", track.preview_url); // Attach track ID to button
+          playButton.setAttribute("data-preview-url", track.preview_url); // Attach track URL to button
+          playButton.setAttribute("data-preview-trackname", track.name); // Attach track name to button
+          playButton.setAttribute("data-preview-artist", albumArtist); // Attach artist to button
+          playButton.setAttribute("data-preview-album", albumName); // Attach album to button
+          playButton.setAttribute("data-preview-cover", albumImageUrl); // Attach track cover to button
 
           const showMoreButton = document.createElement("button");
           showMoreButton.textContent = `Add to playlist`; // NEW - SHOW-MORE BUTTON
@@ -622,9 +627,9 @@
           playSymbol.addEventListener("click", (event) => {
             event.preventDefault(); // Prevent default button behavior
 
-            // focus on audio-player:
+            // focus on audio-player (title above the audio-player):
             document
-              .getElementById("audio-player")
+              .getElementById("currently-playing")
               .scrollIntoView({ behavior: "smooth", block: "start" });
 
             // Get the track ID from the clicked button
@@ -634,22 +639,38 @@
             //   trackId // passes track.id value to the next function which will use it
             // );
 
-            // Get the preview URL from the clicked button
-            const previewUrl = playSymbol.getAttribute("data-preview-url");
+            // const currentTrackPlaying = document.getElementById("currently-playing").createElement("div");
 
-            // console.log("Function playTrack tries to play the track with this id:", track.id, track.name);
-            // console.log(
-            //   "Function playTrack tries to play the track with this url:",
-            //   previewUrl
-            // );
+            // Fetch the preview-URL from the clicked button (playbutton / playSymbol) + other data about playing track (artist, album, cover):
+
+            const previewUrl = playSymbol.getAttribute("data-preview-url"); // Attach track ID to button
+            const previewName = playSymbol.getAttribute(
+              "data-preview-trackname"
+            ); // Attach track name to button
+            const previewArtist = playSymbol.getAttribute(
+              "data-preview-artist"
+            ); // Attach artist to button
+            const previewAlbum = playSymbol.getAttribute("data-preview-album"); // Attach album to button
+            const previewCover = playSymbol.getAttribute("data-preview-cover"); // Attach track cover to button
 
             if (previewUrl) {
               console.log("Playing track preview from URL:", previewUrl);
 
               // Call playTrack with the preview URL
               playTrack(previewUrl);
+
+              console.log("Playing track:", previewName);
+              console.log("Artist:", previewArtist);
+              console.log("Album:", previewAlbum);
+              console.log("Cover:", previewCover);
+
+              // show preview's track name, artist, album name and cover:
             } else {
               console.error("No preview URL available for this track.");
+              console.log("Track:", previewName);
+              console.log("Artist:", previewArtist);
+              console.log("Album:", previewAlbum);
+              console.log("Cover:", previewCover);
             }
           });
         });
@@ -664,19 +685,7 @@
       }
     }
 
-    /* FOR NOW, THIS CODE CAN ONLY PLAY PREVIEW SONGS, AND NOT ALL SONGS EVEN HAVE A PREVIEW.
-
-    Playing track preview from URL: undefined.
-    GET http://localhost:3000/undefined 404 (Not Found)Understand this error
-index.js:696 Error playing track: NotSupportedError: Failed to load because no supported source was found.
-
-    STEPS: 
-    - correct the code so that at least some tracks with preview can be played - OR:
-    - warn Cu that selected song doesn't have preview - if this is the case - OR:
-    - Set up & Include the Spotify Web Playback SDK (already a Premium user and have access token),
-    then it is possible to play full songs (device_id also used...)
-    
-    */
+    /* FOR NOW, THIS CODE CAN ONLY PLAY PREVIEW SONGS, AND NOT ALL SONGS EVEN HAVE A PREVIEW  */
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -737,19 +746,75 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
     //   }
     // };
 
+    // SKRIVENO, ZA TEST:
+
+    // const fetchUserAccessToken = async () => {
+    //   console.log("Pokušavam dohvatiti access token");  // Provjeri radi li funkcija
+    //   try {
+    //     const response = await fetch("/api/get-user-access-token");
+    //     console.log("Odgovor sa servera:", response); // Provjeri što vraća server
+    //     if (!response.ok) {
+    //       throw new Error("Failed to fetch access token");
+    //     }
+    //     const data = await response.json();
+    //     console.log("Dohvaćen access token:", data.token); // Provjera tokena
+    //     return data.token; // Vraća userAccessToken
+    //   } catch (error) {
+    //     console.error("Error fetching user access token:", error);
+    //     return null; // Vraća null ako dođe do greške
+    //   }
+    // };
+
+    let userAccessToken = null;
+
     const fetchUserAccessToken = async () => {
+      // Prvo provjeri da li je token već dostupan:
+      if (userAccessToken) {
+        console.log("Dohvaćen existing access token:", userAccessToken);
+        return userAccessToken; // Vraća postojeći token ako je dostupan
+      }
+
+      console.log("Pokušavam dohvatiti access token"); // Provjeri radi li funkcija
       try {
+        // Pokušaj da dobiješ token preko /
+        const response = await fetch("/");
+        console.log("Odgovor sa servera:", response); // Provjeri što vraća server
+        if (!response.ok) {
+          throw new Error("Failed to fetch access token from main route");
+        }
+
+        // Ako je uspešan odgovor, možeš pretpostaviti da je token dostupan
+        // Ovde možeš dodatno obraditi odgovor i dobiti token iz JSON-a
+        const data = await response.json();
+        if (data.token) {
+          userAccessToken = data.token; // Postavi globalnu promenljivu
+          console.log("Dohvaćen access token:", userAccessToken); // Provjera tokena
+          return userAccessToken; // Vraća userAccessToken
+        }
+      } catch (error) {
+        console.error("Error fetching access token from main route:", error);
+        // Ako prvi pokušaj nije uspeo, probaj sa alternativnom rutom
+        try {
           const response = await fetch("/api/get-user-access-token");
+          console.log("Odgovor sa servera za alternativnu rutu:", response); // Provjeri što vraća server
           if (!response.ok) {
-              throw new Error("Failed to fetch access token");
+            throw new Error(
+              "Failed to fetch access token from alternative route"
+            );
           }
           const data = await response.json();
+          userAccessToken = data.token; // Postavi globalnu promenljivu
+          console.log("Dohvaćen access token sa alternative rute:", data.token); // Provjera tokena
           return data.token; // Vraća userAccessToken
-      } catch (error) {
-          console.error("Error fetching user access token:", error);
+        } catch (error) {
+          console.error(
+            "Error fetching user access token from alternative route:",
+            error
+          );
           return null; // Vraća null ako dođe do greške
+        }
       }
-  };
+    };
 
     // funkcija poziva fetchUserAccessToken() da dobije access token,
     // Ako je token validan, poziva: this.initializeSpotifyPlayer(token) za inicijalizaciju Spotify playera:
@@ -768,27 +833,15 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
     // funkcija initializeSpotifyPlayer kreira instancu Spotify.Player s imenom "Web Playback SDK"
     // i prosljeđuje getOAuthToken funkciju, koja poziva callback sa tokenom:
     this.initializeSpotifyPlayer = (token) => {
+      const self = this; // Spremaj kontekst 'this'
       console.log("Inicijalizacija Spotify playera s tokenom:", token); // Ispis tokena
-
+      // const token = data.access_token;
       const player = new Spotify.Player({
         name: "Web Playback SDK",
         getOAuthToken: (cb) => {
           cb(token);
         },
         volume: 0.5,
-      });
-
-      // Spajanje playera:
-      // player.connect();
-
-      player.connect().then((success) => {
-        if (success) {
-          console.log(
-            "The Web Playback SDK successfully connected to Spotify!"
-          );
-        } else {
-          console.error("Failed to connect to Spotify.");
-        }
       });
 
       // - - - - - - - - - - - - - - - - - - - - - - - - - - NOVO 15.10. - - - - - - - - - - - - - - - - - -
@@ -803,6 +856,31 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
       // Preslušavanje errora
       player.addListener("not_ready", ({ device_id }) => {
         console.log("Device ID has gone offline", device_id);
+      });
+
+      player.addListener("initialization_error", ({ message }) => {
+        console.error(message);
+      });
+
+      player.addListener("authentication_error", ({ message }) => {
+        console.error(message);
+      });
+
+      player.addListener("account_error", ({ message }) => {
+        console.error(message);
+      });
+
+      // Spajanje playera:
+      // player.connect();
+
+      player.connect().then((success) => {
+        if (success) {
+          console.log(
+            "The Web Playback SDK successfully connected to Spotify!"
+          );
+        } else {
+          console.error("Failed to connect to Spotify.");
+        }
       });
     };
 
@@ -1126,6 +1204,7 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
   // here ends Todo function.
 
   const todo = new Todo();
+  console.log("Instanca todo kreirana:", todo);
 
   // window.addEventListener("load", todo.init);
 
@@ -1134,7 +1213,9 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
     // Inicijaliziraj SDK
     window.onSpotifyWebPlaybackSDKReady = () => {
       console.log("Spotify Web Playback SDK učitan 2:", window.Spotify);
+
       todo.init(); // Poziv init nakon što se SDK učita
+      console.log("Pozvan todo.init()");
     };
 
     // U slučaju da se SDK ne učita, možeš dodati fallback
