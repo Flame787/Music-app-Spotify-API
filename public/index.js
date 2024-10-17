@@ -664,6 +664,29 @@
               console.log("Album:", previewAlbum);
               console.log("Cover:", previewCover);
 
+              // showing cover of currently playing track's album:
+
+              const musicWrapper = document.getElementById("music-wrapper");
+              const currentlyPlayingCover = document.createElement("div");
+              const img = document.createElement("img");
+        const div = document.createElement("div");
+
+        // displaying album cover picture (if existing):
+        if (previewCover) {
+          img.src = previewCover;
+        } else {
+          img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+        }
+        img.alt = `${previewAlbum} Album Cover`;
+        img.classList.add("result-image");
+
+        div.classList.add("image-container");
+        div.appendChild(img);
+        currentlyPlayingCover.appendChild(div);
+        musicWrapper.insertBefore(currentlyPlayingCover, musicWrapper.firstChild);
+
+        ////////////////////////////////////////////////////////////////////////////
+
               // show preview's track name, artist, album name and cover:
             } else {
               console.error("No preview URL available for this track.");
