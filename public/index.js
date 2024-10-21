@@ -8,11 +8,6 @@
     const searchButton = document.getElementById("submit-button");
     // const searchForm = document.getElementById("search-form");
 
-    // NOVO 20.10.:
-
-    this.device_id = null; // Globalna varijabla za device ID
-    this.player = null; // Globalna varijabla za Spotify Player
-
     // Navbar behavior:
 
     let prevScrollPos = window.scrollY;
@@ -427,7 +422,6 @@
     }
 
     // ------------ New function to fetch albums (discography) by artist name: ---------------------------------
-    // (dodatno proširivanje rezultata -> klikom na Discography button – prikažu se albumi (diskografija) selectanog autora
 
     async function handleDiscographyButtonClick(artistName) {
       const resultsContainer = document.getElementById("results-container");
@@ -529,9 +523,6 @@
     }
 
     // ------------- New function to display album's Track list based on album-id: ---------------------------
-    // (dodatno proširivanje rezultata -> klikom na 'Track list' button nekog albuma – prikažu se pjesme s tog albuma)
-
-    let currentTrackUri = null; // Globalna varijanta za trackUri, definirana izvan funkcije
 
     async function handleTrackListButtonClick(
       albumId,
@@ -597,16 +588,11 @@
           li.classList.add("result-item-name", "result-flex-item");
 
           const playButton = document.createElement("button");
-          playButton.textContent = `Play  ▶`; // NEW - PLAY-BUTTON beneath each Track
+          playButton.textContent = `Play  ▶`; // NEW - PLAY-BUTTON
           playButton.classList.add("play-button", "play-starter");
-          // Save important data about playing track via playButton attributes:
-          // (so they can be fetched later from the clicked button (playbutton / playSymbol): track URL, name, artist, album, cover):
-          playButton.setAttribute("data-track-id", track.id); // Attach track ID to button
-          playButton.setAttribute("data-preview-url", track.preview_url); // Attach track URL to button
-          playButton.setAttribute("data-preview-trackname", track.name); // Attach track name to button
-          playButton.setAttribute("data-preview-artist", albumArtist); // Attach artist to button
-          playButton.setAttribute("data-preview-album", albumName); // Attach album to button
-          playButton.setAttribute("data-preview-cover", albumImageUrl); // Attach track cover to button
+          // NEW!!:
+          // playButton.setAttribute("data-track-id", track.id); // Attach track ID to button
+          playButton.setAttribute("data-preview-url", track.preview_url); // Attach track ID to button
 
           const showMoreButton = document.createElement("button");
           showMoreButton.textContent = `Add to playlist`; // NEW - SHOW-MORE BUTTON
@@ -629,170 +615,44 @@
 
         /* Dodavanje event-listenera na sve Play-buttone i ikone: */
 
-        // Event-listener dati play-buttonu i svakoj play-ikoni putem klase "play-starter":
+        // eventlistener dati play-buttonu i svakoj play-ikoni putem klase "play-starter":
         const playStarters = document.querySelectorAll(".play-starter");
 
         playStarters.forEach((playSymbol) => {
           playSymbol.addEventListener("click", (event) => {
             event.preventDefault(); // Prevent default button behavior
 
-            // focus on audio-player (title above the audio-player):
+            // focus on audio-player:
             document
-              .getElementById("currently-playing")
+              .getElementById("audio-player")
               .scrollIntoView({ behavior: "smooth", block: "start" });
 
-            // Fetch the preview-URL from the clicked button (playbutton / playSymbol) + other data about playing track (artist, album, cover):
+            // Get the track ID from the clicked button
+            // const trackId = playSymbol.getAttribute("data-track-id");
 
-            const trackId = playSymbol.getAttribute("data-track-id"); // Attach track ID to button -> will be used for track URI in SDK player
-            const previewUrl = playSymbol.getAttribute("data-preview-url"); // Attach track preview url to button
-            const previewName = playSymbol.getAttribute(
-              "data-preview-trackname"
-            ); // Attach track name to button
-            const previewArtist = playSymbol.getAttribute(
-              "data-preview-artist"
-            ); // Attach artist to button
-            const previewAlbum = playSymbol.getAttribute("data-preview-album"); // Attach album to button
-            const previewCover = playSymbol.getAttribute("data-preview-cover"); // Attach track cover to button
+            // playTrack(
+            //   trackId // passes track.id value to the next function which will use it
+            // );
 
-            // Ako postoji previewUrl, sviramo taj link u audio-playeru:
-            // if (previewUrl) {
-            //   console.log("Playing track preview from URL:", previewUrl);
-            //   // Call playPreview with the preview URL
-            //   playPreview(previewUrl);
+            // Get the preview URL from the clicked button
+            const previewUrl = playSymbol.getAttribute("data-preview-url");
 
-            // Ako postoji cjelovit audiozapis odabrane pjesme, sviraj je:
-            // ** dodajemo formulu za trackUri:
-            const trackUri = `spotify:track:${trackId}`; // Kreiraš Spotify URI za pjesmu
-            console.log("Track URI:", trackUri);
+            // console.log("Function playTrack tries to play the track with this id:", track.id, track.name);
+            // console.log(
+            //   "Function playTrack tries to play the track with this url:",
+            //   previewUrl
+            // );
 
-            // ovaj dio se dohvaća i prikazuje u konzoli
-            if (trackUri) {
-              console.log(
-                "Fetched track URI (to be played via SDK Player):",
-                trackUri
-              );
+            if (previewUrl) {
+              console.log("Playing track preview from URL:", previewUrl);
 
-              // ove stvari ostaju iste, i dalje možemo na isti način dohvatiti podatke o tracku koji je izabran da svira (vrijedi isto kao i za preview):
-              console.log("Playing track:", previewName);
-              console.log("Artist:", previewArtist);
-              console.log("Album:", previewAlbum);
-              console.log("Cover:", previewCover);
-
-              // ** Logika prikaza informacija o trenutnoj pjesmi je i dalje ista (podaci su se prenijeli preko Play-buttona):
-
-              // Showing cover of currently playing track's album:
-              const musicWrapper = document.getElementById("music-wrapper");
-
-              // Provjerava postoji li već slika albuma i uklanja je ako postoji:
-              const existingAlbumCover =
-                musicWrapper.querySelector(".album-cover-image");
-              if (existingAlbumCover) {
-                existingAlbumCover.remove(); // Ukloni postojeću sliku albuma
-              }
-
-              const currentlyPlayingCover = document.createElement("div");
-              currentlyPlayingCover.classList.add("album-cover-image");
-              const img = document.createElement("img");
-              const div = document.createElement("div");
-
-              // Displaying album cover picture (if existing):
-              if (previewCover) {
-                img.src = previewCover;
-              } else {
-                img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
-              }
-              img.alt = `${previewAlbum} Album Cover`;
-              img.classList.add("result-image");
-
-              div.classList.add("image-container");
-              div.appendChild(img);
-              // currentlyPlayingCover.innerHTML = "";
-              currentlyPlayingCover.appendChild(div);
-              musicWrapper.insertBefore(
-                currentlyPlayingCover,
-                musicWrapper.firstChild
-              );
-
-              // Add info about currently playing song into audio-player:
-              const currentTrackData = document.getElementById("current-play");
-              // OČISTI prethodne podatke o pjesmi:
-              currentTrackData.innerHTML = "";
-
-              const currentTrackInfo = document.createElement("div");
-              // urediti taj div, dati mu neke bordere ili tamniju pozadinu
-              // smanjiti širinu playera na stranici (i svih formsa - preširoki su)
-
-              const currentTrackInfoDiv1 = document.createElement("div");
-              const currentTrackInfoDiv2 = document.createElement("div");
-              const currentTrackInfoDiv3 = document.createElement("div");
-              const currentTrackInfoDiv4 = document.createElement("div");
-              const currentTrackInfoDiv5 = document.createElement("div");
-
-              currentTrackInfoDiv1.textContent = `${previewName}`;
-              currentTrackInfoDiv2.textContent = `By:`;
-              currentTrackInfoDiv3.textContent = `${previewArtist}`;
-              currentTrackInfoDiv4.textContent = `Album:`;
-              currentTrackInfoDiv5.textContent = `${previewAlbum}`;
-
-              currentTrackInfoDiv1.classList.add("result-item-name"); // bold and bigger font for the song name
-              currentTrackInfoDiv3.classList.add("result-item-name");
-              currentTrackInfoDiv5.classList.add("result-item-name");
-
-              currentTrackInfo.appendChild(currentTrackInfoDiv1);
-              currentTrackInfo.appendChild(currentTrackInfoDiv2);
-              currentTrackInfo.appendChild(currentTrackInfoDiv3);
-              currentTrackInfo.appendChild(currentTrackInfoDiv4);
-              currentTrackInfo.appendChild(currentTrackInfoDiv5);
-
-              currentTrackInfo.classList.add("current-track");
-              currentTrackData.appendChild(currentTrackInfo);
-
-              currentTrackUri = trackUri;
-
-              // Call function playTrack() with the trackUri as argument:
-              playTrack(trackUri);
-
-              ////////////////////////////////////////////////////////////////////////////
-
-              //  even if there is no previewUrl available, then just show preview's track name, artist, album name and cover:
-              // } else {
-              //   console.error("No preview URL available for this track.");
-
-              //  even if there is no playable link (no trackUri) available, then just show preview's track name, artist, album name and cover:
+              // Call playTrack with the preview URL
+              playTrack(previewUrl);
             } else {
-              console.error("No audio available for this track."); // ovo kopirati i na kraj funkcija - kao info koji se pokaže na displayu
-
-              console.log("Track:", previewName);
-              console.log("Artist:", previewArtist);
-              console.log("Album:", previewAlbum);
-              console.log("Cover:", previewCover);
-
-              // Still add info about currently playing song into audio-player:
-              const currentTrackData = document.getElementById("current-play");
-              const currentTrackInfo = document.createElement("div");
-
-              const currentTrackInfoDiv1 = document.createElement("div");
-              const currentTrackInfoDiv2 = document.createElement("div");
-              const currentTrackInfoDiv3 = document.createElement("div");
-
-              currentTrackInfoDiv1.textContent = `${previewName}`;
-              currentTrackInfoDiv2.textContent = `Artist: ${previewArtist}`;
-              currentTrackInfoDiv3.textContent = `Album: ${previewAlbum}`;
-
-              currentTrackInfo.appendChild(currentTrackInfoDiv1);
-              currentTrackInfo.appendChild(currentTrackInfoDiv2);
-              currentTrackInfo.appendChild(currentTrackInfoDiv3);
-
-              currentTrackInfo.classList.add("current-track");
-              currentTrackData.appendChild(currentTrackInfo);
+              console.error("No preview URL available for this track.");
             }
-            console.log("Track ID:", trackId);
-            console.log("Current track URI:", currentTrackUri);
-            // return trackId;
-            // return trackUri;
-          }); //  -> TU ZAVRŠAVA unutarnja FUNKCIJA:  playSymbol.addEventListener("click", (event) => {}
-          // return trackId;
-        }); // -> TU ZAVRŠAVA vanjska FUNKCIJA:  playStarters.forEach((playSymbol) => {}
+          });
+        });
 
         // Scroll to the results container to focus on the tracklist:
         document
@@ -802,26 +662,29 @@
         console.error("Error fetching tracks:", error);
         displayMessage(resultsContainer, "Error fetching track list.");
       }
-      // return trackUri;
-    } // -> TU ZAVRŠAVA vanjska FUNKCIJA: async handleTrackListButtonClick()
+    }
 
-    // provjera da se vraća trackUri:
-    console.log(
-      "Provjera da se vraća trackUri kao globalna varijabla:",
-      currentTrackUri
-    );
+    /* FOR NOW, THIS CODE CAN ONLY PLAY PREVIEW SONGS, AND NOT ALL SONGS EVEN HAVE A PREVIEW.
 
-    /* FOR NOW, THIS CODE CAN ONLY PLAY PREVIEW SONGS, AND NOT ALL SONGS EVEN HAVE A PREVIEW  */
+    Playing track preview from URL: undefined.
+    GET http://localhost:3000/undefined 404 (Not Found)Understand this error
+index.js:696 Error playing track: NotSupportedError: Failed to load because no supported source was found.
+
+    STEPS: 
+    - correct the code so that at least some tracks with preview can be played - OR:
+    - warn Cu that selected song doesn't have preview - if this is the case - OR:
+    - Set up & Include the Spotify Web Playback SDK (already a Premium user and have access token),
+    then it is possible to play full songs (device_id also used...)
+    
+    */
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    // FUNCTION TO PLAY SELECTED TRACK IN AUDIO-PLAYER: - OVO TRENUTNO NE KORISTIMO:
-    // *** (here it works with preview-url & client acceess token, not full song & user acceess token/SDK Player):
-
-    function playPreview(previewUrl) {
+    // Function to play the selected track:
+    function playTrack(previewUrl) {
       const audioPlayer = document.getElementById("audio-player");
 
-      // Set the source of the html-audio-player to the selected track URL:
+      // Set the source of the audio player to the selected track URL
       audioPlayer.src = previewUrl;
 
       // Load the new track (required if you're changing the src dynamically)
@@ -834,333 +697,11 @@
           console.log("Track is playing");
         })
         .catch((error) => {
-          const noPreview = document.createElement("div");
-          currentPlay = document.getElementById("current-play");
-          noPreview.textContent = `No preview available for this track.`;
-          noPreview.classList.add("warning-message");
-          currentPlay.appendChild(noPreview);
-
           console.error("Error playing track:", error);
         });
     }
-    // -> TU ZAVRŠAVA FUNKCIJA: playPreview(previewUrl) {} – koja je unutar function Todo() {}
 
-    // ____________________________________________________________________________________________________
-
-    /* NOVO - 13.10. - PLAYER SDK: */
-
-    // FUNKCTION WHICH WILL RETURN USER ACCESS TOKEN (which can then be used for PLAYER-SDK):
-
-    /* ------------ *****ODAVDE SMO MAKNULI FUNKCIJU fetchUserAccessToken I PREMJESTILI JE SKROZ GORE U NAJVIŠI GLOBALNI DOSEG, IZVAN TODO-FUNKCIJE****** --------------  */
-
-    let userAccessToken = null;
-
-    const fetchUserAccessToken = async () => {
-      // First check if token is already available:
-      if (userAccessToken) {
-        console.log("Access token fetched:", userAccessToken);
-        return userAccessToken; // returns the existing token, if available
-      }
-
-      console.log("Trying to fetch the access token..."); // short console message to check if function is working
-      try {
-        // Try to get token via / (home) route:
-        const response = await fetch("/");
-        console.log("Server response:", response); // check what server returns
-        // return userAccessToken; // function returns userAccessToken
-        if (!response.ok) {
-          throw new Error("Failed to fetch access token from main route");
-        }
-
-        // If succesfull responce, we assume the token is there:
-        // Additionally handle response and get token from JSON:
-        const data = await response.json();
-        if (data.token) {
-          userAccessToken = data.token; // global variable
-          console.log("Access token fetched:", userAccessToken); // check token
-          return userAccessToken; // function returns userAccessToken
-        }
-      } catch (error) {
-        console.error("Error fetching access token from main route:", error);
-
-        // If the 1st try (/ home-route) didn't succeed, try with an alternative route: /api/get-user-access-token:
-        try {
-          const response = await fetch("/api/get-user-access-token");
-          console.log("Server response for alternative route:", response); // check what the server returns
-          if (!response.ok) {
-            throw new Error(
-              "Failed to fetch access token from alternative route"
-            );
-          }
-          const data = await response.json();
-          userAccessToken = data.token; // set a global variable
-          console.log(
-            "Access token fetched from the alternative route:",
-            data.token
-          ); // check token
-          // return data.token; // function returns userAccessToken
-          return userAccessToken;
-        } catch (error) {
-          console.error(
-            "Error fetching user access token from alternative route:",
-            error
-          );
-          return null; // function returns null, in case of an error
-        }
-      }
-    };
-
-    console.log(
-      "Provjera da se vraća i dohvaća trackUri kao globalna varijabla:",
-      currentTrackUri
-    );
-
-    // OVDJE MOŽEMO DODATI FUNKCIJU KOJA SVIRA ODABRANU PJESMU:
-
-    async function playTrack(currentTrackUri) {
-      const token = userAccessToken;
-      const deviceId = window.device_id; // Device ID dobiven iz SDK-a
-      console.log("Device ID:", deviceId); // currently UNDEFINED!
-
-      if (!deviceId) {
-        console.error(
-          "Spotify Web Player SDK is not initialized or device ID is missing."
-        );
-        return;
-      }
-
-      // Kreira API poziv za puštanje pjesme
-      fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
-        method: "PUT",
-        body: JSON.stringify({
-          uris: [currentTrackUri], // URI pjesme koju želimo pustiti
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }).then((response) => {
-        if (response.ok) {
-          console.log("Track is playing");
-
-          //DODATI KOD ZA SVIRANJE U AUDIO PLAYERU:
-
-          const audioPlayer = document.getElementById("audio-player");
-
-          // Set the source of the html-audio-player to the selected track URL:
-          audioPlayer.src = currentTrackUri;
-
-          // Load the new track (required if you're changing the src dynamically)
-          audioPlayer.load();
-
-          // Automatically play the track after loading
-          audioPlayer
-            .play()
-            .then(() => {
-              console.log("Track is playing");
-            })
-            .catch((error) => {
-              const noPreview = document.createElement("div");
-              currentPlay = document.getElementById("current-play");
-              noPreview.textContent = `No preview available for this track.`;
-              noPreview.classList.add("warning-message");
-              currentPlay.appendChild(noPreview);
-
-              console.error("Error playing track:", error);
-            });
-        } else {
-          console.error("Error playing track:", response);
-        }
-      });
-    }
-
-    // funkcija initializeSpotifyPlayer kreira instancu Spotify.Player s imenom "Web Playback SDK"
-    // i prosljeđuje getOAuthToken funkciju, koja poziva callback sa tokenom:
-    this.initializeSpotifyPlayer = (token) => {
-      const self = this; // Spremaj kontekst 'this'
-      console.log("Inicijalizacija Spotify playera s tokenom:", token); // Ispis tokena
-      // const token = data.access_token;
-      const player = new Spotify.Player({
-        name: "Web Playback SDK",
-        getOAuthToken: (cb) => {
-          cb(token);
-        },
-        volume: 0.5,
-      });
-
-      // - - - - - - - - - - - - - - - - - - - - - - - - - - NOVO 15.10. - - - - - - - - - - - - - - - - - -
-
-      // Preslušavanje eventa kad je player spreman
-      player.addListener("ready", ({ device_id }) => {
-        console.log("Ready with Device ID", device_id);
-        // Sada možeš koristiti device_id za upravljanje reprodukcijom
-        this.device_id = device_id;
-      });
-
-      // Preslušavanje errora
-      player.addListener("not_ready", ({ device_id }) => {
-        console.log("Device ID has gone offline", device_id);
-      });
-
-      player.addListener("initialization_error", ({ message }) => {
-        console.error(message);
-      });
-
-      player.addListener("authentication_error", ({ message }) => {
-        console.error(message);
-      });
-
-      player.addListener("account_error", ({ message }) => {
-        console.error(message);
-      });
-
-      // Spajanje playera:
-      // player.connect();
-
-      player.connect().then((success) => {
-        if (success) {
-          console.log(
-            "The Web Playback SDK successfully connected to Spotify!"
-          );
-        } else {
-          console.error("Failed to connect to Spotify.");
-        }
-      });
-
-      // _______________________________________-NOVO 19.10. ______________________________________________
-
-      // const trackId = "xxxx";  // Spotify Track ID
-      // const trackUri = `spotify:track:${trackId}`; // Kreira Spotify URI za pjesmu
-      // console.log("Track URI:", trackUri);
-
-      // OVDJE DEFINIRANU FUNKCIJU playTrack(trackUri) NIJE MOGUĆE POZVATI - JER JE FUNKCIJA OVDJE ZAČAHURENA UNUTAR FUNKCIJE initialize SpotifyPlayer():
-
-      // async function playTrack(trackUri) {
-      //   const token = userAccessToken;
-      //   const deviceId = window.device_id; // Device ID dobiven iz SDK-a
-
-      //   if (!deviceId) {
-      //     console.error(
-      //       "Spotify Web Player SDK is not initialized or device ID is missing."
-      //     );
-      //     return;
-      //   }
-
-      //   // Kreira API poziv za puštanje pjesme
-      //   fetch(
-      //     `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`,
-      //     {
-      //       method: "PUT",
-      //       body: JSON.stringify({
-      //         uris: [trackUri], // URI pjesme koju želimo pustiti
-      //       }),
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //         Authorization: `Bearer ${token}`,
-      //       },
-      //     }
-      //   ).then((response) => {
-      //     if (response.ok) {
-      //       console.log("Track is playing");
-
-      //       //DODATI KOD ZA SVIRANJE U AUDIO PLAYERU:
-
-      //         const audioPlayer = document.getElementById("audio-player");
-
-      //         // Set the source of the html-audio-player to the selected track URL:
-      //         audioPlayer.src = trackUri;
-
-      //         // Load the new track (required if you're changing the src dynamically)
-      //         audioPlayer.load();
-
-      //         // Automatically play the track after loading
-      //         audioPlayer
-      //           .play()
-      //           .then(() => {
-      //             console.log("Track is playing");
-      //           })
-      //           .catch((error) => {
-      //             const noPreview = document.createElement("div");
-      //             currentPlay = document.getElementById("current-play");
-      //             noPreview.textContent = `No preview available for this track.`;
-      //             noPreview.classList.add("warning-message");
-      //             currentPlay.appendChild(noPreview);
-
-      //             console.error("Error playing track:", error);
-      //           });
-
-      //     } else {
-      //       console.error("Error playing track:", response);
-      //     }
-      //   });
-      // }
-
-      // poziv funkcije  playTrack(trackUri) - nakon što smo je definirali - tu je pozvana 2. put.
-      // playTrack(trackUri);
-    };
-    // -> tu završava funkcija initializeSpotifyPlayer
-
-    // - - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - - - - -
-
-    /* SLJEDEĆU this.init ASINKRONU FUNKCIJU SAM DODALA NA KRAJ, JER ONA POZIVA DRUGE 2 FUNKCIJE: 
- ->  fetchUserAccessToken & initializeSpotifyPlayer */
-
-    /* init-funkction first calls another function: fetchUserAccessToken() to get the access token,
-    -> if the token is valid, then the init-function calls 3rd function: this.initializeSpotifyPlayer(token), 
-    this function takes the fetched token as parameter and then can initialize Spotify Player: */
-
-    this.init = async () => {
-      console.log("Initialisation started...");
-      console.log("Spotify Web Playback SDK loaded 1:", window.Spotify);
-      const token = await fetchUserAccessToken();
-      console.log("Access Token:", token);
-      if (token) {
-        this.initializeSpotifyPlayer(token); // call the function for initialising Spotify Player
-      } else {
-        console.error("User access token is not valid or not found");
-      }
-    };
-
-    // _____________________________  TU ZAVRŠAVA KOD ZA PUŠTANJE PJESAMA PREKO AUDIO-PLAYERA ___________________________________________
-
-    // 19.10. - playing full version of tracks with SDK-Player:
-
-    // Example of using fetchUserAccessToken to play a full track via the Spotify Web Player SDK:
-    // async function playFullTrack(trackUri) {
-    //   const token = await fetchUserAccessToken(); // Ensure we have the user token
-    //   if (token) {
-    //     // Set up the Spotify Web Playback SDK or make API call using the user token
-    //     console.log("Playing full track with URI:", trackUri);
-    //     // Example SDK call or fetch to Spotify API using the token
-    //   }
-    // }
-
-    // // Call the fetchUserAccessToken whenever you need it, for example:
-    // document.getElementById("play-full-track").addEventListener("click", () => {
-    //   playFullTrack('spotify:track:xyz'); // Placeholder for actual track URI
-    // });
-
-    /* 
-    server.js:
-
-    app.get("/api/get-user-access-token", (req, res) => {
-      if (userAccessToken) {
-        res.json({ token: userAccessToken });
-      } else {
-        res.status(401).send("Unauthorized"); // Ako token ne postoji, vrati status 401
-      }
-    });
-    Dohvaćanje userAccessToken: Kada se korisnik prijavi putem Spotify OAuth i dobije userAccessToken, 
-    on se pohranjuje u varijablu userAccessToken.
-    Nova API ruta: Nova ruta (/api/get-user-access-token) vraća userAccessToken klijentu ako je postavljen. 
-    U suprotnom, vraća status 401 (Unauthorized).
-
-    index.js:
-    Klijentska funkcija: U index.js, fetchUserAccessToken šalje zahtjev serveru da dobije token. 
-    Kada se SDK učita, poziva se ta funkcija kako bi se dobio token koji se koristi za inicijalizaciju Spotify playera.
-     */
-
-    // _____________________________________________________________
+    // ____________________________________________________________
 
     // Praćenje submita u search-form-u i prikaz search-rezultata:
 
@@ -1456,113 +997,12 @@
       // removes the whole parent-task (in which the removeButton was embedded as a child)
       saveLists();
     }
-
-    // -------------------------------------------------------------------------------------------
-
-    //   NOVI KOD 20.10. ujutro:
-
-    // Definiraj funkciju za inicijalizaciju player-a
-    this.initializeSpotifyPlayer = async function () {
-      const token = await fetchUserAccessToken(); // Dobij token
-      this.player = new Spotify.Player({
-        name: "Web Playback SDK Player",
-        getOAuthToken: (cb) => {
-          cb(token);
-        }, // Postavi ispravan token
-      });
-
-      // Dodaj event listener za 'ready' event kako bi dobio device_id
-      this.player.addListener("ready", ({ device_id }) => {
-        console.log("Device is ready with ID:", device_id);
-        this.device_id = device_id; // Spremi device_id
-
-        // U ovom trenutku, možeš pozvati playTrack
-    // Pozovi playTrack samo ako imaš URI pesme
-    playTrack(currentTrackUri);
-
-      });
-
-      // Poveži player s connect()
-      this.player.connect().then((success) => {
-        if (success) {
-          console.log("The Web Playback SDK successfully connected!");
-        } else {
-          console.error("Failed to connect to Spotify Web Playback SDK.");
-        }
-      });
-    };
-
-    this.init = async function () {
-      await this.initializeSpotifyPlayer(); // Pozovi funkciju za inicijalizaciju player-a
-      console.log("Pozvan todo.init()"); // Log za praćenje
-    };
-
-/*
-
-NOVOSTI + (2): The Web Playback SDK successfully connected!
-
-Device is ready with ID: 6249acd971a31652b892ca20631ba2100d244d32
-
-Device ID: undefined
-
-PROBLEMI - (3): 
-
-Zašto se više ne može koristiti Refresh token?? Nego sve ide preko alternativne rute:
-Error refreshing token: Error: Failed to refresh access token
-
-Access token fetched from the alternative route: 
-BQDT2SRw_JOdKldqCEyhymQfRW1FoH4cBiRX1p_RlAfoZu6GNS8baL9SR48X2SuYGLbjyM3ks9JadBoMBgXrUDIDIok2cELHRcKPeeIC8bxft4iu9S3xCWjULBugDYHj11gncyclP0UuuKD8etmE0XpRke1t7nDgZDBTNMJsanv7gyCpdlq3XnUdfUxqmwhO97afAj6zuEKbaK28Lw6gjUKEInBtdyX3qFIxz-Ma9lE
-
-index.js:3 It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior.
-
-index.js:926 Spotify Web Player SDK is not initialized or device ID is missing.
-playTrack	@	index.js:926
-(anonymous)	@	index.js:1481
-(anonymous)	@	spotify-player.js:3
-t._onEvent	@	spotify-player.js:3
-t._handleMessages	@	spotify-player.js:3
-e._receiveMessage	@	spotify-player.js:3
-Show 1 more frame
-
---> javlja se zato jer u tom trenu još/više nema device_id (iako ga prije toga uspješno bilježi, a kasnije! postane null - vidjeti REDOSLIJED! funkcija...)
-
-if (!deviceId) {
-        console.error(
-          "Spotify Web Player SDK is not initialized or device ID is missing."
-        );
-        return;
-      }
-
- */
-
-
-
-    // - - - - - - - - - - - -- - -- - -- -- - ----------------------------------------
   }
-  // here ends Todo() function.
+  // here ends Todo function.
 
-  // -----------------------------------------------------------------------------------------------------
+  const todo = new Todo();
 
-  const todo = new Todo(); // Todo()-funkciju spremamo u varijablu todo, i onda ćemo je inicijalizirati kad se stranica učita.
-  console.log("Instanca todo kreirana:", todo);
-
-  // window.addEventListener("load", todo.init);
-
-  // Dodaj event listener za load:
-  window.addEventListener("load", () => {
-    // Inicijaliziraj SDK i cijelu Todo-funkciju, čim je stranica učitana:
-    // window.onSpotifyWebPlaybackSDKReady = initializeSpotifyPlayer();
-
-    todo.init(); // Poziv init nakon što se SDK učita
-    console.log("Pozvan todo.init()");
-
-    // U slučaju da se SDK ne učita, možeš dodati fallback
-    setTimeout(() => {
-      if (typeof Spotify === "undefined") {
-        console.error("Spotify SDK nije učitan nakon 10 sekundi.");
-      }
-    }, 10000); // Provjeri nakon 10 sekundi
-  });
+  window.addEventListener("load", todo.init);
 })();
 
 // -> ovdje završava čitav index.js kod! (na kraju je poziv samopozivajuće funkcije).
