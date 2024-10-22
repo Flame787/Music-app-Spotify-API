@@ -135,15 +135,6 @@
           </p>
         </div>
 
-        <!-- <div id="submit-button" class="flex-item">
-          <p id="empty"></p>
-          <button
-            type="submit"
-            class="input-button button play-button nav-button"
-          >
-            Search
-          </button>
-        </div> -->
 
       </form>
 
@@ -215,15 +206,16 @@
                ...
                Songs:
                ...
-               Svaka podsekcija sadrži neki broj (limit) list-itema (npr. do max 10 rezultata).
-               Za albume i pjesme - svaki pojedini rezultat (li) dobiva button Play na kraju svojeg retka!
-               Svaki artist ima ove informacije: artist, genres, slika. 
-               Klikom na button pored (Find music ili nešto slično) otvara se samo taj artist (nestaju ostali rezultati), 
-               prikažu se redom nazivi svih albuma, 
-               i popularne pjesme (sa slikama covera pripadajućih albuma). Pored svih albuma i pjesama su buttoni Play.
+          
+               Each subsection contains a certain number (limit) of list-items (up to max 9 results currently), expandible.
+               For albums and songs - each individual result (li) gets a Play button at the end of its line!
+               Each artist has this information: artist, genres, image. 
+               Clicking on the button underneath (Discography) we can open his albums (other results disappear), 
+               the names of albums are displayed in order (up to max 9 results, with pictures of the corresponding album covers), expandible.
+               Click on album opens it's tracks. Tracks have buttons: Play and Add to playlist.
                
-               Svaki album ima ove informacije: artist, ime albuma, broj pjesama, trajanje albuma, godina izdanja, cover slika albuma.
-               Svaka pjesma ima ove informacije: artist, ime albuma na kojem se nalazi, trajanje pjesme, godina izdanja albuma, cover slika albuma.
+               Each album has this information: name of the album, artist, release date, number of songs, cover image of the album.
+               Each song has the following information: artist, album, album cover image. 
 
               -->
             <!-- </ol> -->
@@ -253,7 +245,7 @@
     </div>
     <script src="/index.js"></script>
     <!-- script for Spotify Player SDK -->
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    
   </body>
 </html>
 
