@@ -291,9 +291,12 @@
           textDivArtist1.classList.add("result-item-name"); // bold and bigger font
 
           ulArtists.appendChild(li);
-          resultsContainer.appendChild(ulArtists);
+          resultsContainer.appendChild(ulArtists);  // -> ovo možda ubaciti kasnije
         });
       }
+
+
+      
 
       ulAlbums.appendChild(titleAlbums);
       titleAlbums.innerHTML = "Albums:";
