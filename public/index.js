@@ -809,7 +809,6 @@
           currentPlay.appendChild(noPreview);
           console.error("Error playing track:", error);
         });
-
     } // here ends the function playPreview(previewUrl) – which is inside of the bigger function Todo()
 
     // ____________________________________________________________
@@ -1107,6 +1106,7 @@
       // removes the whole parent-task (in which the removeButton was embedded as a child)
       saveLists();
     }
+
   }
   // here ends Todo function.
 
@@ -1114,6 +1114,27 @@
 
   window.addEventListener("load", todo.init);
 })();
+
+// IN ADDITION AFTER THE MAIN FUNCTION, global functions:
+
+// if page reloaded, scroll back to the first element:
+document.addEventListener("DOMContentLoaded", function () {
+  document
+  .getElementById("first-container")
+  .scrollIntoView({ behavior: "smooth", block: "start" });
+  
+});
+
+// If backspace pressed when not focused on Input field, 
+document.addEventListener("keydown", function (event) {
+  const activeElement = document.activeElement;
+    if (event.key === "Backspace" && !(activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA")) {
+      event.preventDefault(); // prevent usual Backspace-key task (for deleting)
+      document
+  .getElementById("first-container")
+  .scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+});
 
 // -> here ends index.js code! (it is an Immediately Invoked Function Expression - it uses encapsulation).
 
