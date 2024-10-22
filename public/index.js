@@ -8,6 +8,10 @@
     const searchButton = document.getElementById("submit-button");
     // const searchForm = document.getElementById("search-form");
 
+    function createDiv() {
+      return document.createElement("div");
+    }
+
     // Navbar behavior:
 
     let prevScrollPos = window.scrollY;
@@ -166,17 +170,6 @@
     const albumInput = document.getElementById("album");
     const resultsList = document.getElementById("results");
 
-    // NOVO:
-
-    // Add event listener to the search form
-    // document.getElementById('search-form').addEventListener('submit', function (e) {
-    //   console.log("Event listener triggered"); // Ovdje dodajte
-    //   e.preventDefault(); // Prevent form submission
-    //   const query = document.getElementById('search-all-input').value; // Get query from input
-    //   console.log("Query from input:", query); // Provjera vrijednosti
-    //   displaySearchResults(query); // Call the search results function
-    // });
-
     ///////_______________ Function to send Api-request for Search results - from Frontend to Backend: __________________//////////////////////
 
     // if the 'type' is not set, it will be a default value: 'artist,album,track':
@@ -193,12 +186,12 @@
       }
     }
 
-    // Funkcija za prikaz upozorenja ako je input-polje prazno:
+    // Funcion for warning if the input-field is empty:
     function displayMessage(container, text) {
       const message = document.createElement("p");
       message.textContent = text;
-      message.classList.add("warning-message"); // Optional: Add a class for styling
-      container.appendChild(message); // Append message to the container
+      message.classList.add("warning-message");
+      container.appendChild(message); // ("Please enter your query" - in red letters)
     }
 
     ///////_______________  Function to display all fetched Search-results on the page: __________________//////////////////////
@@ -208,9 +201,9 @@
       resultsContainer.innerHTML = ""; // Clear previous results
 
       const results = await fetchSearchResults(query);
-      console.log(results); // Log the results to see what you get
+      console.log(results); // Log the results
 
-      // Provjera je li dobiveni rezultat prazan
+      // Check if the result is empty:
       if (
         !results ||
         (results.artists.items.length === 0 &&
@@ -221,16 +214,21 @@
         return; // Exit if all 3 results categories are undefined or empty
       }
 
-      const ulArtists = document.createElement("ul"); // Create an unordered list for artists
-      const ulAlbums = document.createElement("ul"); // Create an ordered list for albums
-      const ulSongs = document.createElement("ul"); // Create an ordered list for songs
-      const titleArtists = document.createElement("h3");
-      const titleAlbums = document.createElement("h3");
-      const titleSongs = document.createElement("h3");
-      // [titleArtists, titleAlbums, titleSongs].forEach(element => element.createElement("h4"));
+      const ulArtists = document.createElement("ul"); // create an unordered list for artists
+      const ulAlbums = document.createElement("ul"); // same for albums
+      const ulSongs = document.createElement("ul"); // same for songs
+
+      // const titleArtists = document.createElement("h3");
+      // const titleAlbums = document.createElement("h3");
+      // const titleSongs = document.createElement("h3");
+      const [titleArtists, titleAlbums, titleSongs] = ["h3", "h3", "h3"].map(
+        (tag) => document.createElement(tag)
+      );
+
       // ulArtists.classList.add("flex-container");
       // ulAlbums.classList.add("flex-container");
       // ulSongs.classList.add("flex-container");
+      // skraćeno:
       [ulArtists, ulAlbums, ulSongs].forEach((element) =>
         element.classList.add("flex-container-ol")
       );
@@ -239,47 +237,46 @@
       ulArtists.appendChild(titleArtists);
       titleArtists.innerHTML = "Artists:";
 
-      // Results displaying, depending on API-data structure (...to be modified):
+      // Results displaying, depending on API-data structure:
 
       // Check and display ARTISTS:
 
       if (results.artists && results.artists.items.length > 0) {
         results.artists.items.forEach((item) => {
           const li = document.createElement("li");
-          const div = document.createElement("div"); //new
+          const div = createDiv();
           const img = document.createElement("img");
 
-          // Provjera da li artist ima slike i da li je prva slika dostupna (if some is missing, doesn't matter, others will show up)
+          // Check if artist has a picture and if first picture is available (if one is missing, doesn't matter, then others will show up)
           if (item.images && item.images.length > 0) {
-            img.src = item.images[0].url; // Set the image source
+            img.src = item.images[0].url; // set the image url as source
           } else {
-            // Ako nema slika, postavi placeholder sliku:
-            img.src = "./pictures/image-placeholder.jpg"; // Put the path to your placeholder image here
+            // If no picture available, show a generic placeholder image:
+            img.src = "./pictures/image-placeholder.jpg"; // path to my placeholder image
           }
           img.alt = `${item.name} Artist`;
           img.classList.add("result-image");
 
           // Insert the div-image before the text content:
-          li.insertBefore(div, li.firstChild); //new
-          div.appendChild(img); //new
-          div.classList.add("image-container"); //new
+          li.insertBefore(div, li.firstChild);
+          div.appendChild(img);
+          div.classList.add("image-container");
 
-          // Create a <div> for the text and append it:
-          const textDivArtist1 = document.createElement("div");
-          const textDivArtist2 = document.createElement("div");
-          // textDivArtist.textContent = `${item.name} - ${item.genres.join(
-          //   ", "
-          // )}`;
-          const showMoreButton = document.createElement("button"); // NEW - SHOW-MORE BUTTON
+          // Create a <div> for text and append it:
+          const textDivArtist1 = createDiv();
+          const textDivArtist2 = createDiv();
+
+          const showMoreButton = document.createElement("button");
+          // button for more info, depending on context - it shows Discography (for artists), or Track list (for albums)
 
           textDivArtist1.textContent = `${item.name}`;
           li.appendChild(textDivArtist1);
-          textDivArtist2.textContent = `${item.genres.join(", ")}`;
+          textDivArtist2.textContent = `${item.genres.join(", ")}`; // lists all genres and puts a comma between them
           li.appendChild(textDivArtist2);
 
-          li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
-          showMoreButton.textContent = `Discography`; // NEW - SHOW-MORE BUTTON
-          showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+          li.appendChild(showMoreButton);
+          showMoreButton.textContent = `Discography`;
+          showMoreButton.classList.add("show-more-button");
           showMoreButton.setAttribute("id", "discography-button");
 
           // Event listener for the Discography button:
@@ -306,52 +303,48 @@
       if (results.albums && results.albums.items.length > 0) {
         results.albums.items.forEach((item) => {
           const li = document.createElement("li");
-          const div = document.createElement("div"); //new
+          const div = createDiv();
           const img = document.createElement("img");
 
-          // Provjera da li artist ima slike i da li je prva slika dostupna (id some is missing, doesn't matter, others will show up)
+          // Check if album has a cover picture and if first cover is available:
           if (item.images && item.images.length > 0) {
             img.src = item.images[0].url; // Set the image source
             img.alt = `${item.name} Album Cover`;
             img.classList.add("result-image");
 
             // Insert the div-image before the text content:
-            li.insertBefore(div, li.firstChild); //new
+            li.insertBefore(div, li.firstChild);
 
-            // li.insertBefore(img, li.firstChild);
-            div.appendChild(img); //new
-            div.classList.add("image-container"); //new
+            div.appendChild(img);
+            div.classList.add("image-container");
           }
 
-          // Create a <div> for the text and append it
+          // Create a <div> for the text and append it:
+          const textDivAlbum1 = createDiv();
+          const textDivAlbum2 = createDiv();
+          const textDivAlbum3 = createDiv();
+          const textDivAlbum4 = createDiv();
 
-          const textDivAlbum1 = document.createElement("div");
-          const textDivAlbum2 = document.createElement("div");
-          const textDivAlbum3 = document.createElement("div");
-          const textDivAlbum4 = document.createElement("div");
-          // const [textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4] = Array.from({ length: 4 }, () => document.createElement("div"));
-          // li.textContent = `${item.name} - by: ${item.artists[0].name} - release date: ${item.release_date} - album tracks nr: ${item.total_tracks}`;
-          // li.appendChild(document.createTextNode(`${item.name} - by: ${item.artists[0].name} - release date: ${item.release_date} - album tracks nr: ${item.total_tracks}`));
           textDivAlbum1.textContent = `${item.name}`;
           textDivAlbum2.textContent = `By: ${item.artists[0].name}`;
           textDivAlbum3.textContent = `Release date: ${item.release_date}`;
           textDivAlbum4.textContent = `Album tracks number: ${item.total_tracks}`;
           // li.appendChild(textDivAlbum);
 
-          const showMoreButton = document.createElement("button"); // NEW - SHOW-MORE BUTTON
+          const showMoreButton = document.createElement("button");
 
           li.append(textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4);
 
-          li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
-          showMoreButton.textContent = `Track list`; // NEW - SHOW-MORE BUTTON
-          showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+          li.appendChild(showMoreButton);
+          showMoreButton.textContent = `Track list`;
+          showMoreButton.classList.add("show-more-button");
           showMoreButton.setAttribute("id", "tracklist-button");
 
           li.classList.add("li-item-style", "result-flex-item");
           titleAlbums.classList.add("result-category"); // centered title "Albums:"
           textDivAlbum1.classList.add("result-item-name"); // bold and bigger font
 
-          // Event listener for the 'Track list' button:
+          // Event listener for the button 'Track list':
           showMoreButton.addEventListener("click", (event) => {
             event.preventDefault(); // Prevent default button behavior
             // Calls the function to fetch albums:
@@ -378,36 +371,36 @@
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
           const li = document.createElement("li");
-          const div = document.createElement("div"); //new
+          const div = createDiv();
           const img = document.createElement("img");
 
-          // Provjera da li artist ima slike i da li je prva slika dostupna (id some is missing, doesn't matter, others will show up)
+          // Check if track's album has a cover picture and if first cover is available:
           if (item.album && item.album.images && item.album.images.length > 0) {
-            img.src = item.album.images[0].url; // Set the image source
+            img.src = item.album.images[0].url;
             img.alt = `${item.name} Album Cover`;
             img.classList.add("result-image");
 
             // Insert the div-image before the text content:
-            li.insertBefore(div, li.firstChild); //new
+            li.insertBefore(div, li.firstChild);
 
             // li.insertBefore(img, li.firstChild);
-            div.appendChild(img); //new
-            div.classList.add("image-container"); //new
+            div.appendChild(img);
+            div.classList.add("image-container");
           }
 
           // Create a <div> for the text and append it
-          const textDivSong1 = document.createElement("div");
-          const textDivSong2 = document.createElement("div");
+          const textDivSong1 = createDiv();
+          const textDivSong2 = createDiv();
           textDivSong1.textContent = `${item.name}`;
           textDivSong2.textContent = `By: ${item.artists[0].name}`;
 
-          const showMoreButton = document.createElement("button"); // NEW - SHOW-MORE BUTTON
+          const showMoreButton = document.createElement("button");
 
           li.append(textDivSong1, textDivSong2);
 
-          li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
-          showMoreButton.textContent = `Add to playlist`; // NEW - SHOW-MORE BUTTON
-          showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+          li.appendChild(showMoreButton);
+          showMoreButton.textContent = `Add to playlist`;
+          showMoreButton.classList.add("show-more-button");
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
           li.classList.add("li-item-style", "result-flex-item");
@@ -427,7 +420,6 @@
       const resultsContainer = document.getElementById("results-container");
       try {
         // Fetch albums for the selected artist
-        // const results = await fetchSearchResults(artistName, "album");
         const results = await fetchSearchResults(artistName);
 
         // Clear the previous results from the results-container:
@@ -445,7 +437,7 @@
         if (results.albums && results.albums.items.length > 0) {
           results.albums.items.forEach((album) => {
             const li = document.createElement("li");
-            const div = document.createElement("div"); // For the image
+            const div = createDiv();
             const img = document.createElement("img");
 
             const showMoreButton = document.createElement("button");
@@ -462,21 +454,21 @@
             div.appendChild(img);
             li.appendChild(div);
 
-            // Create a <div> for the text and append it
+            // Create a <div> for the text and append it:
+            // const textDivAlbum1 = createDiv();
+            // const textDivAlbum2 = createDiv();
+            // const textDivAlbum3 = createDiv();
+            // const textDivAlbum4 = createDiv();
+            // skraćeno:
+            const [textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4] =
+              Array(4)
+                .fill()
+                .map(() => document.createElement("div"));
 
-            const textDivAlbum1 = document.createElement("div");
-            const textDivAlbum2 = document.createElement("div");
-            const textDivAlbum3 = document.createElement("div");
-            const textDivAlbum4 = document.createElement("div");
             textDivAlbum1.textContent = `${album.name}`;
             textDivAlbum2.textContent = `By: ${album.artists[0].name}`;
             textDivAlbum3.textContent = `Release date: ${album.release_date}`;
             textDivAlbum4.textContent = `Album tracks number: ${album.total_tracks}`;
-
-            // const textDiv = document.createElement("div");
-            // textDiv.textContent = `${album.name} - Released: ${album.release_date}`;
-            // textDiv.classList.add("result-item-name");
-            // li.appendChild(textDiv);
 
             li.append(
               textDivAlbum1,
@@ -485,13 +477,12 @@
               textDivAlbum4
             );
 
-            li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
-            showMoreButton.textContent = `Track list`; // NEW - SHOW-MORE BUTTON
-            showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+            li.appendChild(showMoreButton);
+            showMoreButton.textContent = `Track list`;
+            showMoreButton.classList.add("show-more-button");
             showMoreButton.setAttribute("id", "tracklist-button");
-            // new: add event-listener to the button 'Track list' under each album:
 
-            // ***COPY SAME showMoreButton.addEventListener FROM PREVIOUS PLACE WHERE IT WAS CALLED (IT SHOULD HAVE SAME FUNCTIONS ON ALL PLACES):
+            // new: add event-listener to the button 'Track list' under each album:
             showMoreButton.addEventListener("click", (event) => {
               event.preventDefault(); // Prevent default button behavior
               // Calls the function to fetch albums:
@@ -547,26 +538,32 @@
         const ulTracks = document.createElement("ul");
         ulTracks.classList.add("flex-container-tracks");
 
-        const titleTracks1 = document.createElement("h3");
-        const titleTracks2 = document.createElement("h3");
-        const titleSmall = document.createElement("h4");
-        const img = document.createElement("img");
-        const div = document.createElement("div");
+        // const titleTracks1 = document.createElement("h3");
+        // const titleTracks2 = document.createElement("h3");
+        // const titleSmall = document.createElement("h4");
+        // const img = document.createElement("img");
+        // const div = createDiv();
+        // skraćeno:
+        const [titleTracks1, titleTracks2, titleSmall, img, div] = [
+          "h3",
+          "h3",
+          "h4",
+          "img",
+          "div",
+        ].map((tag) => document.createElement(tag));
 
-        // razdvoji naslov: ime albuma i ime autora u 2 retka (jer su imena albuma često dugačka):
+        // separate album name and artist name into 2 rows:
         titleTracks1.textContent = `${albumName}`;
         titleTracks1.classList.add("result-category");
         titleTracks2.textContent = `Album by: ${albumArtist}`;
         titleTracks2.classList.add("result-category");
         titleSmall.textContent = `Track list:`;
 
-        // ?? trebamo li drugačiji (kraći, općenitiji) endpoint?? - https://api.spotify.com/v1/albums/{id} - možda da to uzmemo kao generalni 2. endpoint i za tracks?
-
         // displaying album cover picture before all tracks:
         if (albumImageUrl) {
           img.src = albumImageUrl;
         } else {
-          img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+          img.src = "./pictures/image-placeholder.jpg"; // placeholder, if no image available
         }
         img.alt = `${albumName} Album Cover`;
         img.classList.add("result-image");
@@ -574,34 +571,72 @@
         div.classList.add("image-container");
         div.appendChild(img);
 
-        ulTracks.appendChild(titleTracks1);
-        ulTracks.appendChild(titleTracks2);
-        ulTracks.appendChild(div); // appenda se div sa slikom covera albuma
-        ulTracks.appendChild(titleSmall);
+        // ulTracks.appendChild(titleTracks1);
+        // ulTracks.appendChild(titleTracks2);
+        // ulTracks.appendChild(div); // appends a div with cover picture
+        // ulTracks.appendChild(titleSmall);
+        // skraćeno:
+        [titleTracks1, titleTracks2, div, titleSmall].forEach((el) =>
+          ulTracks.appendChild(el)
+        );
 
         // Loop through each track and add it to the displayed list:
         tracksData.items.forEach((track) => {
           const li = document.createElement("li");
-          const div = document.createElement("div");
+          const div = createDiv();
           div.textContent = `${track.track_number}. ${track.name}`;
           li.classList.add("li-item-style");
           li.classList.add("result-item-name", "result-flex-item");
 
           const playButton = document.createElement("button");
-          playButton.textContent = `Play  ▶`; // NEW - PLAY-BUTTON
+          playButton.textContent = `Play  ▶`; // NEW - PLAY-button
           playButton.classList.add("play-button", "play-starter");
+
           // NEW!!:
-          // playButton.setAttribute("data-track-id", track.id); // Attach track ID to button
-          playButton.setAttribute("data-preview-url", track.preview_url); // Attach track ID to button
+          // Save important data about playing track via playButton attributes:
+
+          // (so they can be fetched later from the clicked button (playbutton / playSymbol): track URL, name, artist, album, cover):
+
+          // playButton.setAttribute("data-track-id", track.id); // Attach track ID to play-button
+          // playButton.setAttribute("data-preview-url", track.preview_url); // Attach track URL to play-button
+          // playButton.setAttribute("data-preview-trackname", track.name); // Attach track name to play-button
+          // playButton.setAttribute("data-preview-artist", albumArtist); // Attach artist to play-button
+          // playButton.setAttribute("data-preview-album", albumName); // Attach album to play-button
+          // playButton.setAttribute("data-preview-cover", albumImageUrl); // Attach track cover to play-button
+          // skraćeno:
+          [
+            "track-id",
+            "preview-url",
+            "preview-trackname",
+            "preview-artist",
+            "preview-album",
+            "preview-cover",
+          ].forEach((attr, i) => {
+            playButton.setAttribute(
+              `data-${attr}`,
+              [
+                track.id,
+                track.preview_url,
+                track.name,
+                albumArtist,
+                albumName,
+                albumImageUrl,
+              ][i]
+            );
+          });
 
           const showMoreButton = document.createElement("button");
-          showMoreButton.textContent = `Add to playlist`; // NEW - SHOW-MORE BUTTON
-          showMoreButton.classList.add("show-more-button"); // NEW - SHOW-MORE BUTTON
+          showMoreButton.textContent = `Add to playlist`;
+          showMoreButton.classList.add("show-more-button");
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
-          li.appendChild(div);
-          li.appendChild(playButton); // NEW! PLAYBUTTON ON INDIVIDUAL TRACKS!
-          li.appendChild(showMoreButton); // NEW - SHOW-MORE BUTTON
+          // li.appendChild(div);
+          // li.appendChild(playButton); // NEW! PLAYBUTTON for individual tracks - enables playing preview of the track (30 sec)
+          // li.appendChild(showMoreButton);
+          // skraćeno:
+          [div, playButton, showMoreButton].forEach((element) =>
+            li.appendChild(element)
+          );
 
           // ** LATER ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST!
           // (define which multiple variables it passes to the function Add to playlist)
@@ -613,9 +648,9 @@
         // Append the list to the results container:
         resultsContainer.appendChild(ulTracks);
 
-        /* Dodavanje event-listenera na sve Play-buttone i ikone: */
+        /* Adding event-listeners on all Play-buttona & icons: */
 
-        // eventlistener dati play-buttonu i svakoj play-ikoni putem klase "play-starter":
+        // give eventlistener to each play-button and each play-icone wich has a class "play-starter":
         const playStarters = document.querySelectorAll(".play-starter");
 
         playStarters.forEach((playSymbol) => {
@@ -624,35 +659,119 @@
 
             // focus on audio-player:
             document
-              .getElementById("audio-player")
+              .getElementById("currently-playing")
               .scrollIntoView({ behavior: "smooth", block: "start" });
 
-            // Get the track ID from the clicked button
-            // const trackId = playSymbol.getAttribute("data-track-id");
+            // Fetch the preview-URL from the clicked button (playbutton / playSymbol) + other data about playing track (artist, album, cover):
 
-            // playTrack(
-            //   trackId // passes track.id value to the next function which will use it
-            // );
+            // const trackId = playSymbol.getAttribute("data-track-id");      // Attach track ID to button -> will be used for track URI in SDK player
+            // const previewUrl = playSymbol.getAttribute("data-preview-url");       // Attach track preview url to button
+            // const previewName = playSymbol.getAttribute("data-preview-trackname");    // Attach track name to button
+            // const previewArtist = playSymbol.getAttribute("data-preview-artist");    // Attach artist to button
+            // const previewAlbum = playSymbol.getAttribute("data-preview-album");    // Attach album to button
+            // const previewCover = playSymbol.getAttribute("data-preview-cover");    // Attach track cover to button
+            // skraćeno:
+            const [
+              trackId,
+              previewUrl,
+              previewName,
+              previewArtist,
+              previewAlbum,
+              previewCover,
+            ] = [
+              "track-id",
+              "preview-url",
+              "preview-trackname",
+              "preview-artist",
+              "preview-album",
+              "preview-cover",
+            ].map((attr) => playSymbol.getAttribute(`data-${attr}`));
 
-            // Get the preview URL from the clicked button
-            const previewUrl = playSymbol.getAttribute("data-preview-url");
-
-            // console.log("Function playTrack tries to play the track with this id:", track.id, track.name);
-            // console.log(
-            //   "Function playTrack tries to play the track with this url:",
-            //   previewUrl
-            // );
-
+            // if there is a previewUrl, we play this url in audio-player ( -> function playTrack(previewUrl) ):
             if (previewUrl) {
               console.log("Playing track preview from URL:", previewUrl);
-
               // Call playTrack with the preview URL
               playTrack(previewUrl);
+              console.log("Playing track:", previewName);
+              console.log("Artist:", previewArtist);
+              console.log("Album:", previewAlbum);
+              console.log("Cover:", previewCover);
             } else {
               console.error("No preview URL available for this track.");
             }
-          });
-        });
+
+            // ** Logic for showing info on currently playing song(-preview) (info was transferred via Play-button):
+
+            // Showing the cover of currently playing track's album:
+            const musicWrapper = document.getElementById("music-wrapper");
+
+            // Cheking if there is already an album cover (from the previous track) and removing it:
+            const existingAlbumCover =
+              musicWrapper.querySelector(".album-cover-image");
+            if (existingAlbumCover) {
+              existingAlbumCover.remove();
+            }
+
+            const currentlyPlayingCover = document.createElement("div");
+            currentlyPlayingCover.classList.add("album-cover-image");
+            const img = document.createElement("img");
+            const div = document.createElement("div");
+
+            // Displaying album cover picture (if existing):
+            if (previewCover) {
+              img.src = previewCover;
+            } else {
+              img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+            }
+
+            img.alt = `${previewAlbum} Album Cover`;
+            img.classList.add("result-image");
+            div.classList.add("image-container");
+
+            div.appendChild(img);
+            currentlyPlayingCover.appendChild(div);
+
+            musicWrapper.insertBefore(
+              currentlyPlayingCover,
+              musicWrapper.firstChild
+            );
+
+            // Add info about currently playing song into audio-player:
+            const currentTrackData = document.getElementById("current-play");
+
+            // REMOVE all info about previous song:
+            currentTrackData.innerHTML = "";
+
+            const currentTrackInfo = createDiv();
+            // urediti taj div, dati mu neke bordere ili tamniju pozadinu
+            // smanjiti širinu playera na stranici (i svih formsa - preširoki su)
+
+            const currentTrackInfoDiv1 = createDiv();
+            const currentTrackInfoDiv2 = createDiv();
+            const currentTrackInfoDiv3 = createDiv();
+            const currentTrackInfoDiv4 = createDiv();
+            const currentTrackInfoDiv5 = createDiv();
+
+            currentTrackInfoDiv1.textContent = `${previewName}`;
+            currentTrackInfoDiv2.textContent = `By:`;
+            currentTrackInfoDiv3.textContent = `${previewArtist}`;
+            currentTrackInfoDiv4.textContent = `Album:`;
+            currentTrackInfoDiv5.textContent = `${previewAlbum}`;
+
+            currentTrackInfoDiv1.classList.add("result-item-name"); // bold and bigger font for the song name
+            currentTrackInfoDiv3.classList.add("result-item-name");
+            currentTrackInfoDiv5.classList.add("result-item-name");
+
+            currentTrackInfo.appendChild(currentTrackInfoDiv1);
+            currentTrackInfo.appendChild(currentTrackInfoDiv2);
+            currentTrackInfo.appendChild(currentTrackInfoDiv3);
+            currentTrackInfo.appendChild(currentTrackInfoDiv4);
+            currentTrackInfo.appendChild(currentTrackInfoDiv5);
+
+            currentTrackInfo.classList.add("current-track");
+            currentTrackData.appendChild(currentTrackInfo);
+          }); //  -> here ends inside function:  playSymbol.addEventListener("click", event)
+        }); // -> here ends outer function:  playStarters.forEach(playSymbol)
 
         // Scroll to the results container to focus on the tracklist:
         document
@@ -662,69 +781,60 @@
         console.error("Error fetching tracks:", error);
         displayMessage(resultsContainer, "Error fetching track list.");
       }
-    }
-
-    /* FOR NOW, THIS CODE CAN ONLY PLAY PREVIEW SONGS, AND NOT ALL SONGS EVEN HAVE A PREVIEW.
-
-    Playing track preview from URL: undefined.
-    GET http://localhost:3000/undefined 404 (Not Found)Understand this error
-index.js:696 Error playing track: NotSupportedError: Failed to load because no supported source was found.
-
-    STEPS: 
-    - correct the code so that at least some tracks with preview can be played - OR:
-    - warn Cu that selected song doesn't have preview - if this is the case - OR:
-    - Set up & Include the Spotify Web Playback SDK (already a Premium user and have access token),
-    then it is possible to play full songs (device_id also used...)
-    
-    */
+    } // -> here ends outer function: async handleTrackListButtonClick()
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    // Function to play the selected track:
+    // Function to play selected track preview in html-audio-player:
     function playTrack(previewUrl) {
       const audioPlayer = document.getElementById("audio-player");
 
-      // Set the source of the audio player to the selected track URL
+      // audio source is the selected track's URL:
       audioPlayer.src = previewUrl;
 
-      // Load the new track (required if you're changing the src dynamically)
+      // Load the new track (*needed if the source is changing dynamically):
       audioPlayer.load();
 
-      // Automatically play the track after loading
+      // Automatically play the track after loading:
       audioPlayer
         .play()
         .then(() => {
           console.log("Track is playing");
         })
         .catch((error) => {
+          const noPreview = createDiv();
+          currentPlay = document.getElementById("current-play");
+          noPreview.textContent = `No preview available for this track.`;
+          noPreview.classList.add("warning-message");
+          currentPlay.appendChild(noPreview);
           console.error("Error playing track:", error);
         });
-    }
+
+    } // here ends the function playPreview(previewUrl) – which is inside of the bigger function Todo()
 
     // ____________________________________________________________
 
-    // Praćenje submita u search-form-u i prikaz search-rezultata:
+    // Tracking the submit in the Search-form and displaying search-Results:
 
     searchButton.addEventListener("click", (event) => {
       event.preventDefault(); // Prevent the default form submission
-
-      handleSearch(); // Pozovi handleSearch() umjesto displaySearchResults
+      handleSearch(); // call handleSearch() instead of displaySearchResults
     });
 
-    // function for focusing on the Search Results:
+    // function for focusing on the Search results:
     async function handleSearch() {
-      const query = searchInput.value.trim(); // Get the input value
+      const query = searchInput.value.trim(); // fetch the input value
+      const formContainer = document.getElementById("zero-input"); // container near the input field
 
-      const formContainer = document.getElementById("zero-input"); // Container near the input field
-
-      // Uklonite ranije poruke upozorenja
+      // remove earlier warning messages (if any):
       formContainer.querySelector(".warning-message")?.remove();
 
       if (query.length >= 1) {
         console.log("Form submitted");
         console.log("Query:", query);
-        await displaySearchResults(query); // Koristi fetchSearchResults unutar displaySearchResults
-        // document.getElementById("search-results").focus(); // Focus on the results-container
+        await displaySearchResults(query); // use 'fetchSearchResults' inside the function 'displaySearchResults'
+        // Focus on the results-container:
+        // document.getElementById("search-results").focus();
         document
           .getElementById("search-results")
           .scrollIntoView({ behavior: "smooth", block: "start" });
@@ -733,7 +843,7 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
       }
     }
 
-    // Praćenje pritiska na Enter tipku i poziv handleSearch()
+    // Key press on Enter kbd key is also calling the handleSearch() function:
     searchInput.addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
         event.preventDefault(); // Prevent form submission on Enter
@@ -741,14 +851,14 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
       }
     });
 
-    // Event-listener za praćenje unosa u sva tri ova polja s posebnim kategorijama:
+    // Event-listener for tracking entry in all 3 fields with these categories:
     [artistInput, songInput, albumInput].forEach((input) => {
       input.addEventListener("input", () => {
         const query = input.value.trim();
         if (query.length > 0) {
           fetchSuggestions2(query);
         } else {
-          resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
+          resultsList.innerHTML = ""; // clean results if entry is empty
         }
       });
     });
@@ -1005,7 +1115,7 @@ index.js:696 Error playing track: NotSupportedError: Failed to load because no s
   window.addEventListener("load", todo.init);
 })();
 
-// -> ovdje završava čitav index.js kod! (na kraju je poziv samopozivajuće funkcije).
+// -> here ends index.js code! (it is an Immediately Invoked Function Expression - it uses encapsulation).
 
 // __________________________________________________________________________________________________________________________________________________________________
 
