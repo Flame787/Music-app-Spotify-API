@@ -7,6 +7,7 @@
     const searchInput = document.getElementById("search-all-input");
     const searchButton = document.getElementById("submit-button");
     // const searchForm = document.getElementById("search-form");
+    let narrowForm = false;
 
     function createDiv() {
       return document.createElement("div");
@@ -291,12 +292,9 @@
           textDivArtist1.classList.add("result-item-name"); // bold and bigger font
 
           ulArtists.appendChild(li);
-          resultsContainer.appendChild(ulArtists);  // -> ovo možda ubaciti kasnije
+          resultsContainer.appendChild(ulArtists); // -> ovo možda ubaciti kasnije
         });
       }
-
-
-      
 
       ulAlbums.appendChild(titleAlbums);
       titleAlbums.innerHTML = "Albums:";
@@ -526,6 +524,18 @@
     ) {
       console.log("Album ID:", albumId);
       const resultsContainer = document.getElementById("results-container");
+
+      // // after the Track-list button was clicked, narrowing the form with Tracks (to avoid empty space on each side):
+
+      if (narrowForm === false) {
+        const formResultsContainerTracks = document.getElementById(
+          "form-results-container"
+        );
+        formResultsContainerTracks.style.width = "50%";
+        formResultsContainerTracks.style.margin = "4% auto";
+        narrowForm = true;
+      }
+
       try {
         // Fetch albums for the selected artist
         // const results = await fetchSearchResults(artistName, "album");
@@ -765,11 +775,19 @@
             currentTrackInfoDiv3.classList.add("result-item-name");
             currentTrackInfoDiv5.classList.add("result-item-name");
 
-            currentTrackInfo.appendChild(currentTrackInfoDiv1);
-            currentTrackInfo.appendChild(currentTrackInfoDiv2);
-            currentTrackInfo.appendChild(currentTrackInfoDiv3);
-            currentTrackInfo.appendChild(currentTrackInfoDiv4);
-            currentTrackInfo.appendChild(currentTrackInfoDiv5);
+            // currentTrackInfo.appendChild(currentTrackInfoDiv1);
+            // currentTrackInfo.appendChild(currentTrackInfoDiv2);
+            // currentTrackInfo.appendChild(currentTrackInfoDiv3);
+            // currentTrackInfo.appendChild(currentTrackInfoDiv4);
+            // currentTrackInfo.appendChild(currentTrackInfoDiv5);
+            // skraćeno:
+            [
+              currentTrackInfoDiv1,
+              currentTrackInfoDiv2,
+              currentTrackInfoDiv3,
+              currentTrackInfoDiv4,
+              currentTrackInfoDiv5,
+            ].forEach((div) => currentTrackInfo.appendChild(div));
 
             currentTrackInfo.classList.add("current-track");
             currentTrackData.appendChild(currentTrackInfo);
@@ -830,6 +848,16 @@
 
       // remove earlier warning messages (if any):
       formContainer.querySelector(".warning-message")?.remove();
+
+      // function which expands the result-form back to 80% if user presses Search button again:
+      if (narrowForm === true) {
+        const formResultsContainerTracks = document.getElementById(
+          "form-results-container"
+        );
+        formResultsContainerTracks.style.width = "80%";
+        // formResultsContainerTracks.style.margin = "4% auto";
+        narrowForm = false;
+      }
 
       if (query.length >= 1) {
         console.log("Form submitted");
@@ -1109,7 +1137,6 @@
       // removes the whole parent-task (in which the removeButton was embedded as a child)
       saveLists();
     }
-
   }
   // here ends Todo function.
 
@@ -1123,19 +1150,21 @@
 // if page reloaded, scroll back to the first element:
 document.addEventListener("DOMContentLoaded", function () {
   document
-  .getElementById("first-container")
-  .scrollIntoView({ behavior: "smooth", block: "start" });
-  
+    .getElementById("first-container")
+    .scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
-// If backspace pressed when not focused on Input field, 
+// If backspace pressed when not focused on Input field,
 document.addEventListener("keydown", function (event) {
   const activeElement = document.activeElement;
-    if (event.key === "Backspace" && !(activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA")) {
-      event.preventDefault(); // prevent usual Backspace-key task (for deleting)
-      document
-  .getElementById("first-container")
-  .scrollIntoView({ behavior: "smooth", block: "start" });
+  if (
+    event.key === "Backspace" &&
+    !(activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA")
+  ) {
+    event.preventDefault(); // prevent usual Backspace-key task (for deleting)
+    document
+      .getElementById("first-container")
+      .scrollIntoView({ behavior: "smooth", block: "start" });
   }
 });
 

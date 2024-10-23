@@ -305,7 +305,7 @@ select {
 }
 
 #search-form {
-  width: 50%;   // other flex-containers with results have width: 80%, but Search has to be thinner
+  width: 50%;   // other flex-containers with results have width: 80%, but Search & Audio player have to be thinner
   margin: 4% auto;  // centering Search-form in the middle of the page
 }
 
@@ -582,7 +582,7 @@ hr {
 }
 
 .li-item-style {
-  padding: 0 2% 7%;
+  padding: 0 1% 7%;
   font-size: 1.2rem;
 }
 
@@ -708,6 +708,10 @@ li .image-container img {
   flex-basis: 40%;
 }
 
+#form-results-container {
+  // width: 50%;   // usual Results have width: 80%, but in JS when Track list button is triggered, this form should become thinner
+  margin: 4% auto;  // centering Search-form in the middle of the page
+}
 
 // MEDIA QUERIES:
 
@@ -720,8 +724,8 @@ li .image-container img {
     margin: 0 40px;
   }
   .flex-item {
-    flex-basis: 30%;
-    margin: 3% auto;
+    flex-basis: 50%;
+    margin: 3% 5%;
   }
   a.ancor-style,
   .nav-button,
@@ -749,7 +753,7 @@ li .image-container img {
 
   .flex-container-ol {
     flex-direction: row;
-    gap: 0;
+    gap: 30px;
   }
 
   .flex-container-ol .result-flex-item {
@@ -1012,6 +1016,9 @@ li .image-container img {
     margin: auto;
   }
   .result-item-name {
+    font-size: 1rem !important;
+  }
+  .result-flex-item div {
     font-size: 1rem !important;
   }
 }

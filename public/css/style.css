@@ -1227,7 +1227,7 @@ hr {
 }
 
 .li-item-style {
-  padding: 0 2% 7%;
+  padding: 0 1% 7%;
   font-size: 1.2rem;
 }
 
@@ -1335,6 +1335,10 @@ li .image-container img {
   flex-basis: 40%;
 }
 
+#form-results-container {
+  margin: 4% auto;
+}
+
 @media (max-width: 1540px) {
   #nav-list button:last-child {
     margin-right: 150px;
@@ -1343,8 +1347,8 @@ li .image-container img {
     margin: 0 40px;
   }
   .flex-item {
-    flex-basis: 30%;
-    margin: 3% auto;
+    flex-basis: 50%;
+    margin: 3% 5%;
   }
   a.ancor-style,
   .nav-button,
@@ -1365,7 +1369,7 @@ li .image-container img {
   }
   .flex-container-ol {
     flex-direction: row;
-    gap: 0;
+    gap: 30px;
   }
   .flex-container-ol .result-flex-item {
     flex-basis: 45% !important;
@@ -1584,6 +1588,9 @@ li .image-container img {
     margin: auto;
   }
   .result-item-name {
+    font-size: 1rem !important;
+  }
+  .result-flex-item div {
     font-size: 1rem !important;
   }
 }
