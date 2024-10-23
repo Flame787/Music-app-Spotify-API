@@ -55,7 +55,8 @@ body {
 .favorite-button,
 #theme_color,
 .dropdown-menu,
-.show-more-button, .play-button {
+.show-more-button,
+.play-button {
   @extend .theme-button;
 }
 
@@ -300,8 +301,9 @@ select {
   border-radius: 15px;
 }
 
-
-#first-input, #second-input, #third-input{
+#first-input,
+#second-input,
+#third-input {
   margin: 1% 3%;
   flex-basis: 0%;
 }
@@ -311,8 +313,8 @@ select {
 }
 
 #search-form {
-  width: 50%;   // other flex-containers with results have width: 80%, but Search & Audio player have to be thinner
-  margin: 4% auto;  // centering Search-form in the middle of the page
+  width: 50%; // other flex-containers with results have width: 80%, but Search & Audio player have to be thinner
+  margin: 4% auto; // centering Search-form in the middle of the page
 }
 
 // to have div transparent, but text inside of it fully visible - rgba with transparent effect:
@@ -320,7 +322,7 @@ select {
 
 // checkbox for artist/album/songs:
 input[type="checkbox"] {
-  transform: scale(1.5);  // makes checkbox bigger
+  transform: scale(1.5); // makes checkbox bigger
   vertical-align: middle; // aligns checkbox in the middle of the text in label, and not too high up
   margin-right: 5px; /* gap between checkbox and label */
 }
@@ -611,7 +613,8 @@ hr {
   flex-basis: 30%;
 }
 
-.result-item-name {   // font of the div-text (song name) in Track list (smaller on different media queries)
+.result-item-name {
+  // font of the div-text (song name) in Track list (smaller on different media queries)
   font-size: 1.5rem !important;
   font-weight: bold;
   padding: 2% 0;
@@ -622,7 +625,7 @@ hr {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;  // center all tracks in one column
+  flex-direction: column; // center all tracks in one column
   justify-content: center;
   align-content: center;
 }
@@ -634,7 +637,7 @@ hr {
 }
 
 .flex-container-tracks li div {
-  width: 500px;  
+  width: 500px;
   margin: auto;
 }
 
@@ -656,7 +659,6 @@ hr {
   width: 170px;
   margin: 8% auto 12%;
 }
-
 
 // this doesn't apply at all:
 // .flex-container-tracks .result-flex-item {
@@ -689,7 +691,7 @@ li .image-container::before {
 }
 
 // li .image-container:hover::before {
-//   opacity: 0.8; 
+//   opacity: 0.8;
 // }
 
 li:hover .image-container::before {
@@ -713,8 +715,8 @@ li .image-container img {
 }
 
 .form-player {
-  width: 50%;   // other flex-containers with results have width: 80%, but Audio-player & Search should be thinner
-  margin: 4% auto;  // centering Audio-player in the middle of the page
+  width: 50%; // other flex-containers with results have width: 80%, but Audio-player & Search should be thinner
+  margin: 4% auto; // centering Audio-player in the middle of the page
 }
 
 .form-player .flex-item {
@@ -723,15 +725,24 @@ li .image-container img {
 
 #form-results-container {
   // width: 50%;   // usual Results have width: 80%, but in JS when Track list button is triggered, this form should become thinner
-  margin: 4% auto;  // centering Search-form in the middle of the page
+  margin: 4% auto; // centering Search-form in the middle of the page
 }
 
-.search-category{
+.search-category {
   margin: 40px auto 0%;
 }
 
-#form-results-container{
-  display: none; // Element is hidden by default 
+#form-results-container {
+  display: none; // Element is hidden by default
+}
+
+#flex-search-category {
+  margin-bottom: 5%;
+}
+
+#search-all-button {
+  width: 170px;
+  font-size: 1.5rem;
 }
 
 // MEDIA QUERIES:
@@ -752,7 +763,10 @@ li .image-container img {
   .nav-button,
   .favorite-button,
   .remove-button,
-  .submit-button, .show-more-button, .play-button {
+  .submit-button,
+  .show-more-button,
+  .play-button,
+  #search-all-button {
     font-size: 1.1rem;
     padding: 2%;
   }
@@ -785,9 +799,14 @@ li .image-container img {
     width: 200px;
     height: 200px;
   }
+  .result-category {
+    font-size: 1.8rem;
+  }
+  .li-item-style {
+    margin-bottom: 0%;
+    padding-bottom: 1%;
+  }
 }
-
-
 
 @media (max-width: 1150px) {
   #nav-list button {
@@ -818,6 +837,9 @@ li .image-container img {
 }
 
 @media (max-width: 1056px) {
+  body {
+    font-size: 1rem;
+  }
   li {
     flex-basis: 90%;
   }
@@ -831,7 +853,11 @@ li .image-container img {
   }
 
   .result-item-name {
-    font-size: 1.3rem !important;
+    font-size: 1.1rem !important;
+  }
+  .li-item-style {
+    margin-bottom: 0%;
+    padding-bottom: 1%;
   }
 }
 
@@ -859,7 +885,10 @@ li .image-container img {
   .nav-button,
   .favorite-button,
   .remove-button,
-  .submit-button,  .show-more-button, .play-button {
+  .submit-button,
+  .show-more-button,
+  .play-button,
+  #search-all-button {
     font-size: 1rem;
   }
 }
@@ -913,6 +942,9 @@ li .image-container img {
 
   h3 {
     font-size: 1.5rem;
+  }
+  #search-all-input {
+    width: 90% !important;
   }
 }
 
@@ -970,11 +1002,11 @@ li .image-container img {
   .remove-button {
     width: 50%;
   }
-  #player-add-to-playlist{
+  #player-add-to-playlist {
     width: 13rem;
   }
 
-  .show-more-button{
+  .show-more-button {
     width: 70%;
   }
 
@@ -1006,7 +1038,7 @@ li .image-container img {
   #nav-list button {
     width: 7rem;
   }
-  
+
   .dropdown-menu {
     top: 150px;
   }
@@ -1023,7 +1055,10 @@ li .image-container img {
   .nav-button,
   .favorite-button,
   .remove-button,
-  .submit-button, .show-more-button, .play-button {
+  .submit-button,
+  .show-more-button,
+  .play-button,
+  #search-all-button {
     font-size: 1.1rem;
   }
   .favorite-button {
@@ -1039,7 +1074,7 @@ li .image-container img {
   }
 
   .flex-container-tracks li div {
-    width: 350px;  
+    width: 350px;
     margin: auto;
   }
   .result-item-name {
@@ -1050,7 +1085,10 @@ li .image-container img {
   }
 
   input[type="checkbox"] {
-    transform: scale(0.5);  // makes checkbox bigger
+    transform: scale(0.5); // makes checkbox bigger
+  }
+  .result-category {
+    font-size: 1.5rem;
   }
 }
 
@@ -1076,23 +1114,54 @@ li .image-container img {
   }
 
   audio {
-    width: 230px;
+    width: 220px;
+    height: 35px;
   }
 
   .flex-container-tracks li div {
-    width: 250px;  
+    width: 250px;
     margin: auto;
+  }
+  .result-category {
+    font-size: 1.3rem;
+  }
+  // NEW
+  .flex-container-tracks .play-button {
+    width: 130px;
+  }
+  // NEW
+  .flex-container-tracks .show-more-button {
+    width: 130px;
+  }
+  // NEW
+  .result-image {
+    width: 150px;
+    height: 150px;
+  }
+  // NEW
+  #search-all-input {
+    width: 90% !important;
+  }
+  // NEW
+  #search-all-button {
+    width: 90% !important;
+  }
+
+  #search-form {
+    width: 85%;
   }
 }
 
 @media (max-width: 389px) {
+  // Iphone SE: 375 X 667
   .red {
     height: 300px;
   }
   .flex-container-tracks li div {
-    width: 150px;  
+    width: 150px;
   }
-  #player-add-to-playlist{
+
+  #player-add-to-playlist {
     width: 9rem;
   }
 }
