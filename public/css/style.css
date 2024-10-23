@@ -1668,6 +1668,9 @@ li .image-container img {
   .result-flex-item div {
     font-size: 1rem !important;
   }
+  #first-input, #second-input, #third-input {
+    width: 44px;
+  }
   input[type=checkbox] {
     transform: scale(0.5);
   }

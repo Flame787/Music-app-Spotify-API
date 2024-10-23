@@ -5,6 +5,8 @@
     const list = document.getElementById("added-list"); // first list (ul) that gets tasks appended
     const favoritesList = document.getElementById("fav_albums"); // second list (ul) with favorite songs
     const searchInput = document.getElementById("search-all-input");
+    const query = searchInput.value.trim();
+    const searchAllButton = document.getElementById("search-all-button");
     const searchButton = document.getElementById("submit-button");
     // const searchForm = document.getElementById("search-form");
     const formResultsContainerTracks = document.getElementById(
@@ -176,8 +178,70 @@
 
     ///////_______________ Function to send Api-request for Search results - from Frontend to Backend: __________________//////////////////////
 
+    // NEW 23.10. - Search according to chosen categories (type: artist, album, track):
+
+    let selectedType;
+
+    async function checkCategories() {
+      searchAllButton.addEventListener("click",  async () => {
+        const selectedOptions = Array.from(
+          document.querySelectorAll('input[name="category"]:checked')
+        ).map((checkbox) => checkbox.value);
+
+        console.log("Selected options:", selectedOptions);
+
+        // let type;
+        if (JSON.stringify(selectedOptions) === JSON.stringify(["artist"])) {
+          selectedType = "artist";
+        } else if (
+          JSON.stringify(selectedOptions) === JSON.stringify(["song"])
+        ) {
+          selectedType = "track";
+        } else if (
+          JSON.stringify(selectedOptions) === JSON.stringify(["album"])
+        ) {
+          selectedType = "album";
+        } else if (
+          JSON.stringify(selectedOptions) ===
+          JSON.stringify(["artist", "album"])
+        ) {
+          selectedType = "artist,album";
+        } else if (
+          JSON.stringify(selectedOptions) === JSON.stringify(["song", "album"])
+        ) {
+          selectedType = "track,album";
+        } else if (
+          JSON.stringify(selectedOptions) === JSON.stringify(["artist", "song"])
+        ) {
+          selectedType = "artist,track";
+        } else if (
+          JSON.stringify(selectedOptions) === JSON.stringify([])
+        ) {
+          selectedType = "artist,album,track";
+        } else {
+          selectedType = "artist,album,track";
+        }
+
+        console.log("Selected type:", selectedType);
+
+        try {
+          // call fetchSearchResults and transfer type (catergory):
+          await fetchSearchResults(query, selectedType);
+        } catch (error) {
+          console.error("Error fetching search results:", error);
+        }
+      });
+    }
+
+    checkCategories();
+
+    // if (artistInput.value ==
+
     // if the 'type' is not set, it will be a default value: 'artist,album,track':
-    async function fetchSearchResults(query, type = "artist,album,track") {
+
+    // NEW:
+    async function fetchSearchResults(query, type){
+    // async function fetchSearchResults(query, type = "artist,album,track") {
       try {
         const response = await fetch(`/api/search?q=${query}&type=${type}`);
         if (!response.ok) {
@@ -189,6 +253,9 @@
         console.error("Error fetching suggestions:", error);
       }
     }
+
+    checkCategories();
+
 
     // Funcion for warning if the input-field is empty:
     function displayMessage(container, text) {
@@ -849,7 +916,7 @@
       // remove earlier warning messages (if any):
       formContainer.querySelector(".warning-message")?.remove();
       // show previously hidden form:
-      formResultsContainerTracks.style.display = 'block';
+      formResultsContainerTracks.style.display = "block";
 
       // function which expands the result-form back to 80% if user presses Search button again:
       if (narrowForm === true) {
@@ -881,16 +948,16 @@
     });
 
     // Event-listener for tracking entry in all 3 fields with these categories:
-    [artistInput, songInput, albumInput].forEach((input) => {
-      input.addEventListener("input", () => {
-        const query = input.value.trim();
-        if (query.length > 0) {
-          fetchSuggestions2(query);
-        } else {
-          resultsList.innerHTML = ""; // clean results if entry is empty
-        }
-      });
-    });
+    // [artistInput, songInput, albumInput].forEach((input) => {
+    //   input.addEventListener("input", () => {
+    //     const query = input.value.trim();
+    //     if (query.length > 0) {
+    //       fetchSuggestions2(query);
+    //     } else {
+    //       resultsList.innerHTML = ""; // clean results if entry is empty
+    //     }
+    //   });
+    // });
 
     // Load lists from localStorage on init:
     function loadLists() {
