@@ -137,92 +137,103 @@
 
         <!-- NEW 23.10.: checkbox for chosing Search categories -->
 
-        <div class="flex-item-big flex-container">
-          <p>Search by category:</p>
-        </div>
-        
-        <div class="flex-item" id="first-input">
-          <p>
-            <label for="artist">Artist:</label>
-            <input type="checkbox" id="artist" name="category" value="artist" />
-          </p>
-        </div>
-        
-        <div class="flex-item" id="second-input">
-          <p>
-            <label for="song">Song:</label>
-            <input type="checkbox" id="song" name="category" value="song" />
-          </p>
-        </div>
-        
-        <div class="flex-item" id="third-input">
-          <p>
-            <label for="album">Album:</label>
-            <input type="checkbox" id="album" name="category" value="album" />
-          </p>
-        </div>
+        <p class="search-category">Search by category:</p>
 
+        <div class="flex-item-big flex-container" id="flex-search-category">
+          <div class="flex-item" id="first-input">
+            <p>
+              <label for="artist">Artist:</label>
+              <input
+                type="checkbox"
+                id="artist"
+                name="category"
+                value="artist"
+              />
+            </p>
+          </div>
 
+          <div class="flex-item" id="second-input">
+            <p>
+              <label for="song">Song:</label>
+              <input type="checkbox" id="song" name="category" value="song" />
+            </p>
+          </div>
 
+          <div class="flex-item" id="third-input">
+            <p>
+              <label for="album">Album:</label>
+              <input type="checkbox" id="album" name="category" value="album" />
+            </p>
+          </div>
+        </div>
       </form>
-
-
-      <h2 id="currently-playing">Currently playing:</h2>
 
       <!-- 2nd form: Music player + Rating songs/albums and Adding them to the current list -->
 
-      <form action="" method="get" class="form flex-container form-theme form-player">
-
-        <div class="flex-item" id="music-player">
-          <div id="music-wrapper">
-            <audio controls id="audio-player">
-              <!-- placeholder for dynamically inserted track source -->
-              <!-- <source src="horse.mp3" type="audio/mpeg"> -->
-              ...
-            </audio>
+      <form
+        action=""
+        method="get"
+        class="form flex-container form-theme form-player"
+      >
+        <p id="currently-playing">Currently playing:</p>
+        <div class="flex-container">
+          <div class="flex-item" id="music-player">
+            <div id="music-wrapper">
+              <audio controls id="audio-player">
+                <!-- placeholder for dynamically inserted track source -->
+                <!-- <source src="horse.mp3" type="audio/mpeg"> -->
+                ...
+              </audio>
+            </div>
           </div>
-        </div>
-        <div class="flex-item" id="current-play">
-          <p><label for="album">No track or album selected.</label></p>
-          <!-- <div class="current-track"> -->
-            
-              <!-- this fills out dinamically, depending on currently playing song. It is displaying: current song, album, artist and duration. 
+          <div class="flex-item" id="current-play">
+            <p><label for="album">No track or album selected.</label></p>
+            <!-- <div class="current-track"> -->
+
+            <!-- this fills out dinamically, depending on currently playing song. It is displaying: current song, album, artist and duration. 
                Song, artist and album - values are also copied when user adds this song to his playlist - they fill out new list items. -->
-            
-          <!-- </div> -->
-        </div>
 
-        <div class="flex-item" id="forth-input">
-          <p><label for="review">Rate (1-10):</label></p>
-          <p>
-            <input
-              class="input-color"
-              type="number"
-              id="review"
-              name="review"
-              pattern="[1-10]"
-              min="1"
-              max="10"
-              size="25"
-              required
-            />
-          </p>
-        </div>
+            <!-- </div> -->
+          </div>
 
-        <div id="add-to-playlist" class="flex-item">
-          <p></p>
-          <button
-            type="submit"
-            class="input-button add-button button nav-button"
-          >
-            Add to playlist
-          </button>
+          <div class="flex-item" id="forth-input">
+            <p><label for="review">Rate (1-10):</label></p>
+            <p>
+              <input
+                class="input-color"
+                type="number"
+                id="review"
+                name="review"
+                pattern="[1-10]"
+                min="1"
+                max="10"
+                size="25"
+                required
+              />
+            </p>
+          </div>
+
+          <div id="add-to-playlist" class="flex-item">
+            <p></p>
+            <button
+              type="submit"
+              id="player-add-to-playlist"
+              class="input-button add-button button nav-button"
+            >
+              Add to playlist
+            </button>
+          </div>
         </div>
       </form>
 
       <!-- 3rd form - Results of the Search: -->
 
-      <form action="" method="get" id="form-results-container" class="form flex-container form-theme">
+      <form
+        action=""
+        method="get"
+        id="form-results-container"
+        class="form flex-container form-theme"
+      >
         <div class="flex-item">
           <p id="search-results" tabindex="0">Results:</p>
           <div id="results-container" class="flex-container-results">
@@ -250,8 +261,6 @@
           </div>
         </div>
       </form>
-
-      
     </div>
     <div id="results">
       <div class="visible-title2 title-theme">
@@ -273,7 +282,6 @@
     </div>
     <script src="/index.js"></script>
     <!-- script for Spotify Player SDK -->
-    
   </body>
 </html>
 

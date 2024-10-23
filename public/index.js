@@ -7,6 +7,9 @@
     const searchInput = document.getElementById("search-all-input");
     const searchButton = document.getElementById("submit-button");
     // const searchForm = document.getElementById("search-form");
+    const formResultsContainerTracks = document.getElementById(
+      "form-results-container"
+    );
     let narrowForm = false;
 
     function createDiv() {
@@ -528,9 +531,6 @@
       // // after the Track-list button was clicked, narrowing the form with Tracks (to avoid empty space on each side):
 
       if (narrowForm === false) {
-        const formResultsContainerTracks = document.getElementById(
-          "form-results-container"
-        );
         formResultsContainerTracks.style.width = "50%";
         formResultsContainerTracks.style.margin = "4% auto";
         narrowForm = true;
@@ -848,12 +848,11 @@
 
       // remove earlier warning messages (if any):
       formContainer.querySelector(".warning-message")?.remove();
+      // show previously hidden form:
+      formResultsContainerTracks.style.display = 'block';
 
       // function which expands the result-form back to 80% if user presses Search button again:
       if (narrowForm === true) {
-        const formResultsContainerTracks = document.getElementById(
-          "form-results-container"
-        );
         formResultsContainerTracks.style.width = "80%";
         // formResultsContainerTracks.style.margin = "4% auto";
         narrowForm = false;
@@ -1214,7 +1213,7 @@ document.addEventListener("keydown", function (event) {
 // + brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?) - bez brojki!
 // + tamo gdje se ne pojavljuju slike (jer ih nema) staviti neku placeholder-sliku ili obavijest da slika nedostaje. - DONE
 
-// - list iteme na manjim rezolucijama poredati prvo 2 u redak, pa tek onda 1 u redak - NOT YET WORKING!
+// + list iteme na manjim rezolucijama poredati prvo 2 u redak, pa tek onda 1 u redak - DONE 23.10.
 // + list-itemi bi trebali imati donju marginu veću na manjim rezolucijama, da se vertikalno više razdvoje međusobno - DONE
 
 // + buttonići - boja u nekim temama nije dovoljno kontrastna od pozadine - treba biti svjetlija ili tamnija nijansa da se buttonići istaknu više - DONE
@@ -1235,7 +1234,7 @@ document.addEventListener("keydown", function (event) {
 + dohvaća albume i pjesme samo od odabranog artista (q = artist, a parametri su slično kao i dosad za albume i pjesme)
 + umjesto rezultata, u tom formu se prikažu albumi dohvaćeni s apija, 
 + dohvaćeni albumi imaju sve parametre kao i u Results, i imaju button Track list (i isto ih se može svirati) - DONE
-- dodati da se prikažu i pjesme tog artista, dohvaćene s apija, i imaju buttone Add to playlist
++ dodati da se prikažu i pjesme tog artista, dohvaćene s apija, i imaju buttone Add to playlist
 ** trenutno postoje 2x event-listener za Discography button, svaki unutar jedne funkcije - provjeriti koji je dovoljan (+ prilagoditi), a koji brišemo
 
 + dati dodatni id buttonu Track list (za Tracks-rezultate) - DONE -> id: "tracklist-button"
