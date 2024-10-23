@@ -926,6 +926,12 @@ select option {
   margin: 4% auto;
 }
 
+input[type=checkbox] {
+  transform: scale(1.5);
+  vertical-align: middle;
+  margin-right: 5px; /* gap between checkbox and label */
+}
+
 .visible-title1,
 .visible-title2 {
   padding: 0.1%;

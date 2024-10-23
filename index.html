@@ -110,7 +110,7 @@
           </div>
         </div>
 
-        <div class="flex-item-big flex-container">
+        <!-- <div class="flex-item-big flex-container">
           <p>Search by category:</p>
         </div>
 
@@ -133,7 +133,35 @@
           <p>
             <input type="text" id="album" name="album" class="input-color" />
           </p>
+        </div> -->
+
+        <!-- NEW 23.10.: checkbox for chosing Search categories -->
+
+        <div class="flex-item-big flex-container">
+          <p>Search by category:</p>
         </div>
+        
+        <div class="flex-item" id="first-input">
+          <p>
+            <label for="artist">Artist:</label>
+            <input type="checkbox" id="artist" name="category" value="artist" />
+          </p>
+        </div>
+        
+        <div class="flex-item" id="second-input">
+          <p>
+            <label for="song">Song:</label>
+            <input type="checkbox" id="song" name="category" value="song" />
+          </p>
+        </div>
+        
+        <div class="flex-item" id="third-input">
+          <p>
+            <label for="album">Album:</label>
+            <input type="checkbox" id="album" name="category" value="album" />
+          </p>
+        </div>
+
 
 
       </form>

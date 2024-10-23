@@ -312,6 +312,13 @@ select {
 // to have div transparent, but text inside of it fully visible - rgba with transparent effect:
 // background: radial-gradient(at 25% 75%, #5d0e41, rgba(77, 148, 255, 0));
 
+// checkbox for artist/album/songs:
+input[type="checkbox"] {
+  transform: scale(1.5);  // makes checkbox bigger
+  vertical-align: middle; // aligns checkbox in the middle of the text in label, and not too high up
+  margin-right: 5px; /* gap between checkbox and label */
+}
+
 .visible-title1,
 .visible-title2 {
   padding: 0.1%;
