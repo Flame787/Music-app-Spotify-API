@@ -1,3 +1,5 @@
+// NEW BRANCH "SEARCH_TYPES":
+
 (function () {
   function Todo() {
     const buttonPlay = document.querySelector(".play-button");
@@ -5,14 +7,8 @@
     const list = document.getElementById("added-list"); // first list (ul) that gets tasks appended
     const favoritesList = document.getElementById("fav_albums"); // second list (ul) with favorite songs
     const searchInput = document.getElementById("search-all-input");
-    const query = searchInput.value.trim();
-    const searchAllButton = document.getElementById("search-all-button");
     const searchButton = document.getElementById("submit-button");
     // const searchForm = document.getElementById("search-form");
-    const formResultsContainerTracks = document.getElementById(
-      "form-results-container"
-    );
-    let narrowForm = false;
 
     function createDiv() {
       return document.createElement("div");
@@ -170,7 +166,7 @@
     // const button = document.querySelectorAll("button");
 
     let album, rating, artist, song, time, item;
-
+// OVO SE BAŠ NE KORISTI, VEZANO UZ ČUDNU funkciju fetchSuggestions2 ??:
     const artistInput = document.getElementById("artist");
     const songInput = document.getElementById("song");
     const albumInput = document.getElementById("album");
@@ -178,70 +174,8 @@
 
     ///////_______________ Function to send Api-request for Search results - from Frontend to Backend: __________________//////////////////////
 
-    // NEW 23.10. - Search according to chosen categories (type: artist, album, track):
-
-    let selectedType;
-
-    async function checkCategories() {
-      searchAllButton.addEventListener("click",  async () => {
-        const selectedOptions = Array.from(
-          document.querySelectorAll('input[name="category"]:checked')
-        ).map((checkbox) => checkbox.value);
-
-        console.log("Selected options:", selectedOptions);
-
-        // let type;
-        if (JSON.stringify(selectedOptions) === JSON.stringify(["artist"])) {
-          selectedType = "artist";
-        } else if (
-          JSON.stringify(selectedOptions) === JSON.stringify(["song"])
-        ) {
-          selectedType = "track";
-        } else if (
-          JSON.stringify(selectedOptions) === JSON.stringify(["album"])
-        ) {
-          selectedType = "album";
-        } else if (
-          JSON.stringify(selectedOptions) ===
-          JSON.stringify(["artist", "album"])
-        ) {
-          selectedType = "artist,album";
-        } else if (
-          JSON.stringify(selectedOptions) === JSON.stringify(["song", "album"])
-        ) {
-          selectedType = "track,album";
-        } else if (
-          JSON.stringify(selectedOptions) === JSON.stringify(["artist", "song"])
-        ) {
-          selectedType = "artist,track";
-        } else if (
-          JSON.stringify(selectedOptions) === JSON.stringify([])
-        ) {
-          selectedType = "artist,album,track";
-        } else {
-          selectedType = "artist,album,track";
-        }
-
-        console.log("Selected type:", selectedType);
-
-        try {
-          // call fetchSearchResults and transfer type (catergory):
-          await fetchSearchResults(query, selectedType);
-        } catch (error) {
-          console.error("Error fetching search results:", error);
-        }
-      });
-    }
-
-    checkCategories();
-
-    // if (artistInput.value ==
-
     // if the 'type' is not set, it will be a default value: 'artist,album,track':
-
-    // NEW:
-    async function fetchSearchResults(query, type){
-    // async function fetchSearchResults(query, type = "artist,album,track") {
+    async function fetchSearchResults(query, type = "artist,album,track") {
       try {
         const response = await fetch(`/api/search?q=${query}&type=${type}`);
         if (!response.ok) {
@@ -254,9 +188,6 @@
       }
     }
 
-    checkCategories();
-
-
     // Funcion for warning if the input-field is empty:
     function displayMessage(container, text) {
       const message = document.createElement("p");
@@ -265,7 +196,7 @@
       container.appendChild(message); // ("Please enter your query" - in red letters)
     }
 
-    ///////_______________  Function to display all fetched Search-results on the page: __________________//////////////////////
+    ///// Function to display all fetched Search-results on the page: ///////
 
     async function displaySearchResults(query) {
       const resultsContainer = document.getElementById("results-container"); // Your container element
@@ -284,12 +215,12 @@
         displayMessage(resultsContainer, "No results found.");
         return; // Exit if all 3 results categories are undefined or empty
       }
-
+// kreiramo nove varijable za spremanje dohvaćenih rezultata (ako rezultati postoje):
       const ulArtists = document.createElement("ul"); // create an unordered list for artists
       const ulAlbums = document.createElement("ul"); // same for albums
       const ulSongs = document.createElement("ul"); // same for songs
 
-      // const titleArtists = document.createElement("h3");
+      // const titleArtists = document.createElement("h3");  // naslovi
       // const titleAlbums = document.createElement("h3");
       // const titleSongs = document.createElement("h3");
       const [titleArtists, titleAlbums, titleSongs] = ["h3", "h3", "h3"].map(
@@ -301,16 +232,17 @@
       // ulSongs.classList.add("flex-container");
       // skraćeno:
       [ulArtists, ulAlbums, ulSongs].forEach((element) =>
-        element.classList.add("flex-container-ol")
+        element.classList.add("flex-container-ol")  // listi dodaju klasu 
       );
-
-      // show subtitle inside results:
-      ulArtists.appendChild(titleArtists);
-      titleArtists.innerHTML = "Artists:";
 
       // Results displaying, depending on API-data structure:
 
-      // Check and display ARTISTS:
+      // - - - - - Check and display ARTISTS: - - - - - - - - - - - - -
+  // DODATI UVJET DA SE PRIKAŽE SAMO AKO SU ALBUMI BILI TRAŽENI (ILI SVE 3):
+
+      // show subtitle inside results:
+      ulArtists.appendChild(titleArtists);
+      titleArtists.innerHTML = "Artists:"; // staviti nakon uvjeta za ARTISTS: 
 
       if (results.artists && results.artists.items.length > 0) {
         results.artists.items.forEach((item) => {
@@ -344,7 +276,6 @@
           li.appendChild(textDivArtist1);
           textDivArtist2.textContent = `${item.genres.join(", ")}`; // lists all genres and puts a comma between them
           li.appendChild(textDivArtist2);
-
           li.appendChild(showMoreButton);
           showMoreButton.textContent = `Discography`;
           showMoreButton.classList.add("show-more-button");
@@ -353,7 +284,7 @@
           // Event listener for the Discography button:
           showMoreButton.addEventListener("click", (event) => {
             event.preventDefault(); // Prevent default button behavior
-            handleDiscographyButtonClick(item.name); // Calls the function to fetch albums and passes artist-name to the function
+            handleDiscographyButtonClick(item.name); // Calls the function to fetch albums and passes the artist-name to the function
             console.log("discography fetched");
           });
 
@@ -362,15 +293,16 @@
           textDivArtist1.classList.add("result-item-name"); // bold and bigger font
 
           ulArtists.appendChild(li);
-          resultsContainer.appendChild(ulArtists); // -> ovo možda ubaciti kasnije
+          resultsContainer.appendChild(ulArtists);  // -> ovo možda kasnije?
         });
       }
 
-      ulAlbums.appendChild(titleAlbums);
-      titleAlbums.innerHTML = "Albums:";
+//  - - - - - Check and display ALBUMS:  - - - - - - - - - - - - - - - -
+   // DODATI UVJET DA SE PRIKAŽE SAMO AKO SU ALBUMI BILI TRAŽENI (ILI SVE 3):
 
-      //  - - - - - Check and display ALBUMS:  - - - - - - - - - - - - - - - - - - - - - -
-
+      ulAlbums.appendChild(titleAlbums);  
+      titleAlbums.innerHTML = "Albums:";  // staviti nakon uvjeta za ALBUMS:        
+      
       if (results.albums && results.albums.items.length > 0) {
         results.albums.items.forEach((item) => {
           const li = document.createElement("li");
@@ -382,7 +314,6 @@
             img.src = item.images[0].url; // Set the image source
             img.alt = `${item.name} Album Cover`;
             img.classList.add("result-image");
-
             // Insert the div-image before the text content:
             li.insertBefore(div, li.firstChild);
 
@@ -392,11 +323,11 @@
 
           // Create a <div> for the text and append it:
           const textDivAlbum1 = createDiv();
-          const textDivAlbum2 = createDiv();
+          const textDivAlbum2 = createDiv(); 
           const textDivAlbum3 = createDiv();
           const textDivAlbum4 = createDiv();
 
-          textDivAlbum1.textContent = `${item.name}`;
+          textDivAlbum1.textContent = `${item.name}`;  // NAZIV ALBUMA
           textDivAlbum2.textContent = `By: ${item.artists[0].name}`;
           textDivAlbum3.textContent = `Release date: ${item.release_date}`;
           textDivAlbum4.textContent = `Album tracks number: ${item.total_tracks}`;
@@ -405,7 +336,6 @@
           const showMoreButton = document.createElement("button");
 
           li.append(textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4);
-
           li.appendChild(showMoreButton);
           showMoreButton.textContent = `Track list`;
           showMoreButton.classList.add("show-more-button");
@@ -413,7 +343,7 @@
 
           li.classList.add("li-item-style", "result-flex-item");
           titleAlbums.classList.add("result-category"); // centered title "Albums:"
-          textDivAlbum1.classList.add("result-item-name"); // bold and bigger font
+          textDivAlbum1.classList.add("result-item-name"); //bold, bigger font
 
           // Event listener for the button 'Track list':
           showMoreButton.addEventListener("click", (event) => {
@@ -433,11 +363,12 @@
           resultsContainer.appendChild(ulAlbums);
         });
       }
+      
+      //  - - - - - Check and display TRACKS / SONGS:  - - - - - - - - - - - 
+// DODATI UVJET DA SE PRIKAŽE SAMO AKO SU TRACKSI BILI TRAŽENI (ILI SVE 3):
 
-      ulSongs.appendChild(titleSongs);
-      titleSongs.innerHTML = "Songs:";
-
-      //  - - - - - Check and display TRACKS / SONGS:  - - - - - - - - - - - - - - - - - - - - - -
+      ulSongs.appendChild(titleSongs);  
+      titleSongs.innerHTML = "Songs:";  // staviti nakon uvjeta za TRACKS:     
 
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
@@ -462,7 +393,7 @@
           // Create a <div> for the text and append it
           const textDivSong1 = createDiv();
           const textDivSong2 = createDiv();
-          textDivSong1.textContent = `${item.name}`;
+          textDivSong1.textContent = `${item.name}`;   // NAZIV PJESME
           textDivSong2.textContent = `By: ${item.artists[0].name}`;
 
           const showMoreButton = document.createElement("button");
@@ -485,7 +416,7 @@
       }
     }
 
-    // ------------ New function to fetch albums (discography) by artist name: ---------------------------------
+    // ------------ Additional function to fetch albums (discography) by artist name: (linked by button Discography) --------------------------------
 
     async function handleDiscographyButtonClick(artistName) {
       const resultsContainer = document.getElementById("results-container");
@@ -531,10 +462,7 @@
             // const textDivAlbum3 = createDiv();
             // const textDivAlbum4 = createDiv();
             // skraćeno:
-            const [textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4] =
-              Array(4)
-                .fill()
-                .map(() => document.createElement("div"));
+            const [textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4] = Array(4).fill().map(() => document.createElement("div"));
 
             textDivAlbum1.textContent = `${album.name}`;
             textDivAlbum2.textContent = `By: ${album.artists[0].name}`;
@@ -553,7 +481,7 @@
             showMoreButton.classList.add("show-more-button");
             showMoreButton.setAttribute("id", "tracklist-button");
 
-            // new: add event-listener to the button 'Track list' under each album:
+      // new: add event-listener to the button 'Track list' under each album:
             showMoreButton.addEventListener("click", (event) => {
               event.preventDefault(); // Prevent default button behavior
               // Calls the function to fetch albums:
@@ -584,7 +512,7 @@
       }
     }
 
-    // ------------- New function to display album's Track list based on album-id: ---------------------------
+    // ------------- Additional function to display album's Track list based on album-id: ---------------------------
 
     async function handleTrackListButtonClick(
       albumId,
@@ -594,15 +522,6 @@
     ) {
       console.log("Album ID:", albumId);
       const resultsContainer = document.getElementById("results-container");
-
-      // // after the Track-list button was clicked, narrowing the form with Tracks (to avoid empty space on each side):
-
-      if (narrowForm === false) {
-        formResultsContainerTracks.style.width = "50%";
-        formResultsContainerTracks.style.margin = "4% auto";
-        narrowForm = true;
-      }
-
       try {
         // Fetch albums for the selected artist
         // const results = await fetchSearchResults(artistName, "album");
@@ -759,12 +678,12 @@
               previewAlbum,
               previewCover,
             ] = [
-              "track-id",
-              "preview-url",
-              "preview-trackname",
+              "track-id",                     // data-track-id
+              "preview-url",                 // data-preview-url
+              "preview-trackname",          // data-preview-...
               "preview-artist",
               "preview-album",
-              "preview-cover",
+              "preview-cover",      
             ].map((attr) => playSymbol.getAttribute(`data-${attr}`));
 
             // if there is a previewUrl, we play this url in audio-player ( -> function playTrack(previewUrl) ):
@@ -842,19 +761,11 @@
             currentTrackInfoDiv3.classList.add("result-item-name");
             currentTrackInfoDiv5.classList.add("result-item-name");
 
-            // currentTrackInfo.appendChild(currentTrackInfoDiv1);
-            // currentTrackInfo.appendChild(currentTrackInfoDiv2);
-            // currentTrackInfo.appendChild(currentTrackInfoDiv3);
-            // currentTrackInfo.appendChild(currentTrackInfoDiv4);
-            // currentTrackInfo.appendChild(currentTrackInfoDiv5);
-            // skraćeno:
-            [
-              currentTrackInfoDiv1,
-              currentTrackInfoDiv2,
-              currentTrackInfoDiv3,
-              currentTrackInfoDiv4,
-              currentTrackInfoDiv5,
-            ].forEach((div) => currentTrackInfo.appendChild(div));
+            currentTrackInfo.appendChild(currentTrackInfoDiv1);
+            currentTrackInfo.appendChild(currentTrackInfoDiv2);
+            currentTrackInfo.appendChild(currentTrackInfoDiv3);
+            currentTrackInfo.appendChild(currentTrackInfoDiv4);
+            currentTrackInfo.appendChild(currentTrackInfoDiv5);
 
             currentTrackInfo.classList.add("current-track");
             currentTrackData.appendChild(currentTrackInfo);
@@ -915,15 +826,6 @@
 
       // remove earlier warning messages (if any):
       formContainer.querySelector(".warning-message")?.remove();
-      // show previously hidden form:
-      formResultsContainerTracks.style.display = "block";
-
-      // function which expands the result-form back to 80% if user presses Search button again:
-      if (narrowForm === true) {
-        formResultsContainerTracks.style.width = "80%";
-        // formResultsContainerTracks.style.margin = "4% auto";
-        narrowForm = false;
-      }
 
       if (query.length >= 1) {
         console.log("Form submitted");
@@ -948,17 +850,18 @@
     });
 
     // Event-listener for tracking entry in all 3 fields with these categories:
-    // [artistInput, songInput, albumInput].forEach((input) => {
-    //   input.addEventListener("input", () => {
-    //     const query = input.value.trim();
-    //     if (query.length > 0) {
-    //       fetchSuggestions2(query);
-    //     } else {
-    //       resultsList.innerHTML = ""; // clean results if entry is empty
-    //     }
-    //   });
-    // });
+    [artistInput, songInput, albumInput].forEach((input) => {
+      input.addEventListener("input", () => {
+        const query = input.value.trim();
+        if (query.length > 0) {
+          fetchSuggestions2(query);  // OVA FUNKCIJA SE BAŠ NE KORISTI?
+        } else {
+          resultsList.innerHTML = ""; // clean results if entry is empty
+        }
+      });
+    });
 
+// ------------------------------------------------------------------------
     // Load lists from localStorage on init:
     function loadLists() {
       const savedList = localStorage.getItem("addedList");
@@ -1024,7 +927,7 @@
 
     // doraditi logiku Search funkcije !!! - što se dohvaća pomoću API-ja i kako se prikazuje
 
-    // _________________________________________________________________________________________________
+______________________________________________________________________________
 
     // Creating new task / new item on a submit/play-list:
     function createTask(artist, song, album, rating, time) {
@@ -1072,6 +975,7 @@
       document.getElementById("review").value = "";
       saveLists();
     }
+
 
     this.init = function () {
       // body initially has a default theme0:
@@ -1203,6 +1107,7 @@
       // removes the whole parent-task (in which the removeButton was embedded as a child)
       saveLists();
     }
+
   }
   // here ends Todo function.
 
@@ -1216,21 +1121,19 @@
 // if page reloaded, scroll back to the first element:
 document.addEventListener("DOMContentLoaded", function () {
   document
-    .getElementById("first-container")
-    .scrollIntoView({ behavior: "smooth", block: "start" });
+  .getElementById("first-container")
+  .scrollIntoView({ behavior: "smooth", block: "start" });
+  
 });
 
-// If backspace pressed when not focused on Input field,
+// If backspace pressed when not focused on Input field, 
 document.addEventListener("keydown", function (event) {
   const activeElement = document.activeElement;
-  if (
-    event.key === "Backspace" &&
-    !(activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA")
-  ) {
-    event.preventDefault(); // prevent usual Backspace-key task (for deleting)
-    document
-      .getElementById("first-container")
-      .scrollIntoView({ behavior: "smooth", block: "start" });
+    if (event.key === "Backspace" && !(activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA")) {
+      event.preventDefault(); // prevent usual Backspace-key task (for deleting)
+      document
+  .getElementById("first-container")
+  .scrollIntoView({ behavior: "smooth", block: "start" });
   }
 });
 
@@ -1280,7 +1183,7 @@ document.addEventListener("keydown", function (event) {
 // + brojke staviti uz same list-iteme, a ne na početak retka (smanjiti width list-itema?) - bez brojki!
 // + tamo gdje se ne pojavljuju slike (jer ih nema) staviti neku placeholder-sliku ili obavijest da slika nedostaje. - DONE
 
-// + list iteme na manjim rezolucijama poredati prvo 2 u redak, pa tek onda 1 u redak - DONE 23.10.
+// - list iteme na manjim rezolucijama poredati prvo 2 u redak, pa tek onda 1 u redak - NOT YET WORKING!
 // + list-itemi bi trebali imati donju marginu veću na manjim rezolucijama, da se vertikalno više razdvoje međusobno - DONE
 
 // + buttonići - boja u nekim temama nije dovoljno kontrastna od pozadine - treba biti svjetlija ili tamnija nijansa da se buttonići istaknu više - DONE
@@ -1301,7 +1204,7 @@ document.addEventListener("keydown", function (event) {
 + dohvaća albume i pjesme samo od odabranog artista (q = artist, a parametri su slično kao i dosad za albume i pjesme)
 + umjesto rezultata, u tom formu se prikažu albumi dohvaćeni s apija, 
 + dohvaćeni albumi imaju sve parametre kao i u Results, i imaju button Track list (i isto ih se može svirati) - DONE
-+ dodati da se prikažu i pjesme tog artista, dohvaćene s apija, i imaju buttone Add to playlist
+- dodati da se prikažu i pjesme tog artista, dohvaćene s apija, i imaju buttone Add to playlist
 ** trenutno postoje 2x event-listener za Discography button, svaki unutar jedne funkcije - provjeriti koji je dovoljan (+ prilagoditi), a koji brišemo
 
 + dati dodatni id buttonu Track list (za Tracks-rezultate) - DONE -> id: "tracklist-button"
@@ -1330,7 +1233,6 @@ document.addEventListener("keydown", function (event) {
 
 
 
-
 + Play button transparent image preko slike - podesiti da se pojavi kad se hovera preko bilo kojeg dijela li (list itema), 
 tako da cijeli list item ima opciju hover, a ne samo img - DONE
 
@@ -1353,7 +1255,6 @@ Toggle Playback Shuffle
 Get Recently Played Tracks
 Get the User's Queue
 Add Item to Playback Queue
-
 
 
 - napravi funkciju playSong() koja ima ove podfunkcije:
@@ -1390,3 +1291,5 @@ playlista ostaje spremljena (možda u bazi - trajno?) na 2. stranici (My playlis
 - Results container/form je trenutno stalno vidljiv jer je hardkodiran na idex.html-u - učiniti da je nevidljiv, i da se prikazuje samo kad se dohvate neki rezultati
 
 */
+
+
