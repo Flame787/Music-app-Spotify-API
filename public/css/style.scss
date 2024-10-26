@@ -586,7 +586,7 @@ hr {
 
 .result-category {
   width: 100%;
-  margin: 0 auto 5%;
+  margin: 5% auto 3%;
 }
 
 .result-image {
@@ -670,6 +670,7 @@ hr {
 li .image-container {
   position: relative;
   display: inline-block; /* ili drugi prikladni display tip */
+  margin: 5% auto 0;
 }
 
 li .image-container::before {
@@ -1084,7 +1085,9 @@ li .image-container img {
     font-size: 1rem !important;
   }
 
-  #first-input, #second-input, #third-input {
+  #first-input,
+  #second-input,
+  #third-input {
     width: 44px;
   }
 

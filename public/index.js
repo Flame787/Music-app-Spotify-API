@@ -20,6 +20,9 @@
     function createDiv() {
       return document.createElement("div");
     }
+    function createLine() {
+      return document.createElement("hr");
+    }
 
     // Navbar behavior:
 
@@ -293,6 +296,10 @@
       // );
     }
 
+    // 25.10. - PRIKAZUJU SE SAMO artistInput, IAKO SE NE ODABERE NIJEDAN POSEBAN TYPE (TREBALO BI SE PRIKAZATI SVE 3)
+    // KAD JE ODABRAN NEKI OD 3 WebTransportBidirectionalStream, UOPĆE SE NE PRIKAŽU REZULTATI (MOŽDA SE DOGODI default, TO BI TREBALO SPRIJEČITI?)
+    // I DISKOGRAPHY BUTTON NE RADI -> prikaže se Fetched discography u konzoli, ali ne na stranici
+
     ///////_______________ Function to send Api-request for Search results - from Frontend to Backend: __________________//////////////////////
 
     // Function fetchSearchResults = dynamically implements selected search-categories ('types') into the API-link:
@@ -322,19 +329,16 @@
     function displaySearchResults(data, type) {
       resultsContainer.innerHTML = ""; // Clear previous results
 
-      console.log(
-        "Function displaSearchResults received this type:",
-        selectedType
-      );
-      console.log(results); // Log the results   ---> 25.10. rezultati se prikažu u konzoli, ali ne i na displayu
+      console.log("Function displaSearchResults received this type:", type);
+      console.log("Data received:", data); // Log the results   ---> 25.10. rezultati se prikažu u konzoli, ali ne i na displayu
 
       // Check if the result is empty:
       if (
-        !results
-        // !results ||
-        // (results.artists.items.length === 0 &&
-        //   results.albums.items.length === 0 &&
-        //   results.tracks.items.length === 0)
+        !data
+        // !data ||
+        // (!data.artists.items.length &&
+        //   !data.albums.items.length &&
+        //   !data.tracks.items.length)
       ) {
         displayMessage(resultsContainer, "No results found.");
         return; // Exit if all 3 results categories are undefined or empty
@@ -342,22 +346,17 @@
 
       // conditionally displaying results, based on selectedType:
       if (type.includes("artist")) {
-        showArtists(data.artists.items);
+        showArtists(data);
         console.log("Found artists:", data.artists.items);
       }
       if (type.includes("album")) {
-        showAlbums(data.albums.items);
+        showAlbums(data);
         console.log("Found albums:", data.albums.items);
       }
       if (type.includes("track")) {
-        showTracks(data.tracks.items);
+        showTracks(data);
         console.log("Found tracks:", data.tracks.items); // rezultati se sad prikazuju u konzoli za sve 3 kategorije :)
       }
-
-      // ** definirati DODATNI UVJET DA SE POZOVE NEKA OD 3 SHOW-result FUNKCIJE SAMO AKO JE TA KATEGORIJA BILA TRAŽENA (ILI SVA 3 TIPA REZULTATA):
-      // OVDJE još POZVATI FUNKCIJE:
-      // showArtists(), showAlbums(), showTracks() - (svaka se poziva ovisno o tome što je bio 'selectedType')
-      // npr. if selectedType contains 'artist' (kao string) -> poziv funkcije showArtists()...
     }
 
     /*  
@@ -394,19 +393,20 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
     // 25.10. NEW function - odvojeno prikazuje samo ARTISTE:
 
     function showArtists(results) {
-      if (results && results.length > 0) {
-        console.log("showArtist function:", results); // ovo je ok, pojavi se u konzoli, znači da se funkcija showArtist poziva i dobije podatke.
+      // if (results && results.length > 0) {
+      //   console.log("showArtist function:", results); // ovo je ok, pojavi se u konzoli, znači da se funkcija showArtist poziva i dobije podatke.
 
-        
+      const ulArtists = document.createElement("ul"); // create an unordered list for artists
+      const titleArtists = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
+      ulArtists.classList.add("flex-container");
 
-        const ulArtists = document.createElement("ul"); // create an unordered list for artists
-        const titleArtists = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
-        ulArtists.classList.add("flex-container");
+      const hrLine = createLine();
+      ulArtists.appendChild(titleArtists);
+      titleArtists.innerHTML = "Artists:"; // staviti nakon uvjeta za ARTISTS
+      ulArtists.appendChild(hrLine);
 
-        ulArtists.appendChild(titleArtists);
-        titleArtists.innerHTML = "Artists:"; // staviti nakon uvjeta za ARTISTS
-
-        results.forEach((item) => {
+      if (results.artists && results.artists.items.length > 0) {
+        results.artists.items.forEach((item) => {
           const li = document.createElement("li");
           const div = createDiv();
           const img = document.createElement("img");
@@ -445,9 +445,9 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
           // Event listener for the Discography button:
           showMoreButton.addEventListener("click", (event) => {
             event.preventDefault(); // Prevent default button behavior
-            handleDiscographyButtonClick(item.id, item.name); // Calls the function to fetch albums and passes the artist-name to the function
+            handleDiscographyButtonClick(item.id, item.name); // Calls the function to fetch albums and passes the artist-id & name to the function
             // koristit ćemo ovaj API: const response = await fetch(`/api/albums/${albumId}/tracks`);
-            console.log("discography fetched");
+            console.log("fetching discography for:", item.id, item.name); // ovo se prikaže, prenosi dobar info (id- i ime artista)
           });
 
           li.classList.add("li-item-style", "result-flex-item");
@@ -455,7 +455,7 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
           textDivArtist1.classList.add("result-item-name"); // bold and bigger font
 
           ulArtists.appendChild(li);
-          resultsContainer.appendChild(ulArtists);
+          resultsContainer.appendChild(ulArtists); // -> ovo je ok, događa se kako treba.
         });
       }
     }
@@ -468,8 +468,10 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
       const titleAlbums = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
       ulAlbums.classList.add("flex-container");
 
+      const hrLine = createLine();
       ulAlbums.appendChild(titleAlbums);
-      titleAlbums.innerHTML = "Albums:"; // staviti nakon uvjeta za ALBUMS:
+      titleAlbums.innerHTML = "Albums:"; 
+      ulAlbums.appendChild(hrLine);
 
       if (results.albums && results.albums.items.length > 0) {
         results.albums.items.forEach((item) => {
@@ -541,8 +543,10 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
       const titleSongs = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
       ulSongs.classList.add("flex-container");
 
+      const hrLine = createLine();
       ulSongs.appendChild(titleSongs);
-      titleSongs.innerHTML = "Songs:"; // staviti nakon uvjeta za TRACKS:
+      titleSongs.innerHTML = "Songs:"; 
+      ulSongs.appendChild(hrLine);
 
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
@@ -618,8 +622,8 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
         titleAlbums.classList.add("result-category");
         ulAlbums.appendChild(titleAlbums);
 
-        if (results.albums && results.albums.items.length > 0) {
-          results.albums.items.forEach((album) => {
+        if (results.items && results.items.length > 0) {
+          results.items.forEach((album) => {
             const li = document.createElement("li");
             const div = createDiv();
             const img = document.createElement("img");
@@ -689,8 +693,11 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
           resultsContainer.appendChild(ulAlbums);
         } else {
           // Show a message if no albums are found:
-          displayMessage(resultsContainer, "No albums found for this artist.");  
-          // 25.10. - OVO SE PRIKAZUJE na stranici, NEKA GREŠKA U handleDiscography funkciji
+          displayMessage(
+            resultsContainer,
+            "Cannot display albums for this artist."
+          );
+          // 25.10. - OVO SE PRIKAZUJE na samoj stranici, NEKA GREŠKA U handleDiscography funkciji
         }
       } catch (error) {
         console.error("Error fetching discography:", error);
