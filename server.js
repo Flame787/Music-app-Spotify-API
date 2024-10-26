@@ -37,7 +37,6 @@ const PORT = process.env.PORT || 3000;
 const clientId = process.env.client_id;
 const clientSecret = process.env.client_secret;
 
-
 // -> and this exact same link should be also set in Spotify Dashboard (Settings) as the only redirect-link!
 // const redirect_uri = "http://localhost:3000/callback";
 // if using SDK player, it's very important that the callback link (redirect page after user login) is localhost:3000/callback
@@ -61,12 +60,10 @@ let clientAccessToken = null; // token from Client Credentials Flow, for searchi
 let clientTokenExpirationTime = null;
 // let userTokenExpirationTime = null;
 
-
 let isFetchingToken = false; // New variable for tracking the status of token fetching
 
 // Define main routes:
 // SEND-request can be only ONE! - nothing else can be returned after that. Next SEND-requests following after this one will not be realised!
-
 
 // ADDED 21.10.:
 // Route for serving 'index.html' (home page: '/'):
@@ -79,7 +76,6 @@ app.get("/", (req, res) => {
 app.get("/favorites", (req, res) => {
   res.sendFile(path.join(__dirname + "/favorites.html"));
 });
-
 
 // new 15.10.:
 
@@ -135,7 +131,7 @@ app.get("/favorites", (req, res) => {
 
 //     try {
 //       // Refresh token (if expired))
-//       const newToken = await refreshUserAccessToken(); 
+//       const newToken = await refreshUserAccessToken();
 //       userAccessToken = newToken;
 //       tokenExpirationTime = Date.now() + 3600 * 1000; // set new expiration time
 //     } catch (error) {
@@ -144,7 +140,7 @@ app.get("/favorites", (req, res) => {
 //     }
 //   }
 
-  // Ako je token valjan, posluži početnu stranicu:
+// Ako je token valjan, posluži početnu stranicu:
 //   console.log("User access token found:", userAccessToken);
 //   res.sendFile(path.join(__dirname + "/index.html"));
 // });
@@ -232,7 +228,6 @@ app.get("/favorites", (req, res) => {
 // Čak i kad se izlogiram iz Spotify app-a, userAccessToken je i dalje aktivan.
 // Isti userAccessToken se prikazuje u server-konzoli za oba browsera (console-loga se kad god reloadamo stranicu u nekom browseru).
 // Znači da je userAccessToken dodijeljen na temelju device_id, koji je isti neovisno u kojem browseru se koristi, i traje i dalje (cca sat vremena).
-
 
 // Asyncronous function to fetch Client access token:
 // function sends a POST request to Spotify API to retrieve an OAuth access token.
@@ -394,14 +389,14 @@ app.get("/api/search", async (req, res) => {
   const query = req.query.q; // user's query/input
   const type = req.query.type || "artist,album,track"; // type of the search, f.e. artist, album, track
   // NEW 22.10.:
-  const offset = parseInt(req.query.offset) || 0; 
+  const offset = parseInt(req.query.offset) || 0;
   const limit = parseInt(req.query.limit) || 9;
 
   const clientAccessToken = await getAccessToken(); // fetch access token
 
   // URL for Search on Spotify API:
-  const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=${type}&offset=${offset}&limit=${limit}`;
-  // const searchUrl = https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=9;
+  // const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=${type}&offset=${offset}&limit=${limit}`;
+  const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=9`;
 
   try {
     const response = await fetch(searchUrl, {
@@ -436,7 +431,35 @@ app.get("/api/albums/:id/tracks", async (req, res) => {
     const response = await fetch(searchUrl, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${clientAccessToken}`, 
+        Authorization: `Bearer ${clientAccessToken}`,
+      },
+    });
+
+    if (response.ok) {
+      const tracksData = await response.json();
+      res.json(tracksData);
+    } else {
+      res.status(response.status).json({ error: "Search failed" });
+    }
+  } catch (error) {
+    console.error("Error fetching tracks:", error);
+    res.status(500).send("Error fetching album tracks");
+  }
+});
+
+// Route for fetching artists albums - used for the funkcion 'handleDiscographyButtonClick' in index.js (showing albums from an artist):
+app.get("/api/artists/:id/albums", async (req, res) => {
+  const artistId = req.params.id;
+
+  const clientAccessToken = await getAccessToken(); // Dohvati access token
+
+  const searchUrl = `https://api.spotify.com/v1/artists/${artistId}/albums`;
+
+  try {
+    const response = await fetch(searchUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${clientAccessToken}`,
       },
     });
 
@@ -464,7 +487,7 @@ app.get("/api/tracks/:id", async (req, res) => {
     const response = await fetch(searchUrl, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${clientAccessToken}`, 
+        Authorization: `Bearer ${clientAccessToken}`,
       },
     });
 
@@ -484,7 +507,7 @@ app.get("/api/tracks/:id", async (req, res) => {
 // app.get("/api/me/player/currently-playing", async (req, res) => {
 //   // const playback = req.track.id;
 
-//   const clientAccessToken = await getAccessToken(); 
+//   const clientAccessToken = await getAccessToken();
 
 //   const searchUrl = `https://api.spotify.com/v1/me/player/currently-playing`;
 
@@ -492,7 +515,7 @@ app.get("/api/tracks/:id", async (req, res) => {
 //     const response = await fetch(searchUrl, {
 //       method: "GET",
 //       headers: {
-//         Authorization: `Bearer ${clientAccessToken}`, 
+//         Authorization: `Bearer ${clientAccessToken}`,
 //       },
 //     });
 //     if (response.ok) {
@@ -544,20 +567,20 @@ app.get("/api/tracks/:id", async (req, res) => {
 
 // Route for fetching info on artist - not used for now?
 app.get("/artist/:id", async (req, res) => {
-  const artistId = req.params.id; 
-  const clientAccessToken = await getAccessToken(); 
+  const artistId = req.params.id;
+  const clientAccessToken = await getAccessToken();
 
   // URL for fetching artist's data:
   const artistUrl = `https://api.spotify.com/v1/artists/${artistId}`;
 
   const response = await fetch(artistUrl, {
     method: "GET",
-    headers: { Authorization: `Bearer ${clientAccessToken}` }, 
+    headers: { Authorization: `Bearer ${clientAccessToken}` },
   });
 
   if (response.ok) {
     const artistData = await response.json();
-    res.json(artistData); 
+    res.json(artistData);
   } else {
     res.status(response.status).json({ error: "Artist not found" });
   }
@@ -578,7 +601,7 @@ app.get("/api/search", async (req, res) => {
 
   if (response.ok) {
     const searchResults = await response.json();
-    res.json(searchResults); 
+    res.json(searchResults);
   } else {
     res.status(response.status).json({ error: "Search failed" });
   }

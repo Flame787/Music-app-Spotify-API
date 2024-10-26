@@ -7,8 +7,15 @@
     const list = document.getElementById("added-list"); // first list (ul) that gets tasks appended
     const favoritesList = document.getElementById("fav_albums"); // second list (ul) with favorite songs
     const searchInput = document.getElementById("search-all-input");
-    const searchButton = document.getElementById("submit-button");
+    // const searchButton = document.getElementById("submit-button");
+    const resultsContainer = document.getElementById("results-container"); // container for results
+    const searchAllButton = document.getElementById("search-all-button");
     // const searchForm = document.getElementById("search-form");
+    const formContainer = document.getElementById("zero-input");
+    const formResultsContainerTracks = document.getElementById(
+      "form-results-container"
+    );
+    let narrowForm = false;
 
     function createDiv() {
       return document.createElement("div");
@@ -166,27 +173,26 @@
     // const button = document.querySelectorAll("button");
 
     let album, rating, artist, song, time, item;
-// OVO SE BAŠ NE KORISTI, VEZANO UZ ČUDNU funkciju fetchSuggestions2 ??:
+    // OVO SE BAŠ NE KORISTI, VEZANO UZ ČUDNU funkciju fetchSuggestions2 ??:
     const artistInput = document.getElementById("artist");
     const songInput = document.getElementById("song");
     const albumInput = document.getElementById("album");
     const resultsList = document.getElementById("results");
 
-    ///////_______________ Function to send Api-request for Search results - from Frontend to Backend: __________________//////////////////////
+    // ---------------------- FUNCTIONS FOR HANDLING SEARCH INPUT ------------------------------------- //
 
-    // if the 'type' is not set, it will be a default value: 'artist,album,track':
-    async function fetchSearchResults(query, type = "artist,album,track") {
-      try {
-        const response = await fetch(`/api/search?q=${query}&type=${type}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch results");
-        }
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.error("Error fetching suggestions:", error);
+    searchAllButton.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent the default form submission
+      handleSearch(); // call handleSearch() instead of displaySearchResults
+    });
+
+    // Key press on Enter kbd key is also calling the handleSearch() function:
+    searchInput.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Prevent form submission on Enter
+        handleSearch(); // call handleSearch() instead of displaySearchResults
       }
-    }
+    });
 
     // Funcion for warning if the input-field is empty:
     function displayMessage(container, text) {
@@ -194,58 +200,213 @@
       message.textContent = text;
       message.classList.add("warning-message");
       container.appendChild(message); // ("Please enter your query" - in red letters)
+    } // OVA FUNKCIJA RADI OK 25.10.
+
+    // 25.10.: helper (middleman) function in order to FETCH and DISPLAY results, and to focus on the Search results
+    // this function CALLS other important functions: checkCategories(query) -> fetchSearchResults -> await displaySearchResults(query):
+
+    async function handleSearch() {
+      const query = searchInput.value.trim(); // fetch the input value
+      // container near the input field
+
+      // remove earlier warning messages (if any):
+      formContainer.querySelector(".warning-message")?.remove();
+
+      // show previously hidden form:
+      formResultsContainerTracks.style.display = "block";
+
+      if (query.length >= 1) {
+        console.log("Form submitted");
+        console.log("Query:", query); // 25.10. - THIS WORKS IN CONSOLE-LOG
+
+        // function which expands the result-form back to 80% if user presses Search button again:
+        if (narrowForm === true) {
+          formResultsContainerTracks.style.width = "80%";
+          // formResultsContainerTracks.style.margin = "4% auto";
+          narrowForm = false;
+        }
+
+        // calls the 1. function which handles INPUT:
+        // checkCategories(query);
+        // NOVO 25.10. - here we are calling the NEW FUNCTION checkCategories,
+        // which sends different API fetch calls, depending on chosen type/category of results
+        checkCategories(query); // Get the selected type
+        console.log("handleSearch called"); // poziva se jednom, to je ok, ali nakon toga krene beskonačna petlja :(
+
+        // Put focus on the results-container:
+        document
+          .getElementById("search-results")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        displayMessage(formContainer, "Please enter your query.");
+      }
     }
 
-    ///// Function to display all fetched Search-results on the page: ///////
+    // preuzeto od 23-10. i dorađeno - funkcija koja RASPISUJE RAZLIČITE SLUČAJEVE ODABIRA TYPES (kategorija rezultata):
 
-    async function displaySearchResults(query) {
-      const resultsContainer = document.getElementById("results-container"); // Your container element
+    let selectedType;
+
+    function checkCategories(query) {
+      // searchAllButton.addEventListener("click", async(event) => {
+      //   event.preventDefault();
+
+      const selectedOptions = Array.from(
+        document.querySelectorAll('input[name="category"]:checked')
+      ).map((checkbox) => checkbox.value);
+
+      console.log("Selected options:", selectedOptions);
+
+      switch (JSON.stringify(selectedOptions)) {
+        case JSON.stringify(["artist"]):
+          selectedType = "artist";
+          break;
+        case JSON.stringify(["song"]):
+          selectedType = "track";
+          break;
+        case JSON.stringify(["album"]):
+          selectedType = "album";
+          break;
+        case JSON.stringify(["artist", "album"]):
+          selectedType = "artist,album";
+          break;
+        case JSON.stringify(["song", "album"]):
+          selectedType = "album,track";
+          break;
+        case JSON.stringify(["artist", "song"]):
+          selectedType = "artist,track";
+          break;
+        case JSON.stringify([]): // option if user didn't select any category, just pressed Search (all)
+        default:
+          selectedType = "artist,album,track"; // showing results for all 3 categories
+          break;
+      }
+
+      console.log("Selected type:", selectedType); // ovo se isto samo jednom ispiše na početku
+
+      // Call 2. function: 'fetchSearchResults', and hand over to her argumets, which are here available: query & selectedType
+      // Call fetchSearchResults and return its value
+      // fetchSearchResults(query, selectedType);
+      fetchSearchResults(query, selectedType);
+      //  catch (error) {
+      //   console.error("Error fetching search results:", error);
+      //   }
+      // );
+    }
+
+    ///////_______________ Function to send Api-request for Search results - from Frontend to Backend: __________________//////////////////////
+
+    // Function fetchSearchResults = dynamically implements selected search-categories ('types') into the API-link:
+    // (if the 'type' is not set, it will be a default value: 'artist,album,track)
+    // --> this function is called inside of the function checkCategories():
+    async function fetchSearchResults(query, type) {
+      try {
+        const response = await fetch(`/api/search?q=${query}&type=${type}`);
+        console.log("Fetching results...");
+        if (!response.ok) {
+          throw new Error("Failed to fetch results");
+        }
+        const data = await response.json();
+        console.log("Data received:", data); // Log the fetched data
+        displaySearchResults(data, type); // Pass the data directly to the display function
+      } catch (error) {
+        console.error("Error fetching suggestions:", error);
+      }
+      // 2. function which handles OUTPUT:
+      // await displaySearchResults(query, selectedType); // CALLS the 'displaySearchResults' function
+      // --> which will handle and show results, depending on chosen type/category of results
+    }
+
+    ///// Function to show/display all fetched Search-results on the page:
+    // POPRAVITI OVU FUNKCIJU, TAKO DA PRIKAŽE DOHVAĆENE REZULTATE NA STRANICI:
+
+    function displaySearchResults(data, type) {
       resultsContainer.innerHTML = ""; // Clear previous results
 
-      const results = await fetchSearchResults(query);
-      console.log(results); // Log the results
+      console.log(
+        "Function displaSearchResults received this type:",
+        selectedType
+      );
+      console.log(results); // Log the results   ---> 25.10. rezultati se prikažu u konzoli, ali ne i na displayu
 
       // Check if the result is empty:
       if (
-        !results ||
-        (results.artists.items.length === 0 &&
-          results.albums.items.length === 0 &&
-          results.tracks.items.length === 0)
+        !results
+        // !results ||
+        // (results.artists.items.length === 0 &&
+        //   results.albums.items.length === 0 &&
+        //   results.tracks.items.length === 0)
       ) {
         displayMessage(resultsContainer, "No results found.");
         return; // Exit if all 3 results categories are undefined or empty
       }
-// kreiramo nove varijable za spremanje dohvaćenih rezultata (ako rezultati postoje):
-      const ulArtists = document.createElement("ul"); // create an unordered list for artists
-      const ulAlbums = document.createElement("ul"); // same for albums
-      const ulSongs = document.createElement("ul"); // same for songs
 
-      // const titleArtists = document.createElement("h3");  // naslovi
-      // const titleAlbums = document.createElement("h3");
-      // const titleSongs = document.createElement("h3");
-      const [titleArtists, titleAlbums, titleSongs] = ["h3", "h3", "h3"].map(
-        (tag) => document.createElement(tag)
-      );
+      // conditionally displaying results, based on selectedType:
+      if (type.includes("artist")) {
+        showArtists(data.artists.items);
+        console.log("Found artists:", data.artists.items);
+      }
+      if (type.includes("album")) {
+        showAlbums(data.albums.items);
+        console.log("Found albums:", data.albums.items);
+      }
+      if (type.includes("track")) {
+        showTracks(data.tracks.items);
+        console.log("Found tracks:", data.tracks.items); // rezultati se sad prikazuju u konzoli za sve 3 kategorije :)
+      }
 
-      // ulArtists.classList.add("flex-container");
-      // ulAlbums.classList.add("flex-container");
-      // ulSongs.classList.add("flex-container");
-      // skraćeno:
-      [ulArtists, ulAlbums, ulSongs].forEach((element) =>
-        element.classList.add("flex-container-ol")  // listi dodaju klasu 
-      );
+      // ** definirati DODATNI UVJET DA SE POZOVE NEKA OD 3 SHOW-result FUNKCIJE SAMO AKO JE TA KATEGORIJA BILA TRAŽENA (ILI SVA 3 TIPA REZULTATA):
+      // OVDJE još POZVATI FUNKCIJE:
+      // showArtists(), showAlbums(), showTracks() - (svaka se poziva ovisno o tome što je bio 'selectedType')
+      // npr. if selectedType contains 'artist' (kao string) -> poziv funkcije showArtists()...
+    }
 
-      // Results displaying, depending on API-data structure:
+    /*  
+popravljena je ona beskonačna petlja, sad je ovako:
+favoritesList: <ul id=​"fav_albums">​</ul>​
+index.js:133 Selected theme: theme0
+index.js:134 Body classes: DOMTokenList ['theme0', value: 'theme0']
+index.js:212 Form submitted
+index.js:213 Query: iron
+index.js:243 Selected options: []
+index.js:270 Selected type: artist,album,track
+index.js:220 handleSearch called
+index.js:293 Fetching results...
+index.js:298 Data received: {albums: {…}, artists: {…}, tracks: {…}}
+index.js:314 Function displaSearchResults received this type: artist,album,track
+index.js:318 {albums: {…}, artists: {…}, tracks: {…}}
+index.js:212 Form submitted
+index.js:213 Query: jojo
+index.js:243 Selected options: ['album']
+index.js:270 Selected type: album
+index.js:220 handleSearch called
+index.js:293 Fetching results...
+index.js:298 Data received: {albums: {…}}
+index.js:314 Function displaSearchResults received this type: album
+index.js:318 {albums: {…}}
+rezultati se dohvaćaju, ali se ne prikažu na stranici */
 
-      // - - - - - Check and display ARTISTS: - - - - - - - - - - - - -
-  // DODATI UVJET DA SE PRIKAŽE SAMO AKO SU ALBUMI BILI TRAŽENI (ILI SVE 3):
+    // Results displaying, depending on API-data structure:
 
-      // show subtitle inside results:
-      ulArtists.appendChild(titleArtists);
-      titleArtists.innerHTML = "Artists:"; // staviti nakon uvjeta za ARTISTS: 
+    // - - - - - - Check and display ARTISTS: - - - - - - - - - - - - -
 
-      if (results.artists && results.artists.items.length > 0) {
-        results.artists.items.forEach((item) => {
+    // --> ovisno koji je odabrani selectedType:
+
+    // 25.10. NEW function - odvojeno prikazuje samo ARTISTE:
+
+    function showArtists(results) {
+      if (results && results.length > 0) {
+        console.log("showArtist function:", results); // ovo je ok, pojavi se u konzoli, znači da se funkcija showArtist poziva i dobije podatke.
+
+        
+
+        const ulArtists = document.createElement("ul"); // create an unordered list for artists
+        const titleArtists = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
+        ulArtists.classList.add("flex-container");
+
+        ulArtists.appendChild(titleArtists);
+        titleArtists.innerHTML = "Artists:"; // staviti nakon uvjeta za ARTISTS
+
+        results.forEach((item) => {
           const li = document.createElement("li");
           const div = createDiv();
           const img = document.createElement("img");
@@ -284,7 +445,8 @@
           // Event listener for the Discography button:
           showMoreButton.addEventListener("click", (event) => {
             event.preventDefault(); // Prevent default button behavior
-            handleDiscographyButtonClick(item.name); // Calls the function to fetch albums and passes the artist-name to the function
+            handleDiscographyButtonClick(item.id, item.name); // Calls the function to fetch albums and passes the artist-name to the function
+            // koristit ćemo ovaj API: const response = await fetch(`/api/albums/${albumId}/tracks`);
             console.log("discography fetched");
           });
 
@@ -293,16 +455,22 @@
           textDivArtist1.classList.add("result-item-name"); // bold and bigger font
 
           ulArtists.appendChild(li);
-          resultsContainer.appendChild(ulArtists);  // -> ovo možda kasnije?
+          resultsContainer.appendChild(ulArtists);
         });
       }
+    }
 
-//  - - - - - Check and display ALBUMS:  - - - - - - - - - - - - - - - -
-   // DODATI UVJET DA SE PRIKAŽE SAMO AKO SU ALBUMI BILI TRAŽENI (ILI SVE 3):
+    //  - - - - - Check and display ALBUMS:  - - - - - - - - - - - - - - - -
+    // DODATI UVJET DA SE PRIKAŽE SAMO AKO SU ALBUMI BILI TRAŽENI (ILI SVE 3):
 
-      ulAlbums.appendChild(titleAlbums);  
-      titleAlbums.innerHTML = "Albums:";  // staviti nakon uvjeta za ALBUMS:        
-      
+    function showAlbums(results) {
+      const ulAlbums = document.createElement("ul"); // create an unordered list for artists
+      const titleAlbums = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
+      ulAlbums.classList.add("flex-container");
+
+      ulAlbums.appendChild(titleAlbums);
+      titleAlbums.innerHTML = "Albums:"; // staviti nakon uvjeta za ALBUMS:
+
       if (results.albums && results.albums.items.length > 0) {
         results.albums.items.forEach((item) => {
           const li = document.createElement("li");
@@ -323,11 +491,11 @@
 
           // Create a <div> for the text and append it:
           const textDivAlbum1 = createDiv();
-          const textDivAlbum2 = createDiv(); 
+          const textDivAlbum2 = createDiv();
           const textDivAlbum3 = createDiv();
           const textDivAlbum4 = createDiv();
 
-          textDivAlbum1.textContent = `${item.name}`;  // NAZIV ALBUMA
+          textDivAlbum1.textContent = `${item.name}`; // NAZIV ALBUMA
           textDivAlbum2.textContent = `By: ${item.artists[0].name}`;
           textDivAlbum3.textContent = `Release date: ${item.release_date}`;
           textDivAlbum4.textContent = `Album tracks number: ${item.total_tracks}`;
@@ -363,12 +531,18 @@
           resultsContainer.appendChild(ulAlbums);
         });
       }
-      
-      //  - - - - - Check and display TRACKS / SONGS:  - - - - - - - - - - - 
-// DODATI UVJET DA SE PRIKAŽE SAMO AKO SU TRACKSI BILI TRAŽENI (ILI SVE 3):
+    }
 
-      ulSongs.appendChild(titleSongs);  
-      titleSongs.innerHTML = "Songs:";  // staviti nakon uvjeta za TRACKS:     
+    //  - - - - - Check and display TRACKS / SONGS:  - - - - - - - - - - -
+    // DODATI UVJET DA SE PRIKAŽE SAMO AKO SU TRACKSI BILI TRAŽENI (ILI SVE 3):
+
+    function showTracks(results) {
+      const ulSongs = document.createElement("ul"); // create an unordered list for artists
+      const titleSongs = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
+      ulSongs.classList.add("flex-container");
+
+      ulSongs.appendChild(titleSongs);
+      titleSongs.innerHTML = "Songs:"; // staviti nakon uvjeta za TRACKS:
 
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
@@ -393,7 +567,7 @@
           // Create a <div> for the text and append it
           const textDivSong1 = createDiv();
           const textDivSong2 = createDiv();
-          textDivSong1.textContent = `${item.name}`;   // NAZIV PJESME
+          textDivSong1.textContent = `${item.name}`; // NAZIV PJESME
           textDivSong2.textContent = `By: ${item.artists[0].name}`;
 
           const showMoreButton = document.createElement("button");
@@ -414,15 +588,23 @@
           resultsContainer.appendChild(ulSongs);
         });
       }
+
+      // --> ovo doraditi za Tracks, dodati Playsymbol/Playbutton i ostale opcije koje su kasnije definirane
     }
 
     // ------------ Additional function to fetch albums (discography) by artist name: (linked by button Discography) --------------------------------
+    // 25.10. - ovo je ok, može ostati, jer je zasebna funkcija za prikaz samo izbora albuma od pojedinog autora
+    // (nije isto kao obični search rezultati, niti koristi isti API):
 
-    async function handleDiscographyButtonClick(artistName) {
-      const resultsContainer = document.getElementById("results-container");
+    // POPTAVITI OVU FUNKCIJU TAKO DA KORISTI FETCH REQUEST ZA ALBUME!! (POSEBAN, NE KAO SEARCH):
+
+    async function handleDiscographyButtonClick(artistId, artistName) {
       try {
         // Fetch albums for the selected artist
-        const results = await fetchSearchResults(artistName);
+        // const results = await fetchSearchResults(artistName, type);
+        const results = await fetch(`/api/artists/${artistId}/albums`);
+
+        console.log("Fetched discography:", results);
 
         // Clear the previous results from the results-container:
         resultsContainer.innerHTML = "";
@@ -462,7 +644,10 @@
             // const textDivAlbum3 = createDiv();
             // const textDivAlbum4 = createDiv();
             // skraćeno:
-            const [textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4] = Array(4).fill().map(() => document.createElement("div"));
+            const [textDivAlbum1, textDivAlbum2, textDivAlbum3, textDivAlbum4] =
+              Array(4)
+                .fill()
+                .map(() => document.createElement("div"));
 
             textDivAlbum1.textContent = `${album.name}`;
             textDivAlbum2.textContent = `By: ${album.artists[0].name}`;
@@ -481,7 +666,7 @@
             showMoreButton.classList.add("show-more-button");
             showMoreButton.setAttribute("id", "tracklist-button");
 
-      // new: add event-listener to the button 'Track list' under each album:
+            // new: add event-listener to the button 'Track list' under each album:
             showMoreButton.addEventListener("click", (event) => {
               event.preventDefault(); // Prevent default button behavior
               // Calls the function to fetch albums:
@@ -504,7 +689,8 @@
           resultsContainer.appendChild(ulAlbums);
         } else {
           // Show a message if no albums are found:
-          displayMessage(resultsContainer, "No albums found for this artist.");
+          displayMessage(resultsContainer, "No albums found for this artist.");  
+          // 25.10. - OVO SE PRIKAZUJE na stranici, NEKA GREŠKA U handleDiscography funkciji
         }
       } catch (error) {
         console.error("Error fetching discography:", error);
@@ -513,6 +699,8 @@
     }
 
     // ------------- Additional function to display album's Track list based on album-id: ---------------------------
+    // 25.10. - ovo je isto ok, može ostati, jer je zasebna funkcija za prikaz samo Tracklista s odabranog albuma
+    // (nije isto kao obični search rezultati, niti koristi isti API):
 
     async function handleTrackListButtonClick(
       albumId,
@@ -521,7 +709,15 @@
       albumImageUrl
     ) {
       console.log("Album ID:", albumId);
-      const resultsContainer = document.getElementById("results-container");
+
+      // // after the Track-list button was clicked, narrowing the form with Tracks (to avoid empty space on each side):
+
+      if (narrowForm === false) {
+        formResultsContainerTracks.style.width = "50%";
+        formResultsContainerTracks.style.margin = "4% auto";
+        narrowForm = true;
+      }
+
       try {
         // Fetch albums for the selected artist
         // const results = await fetchSearchResults(artistName, "album");
@@ -591,9 +787,7 @@
           playButton.textContent = `Play  ▶`; // NEW - PLAY-button
           playButton.classList.add("play-button", "play-starter");
 
-          // NEW!!:
           // Save important data about playing track via playButton attributes:
-
           // (so they can be fetched later from the clicked button (playbutton / playSymbol): track URL, name, artist, album, cover):
 
           // playButton.setAttribute("data-track-id", track.id); // Attach track ID to play-button
@@ -678,12 +872,12 @@
               previewAlbum,
               previewCover,
             ] = [
-              "track-id",                     // data-track-id
-              "preview-url",                 // data-preview-url
-              "preview-trackname",          // data-preview-...
+              "track-id", // data-track-id
+              "preview-url", // data-preview-url
+              "preview-trackname", // data-preview-...
               "preview-artist",
               "preview-album",
-              "preview-cover",      
+              "preview-cover",
             ].map((attr) => playSymbol.getAttribute(`data-${attr}`));
 
             // if there is a previewUrl, we play this url in audio-player ( -> function playTrack(previewUrl) ):
@@ -812,56 +1006,19 @@
 
     // ____________________________________________________________
 
-    // Tracking the submit in the Search-form and displaying search-Results:
-
-    searchButton.addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent the default form submission
-      handleSearch(); // call handleSearch() instead of displaySearchResults
-    });
-
-    // function for focusing on the Search results:
-    async function handleSearch() {
-      const query = searchInput.value.trim(); // fetch the input value
-      const formContainer = document.getElementById("zero-input"); // container near the input field
-
-      // remove earlier warning messages (if any):
-      formContainer.querySelector(".warning-message")?.remove();
-
-      if (query.length >= 1) {
-        console.log("Form submitted");
-        console.log("Query:", query);
-        await displaySearchResults(query); // use 'fetchSearchResults' inside the function 'displaySearchResults'
-        // Focus on the results-container:
-        // document.getElementById("search-results").focus();
-        document
-          .getElementById("search-results")
-          .scrollIntoView({ behavior: "smooth", block: "start" });
-      } else {
-        displayMessage(formContainer, "Please enter your query.");
-      }
-    }
-
-    // Key press on Enter kbd key is also calling the handleSearch() function:
-    searchInput.addEventListener("keypress", function (event) {
-      if (event.key === "Enter") {
-        event.preventDefault(); // Prevent form submission on Enter
-        handleSearch();
-      }
-    });
-
     // Event-listener for tracking entry in all 3 fields with these categories:
-    [artistInput, songInput, albumInput].forEach((input) => {
-      input.addEventListener("input", () => {
-        const query = input.value.trim();
-        if (query.length > 0) {
-          fetchSuggestions2(query);  // OVA FUNKCIJA SE BAŠ NE KORISTI?
-        } else {
-          resultsList.innerHTML = ""; // clean results if entry is empty
-        }
-      });
-    });
+    // [artistInput, songInput, albumInput].forEach((input) => {
+    //   input.addEventListener("input", () => {
+    //     const query = input.value.trim();
+    //     if (query.length > 0)
+    //       // fetchSuggestions2(query);  // OVA FUNKCIJA SE BAŠ NE KORISTI?
+    //     } else {
+    //       resultsList.innerHTML = ""; // clean results if entry is empty
+    //     }
+    //   });
+    // });
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Load lists from localStorage on init:
     function loadLists() {
       const savedList = localStorage.getItem("addedList");
@@ -927,7 +1084,7 @@
 
     // doraditi logiku Search funkcije !!! - što se dohvaća pomoću API-ja i kako se prikazuje
 
-______________________________________________________________________________
+    // ______________________________________________________________________________
 
     // Creating new task / new item on a submit/play-list:
     function createTask(artist, song, album, rating, time) {
@@ -975,7 +1132,6 @@ ______________________________________________________________________________
       document.getElementById("review").value = "";
       saveLists();
     }
-
 
     this.init = function () {
       // body initially has a default theme0:
@@ -1107,7 +1263,6 @@ ______________________________________________________________________________
       // removes the whole parent-task (in which the removeButton was embedded as a child)
       saveLists();
     }
-
   }
   // here ends Todo function.
 
@@ -1121,19 +1276,21 @@ ______________________________________________________________________________
 // if page reloaded, scroll back to the first element:
 document.addEventListener("DOMContentLoaded", function () {
   document
-  .getElementById("first-container")
-  .scrollIntoView({ behavior: "smooth", block: "start" });
-  
+    .getElementById("first-container")
+    .scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
-// If backspace pressed when not focused on Input field, 
+// If backspace pressed when not focused on Input field,
 document.addEventListener("keydown", function (event) {
   const activeElement = document.activeElement;
-    if (event.key === "Backspace" && !(activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA")) {
-      event.preventDefault(); // prevent usual Backspace-key task (for deleting)
-      document
-  .getElementById("first-container")
-  .scrollIntoView({ behavior: "smooth", block: "start" });
+  if (
+    event.key === "Backspace" &&
+    !(activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA")
+  ) {
+    event.preventDefault(); // prevent usual Backspace-key task (for deleting)
+    document
+      .getElementById("first-container")
+      .scrollIntoView({ behavior: "smooth", block: "start" });
   }
 });
 
@@ -1291,5 +1448,3 @@ playlista ostaje spremljena (možda u bazi - trajno?) na 2. stranici (My playlis
 - Results container/form je trenutno stalno vidljiv jer je hardkodiran na idex.html-u - učiniti da je nevidljiv, i da se prikazuje samo kad se dohvate neki rezultati
 
 */
-
-
