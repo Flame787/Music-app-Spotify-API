@@ -1,4 +1,4 @@
-// NEW BRANCH "SEARCH_TYPES":
+// CHANGES MERGED FROM THE NEW BRANCH "SEARCH_TYPES" INTO THE "MASTER" BRANCH - this is now 'master' branch:
 
 (function () {
   function Todo() {
