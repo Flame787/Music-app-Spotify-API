@@ -1,4 +1,6 @@
-// CHANGES MERGED FROM THE NEW BRANCH "SEARCH_TYPES" INTO THE "MASTER" BRANCH - this is now 'master' branch:
+// NEW BRANCH "PLAYLIST" - for playlist functionalities
+// 27.10. changes merged from the latest branch "SEARCH_TYPES" into the "master" branch. 
+// After that, based on newly updated 'master' branch, here continues the new 'PLAYLIST' branch. 
 
 (function () {
   function Todo() {
