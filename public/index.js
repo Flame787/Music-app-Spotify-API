@@ -357,34 +357,10 @@
       }
       if (type.includes("track")) {
         showTracks(data);
-        console.log("Found tracks:", data.tracks.items); // rezultati se sad prikazuju u konzoli za sve 3 kategorije :)
+        console.log("Found tracks:", data.tracks.items); 
       }
     }
 
-    /*  
-popravljena je ona beskonačna petlja, sad je ovako:
-favoritesList: <ul id=​"fav_albums">​</ul>​
-index.js:133 Selected theme: theme0
-index.js:134 Body classes: DOMTokenList ['theme0', value: 'theme0']
-index.js:212 Form submitted
-index.js:213 Query: iron
-index.js:243 Selected options: []
-index.js:270 Selected type: artist,album,track
-index.js:220 handleSearch called
-index.js:293 Fetching results...
-index.js:298 Data received: {albums: {…}, artists: {…}, tracks: {…}}
-index.js:314 Function displaSearchResults received this type: artist,album,track
-index.js:318 {albums: {…}, artists: {…}, tracks: {…}}
-index.js:212 Form submitted
-index.js:213 Query: jojo
-index.js:243 Selected options: ['album']
-index.js:270 Selected type: album
-index.js:220 handleSearch called
-index.js:293 Fetching results...
-index.js:298 Data received: {albums: {…}}
-index.js:314 Function displaSearchResults received this type: album
-index.js:318 {albums: {…}}
-rezultati se dohvaćaju, ali se ne prikažu na stranici */
 
     // Results displaying, depending on API-data structure:
 
@@ -425,7 +401,7 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
           // Insert the div-image before the text content:
           li.insertBefore(div, li.firstChild);
           div.appendChild(img);
-          div.classList.add("image-container");
+          div.classList.add("image-container-artist");
 
           // Create a <div> for text and append it:
           const textDivArtist1 = createDiv();
@@ -1486,5 +1462,10 @@ dodati:
 + klik na artista (ime) baca na Discography
 + play ikona na slikama još ne radi, dodati istu funkciju kao i play button
 
+Što ako kliknemo na Play na slici banda ii artista? Treba li nam to uopće? Ne baš.
+
+Što ako kliknemo na Play na slici albuma? Trebalo bi otvoriti album (Tracklist) i odmah početi svirati prvu pjesmu s albuma.
+
+Što ako kliknemo na Play na slici pjesme? Trebalo bi odmah krenuti svirati tu pjesmu. 
 
 */
