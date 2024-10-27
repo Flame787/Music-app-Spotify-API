@@ -215,7 +215,7 @@
       // remove earlier warning messages (if any):
       formContainer.querySelector(".warning-message")?.remove();
 
-      // show previously hidden form:
+      // show the initially hidden form with all results:
       formResultsContainerTracks.style.display = "block";
 
       if (query.length >= 1) {
@@ -272,7 +272,7 @@
         case JSON.stringify(["artist", "album"]):
           selectedType = "artist,album";
           break;
-        case JSON.stringify(["song", "album"]):
+        case JSON.stringify(["album", "song"]):
           selectedType = "album,track";
           break;
         case JSON.stringify(["artist", "song"]):
@@ -398,12 +398,11 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
 
       const ulArtists = document.createElement("ul"); // create an unordered list for artists
       const titleArtists = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
-      ulArtists.classList.add("flex-container");
+      ulArtists.classList.add("flex-container-ol");
 
-      const hrLine = createLine();
       ulArtists.appendChild(titleArtists);
       titleArtists.innerHTML = "Artists:"; // staviti nakon uvjeta za ARTISTS
-      ulArtists.appendChild(hrLine);
+
 
       if (results.artists && results.artists.items.length > 0) {
         results.artists.items.forEach((item) => {
@@ -457,6 +456,10 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
           ulArtists.appendChild(li);
           resultsContainer.appendChild(ulArtists); // -> ovo je ok, događa se kako treba.
         });
+      } else {
+        const errorMessage = createDiv();
+        resultsContainer.appendChild(errorMessage);
+        errorMessage.textContent = `No artists found.`;
       }
     }
 
@@ -466,12 +469,10 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
     function showAlbums(results) {
       const ulAlbums = document.createElement("ul"); // create an unordered list for artists
       const titleAlbums = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
-      ulAlbums.classList.add("flex-container");
+      ulAlbums.classList.add("flex-container-ol");
 
-      const hrLine = createLine();
       ulAlbums.appendChild(titleAlbums);
       titleAlbums.innerHTML = "Albums:"; 
-      ulAlbums.appendChild(hrLine);
 
       if (results.albums && results.albums.items.length > 0) {
         results.albums.items.forEach((item) => {
@@ -532,6 +533,10 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
           ulAlbums.appendChild(li);
           resultsContainer.appendChild(ulAlbums);
         });
+      } else {
+        const errorMessage = createDiv();
+        resultsContainer.appendChild(errorMessage);
+        errorMessage.textContent = `No albums found.`;
       }
     }
 
@@ -541,12 +546,10 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
     function showTracks(results) {
       const ulSongs = document.createElement("ul"); // create an unordered list for artists
       const titleSongs = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
-      ulSongs.classList.add("flex-container");
+      ulSongs.classList.add("flex-container-ol");
 
-      const hrLine = createLine();
       ulSongs.appendChild(titleSongs);
       titleSongs.innerHTML = "Songs:"; 
-      ulSongs.appendChild(hrLine);
 
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
@@ -591,6 +594,10 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
           ulSongs.appendChild(li);
           resultsContainer.appendChild(ulSongs);
         });
+      } else {
+        const errorMessage = createDiv();
+        resultsContainer.appendChild(errorMessage);
+        errorMessage.textContent = `No tracks found.`;
       }
 
       // --> ovo doraditi za Tracks, dodati Playsymbol/Playbutton i ostale opcije koje su kasnije definirane
@@ -600,14 +607,17 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
     // 25.10. - ovo je ok, može ostati, jer je zasebna funkcija za prikaz samo izbora albuma od pojedinog autora
     // (nije isto kao obični search rezultati, niti koristi isti API):
 
-    // POPTAVITI OVU FUNKCIJU TAKO DA KORISTI FETCH REQUEST ZA ALBUME!! (POSEBAN, NE KAO SEARCH):
+    // FUNKCIJA RADI I PRIKAŽE SVE ALBUME ZA ODABRANOG ARTISTA, KOLIKO GOD ALBUMA POSTOJI:
 
     async function handleDiscographyButtonClick(artistId, artistName) {
+
+      console.log("Artist ID & name:", artistId, artistName); // - ovo se prikazuje u konzoli, znači da su values dobro prenesene ovamo:
+
       try {
         // Fetch albums for the selected artist
         // const results = await fetchSearchResults(artistName, type);
-        const results = await fetch(`/api/artists/${artistId}/albums`);
-
+        const response = await fetch(`/api/artists/${artistId}/albums`);
+        const results = await response.json();
         console.log("Fetched discography:", results);
 
         // Clear the previous results from the results-container:
@@ -709,7 +719,7 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
     // 25.10. - ovo je isto ok, može ostati, jer je zasebna funkcija za prikaz samo Tracklista s odabranog albuma
     // (nije isto kao obični search rezultati, niti koristi isti API):
 
-    async function handleTrackListButtonClick(
+    async function handleTrackListButtonClick(   // OVA FUNKCIJA RADI NA PRITISAK BUTTONA, I U NJOJ PLAY BUTTON -> PREVIEW PLAYER RADI :D :) 
       albumId,
       albumName,
       albumArtist,
@@ -726,7 +736,7 @@ rezultati se dohvaćaju, ali se ne prikažu na stranici */
       }
 
       try {
-        // Fetch albums for the selected artist
+        // Fetch tracks ffrom selected album:
         // const results = await fetchSearchResults(artistName, "album");
         const tracksResponse = await fetch(`/api/albums/${albumId}/tracks`);
         const tracksData = await tracksResponse.json();
@@ -1421,20 +1431,20 @@ Get the User's Queue
 Add Item to Playback Queue
 
 
-- napravi funkciju playSong() koja ima ove podfunkcije:
-- event-listener kad se klikne na bilo koji dio cijelog li (list itema), pokrene se player
-- automatski se fokus prebaci u donji form gdje je Audio player i pjesma počne svirati
++ napravi funkciju playSong() koja ima ove podfunkcije:
++ event-listener kad se klikne na bilo koji dio cijelog li (list itema), pokrene se player
++ automatski se fokus prebaci u donji form gdje je Audio player i pjesma počne svirati
 - volume je automatski set na 50% ili manje
-- pjesma se može zaustaviti na play/pause
-- u prozoru Playera se pojavi slika covera albuma s kojeg je pjesma
++ pjesma se može zaustaviti na play/pause
++ u prozoru Playera se pojavi slika covera albuma s kojeg je pjesma
 - opcije premotavanja? Vidjeti jel ih Player ima
 - opcije Next / Back (iduća ili ranija pjesma)? (onda dohvaća sljedeći ili prethodni item s liste tog albuma) - moguće da postoji api-endpoint za to, ili preko petlje koja prolazi kroz cijelu listu na tom albumu
-- ispod Playera piše dinamički artist, album i song koji svira
-- Rate i Add to playlist buttoni su isto unutar Playera, blizu tog ispisa pjesme, i imaju svoje funkcije kao i prije (za dodavanje na listu) - samo podesiti da sad dohvaćaju podatke poslane s Api-ja
++ ispod Playera piše dinamički artist, album i song koji svira
++ Rate i Add to playlist buttoni su isto unutar Playera, blizu tog ispisa pjesme, i imaju svoje funkcije kao i prije (za dodavanje na listu) - samo podesiti da sad dohvaćaju podatke poslane s Api-ja
 
-- maknuti iz Search-forma opcije Artist, Album, Song i njihov kod preobličiti, tako da pod tim id-evima označava i sprema stvari dohvaćene s api-callova
-- umjesto njih, staviti opciju Search by: Artist, Album, Song kao neki checkbox-form, gdje korisnik može označiti jednu ili više stvari i dobiva samo djelomične api-rezultate ovisno o kategorijama koje je označio (modifikacija već postojećeg Searcha)
-- napraviti da Results nije stalno vidljiv na stranici, nego tek nakon što je korisnik kliknuo na Search i bio je unesen bar 1 znak
++ maknuti iz Search-forma opcije Artist, Album, Song i njihov kod preobličiti, tako da pod tim id-evima označava i sprema stvari dohvaćene s api-callova
++ umjesto njih, staviti opciju Search by: Artist, Album, Song kao neki checkbox-form, gdje korisnik može označiti jednu ili više stvari i dobiva samo djelomične api-rezultate ovisno o kategorijama koje je označio (modifikacija već postojećeg Searcha)
++ napraviti da Results nije stalno vidljiv na stranici, nego tek nakon što je korisnik kliknuo na Search i bio je unesen bar 1 znak
 
 - preobličiti funkciju Add to favorites, osmisliti logiku gdje se spremaju i bilježe playliste (možda na 2. podstranici)
 - i koja je razlika između Favorites i obične playliste? Ocjene? Samo da bi se zabilježilo najbolje stvari ikad na jednu veliku posebnu listu?
@@ -1449,9 +1459,30 @@ dok uređujemo playlistu prvi put, ona se sprema dolje na prvoj stranici i vidlj
 na 1. stranici kod playliste je button 'See all playlists' koji vodi na 2. podstranicu, i na njoj se također sprema dinamički ova playlista, i spremljene su prethodne liste
 playlista ostaje spremljena (možda u bazi - trajno?) na 2. stranici (My playlists) i tu se može dalje uvijek slušati i modificirati 
 
-- suziti širinu prvog forma u kojem je Search (nema potrebe da je tako širok i glomazan, dok ostali mogu biti kako jesu široki)
-- suziti širinu Search-input polja i Search-buttona, te prilagoditi za nekoliko media queriesa
++ suziti širinu prvog forma u kojem je Search (nema potrebe da je tako širok i glomazan, dok ostali mogu biti kako jesu široki)
++ suziti širinu Search-input polja i Search-buttona, te prilagoditi za nekoliko media queriesa
 
-- Results container/form je trenutno stalno vidljiv jer je hardkodiran na idex.html-u - učiniti da je nevidljiv, i da se prikazuje samo kad se dohvate neki rezultati
++ Results container/form je trenutno stalno vidljiv jer je hardkodiran na idex.html-u - učiniti da je nevidljiv, i da se prikazuje samo kad se dohvate neki rezultati
+
+26./27.10. - radi Discography button i implementirano do kraja pretraga po kategorijama - sve radi.
+
+Next steps:
+
+Add to playlist
+Favorite playlist
+- funkcije obraditi
+
+srediti stranicu Playlists
+spremanje listi tamo
+
+nice to have:
+Filtriranje i search po spremljenim listama
+premještanje itema na listi
+ocjenjivanje i editiranje ocjena
+
+dodati:
++ klik na artista (ime) baca na Discography
++ play ikona na slikama još ne radi, dodati istu funkciju kao i play button
+
 
 */

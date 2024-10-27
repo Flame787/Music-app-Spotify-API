@@ -116,13 +116,13 @@ $headerThemes: (
   //Emerald
   theme11:
     (
-      background:
-        radial-gradient(at 25% 75%, #02818db9, rgba(2, 51, 52, 0.749)),
+      background: radial-gradient(at 25% 75%, #02818db9, rgba(2, 51, 52, 0.749)),
     ),
   //Azure
   theme12:
     (
-      background: radial-gradient(at 75% 25%, #80b3d5bf, rgba(26, 78, 113, 0.749)),
+      background:
+        radial-gradient(at 75% 25%, #80b3d5bf, rgba(26, 78, 113, 0.749)),
     ),
   //Frost
   theme13:
@@ -155,9 +155,8 @@ $headerThemes: (
 $themes: (
   theme0: (
     background-color: #070b7c,
-    background-image:
-      // linear-gradient(320deg, #d00768 5%, #070b7c 40%),
-      linear-gradient(320deg, #d007a8 0%, #040651 50%),
+    background-image: // linear-gradient(320deg, #d00768 5%, #070b7c 40%),
+    linear-gradient(320deg, #d007a8 0%, #040651 50%),
     color: white,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -176,13 +175,15 @@ $themes: (
   ),
   theme3: (
     background-color: rgb(1, 1, 11),
-    background-image: linear-gradient(320deg, #b721ff 0%, #1591ad 63%, #c1e3eb 100%),
+    background-image:
+      linear-gradient(320deg, #b721ff 0%, #1591ad 63%, #c1e3eb 100%),
     color: white,
     box-shadow: 3px 3px 2px #04062db6,
   ),
   theme4: (
     background-color: #0b6893,
-    background-image: linear-gradient(320deg, #aadeef 0%, #1554ad 43%, #031b85 100%),
+    background-image:
+      linear-gradient(320deg, #aadeef 0%, #1554ad 43%, #031b85 100%),
     color: white,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -229,13 +230,20 @@ $themes: (
   ),
   theme10: (
     background-color: #baff7d,
-    background-image: linear-gradient(320deg, #dcf3ca 0%, #57c35e 51%, rgb(16, 108, 6) 100%),
+    background-image:
+      linear-gradient(320deg, #dcf3ca 0%, #57c35e 51%, rgb(16, 108, 6) 100%),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
   theme11: (
     background-color: #a6cad2,
-    background-image: linear-gradient(320deg, #dbf4f4 0%, #56ebf8b9 20%, rgba(31, 107, 108, 0.749) 100%),
+    background-image:
+      linear-gradient(
+        320deg,
+        #dbf4f4 0%,
+        #56ebf8b9 20%,
+        rgba(31, 107, 108, 0.749) 100%
+      ),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -264,11 +272,18 @@ $themes: (
   theme15: (
     background-color: rgb(246, 194, 38),
     background-image:
-      linear-gradient(320deg, rgb(245, 232, 192) 0%, rgb(246, 194, 38) 43%, #ec7948 100%),
+      linear-gradient(
+        320deg,
+        rgb(245, 232, 192) 0%,
+        rgb(246, 194, 38) 43%,
+        #ec7948 100%
+      ),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
 );
+
+
 
 // Set of colors for Remove-buttons:
 
@@ -335,7 +350,12 @@ $themes2: (
   theme9: (
     background-color: rgb(6, 125, 8),
     background-image:
-      linear-gradient(320deg, #619c55 0%, rgb(1, 99, 60) 33%, rgb(1, 40, 21) 100%),
+      linear-gradient(
+        320deg,
+        #619c55 0%,
+        rgb(1, 99, 60) 33%,
+        rgb(1, 40, 21) 100%
+      ),
     color: white,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -348,14 +368,16 @@ $themes2: (
   ),
   theme11: (
     background-color: rgb(37, 121, 143),
-    background-image: linear-gradient(320deg, #caebf3 0%, #067f71 26%, #013c5f 80%),
+    background-image:
+      linear-gradient(320deg, #caebf3 0%, #067f71 26%, #013c5f 80%),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
   theme12: (
     // background-color: orange,
     background-color: rgb(35, 107, 116),
-    background-image: linear-gradient(320deg, #a8c8f0 0%, rgb(34, 115, 125) 20%, #04264f 100%),
+    background-image:
+      linear-gradient(320deg, #a8c8f0 0%, rgb(34, 115, 125) 20%, #04264f 100%),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -375,7 +397,8 @@ $themes2: (
 
   theme15: (
     background-color: black,
-    background-image: linear-gradient(320deg, rgb(232, 194, 81) 0%, #f38d7b 36%, #7a2715 100%),
+    background-image:
+      linear-gradient(320deg, rgb(232, 194, 81) 0%, #f38d7b 36%, #7a2715 100%),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -421,7 +444,6 @@ $fontColors: ();
   );
 }
 
-
 // $fontColors: map-merge(
 //   $fontColors,
 //   (
@@ -453,7 +475,6 @@ $fontColors: map-merge(
     ),
   )
 );
-
 
 // font-colors for 'thin'-class-font in forms:
 
@@ -501,7 +522,6 @@ $thinColors: ();
   );
 }
 
-
 @for $i from 3 through 4 {
   $thinColors: map-merge(
     $thinColors,
@@ -513,7 +533,6 @@ $thinColors: ();
     )
   );
 }
-
 
 // Set of colors for Forms:
 
@@ -589,11 +608,11 @@ $formThemes: (
   ),
   theme10: (
     background:
-        radial-gradient(
-          at 25% 75%,
-          rgba(74, 116, 3, 0.574),
-          rgba(2, 71, 40, 0.623)
-        ),
+      radial-gradient(
+        at 25% 75%,
+        rgba(74, 116, 3, 0.574),
+        rgba(2, 71, 40, 0.623)
+      ),
     color: white,
     text-shadow: none,
     box-shadow: 3px 3px 2px $boxShadowColor1,
@@ -601,8 +620,7 @@ $formThemes: (
   theme11: (
     // background:
     //   radial-gradient(at 25% 75%, #a4d1ed4f, rgba(96, 148, 226, 0.567)),
-      background:
-        radial-gradient(at 25% 75%, #02818da2, rgba(2, 51, 52, 0.674)),
+    background: radial-gradient(at 25% 75%, #02818da2, rgba(2, 51, 52, 0.674)),
     color: white,
     text-shadow: none,
     box-shadow: 3px 3px 2px $boxShadowColor1,
@@ -610,7 +628,7 @@ $formThemes: (
   theme12: (
     background:
       // radial-gradient(at 25% 75%, #c8e2f2bf, rgba(110, 158, 230, 0.749)),
-      radial-gradient(at 75% 25%, #b1b0b0c6, rgba(42, 101, 140, 0.8)),
+    radial-gradient(at 75% 25%, #b1b0b0c6, rgba(42, 101, 140, 0.8)),
     color: white,
     text-shadow: none,
     box-shadow: 3px 3px 2px $boxShadowColor1,
@@ -618,8 +636,8 @@ $formThemes: (
   theme13: (
     background:
       // radial-gradient(at 75% 25%, #b1b0b0b2, rgba(42, 100, 140, 0.749)),
-      radial-gradient(at 25% 75%, #c8e2f2bf, #57c3de8e),
-    color: black, 
+    radial-gradient(at 25% 75%, #c8e2f2bf, #57c3de8e),
+    color: black,
     text-shadow: none,
     box-shadow: 3px 3px 2px black,
   ),

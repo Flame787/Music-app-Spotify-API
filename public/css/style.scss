@@ -429,6 +429,7 @@ select {
   // overflow: hidden: enables that eny content which is outside of element border stays hidden - important for 'shine' efect because it passes over the element border.
   // transition: enables transformation on hover.
 
+  // additional effect-element, coming 'after' the button (just a shadow/shine):
   &::after {
     content: "";
     position: absolute;
@@ -439,6 +440,7 @@ select {
     // background: rgba(255, 255, 255, 0.289);
     // transform: skewX(-20deg);
     // transition: left 0.1s ease-in-out;
+
     background: linear-gradient(
       to top,
       rgba(229, 172, 142, 0),
@@ -586,7 +588,7 @@ hr {
 
 .result-category {
   width: 100%;
-  margin: 5% auto 3%;
+  margin: 2% auto 3%;
 }
 
 .result-image {
@@ -597,7 +599,7 @@ hr {
 }
 
 .li-item-style {
-  padding: 0 1% 7%;
+  padding: 0 1% 2%;
   font-size: 1.2rem;
 }
 
@@ -704,9 +706,9 @@ li .image-container img {
 }
 
 .show-more-button {
-  margin-top: 5%;
+  margin: 4% auto;
   font-size: 1.1rem;
-  width: 70%;
+  width: 45%;
 }
 
 .play-button {
@@ -733,18 +735,30 @@ li .image-container img {
   margin: 40px auto 0%;
 }
 
-// #form-results-container {
-//   display: none; // Element is hidden by default
-// }
+#form-results-container {
+  display: none; // Element is hidden by default
+}
 
 #flex-search-category {
   margin-bottom: 5%;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 #search-all-button {
   width: 170px;
   font-size: 1.5rem;
+  &:hover {
+    cursor: pointer;
+  }
 }
+
+button {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 
 // MEDIA QUERIES:
 
@@ -828,6 +842,13 @@ li .image-container img {
   }
   #empty {
     display: none;
+  }
+  .show-more-button {
+    margin: 4% auto 8%;
+  }
+  #flex-search-category {
+    margin-left: 20%;
+    margin-right: 20%;
   }
 }
 
@@ -1097,6 +1118,10 @@ li .image-container img {
   .result-category {
     font-size: 1.5rem;
   }
+  #flex-search-category {
+    margin-left: 12%;
+    margin-right: 12%;
+  }
 }
 
 @media (max-width: 512px) {
@@ -1170,5 +1195,9 @@ li .image-container img {
 
   #player-add-to-playlist {
     width: 9rem;
+  }
+  #flex-search-category {
+    margin-left: 5%;
+    margin-right: 5%;
   }
 }
