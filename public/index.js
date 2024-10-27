@@ -17,6 +17,7 @@
     const formResultsContainerTracks = document.getElementById(
       "form-results-container"
     );
+    const audioPlayer = document.getElementById("audio-player");
     let narrowForm = false;
 
     function createDiv() {
@@ -779,7 +780,7 @@
         // const img = document.createElement("img");
         // const div = createDiv();
         // skraćeno:
-        const [titleTracks1, titleTracks2, titleSmall, img, div] = [
+        const [titleTracks1, titleTracks2, titleSmall, img, imgContainer] = [
           "h3",
           "h3",
           "h4",
@@ -803,15 +804,73 @@
         img.alt = `${albumName} Album Cover`;
         img.classList.add("result-image");
 
-        div.classList.add("image-container");
-        div.appendChild(img);
+        imgContainer.classList.add("image-container");
+        imgContainer.appendChild(img);
 
-        // ulTracks.appendChild(titleTracks1);
-        // ulTracks.appendChild(titleTracks2);
-        // ulTracks.appendChild(div); // appends a div with cover picture
-        // ulTracks.appendChild(titleSmall);
+        // OVDJE SLIJEDI FUNKCIJA ZA SVIRANJE CIJELOG ALBUMA, AKTIVIRANA JE NA KLIK NA SLIKU ALBUMA, UNUTAR TRACK LIST-a:
+
+        let currentTrackIndex = 0; // first song on the album
+
+        // Function for reproduction of the next song (=> playing whole album):
+        function playNextTrack() {
+          currentTrackIndex++; // increase index
+          if (
+            currentTrackIndex < tracksData.items.length &&
+            tracksData.items[currentTrackIndex].preview_url
+          ) {
+            playTrack(tracksData.items[currentTrackIndex].preview_url); // calling function to play song in audio-player
+            updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
+          } else {
+            console.log(
+              "Reprodukcion is finished, or preview URL for the next song is missing."
+            );
+          }
+        }
+
+        // function to update info on currently playing track (when playing the whole album):
+        function updateCurrentlyPlayingInfo(trackIndex) {
+          const currentTrackData = document.getElementById("current-play");
+          currentTrackData.innerHTML = "";
+
+          const currentTrackInfo = createDiv();
+
+          const currentTrackInfoDiv1 = createDiv();
+          const currentTrackInfoDiv2 = createDiv();
+          const currentTrackInfoDiv3 = createDiv();
+          const currentTrackInfoDiv4 = createDiv();
+          const currentTrackInfoDiv5 = createDiv();
+
+          currentTrackInfoDiv1.textContent = `${tracksData.items[trackIndex].name}`;
+          currentTrackInfoDiv2.textContent = `By:`;
+          currentTrackInfoDiv3.textContent = `${tracksData.items[trackIndex].artists[0].name}`;
+          currentTrackInfoDiv4.textContent = `Album:`;
+          currentTrackInfoDiv5.textContent = `${tracksData.name}`;
+
+          currentTrackInfoDiv1.classList.add("result-item-name");
+          currentTrackInfoDiv3.classList.add("result-item-name");
+          currentTrackInfoDiv5.classList.add("result-item-name");
+
+          currentTrackInfo.appendChild(currentTrackInfoDiv1);
+          currentTrackInfo.appendChild(currentTrackInfoDiv2);
+          currentTrackInfo.appendChild(currentTrackInfoDiv3);
+          currentTrackInfo.appendChild(currentTrackInfoDiv4);
+          currentTrackInfo.appendChild(currentTrackInfoDiv5);
+
+          currentTrackInfo.classList.add("current-track");
+          currentTrackData.appendChild(currentTrackInfo);
+        }
+
+      
+
+
+        // audioPlayer.addEventListener("ended", playNextTrack);
+        console.log("Next song started.");
+
+        // Continue with the main function - handleTrackListButtonClick:
+
+        // adding child-elements to the ulTracks:
         // skraćeno:
-        [titleTracks1, titleTracks2, div, titleSmall].forEach((el) =>
+        [titleTracks1, titleTracks2, imgContainer, titleSmall].forEach((el) =>
           ulTracks.appendChild(el)
         );
 
@@ -829,17 +888,10 @@
 
           // Save important data about playing track via playButton attributes:
           // (so they can be fetched later from the clicked button (playbutton / playSymbol): track URL, name, artist, album, cover):
-
-          // playButton.setAttribute("data-track-id", track.id); // Attach track ID to play-button
-          // playButton.setAttribute("data-preview-url", track.preview_url); // Attach track URL to play-button
-          // playButton.setAttribute("data-preview-trackname", track.name); // Attach track name to play-button
-          // playButton.setAttribute("data-preview-artist", albumArtist); // Attach artist to play-button
-          // playButton.setAttribute("data-preview-album", albumName); // Attach album to play-button
-          // playButton.setAttribute("data-preview-cover", albumImageUrl); // Attach track cover to play-button
           // skraćeno:
           [
-            "track-id",
-            "preview-url",
+            "track-id", // Attach track ID to play-button
+            "preview-url", // Attach track URL to play-button
             "preview-trackname",
             "preview-artist",
             "preview-album",
@@ -880,6 +932,26 @@
 
         // Append the list to the results container:
         resultsContainer.appendChild(ulTracks);
+
+
+        // 27.10. - OVO SMO ZAKOMENTIRALI JER TRENUTNO BACA GREŠKU: 
+        // "NEMA DOSTUPNOG URL-A ZA PRVU PJESMU" (NE DOHVAĆA URL?)
+        // OBIČNI PLAY PREVIEW ZA TRACKSE RADI
+
+        // imgContainer.addEventListener("click", (event) => {
+        //   event.preventDefault();
+        //   document.getElementById("currently-playing").scrollIntoView({ behavior: "smooth", block: "start" });
+        
+        //   if (tracksData.items[0].trackUrl) {
+        //     currentTrackIndex = 0; // Postavi redni broj pjesme na prvu pjesmu
+        //     playTrack(tracksData.items[currentTrackIndex].trackUrl);
+        //     updateCurrentlyPlayingInfo(currentTrackIndex);
+        //   } else {
+        //     console.error("Nema dostupnog track URL-a za prvu pjesmu.");
+        //   }
+        // });
+
+
 
         /* Adding event-listeners on all Play-buttona & icons: */
 
@@ -976,8 +1048,6 @@
             currentTrackData.innerHTML = "";
 
             const currentTrackInfo = createDiv();
-            // urediti taj div, dati mu neke bordere ili tamniju pozadinu
-            // smanjiti širinu playera na stranici (i svih formsa - preširoki su)
 
             const currentTrackInfoDiv1 = createDiv();
             const currentTrackInfoDiv2 = createDiv();
@@ -1006,6 +1076,7 @@
           }); //  -> here ends inside function:  playSymbol.addEventListener("click", event)
         }); // -> here ends outer function:  playStarters.forEach(playSymbol)
 
+        
         // Scroll to the results container to focus on the tracklist:
         document
           .getElementById("search-results")
@@ -1020,8 +1091,6 @@
 
     // Function to play selected track preview in html-audio-player:
     function playTrack(previewUrl) {
-      const audioPlayer = document.getElementById("audio-player");
-
       // audio source is the selected track's URL:
       audioPlayer.src = previewUrl;
 
@@ -1042,7 +1111,7 @@
           currentPlay.appendChild(noPreview);
           console.error("Error playing track:", error);
         });
-    } // here ends the function playPreview(previewUrl) – which is inside of the bigger function Todo()
+    } // here ends the function playTrack(previewUrl) – which is inside of the bigger function Todo()
 
     // ____________________________________________________________
 
