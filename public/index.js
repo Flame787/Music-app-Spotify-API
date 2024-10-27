@@ -1,6 +1,6 @@
 // NEW BRANCH "PLAYLIST" - for playlist functionalities
-// 27.10. changes merged from the latest branch "SEARCH_TYPES" into the "master" branch. 
-// After that, based on newly updated 'master' branch, here continues the new 'PLAYLIST' branch. 
+// 27.10. changes merged from the latest branch "SEARCH_TYPES" into the "master" branch.
+// After that, based on newly updated 'master' branch, here continues the new 'PLAYLIST' branch.
 
 (function () {
   function Todo() {
@@ -357,10 +357,9 @@
       }
       if (type.includes("track")) {
         showTracks(data);
-        console.log("Found tracks:", data.tracks.items); 
+        console.log("Found tracks:", data.tracks.items);
       }
     }
-
 
     // Results displaying, depending on API-data structure:
 
@@ -380,7 +379,6 @@
 
       ulArtists.appendChild(titleArtists);
       titleArtists.innerHTML = "Artists:"; // staviti nakon uvjeta za ARTISTS
-
 
       if (results.artists && results.artists.items.length > 0) {
         results.artists.items.forEach((item) => {
@@ -403,12 +401,16 @@
           div.appendChild(img);
           div.classList.add("image-container-artist");
 
-          // Event listener for the Discography button:
+          // Event listener for showing Discography on click on the artist-image-div:
           div.addEventListener("click", (event) => {
             event.preventDefault(); // Prevent default button behavior
             handleDiscographyButtonClick(item.id, item.name); // Calls the function to fetch albums and passes the artist-id & name to the function
             // koristit ćemo ovaj API: const response = await fetch(`/api/albums/${albumId}/tracks`);
-            console.log("fetching discography via picture for:", item.id, item.name); // ovo se prikaže, prenosi dobar info (id- i ime artista)
+            console.log(
+              "Discography fetched via picture for:",
+              item.id,
+              item.name
+            );
           });
 
           // Create a <div> for text and append it:
@@ -432,7 +434,11 @@
             event.preventDefault(); // Prevent default button behavior
             handleDiscographyButtonClick(item.id, item.name); // Calls the function to fetch albums and passes the artist-id & name to the function
             // koristit ćemo ovaj API: const response = await fetch(`/api/albums/${albumId}/tracks`);
-            console.log("fetching discography via button for:", item.id, item.name); // ovo se prikaže, prenosi dobar info (id- i ime artista)
+            console.log(
+              "Discography fetched via button for:",
+              item.id,
+              item.name
+            );
           });
 
           li.classList.add("li-item-style", "result-flex-item");
@@ -458,7 +464,7 @@
       ulAlbums.classList.add("flex-container-ol");
 
       ulAlbums.appendChild(titleAlbums);
-      titleAlbums.innerHTML = "Albums:"; 
+      titleAlbums.innerHTML = "Albums:";
 
       if (results.albums && results.albums.items.length > 0) {
         results.albums.items.forEach((item) => {
@@ -477,6 +483,21 @@
             div.appendChild(img);
             div.classList.add("image-container");
           }
+
+          // Event listener for showing Track list on click on the Album-image-div:
+          div.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent default button behavior
+            handleTrackListButtonClick(
+              item.id, // passes album-id to this function (we use album-id later to fetch individual tracks - Track list)
+              item.name, // passes album name
+              item.artists[0].name, // passes artist name
+              item.images[0].url // passes album cover image url
+            );
+            console.log("Track list fetched via image.");
+            // OVDJE JOŠ DODATI I NOVU FUNKCIJU DA ODMAH SVIRA PRVU PJESMU S ODABRANOG ALBUMA!
+
+            // -> CIJELU OVU FUNKCIJU DODATI I U FUNKCIJU handleDiscography, JER SE I TAMO POZIVA
+          });
 
           // Create a <div> for the text and append it:
           const textDivAlbum1 = createDiv();
@@ -513,7 +534,7 @@
               item.images[0].url // passes album cover image url
             );
 
-            console.log("discography fetched");
+            console.log("Track list fetched via button.");
           });
 
           ulAlbums.appendChild(li);
@@ -535,7 +556,7 @@
       ulSongs.classList.add("flex-container-ol");
 
       ulSongs.appendChild(titleSongs);
-      titleSongs.innerHTML = "Songs:"; 
+      titleSongs.innerHTML = "Songs:";
 
       if (results.tracks && results.tracks.items.length > 0) {
         results.tracks.items.forEach((item) => {
@@ -596,7 +617,6 @@
     // FUNKCIJA RADI I PRIKAŽE SVE ALBUME ZA ODABRANOG ARTISTA, KOLIKO GOD ALBUMA POSTOJI:
 
     async function handleDiscographyButtonClick(artistId, artistName) {
-
       console.log("Artist ID & name:", artistId, artistName); // - ovo se prikazuje u konzoli, znači da su values dobro prenesene ovamo:
 
       try {
@@ -637,6 +657,19 @@
             div.classList.add("image-container");
             div.appendChild(img);
             li.appendChild(div);
+
+            // Event listener for showing Track list on click on the Album-image-div:
+            div.addEventListener("click", (event) => {
+              event.preventDefault(); // Prevent default button behavior
+              handleTrackListButtonClick(
+                album.id, // passes album-id to this function (we use album-id later to fetch individual tracks - Track list)
+                album.name, // passes album name
+                album.artists[0].name, // passes artist name
+                album.images[0].url // passes album cover image url
+              );
+              console.log("Track list fetched via image.");
+              // OVDJE JOŠ DODATI I NOVU FUNKCIJU DA ODMAH SVIRA PRVU PJESMU S ODABRANOG ALBUMA!
+            });
 
             // Create a <div> for the text and append it:
             // const textDivAlbum1 = createDiv();
@@ -687,6 +720,10 @@
 
           // Append the list to the results container:
           resultsContainer.appendChild(ulAlbums);
+          // focus on the results-field:
+          document
+            .getElementById("search-results")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
         } else {
           // Show a message if no albums are found:
           displayMessage(
@@ -705,7 +742,7 @@
     // 25.10. - ovo je isto ok, može ostati, jer je zasebna funkcija za prikaz samo Tracklista s odabranog albuma
     // (nije isto kao obični search rezultati, niti koristi isti API):
 
-    async function handleTrackListButtonClick(   // OVA FUNKCIJA RADI NA PRITISAK BUTTONA, I U NJOJ PLAY BUTTON -> PREVIEW PLAYER RADI :D :) 
+    async function handleTrackListButtonClick( // OVA FUNKCIJA RADI NA PRITISAK BUTTONA, I U NJOJ PLAY BUTTON -> PREVIEW PLAYER RADI :D :)
       albumId,
       albumName,
       albumArtist,
