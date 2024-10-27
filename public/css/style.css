@@ -1253,6 +1253,9 @@ hr {
   height: 250px;
   box-shadow: 2px 2px 2px rgb(60, 60, 60);
 }
+.result-image:hover {
+  cursor: pointer;
+}
 
 .li-item-style {
   padding: 0 1% 2%;
@@ -1317,6 +1320,9 @@ li .image-container {
   display: inline-block;
   margin: 5% auto 0;
 }
+li .image-container:hover {
+  cursor: pointer;
+}
 
 li .image-container::before {
   content: "";
@@ -1347,6 +1353,9 @@ li .image-container-artist {
   position: relative;
   display: inline-block;
   margin: 5% auto 0;
+}
+li .image-container-artist:hover {
+  cursor: pointer;
 }
 
 li .image-container-artist::before {

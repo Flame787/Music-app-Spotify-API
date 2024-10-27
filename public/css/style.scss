@@ -596,6 +596,9 @@ hr {
   width: 250px;
   height: 250px;
   box-shadow: 2px 2px 2px rgb(60, 60, 60);
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .li-item-style {
@@ -662,16 +665,14 @@ hr {
   margin: 8% auto 12%;
 }
 
-// this doesn't apply at all:
-// .flex-container-tracks .result-flex-item {
-//   flex-basis: 30%;
-// }
-
 // Adding Play-button layer (background element) - on Hover over albums & songs picture:
 li .image-container {
   position: relative;
-  display: inline-block; 
+  display: inline-block;
   margin: 5% auto 0;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 // albums and songs get additionall semi-transarent Play-icon clickable overlay
@@ -701,11 +702,14 @@ li .image-container img {
   display: block; /* needed to correctly show the picture */
 }
 
-// artist-result don't get the semi-transarent Play-icon (like albums and songs), but they get "Vew more" symbol - which opens Discography. 
+// artist-result don't get the semi-transarent Play-icon (like albums and songs), but they get "Vew more" symbol - which opens Discography.
 li .image-container-artist {
   position: relative;
-  display: inline-block; 
+  display: inline-block;
   margin: 5% auto 0;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 li .image-container-artist::before {
@@ -733,7 +737,6 @@ li:hover .image-container-artist::before {
 li .image-container-artist img {
   display: block; /* needed to correctly show the picture */
 }
-
 
 .show-more-button {
   margin: 4% auto;
@@ -788,7 +791,6 @@ button {
     cursor: pointer;
   }
 }
-
 
 // MEDIA QUERIES:
 

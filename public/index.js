@@ -403,6 +403,14 @@
           div.appendChild(img);
           div.classList.add("image-container-artist");
 
+          // Event listener for the Discography button:
+          div.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent default button behavior
+            handleDiscographyButtonClick(item.id, item.name); // Calls the function to fetch albums and passes the artist-id & name to the function
+            // koristit ćemo ovaj API: const response = await fetch(`/api/albums/${albumId}/tracks`);
+            console.log("fetching discography via picture for:", item.id, item.name); // ovo se prikaže, prenosi dobar info (id- i ime artista)
+          });
+
           // Create a <div> for text and append it:
           const textDivArtist1 = createDiv();
           const textDivArtist2 = createDiv();
@@ -424,7 +432,7 @@
             event.preventDefault(); // Prevent default button behavior
             handleDiscographyButtonClick(item.id, item.name); // Calls the function to fetch albums and passes the artist-id & name to the function
             // koristit ćemo ovaj API: const response = await fetch(`/api/albums/${albumId}/tracks`);
-            console.log("fetching discography for:", item.id, item.name); // ovo se prikaže, prenosi dobar info (id- i ime artista)
+            console.log("fetching discography via button for:", item.id, item.name); // ovo se prikaže, prenosi dobar info (id- i ime artista)
           });
 
           li.classList.add("li-item-style", "result-flex-item");
