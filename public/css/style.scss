@@ -498,7 +498,7 @@ button {
 ul {
   list-style-type: none;
   padding-inline-start: 0;
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 li {
@@ -870,7 +870,7 @@ button {
 
   h3 {
     font-size: 1.9rem;
-    padding: 5%;
+    padding: 0%;
   }
   #empty {
     display: none;
@@ -913,11 +913,17 @@ button {
     margin-bottom: 0%;
     padding-bottom: 1%;
   }
+  .result-flex-item div {
+    font-size: 1rem !important;
+  }
 }
 
 @media (max-width: 989px) {
   #nav-title {
     font-size: 1.4rem;
+  }
+  .result-flex-item div {
+    font-size: 1rem !important;
   }
 }
 
@@ -945,11 +951,17 @@ button {
   #search-all-button {
     font-size: 1rem;
   }
+  .result-flex-item div {
+    font-size: 1rem !important;
+  }
 }
 
 @media (max-width: 908px) {
   #nav-title {
     font-size: 1.4rem;
+  }
+  .result-flex-item div {
+    font-size: 1rem !important;
   }
 }
 
@@ -972,8 +984,11 @@ button {
   }
 
   h3 {
-    font-size: 1.5rem;
-    padding: 5%;
+    font-size: 1.3rem;
+    padding: 1%;
+  }
+  .result-flex-item div {
+    font-size: 1rem !important;
   }
 }
 
@@ -999,6 +1014,9 @@ button {
   }
   #search-all-input {
     width: 90% !important;
+  }
+  .result-flex-item div {
+    font-size: 1rem !important;
   }
 }
 
@@ -1039,7 +1057,7 @@ button {
 
   h3 {
     font-size: 1.4rem;
-    padding: 5%;
+    padding: 1%;
   }
 
   select {
@@ -1103,7 +1121,7 @@ button {
 
   h3 {
     font-size: 1.3rem;
-    padding: 5%;
+    padding: 1%;
   }
   a.ancor-style,
   .nav-button,
@@ -1174,7 +1192,7 @@ button {
 
   h3 {
     font-size: 1.2rem;
-    padding: 5%;
+    padding: 1%;
   }
 
   audio {

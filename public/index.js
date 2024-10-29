@@ -23,9 +23,9 @@
     function createDiv() {
       return document.createElement("div");
     }
-    function createLine() {
-      return document.createElement("hr");
-    }
+    // function createLine() {
+    //   return document.createElement("hr");
+    // }
 
     // Navbar behavior:
 
@@ -1576,10 +1576,10 @@ dodati:
 + klik na artista (ime) baca na Discography
 + play ikona na slikama još ne radi, dodati istu funkciju kao i play button
 
-Što ako kliknemo na Play na slici banda ii artista? Treba li nam to uopće? Ne baš.
+Što ako kliknemo na Play na slici banda ii artista? -> otvara se njegova Diskografija.
 
-Što ako kliknemo na Play na slici albuma? Trebalo bi otvoriti album (Tracklist) i odmah početi svirati prvu pjesmu s albuma.
+Što ako kliknemo na Play na slici albuma? Trebalo bi otvoriti album (Tracklist) i odmah početi svirati prvu pjesmu s albuma, i nastaviti svirati ostale pjesme.
 
-Što ako kliknemo na Play na slici pjesme? Trebalo bi odmah krenuti svirati tu pjesmu. 
+Što ako kliknemo na Play na slici Track lista? odmah početi svirati prvu pjesmu s albuma, i nastaviti svirati ostale pjesme.
 
 */
