@@ -146,6 +146,8 @@
 
       <!-- 2nd form: Music player + Rating songs/albums and Adding them to the current list -->
 
+      
+
       <form
         action=""
         method="get"
@@ -156,12 +158,17 @@
           <div class="flex-item" id="music-player">
             <div id="music-wrapper">
               <audio controls id="audio-player">
-                <!-- placeholder for dynamically inserted track source -->
-                <!-- <source src="horse.mp3" type="audio/mpeg"> -->
+                
+           
                 ...
               </audio>
+              <div id="controls">
+                <button id="prev-button">⏮️</button>
+                <button id="next-button">⏭️</button>
+            </div>
             </div>
           </div>
+
           <div class="flex-item" id="current-play">
             <p><label for="album">No track or album selected.</label></p>
             <!-- <div class="current-track"> -->

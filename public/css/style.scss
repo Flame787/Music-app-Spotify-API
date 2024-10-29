@@ -792,6 +792,19 @@ button {
   }
 }
 
+#controls {
+  display: flex;
+  margin-left: 10px; // space between audio player & controls
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px; // bigger button size
+  margin: 0 5px; // gap between buttons
+}
+
 // MEDIA QUERIES:
 
 @media (max-width: 1540px) {
