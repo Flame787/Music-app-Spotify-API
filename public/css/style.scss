@@ -794,15 +794,15 @@ button {
 
 #controls {
   display: flex;
-  margin-left: 10px; // space between audio player & controls
+  margin-top: 3%; // space between audio player & controls
 }
 
-button {
-  background: none;
+#prev-button, #next-button {
+  background-color: rgb(58, 54, 54);
   border: none;
   cursor: pointer;
   font-size: 20px; // bigger button size
-  margin: 0 5px; // gap between buttons
+  margin: 0 20%; // gap between buttons
 }
 
 // MEDIA QUERIES:

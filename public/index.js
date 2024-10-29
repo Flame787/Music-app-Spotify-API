@@ -816,35 +816,6 @@
 
         audioPlayer.addEventListener("ended", playNextTrack);
 
-        // OVDJE SLIJEDI FUNKCIJA ZA SVIRANJE CIJELOG ALBUMA, AKTIVIRANA JE NA KLIK NA SLIKU ALBUMA, UNUTAR TRACK LIST-a:
-        // Function for reproduction of the next song (=> playing whole album):
-        // function playNextTrack() {
-        //   if (currentTrackIndex < tracksData.items.length) {
-        //     if (tracksData.items[currentTrackIndex].preview_url) {
-        //       currentTrackIndex++; // increase index from 0 to 1 etc.
-        //       console.log("currentTrackIndex:", currentTrackIndex);
-        //       playTrack(tracksData.items[currentTrackIndex].preview_url); // calling the basic function to play current song index in audio-player
-        //       updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
-
-        //       console.log(
-        //         "Next song started:",
-        //         tracksData.items[currentTrackIndex].name
-        //       );
-        //     } else {
-        //       console.log(
-        //         "Preview URL for the next song is missing. Skipping to next track."
-        //       );
-        //       currentTrackIndex++; // increase index (jump over to the next song)
-        //       console.log("currentTrackIndex:", currentTrackIndex);
-        //       playTrack(tracksData.items[currentTrackIndex].preview_url); // calling function to play song in audio-player
-        //       updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
-
-        //     }
-        //   } else {
-        //     console.log("Reproduction is finished.");
-        //   }
-        // }
-
         function playNextTrack() {
           // (only the 1st song is played by the basic function playTrack, but each next song is started by this function: playNextTrack)
           // Increase the song index, in order to play the 2. song on the album, then the 3., and so on...
@@ -872,8 +843,69 @@
           }
         }
 
+        // function playPreviousTrack() {
+        //   // (only the 1st song is played by the basic function playTrack, but each next song is started by this function: playNextTrack)
+        //   // Increase the song index, in order to play the 2. song on the album, then the 3., and so on...
+        //   currentTrackIndex--;
+
+        //   // Check if the currentTrackIndex is smaller, than the total number of items on the track-list:
+        //   if (currentTrackIndex >= 0) {
+        //     const currentTrack = tracksData.items[currentTrackIndex]; // save current song index into a shorter expression
+
+        //     // Check if the current song has a playable preview_url:
+        //     if (currentTrack.preview_url) {
+        //       playTrack(currentTrack.preview_url); // calling the basic function to play current song index in audio-player
+        //       updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
+        //       console.log("Next song started:", currentTrack.name);
+        //     } else {
+        //       console.log(
+        //         "Preview URL for the next song is missing. Skipping to next song."
+        //       );
+        //       playPreviousTrack(); // Try all over again with the next song
+        //     }
+        //   } else {
+        //     console.log("Reproduction is finished.");
+        //     currentTrackIndex = 0;
+        //     // Sets index back to 0, so if the album cover image is clicked again, the whole album reporoduction starts over.
+        //   }
+        // }
+
         // function to update info on currently playing track (when playing the whole album):
         function updateCurrentlyPlayingInfo(trackIndex) {
+          // Showing the cover of currently playing track's album:
+          const musicWrapper = document.getElementById("music-wrapper");
+
+          // Cheking if there is already an album cover (from the previous track) and removing it:
+          const existingAlbumCover =
+            musicWrapper.querySelector(".album-cover-image");
+          if (existingAlbumCover) {
+            existingAlbumCover.remove();
+          }
+
+          const currentlyPlayingCover = document.createElement("div");
+          currentlyPlayingCover.classList.add("album-cover-image");
+          const img = document.createElement("img");
+          const div = document.createElement("div");
+
+          // Displaying album cover picture (if existing):
+          if (albumImageUrl) {
+            img.src = albumImageUrl;
+          } else {
+            img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+          }
+
+          img.alt = `${albumName} Album Cover`;
+          img.classList.add("result-image");
+          div.classList.add("image-container");
+
+          div.appendChild(img);
+          currentlyPlayingCover.appendChild(div);
+
+          musicWrapper.insertBefore(
+            currentlyPlayingCover,
+            musicWrapper.firstChild
+          );
+
           const currentTrackData = document.getElementById("current-play");
           currentTrackData.innerHTML = "";
 
@@ -916,8 +948,6 @@
             currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
             playTrack(tracksData.items[currentTrackIndex].preview_url);
             updateCurrentlyPlayingInfo(currentTrackIndex);
-            //  } else if (audioPlayer.ended) {
-            //   playNextTrack();
           } else {
             console.error(
               "Nema dostupnog track URL-a za prvu pjesmu:",
@@ -994,10 +1024,11 @@
         resultsContainer.appendChild(ulTracks);
 
         // 29.10. - dodavanje buttona za Preview/Next song:
-        prevButton.addEventListener("click", playPreviousTrack);
-        nextButton.addEventListener("click", playNextTrack);
-
-        
+        // prevButton.addEventListener("click", (event) => {
+        //   event.preventDefault(); // Prevent default button behavior
+        //   playPreviousTrack();
+        // });
+        // nextButton.addEventListener("click", playNextTrack);
 
         /* Adding event-listeners on all Play-buttona & icons: */
         // give eventlistener to each play-button and each play-icone wich has a class "play-starter":
@@ -1087,6 +1118,7 @@
             );
 
             // Add info about currently playing song into audio-player:
+
             const currentTrackData = document.getElementById("current-play");
 
             // REMOVE all info about previous song:
