@@ -1658,4 +1658,18 @@ dodati:
 
 Što ako kliknemo na Play na slici Track lista? odmah početi svirati prvu pjesmu s albuma, i nastaviti svirati ostale pjesme.
 
+SCSS THEMES ZA DODATI / MIJENJATI:
+
+1conical dark green with abstract-green theme - to bi bila najmračnija tema, prilagoditi buttone da budu malo tamniji isto
+
+1gradient radial blue black with theme3 - isto jako tamna plava
+
+fern wood with theme9 green
+
+(i već su zamijenjene crvena i azure tema)
+
+IZBACITI: 
+
+theme8 teal orange
+
 */

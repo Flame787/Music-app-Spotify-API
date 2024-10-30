@@ -646,10 +646,10 @@ hr {
   margin: auto;
 }
 
-.flex-container-tracks img {
-  margin-top: 5%;
-  margin-bottom: 10%;
-}
+// .flex-container-tracks img {
+//   margin-top: 5%;
+//   margin-bottom: 5%;
+// }
 
 .flex-container-tracks .play-button {
   // width: 60%;
@@ -700,6 +700,42 @@ li:hover .image-container::before {
 
 li .image-container img {
   display: block; /* needed to correctly show the picture */
+}
+
+
+// for a single Album cover in Track list:
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin: 5% auto 0;
+
+  &:hover {
+    cursor: pointer;
+    
+    &::before {
+      opacity: 0.8; // Povećana vidljivost ikone na hoveru
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    background-image: url("/pictures/play-button.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0; // Početna prozirnost
+    transition: opacity 0.3s ease;
+    transform: translate(-50%, -50%);
+  }
+}
+
+#img-div {
+  display: block;
 }
 
 // artist-result don't get the semi-transarent Play-icon (like albums and songs), but they get "Vew more" symbol - which opens Discography.

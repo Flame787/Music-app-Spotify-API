@@ -30,10 +30,10 @@ body.theme6 {
   background-image: url("../pictures/volcano.jpg") !important;
 }
 body.theme7 {
-  background-image: url("../pictures/red-triangles.jpg") !important;
+  background-image: url("../pictures/1gradient radial black red.png") !important;
 }
 body.theme8 {
-  background-image: url("../pictures/dawn2.jpg") !important;
+  background-image: url("../pictures/1gradient teal orange.png") !important;
 }
 body.theme9 {
   background-image: url("../pictures/abstract-green.jpg") !important;
@@ -42,7 +42,7 @@ body.theme10 {
   background-image: url("../pictures/green-triangles.jpg") !important;
 }
 body.theme11 {
-  background-image: url("../pictures/blue-water3.jpg") !important;
+  background-image: url("../pictures/blue-green44.jpg") !important;
 }
 body.theme12 {
   background-image: url("../pictures/frost2.jpg") !important;
@@ -1299,11 +1299,6 @@ hr {
   margin: auto;
 }
 
-.flex-container-tracks img {
-  margin-top: 5%;
-  margin-bottom: 10%;
-}
-
 .flex-container-tracks .play-button {
   width: 170px;
   margin: 8% auto 3%;
@@ -1347,6 +1342,37 @@ li:hover .image-container::before {
 
 li .image-container img {
   display: block; /* needed to correctly show the picture */
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin: 5% auto 0;
+}
+.image-container:hover {
+  cursor: pointer;
+}
+.image-container:hover::before {
+  opacity: 0.8;
+}
+.image-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 70%;
+  background-image: url("/pictures/play-button.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+#img-div {
+  display: block;
 }
 
 li .image-container-artist {
