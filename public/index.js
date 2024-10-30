@@ -829,6 +829,10 @@
             if (currentTrack.preview_url) {
               playTrack(currentTrack.preview_url); // calling the basic function to play current song index in audio-player
               updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
+              //new:
+              document.getElementById("sound-pic").style.display = "none";
+              document.getElementById("sound-bars").style.display = "block";
+
               console.log("Next song started:", currentTrack.name);
             } else {
               console.log(
@@ -1028,7 +1032,7 @@
         //   event.preventDefault(); // Prevent default button behavior
         //   playPreviousTrack();
         // });
-        // nextButton.addEventListener("click", playNextTrack);
+        nextButton.addEventListener("click", playNextTrack); // 30.10. next-button works!
 
         /* Adding event-listeners on all Play-buttona & icons: */
         // give eventlistener to each play-button and each play-icone wich has a class "play-starter":
@@ -1178,6 +1182,8 @@
         .play()
         .then(() => {
           console.log("Track is playing");
+          document.getElementById("sound-pic").style.display = "none";
+          document.getElementById("sound-bars").style.display = "block";
         })
         .catch((error) => {
           const noPreview = createDiv();
@@ -1188,6 +1194,18 @@
           console.error("Error playing track:", error);
         });
     } // here ends the function playTrack(previewUrl) – which is inside of the bigger function Todo()
+
+    // Event listener to show gif when audio starts playing again after pause
+    audioPlayer.addEventListener("playing", () => {
+      document.getElementById("sound-pic").style.display = "none";
+      document.getElementById("sound-bars").style.display = "block";
+    });
+
+    // Event listener for pausing to switch back to the static image
+    audioPlayer.addEventListener("pause", () => {
+      document.getElementById("sound-pic").style.display = "block";
+      document.getElementById("sound-bars").style.display = "none";
+    });
 
     // ____________________________________________________________
 
