@@ -823,7 +823,7 @@
 
           if (tracksData.items[currentTrackIndex].preview_url) {
             currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
-            playTrack(tracksData.items[currentTrackIndex].preview_url);
+            playFullAlbum(tracksData.items[currentTrackIndex].preview_url);
             updateCurrentlyPlayingInfo(currentTrackIndex);
           } else {
             console.error(
@@ -931,6 +931,8 @@
 
         // NEW 31.10. - getting real index of each song on the track list (fetching single list-items via play-buttons):
 
+        let index = 0;
+
         const trackList = document.querySelectorAll(".play-button"); // Assuming that every play-button in each <li> has this class
 
         trackList.forEach((button) => {
@@ -943,31 +945,33 @@
               listItem.parentElement.children
             ).filter((child) => child.tagName === "LI");
 
-            // Pronađi indeks trenutnog <li> elementa unutar filtrirane liste
-            const index = listItems.indexOf(listItem);
-            console.log("index:", index);
-            return index;
+            index = listItems.indexOf(listItem); // we are changin index, according to the real index of the currently play-clicked song
+
+            // For test- show index of the current <li>, whose play-button was clicked:
+            console.log("index:", index); // index is shown correctly for each song on the list (0, 1, 2, 3...)
+            playTrack(tracksData.items[index].preview_url);
+            updateCurrentlyPlayingInfo(index);
+            // return index;
           });
         });
 
-
-        let currentTrackIndex = 0; // first song on the album
+        // let currentTrackIndex = 0; // first song on the album
 
         audioPlayer.addEventListener("ended", playNextTrack);
 
         function playNextTrack() {
           // (only the 1st song is played by the basic function playTrack, but each next song is started by this function: playNextTrack)
           // Increase the song index, in order to play the 2. song on the album, then the 3., and so on...
-          currentTrackIndex++;
+          index++;
 
           // Check if the currentTrackIndex is smaller, than the total number of items on the track-list:
-          if (currentTrackIndex < tracksData.items.length) {
-            const currentTrack = tracksData.items[currentTrackIndex]; // save current song index into a shorter expression
+          if (index < tracksData.items.length) {
+            const currentTrack = tracksData.items[index]; // save current song index into a shorter expression
 
             // Check if the current song has a playable preview_url:
             if (currentTrack.preview_url) {
               playTrack(currentTrack.preview_url); // calling the basic function to play current song index in audio-player
-              updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
+              updateCurrentlyPlayingInfo(index); // update info on currently playing track
               //new:
               document.getElementById("sound-pic").style.display = "none";
               document.getElementById("sound-bars").style.display = "block";
@@ -981,8 +985,48 @@
             }
           } else {
             console.log("Reproduction is finished.");
+            index = 0;
+            // Sets index back to 0, so if the album cover image is clicked again, the whole album reproduction starts over.
+          }
+        }
+
+        let currentTrackIndex = 0;
+
+        function playFullAlbum() {
+          // (only the 1st song is played by the basic function playTrack, but each next song is started by this function: playNextTrack)
+          // Increase the song index, in order to play the 2. song on the album, then the 3., and so on...
+          // As we are starting from the 1st song on the album, index also has to come down to 0 (so if we later use playNext-function, it will work ok):
+          index = 0;
+          // Check if the currentTrackIndex is smaller, than the total number of items on the track-list:
+          if (currentTrackIndex < tracksData.items.length) {
+            const currentTrack = tracksData.items[currentTrackIndex]; // save current song index into a shorter expression
+
+            // Check if the current song has a playable preview_url:
+            if (currentTrack.preview_url) {
+              playTrack(currentTrack.preview_url); // calling the basic function to play current song index in audio-player
+              updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
+              //new:
+              document.getElementById("sound-pic").style.display = "none";
+              document.getElementById("sound-bars").style.display = "block";
+              console.log(
+                "Reproducing album track:",
+                currentTrack.name,
+                " - currentTrackIndex:",
+                currentTrackIndex,
+                "index:",
+                index
+              );
+              currentTrackIndex++;
+            } else {
+              console.log(
+                "Preview URL for the next song is missing. Skipping to next song."
+              );
+              playNextTrack(); // Try all over again with the next song
+            }
+          } else {
+            console.log("Reproduction is finished.");
             currentTrackIndex = 0;
-            // Sets index back to 0, so if the album cover image is clicked again, the whole album reporoduction starts over.
+            // Sets index back to 0, so if the album cover image is clicked again, the whole album reproduction starts over.
           }
         }
 
@@ -1078,8 +1122,6 @@
           currentTrackInfo.classList.add("current-track");
           currentTrackData.appendChild(currentTrackInfo);
         }
-
-
 
         /* Adding event-listeners on all Play-buttona & icons: */
         // give eventlistener to each play-button and each play-icone wich has a class "play-starter":
@@ -1218,6 +1260,9 @@
 
     // Function to play selected track preview in html-audio-player:
     function playTrack(previewUrl) {
+      if (!audioPlayer.paused) {
+        audioPlayer.pause(); // pasue if something is already playing before the playTrack-function (this should prevent 'abort'-errors in console)
+      }
       // audio source is the selected track's URL:
       audioPlayer.src = previewUrl;
 
@@ -1225,22 +1270,25 @@
       audioPlayer.load();
 
       // Automatically play the track after loading:
-      audioPlayer
-        .play()
-        .then(() => {
-          console.log("Track is playing");
-          document.getElementById("sound-pic").style.display = "none";
-          document.getElementById("sound-bars").style.display = "block";
-        })
-        .catch((error) => {
-          const noPreview = createDiv();
-          currentPlay = document.getElementById("current-play");
-          noPreview.textContent = `No preview available for this track.`;
-          noPreview.classList.add("warning-message");
-          currentPlay.appendChild(noPreview);
-          console.error("Error playing track:", error);
-        });
-    } // here ends the function playTrack(previewUrl) – which is inside of the bigger function Todo()
+      setTimeout(() => {
+        audioPlayer
+          .play()
+          .then(() => {
+            console.log("Track is playing");
+            document.getElementById("sound-pic").style.display = "none";
+            document.getElementById("sound-bars").style.display = "block";
+          })
+          .catch((error) => {
+            const noPreview = createDiv();
+            currentPlay = document.getElementById("current-play");
+            noPreview.textContent = `No preview available for this track.`;
+            noPreview.classList.add("warning-message");
+            currentPlay.appendChild(noPreview);
+            console.error("Error playing track:", error);
+          });
+      }, 50);
+    }
+    // here ends the function playTrack(previewUrl) – which is inside of the bigger function Todo()
 
     // Event listener to show gif when audio starts playing again after pause
     audioPlayer.addEventListener("playing", () => {
