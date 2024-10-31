@@ -812,11 +812,146 @@
         imgContainer.setAttribute("id", "img-div");
         imgContainer.appendChild(img);
 
-        let currentTrackIndex = 0; // first song on the album
+        // tu su bile funkcije playPrev i playNext
 
-        tracksData.items.forEach((item, index) => {
-          item.index = index;
+        // ADDING EVENT-LISTENER TO THE IMG-CONTAINER - ON CLICK, IT SHOULD START PLAYING THE FULL ALBUM FROM THE 1ST SONG:
+        imgContainer.addEventListener("click", (event) => {
+          event.preventDefault();
+          document
+            .getElementById("currently-playing")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+
+          if (tracksData.items[currentTrackIndex].preview_url) {
+            currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
+            playTrack(tracksData.items[currentTrackIndex].preview_url);
+            updateCurrentlyPlayingInfo(currentTrackIndex);
+          } else {
+            console.error(
+              "Nema dostupnog track URL-a za prvu pjesmu:",
+              tracksData.items[currentTrackIndex].name
+            );
+          }
         });
+
+        // Continue with the main function - handleTrackListButtonClick:
+
+        // adding child-elements to the ulTracks:
+        // skraćeno:
+        [titleTracks1, titleTracks2, imgContainer, titleSmall].forEach((el) =>
+          ulTracks.appendChild(el)
+        );
+
+        // Loop through each track, and add each track as list item to the displayed list:
+        tracksData.items.forEach((track) => {
+          const li = document.createElement("li");
+          const div = createDiv();
+          div.textContent = `${track.track_number}. ${track.name}`;
+          li.classList.add("li-item-style");
+          li.classList.add("result-item-name", "result-flex-item");
+
+          const playButton = document.createElement("button");
+          playButton.textContent = `Play  ▶`; // NEW - PLAY-button
+          playButton.classList.add("play-button", "play-starter");
+
+          // Save important data about playing track via playButton attributes:
+          // (so they can be fetched later from the clicked button (playbutton / playSymbol): track URL, name, artist, album, cover):
+          // skraćeno:
+          [
+            "track-id", // Attach track ID to play-button
+            "preview-url", // Attach track URL to play-button
+            "preview-trackname",
+            "preview-artist",
+            "preview-album",
+            "preview-cover",
+          ].forEach((attr, i) => {
+            playButton.setAttribute(
+              `data-${attr}`,
+              [
+                track.id,
+                track.preview_url,
+                track.name,
+                albumArtist,
+                albumName,
+                albumImageUrl,
+              ][i]
+            );
+          });
+
+          const showMoreButton = document.createElement("button");
+          showMoreButton.textContent = `Add to playlist`;
+          showMoreButton.classList.add("show-more-button");
+          showMoreButton.setAttribute("id", "add-to-playlist-button");
+
+          // NEW 31.10. - adding properties/attributes to the Add-to-playlist-button:
+          [
+            "track-id", // Attach track ID to play-button
+            "preview-url", // Attach track URL to play-button
+            "preview-trackname",
+            "preview-artist",
+            "preview-album",
+            "preview-cover",
+          ].forEach((attr, i) => {
+            showMoreButton.setAttribute(
+              `data-${attr}`,
+              [
+                track.id,
+                track.preview_url,
+                track.name,
+                albumArtist,
+                albumName,
+                albumImageUrl,
+              ][i]
+            );
+          });
+
+          // li.appendChild(div);
+          // li.appendChild(playButton); // NEW! PLAYBUTTON for individual tracks - enables playing preview of the track (30 sec)
+          // li.appendChild(showMoreButton);
+          // skraćeno:
+          [div, playButton, showMoreButton].forEach((element) =>
+            li.appendChild(element)
+          );
+
+          // ** LATER ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST!
+          // (define which multiple variables it passes to the function Add to playlist)
+          // - f.e. track.name, albumName, albumArtist, albumImageUrl, track.duration_ms, track.is_playable (true / false)
+
+          ulTracks.appendChild(li);
+        });
+
+        // Append the list to the results container:
+        resultsContainer.appendChild(ulTracks);
+
+        // 31.10. - dodavanje buttona za Preview/Next song:
+        prevButton.addEventListener("click", (event) => {
+          event.preventDefault(); // Prevent default button behavior
+          playPreviousTrack();
+        });
+        nextButton.addEventListener("click", playNextTrack); // 30.10. next-button works!
+
+        // NEW 31.10. - getting real index of each song on the track list (fetching single list-items via play-buttons):
+
+        const trackList = document.querySelectorAll(".play-button"); // Assuming that every play-button in each <li> has this class
+
+        trackList.forEach((button) => {
+          button.addEventListener("click", (event) => {
+            // find <li> parent
+            const listItem = button.closest("li");
+            // find index
+            // Filtriraj samo <li> elemente unutar roditelja
+            const listItems = Array.from(
+              listItem.parentElement.children
+            ).filter((child) => child.tagName === "LI");
+
+            // Pronađi indeks trenutnog <li> elementa unutar filtrirane liste
+            const index = listItems.indexOf(listItem);
+            console.log("index:", index);
+            return index;
+          });
+        });
+
+
+        let currentTrackIndex = 0; // first song on the album
 
         audioPlayer.addEventListener("ended", playNextTrack);
 
@@ -944,99 +1079,7 @@
           currentTrackData.appendChild(currentTrackInfo);
         }
 
-        // ADDING EVENT-LISTENER TO THE IMG-CONTAINER - ON CLICK, IT SHOULD START PLAYING THE FULL ALBUM FROM THE 1ST SONG:
-        imgContainer.addEventListener("click", (event) => {
-          event.preventDefault();
-          document
-            .getElementById("currently-playing")
-            .scrollIntoView({ behavior: "smooth", block: "start" });
 
-          if (tracksData.items[currentTrackIndex].preview_url) {
-            currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
-            playTrack(tracksData.items[currentTrackIndex].preview_url);
-            updateCurrentlyPlayingInfo(currentTrackIndex);
-          } else {
-            console.error(
-              "Nema dostupnog track URL-a za prvu pjesmu:",
-              tracksData.items[currentTrackIndex].name
-            );
-          }
-        });
-
-        // Continue with the main function - handleTrackListButtonClick:
-
-        // adding child-elements to the ulTracks:
-        // skraćeno:
-        [titleTracks1, titleTracks2, imgContainer, titleSmall].forEach((el) =>
-          ulTracks.appendChild(el)
-        );
-
-        // Loop through each track, and add each track as list item to the displayed list:
-        tracksData.items.forEach((track) => {
-          const li = document.createElement("li");
-          const div = createDiv();
-          div.textContent = `${track.track_number}. ${track.name}`;
-          li.classList.add("li-item-style");
-          li.classList.add("result-item-name", "result-flex-item");
-
-          const playButton = document.createElement("button");
-          playButton.textContent = `Play  ▶`; // NEW - PLAY-button
-          playButton.classList.add("play-button", "play-starter");
-
-          // Save important data about playing track via playButton attributes:
-          // (so they can be fetched later from the clicked button (playbutton / playSymbol): track URL, name, artist, album, cover):
-          // skraćeno:
-          [
-            "track-id", // Attach track ID to play-button
-            "preview-url", // Attach track URL to play-button
-            "preview-trackname",
-            "preview-artist",
-            "preview-album",
-            "preview-cover",
-          ].forEach((attr, i) => {
-            playButton.setAttribute(
-              `data-${attr}`,
-              [
-                track.id,
-                track.preview_url,
-                track.name,
-                albumArtist,
-                albumName,
-                albumImageUrl,
-              ][i]
-            );
-          });
-
-          const showMoreButton = document.createElement("button");
-          showMoreButton.textContent = `Add to playlist`;
-          showMoreButton.classList.add("show-more-button");
-          showMoreButton.setAttribute("id", "add-to-playlist-button");
-
-          // li.appendChild(div);
-          // li.appendChild(playButton); // NEW! PLAYBUTTON for individual tracks - enables playing preview of the track (30 sec)
-          // li.appendChild(showMoreButton);
-          // skraćeno:
-          [div, playButton, showMoreButton].forEach((element) =>
-            li.appendChild(element)
-          );
-
-          // ** LATER ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST!
-          // (define which multiple variables it passes to the function Add to playlist)
-          // - f.e. track.name, albumName, albumArtist, albumImageUrl, track.duration_ms, track.is_playable (true / false)
-
-          ulTracks.appendChild(li);
-        });
-
-        // Append the list to the results container:
-        resultsContainer.appendChild(ulTracks);
-
-        // 31.10. - dodavanje buttona za Preview/Next song:
-        prevButton.addEventListener("click", (event) => {
-          event.preventDefault(); // Prevent default button behavior
-          playPreviousTrack();
-        });
-
-        nextButton.addEventListener("click", playNextTrack); // 30.10. next-button works!
 
         /* Adding event-listeners on all Play-buttona & icons: */
         // give eventlistener to each play-button and each play-icone wich has a class "play-starter":
