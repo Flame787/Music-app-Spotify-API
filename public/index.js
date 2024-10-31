@@ -814,6 +814,10 @@
 
         let currentTrackIndex = 0; // first song on the album
 
+        tracksData.items.forEach((item, index) => {
+          item.index = index;
+        });
+
         audioPlayer.addEventListener("ended", playNextTrack);
 
         function playNextTrack() {
@@ -847,32 +851,31 @@
           }
         }
 
-        // function playPreviousTrack() {
-        //   // (only the 1st song is played by the basic function playTrack, but each next song is started by this function: playNextTrack)
-        //   // Increase the song index, in order to play the 2. song on the album, then the 3., and so on...
-        //   currentTrackIndex--;
+        function playPreviousTrack() {
+          // Decrease the song index, in order to play previous song...
+          currentTrackIndex--;
 
-        //   // Check if the currentTrackIndex is smaller, than the total number of items on the track-list:
-        //   if (currentTrackIndex >= 0) {
-        //     const currentTrack = tracksData.items[currentTrackIndex]; // save current song index into a shorter expression
+          // Check if the currentTrackIndex is bigger, than the total number of items on the track-list:
+          if (currentTrackIndex >= 0) {
+            const currentTrack = tracksData.items[currentTrackIndex]; // save current song index into a shorter expression
 
-        //     // Check if the current song has a playable preview_url:
-        //     if (currentTrack.preview_url) {
-        //       playTrack(currentTrack.preview_url); // calling the basic function to play current song index in audio-player
-        //       updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
-        //       console.log("Next song started:", currentTrack.name);
-        //     } else {
-        //       console.log(
-        //         "Preview URL for the next song is missing. Skipping to next song."
-        //       );
-        //       playPreviousTrack(); // Try all over again with the next song
-        //     }
-        //   } else {
-        //     console.log("Reproduction is finished.");
-        //     currentTrackIndex = 0;
-        //     // Sets index back to 0, so if the album cover image is clicked again, the whole album reporoduction starts over.
-        //   }
-        // }
+            // Check if the current song has a playable preview_url:
+            if (currentTrack.preview_url) {
+              playTrack(currentTrack.preview_url); // calling the basic function to play current song index in audio-player
+              updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
+              console.log("Previous song started:", currentTrack.name);
+            } else {
+              console.log(
+                "Preview URL for the previous song is missing. Skipping to next song."
+              );
+              playPreviousTrack(); // Try all over again with the next song
+            }
+          } else {
+            console.log("Reproduction is finished.");
+            // currentTrackIndex = 0;
+            // Sets index back to 0, so if the album cover image is clicked again, the whole album reporoduction starts over.
+          }
+        }
 
         // function to update info on currently playing track (when playing the whole album):
         function updateCurrentlyPlayingInfo(trackIndex) {
@@ -1027,11 +1030,12 @@
         // Append the list to the results container:
         resultsContainer.appendChild(ulTracks);
 
-        // 29.10. - dodavanje buttona za Preview/Next song:
-        // prevButton.addEventListener("click", (event) => {
-        //   event.preventDefault(); // Prevent default button behavior
-        //   playPreviousTrack();
-        // });
+        // 31.10. - dodavanje buttona za Preview/Next song:
+        prevButton.addEventListener("click", (event) => {
+          event.preventDefault(); // Prevent default button behavior
+          playPreviousTrack();
+        });
+
         nextButton.addEventListener("click", playNextTrack); // 30.10. next-button works!
 
         /* Adding event-listeners on all Play-buttona & icons: */
