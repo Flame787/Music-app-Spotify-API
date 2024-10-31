@@ -824,7 +824,7 @@
           if (tracksData.items[currentTrackIndex].preview_url) {
             currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
             playFullAlbum(tracksData.items[currentTrackIndex].preview_url);
-            updateCurrentlyPlayingInfo(currentTrackIndex);
+            updateCurrentlyPlayingInfo(index);   
           } else {
             console.error(
               "Nema dostupnog track URL-a za prvu pjesmu:",
@@ -945,7 +945,7 @@
               listItem.parentElement.children
             ).filter((child) => child.tagName === "LI");
 
-            index = listItems.indexOf(listItem); // we are changin index, according to the real index of the currently play-clicked song
+            index = listItems.indexOf(listItem); // we are changing index, according to the real index of the currently play-clicked song
 
             // For test- show index of the current <li>, whose play-button was clicked:
             console.log("index:", index); // index is shown correctly for each song on the list (0, 1, 2, 3...)
@@ -994,7 +994,7 @@
 
         function playFullAlbum() {
           // (only the 1st song is played by the basic function playTrack, but each next song is started by this function: playNextTrack)
-          // Increase the song index, in order to play the 2. song on the album, then the 3., and so on...
+          
           // As we are starting from the 1st song on the album, index also has to come down to 0 (so if we later use playNext-function, it will work ok):
           index = 0;
           // Check if the currentTrackIndex is smaller, than the total number of items on the track-list:
@@ -1004,7 +1004,7 @@
             // Check if the current song has a playable preview_url:
             if (currentTrack.preview_url) {
               playTrack(currentTrack.preview_url); // calling the basic function to play current song index in audio-player
-              updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
+              updateCurrentlyPlayingInfo(index); // update info on currently playing track
               //new:
               document.getElementById("sound-pic").style.display = "none";
               document.getElementById("sound-bars").style.display = "block";
@@ -1016,7 +1016,9 @@
                 "index:",
                 index
               );
+              // Increase the song index, in order to play the 2. song on the album, then the 3., and so on...
               currentTrackIndex++;
+
             } else {
               console.log(
                 "Preview URL for the next song is missing. Skipping to next song."
@@ -1032,16 +1034,16 @@
 
         function playPreviousTrack() {
           // Decrease the song index, in order to play previous song...
-          currentTrackIndex--;
+          index--;
 
           // Check if the currentTrackIndex is bigger, than the total number of items on the track-list:
-          if (currentTrackIndex >= 0) {
-            const currentTrack = tracksData.items[currentTrackIndex]; // save current song index into a shorter expression
+          if (index >= 0) {
+            const currentTrack = tracksData.items[index]; // save current song index into a shorter expression
 
             // Check if the current song has a playable preview_url:
             if (currentTrack.preview_url) {
               playTrack(currentTrack.preview_url); // calling the basic function to play current song index in audio-player
-              updateCurrentlyPlayingInfo(currentTrackIndex); // update info on currently playing track
+              updateCurrentlyPlayingInfo(index); // update info on currently playing track
               console.log("Previous song started:", currentTrack.name);
             } else {
               console.log(
@@ -1051,7 +1053,7 @@
             }
           } else {
             console.log("Reproduction is finished.");
-            // currentTrackIndex = 0;
+            currentTrackIndex = 0;
             // Sets index back to 0, so if the album cover image is clicked again, the whole album reporoduction starts over.
           }
         }
@@ -1107,7 +1109,7 @@
           currentTrackInfoDiv2.textContent = `By:`;
           currentTrackInfoDiv3.textContent = `${tracksData.items[trackIndex].artists[0].name}`;
           currentTrackInfoDiv4.textContent = `Album:`;
-          currentTrackInfoDiv5.textContent = `${tracksData.name}`;
+          currentTrackInfoDiv5.textContent = `${albumName}`;
 
           currentTrackInfoDiv1.classList.add("result-item-name");
           currentTrackInfoDiv3.classList.add("result-item-name");
