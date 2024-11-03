@@ -13,6 +13,7 @@
     const resultsContainer = document.getElementById("results-container"); // container for results
     const searchAllButton = document.getElementById("search-all-button");
     // const searchForm = document.getElementById("search-form");
+    const mainAddToPlaylist = document.getElementById("player-add-to-playlist");
     const formContainer = document.getElementById("zero-input");
     const formResultsContainerTracks = document.getElementById(
       "form-results-container"
@@ -824,7 +825,7 @@
           if (tracksData.items[currentTrackIndex].preview_url) {
             currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
             playFullAlbum(tracksData.items[currentTrackIndex].preview_url);
-            updateCurrentlyPlayingInfo(index);   
+            updateCurrentlyPlayingInfo(index);
           } else {
             console.error(
               "Nema dostupnog track URL-a za prvu pjesmu:",
@@ -879,20 +880,22 @@
 
           const showMoreButton = document.createElement("button");
           showMoreButton.textContent = `Add to playlist`;
-          showMoreButton.classList.add("show-more-button");
+          showMoreButton.classList.add("show-more-button", "add-button"); // add-button is used for adding a track to the playlist
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
-          // NEW 31.10. - adding properties/attributes to the Add-to-playlist-button:
+          // NEW 31.10. - adding properties/attributes to the Add-to-playlist-button: - 03.10. THIS WORKS AND VALUES ARE PASSED INTO PLAYLIST
+          // const trackId = playSymbol.getAttribute("data-track-id");  -> short:
           [
-            "track-id", // Attach track ID to play-button
-            "preview-url", // Attach track URL to play-button
+            "track-id", // Attach track ID (dynamic value) to the play-button
+            "preview-url", // Attach track URL (dynamic value) to the play-button
             "preview-trackname",
             "preview-artist",
             "preview-album",
             "preview-cover",
           ].forEach((attr, i) => {
             showMoreButton.setAttribute(
-              `data-${attr}`,
+              // function transfers dynamic values to the attributes
+              `data-${attr}`, // creates name of the attribute, f.e. 'data-track-id'...
               [
                 track.id,
                 track.preview_url,
@@ -902,6 +905,20 @@
                 albumImageUrl,
               ][i]
             );
+          });
+
+          const previewName = track.name;
+          const previewArtist = albumArtist;
+          const previewAlbum = albumName;
+          const rating = document.getElementById("review").value;
+      const time = new Date().toLocaleDateString();
+
+          // showMoreButton.addEventListener("click", addTask);   // 03.11. NEW! - add track to playlist
+          // showMoreButton.addEventListener("click", function (event) {
+          //   addTask(event, showMoreButton);
+          // });
+          showMoreButton.addEventListener("click", (event) => {
+            addTask(event, previewArtist, previewName, previewAlbum, rating, time);
           });
 
           // li.appendChild(div);
@@ -994,7 +1011,7 @@
 
         function playFullAlbum() {
           // (only the 1st song is played by the basic function playTrack, but each next song is started by this function: playNextTrack)
-          
+
           // As we are starting from the 1st song on the album, index also has to come down to 0 (so if we later use playNext-function, it will work ok):
           index = 0;
           // Check if the currentTrackIndex is smaller, than the total number of items on the track-list:
@@ -1018,7 +1035,6 @@
               );
               // Increase the song index, in order to play the 2. song on the album, then the 3., and so on...
               currentTrackIndex++;
-
             } else {
               console.log(
                 "Preview URL for the next song is missing. Skipping to next song."
@@ -1123,6 +1139,31 @@
 
           currentTrackInfo.classList.add("current-track");
           currentTrackData.appendChild(currentTrackInfo);
+
+          // ***
+          // NEW 03.11. ADDED FUNCTION WHICH PASSES VALUES TO THE mainAddToPlaylist-button (in audio-player):
+          const previewName = tracksData.items[trackIndex].name;
+          const previewArtist = tracksData.items[trackIndex].artists[0].name;
+          const previewAlbum = albumName;
+          const rating = document.getElementById("review").value;
+      const time = new Date().toLocaleDateString();
+
+          // const [previewName, previewArtist, previewAlbum, previewCover] = [
+          //   "preview-trackname", // data-preview-trackname
+          //   "preview-artist", // data-preview-artist
+          //   "preview-album",
+          //   "preview-cover",
+          // ].map((attr) => mainAddToPlaylist.getAttribute(`data-${attr}`));
+
+          // mainAddToPlaylist.addEventListener("click", addTask);
+
+          // mainAddToPlaylist.addEventListener("click", function(event) {
+          //   addTask(event, mainAddToPlaylist);
+          // });
+
+          mainAddToPlaylist.addEventListener("click", (event) => {
+            addTask(event, previewArtist, previewName, previewAlbum, rating, time);
+          });
         }
 
         /* Adding event-listeners on all Play-buttona & icons: */
@@ -1360,8 +1401,8 @@
       const addedItems = [];
       list.querySelectorAll("li").forEach((item) => {
         addedItems.push({
-          artist: item.querySelector(".artist").textContent,
-          song: item.querySelector(".song").textContent,
+          artist: item.querySelector(".artist").textContent, // uses text-content found under the class '.artist'
+          song: item.querySelector(".song").textContent, // uses text-content found under the class '.song', etc.
           album: item.querySelector(".album").textContent,
           rating: item.querySelector(".rating").textContent,
           time: item.querySelector(".time").textContent,
@@ -1382,17 +1423,30 @@
       localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
     }
 
-    // doraditi logiku Search funkcije !!! - što se dohvaća pomoću API-ja i kako se prikazuje
-
     // ______________________________________________________________________________
 
     // Creating new task / new item on a submit/play-list:
+
+    // 03.11. NEW:
+    // track.id,
+    // track.preview_url,
+    // track.name,
+    // albumArtist,
+    // albumName,
+    // albumImageUrl,
+    //  - dynamic values, transferred via Show-more button (Add to playlist)
+
+    // submitToListButton.addEventListener("click", addTask);
+    // event.preventDefault(); // Prevent the default form submission
+    // call handleSearch() instead of displaySearchResults
+
     function createTask(artist, song, album, rating, time) {
       const item = document.createElement("li");
 
       // const div = document.createElement("div");
       // div.classList.add("form-theme", "item-card");
 
+      // values are fetched via the function 'addTask' and then saved into the card:
       item.innerHTML = `<div class="form-theme item-card" > 
       <p class="item-fill flex-item">  
       <span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> <br> 
@@ -1412,24 +1466,42 @@
 
     // console.log(paragraph);
 
-    // Adding new task on the list:
-    function addTask(event) {
+    // Adding new task on the list - this function just fetches values (and then, they will be added to card in next function 'createTask'):
+    function addTask(event, artist, song, album, rating, time) {
       event.preventDefault();
-      const artist = document.getElementById("artist").value.trim();
-      const song = document.getElementById("song").value.trim();
-      const album = document.getElementById("album").value.trim();
-      const rating = document.getElementById("review").value;
-      const time = new Date().toLocaleDateString();
+
+      // let artist, song, album;
+
+      // artist = button.getAttribute("data-preview-artist");
+      // song = button.getAttribute("data-preview-trackname");
+      // album = button.getAttribute("data-preview-album");
+
+      // artist =
+      //   showMoreButton.getAttribute("data-preview-artist") ||
+      //   mainAddToPlaylist.getAttribute("data-preview-artist");
+      // song =
+      //   showMoreButton.getAttribute("data-preview-trackname") ||
+      //   mainAddToPlaylist.getAttribute("data-preview-trackname");
+      // album =
+      //   showMoreButton.getAttribute("data-preview-album") ||
+      //   mainAddToPlaylist.getAttribute("data-preview-album");
+
+      // const showMoreButton = event.currentTarget;
+      // const artist = showMoreButton.getAttribute("data-preview-artist") || mainAddToPlaylist.getAttribute("data-preview-artist");
+      // const song = showMoreButton.getAttribute("data-preview-trackname") || mainAddToPlaylist.getAttribute("data-preview-trackname");
+      // const album = showMoreButton.getAttribute("data-preview-album") || mainAddToPlaylist.getAttribute("data-preview-album");
+      // const rating = document.getElementById("review").value;
+      // const time = new Date().toLocaleDateString();
 
       // test:
       //const time = new Date(2023, 11, 17).toLocaleDateString();
 
       const item = createTask(artist, song, album, rating, time);
       list.appendChild(item);
-      document.getElementById("artist").value = "";
-      document.getElementById("song").value = "";
-      document.getElementById("album").value = "";
-      document.getElementById("review").value = "";
+      // document.getElementById("artist").value = "";
+      // document.getElementById("song").value = "";
+      // document.getElementById("album").value = "";
+      document.getElementById("review").value = ""; // empty the input field, so the next rate - for next song can be added
       saveLists();
     }
 
@@ -1437,7 +1509,8 @@
       // body initially has a default theme0:
       document.body.classList.add("theme0");
       // new task (item) added on the add-button click:
-      submitToListButton.addEventListener("click", addTask);
+      // submitToListButton.addEventListener("click", addTask);
+
       // buttonPlay.addEventListener("click", playSong);
       loadLists();
     };
