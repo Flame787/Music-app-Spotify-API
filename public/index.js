@@ -595,7 +595,7 @@
           li.append(textDivSong1, textDivSong2);
 
           li.appendChild(showMoreButton);
-          showMoreButton.textContent = `Add to playlist`;
+          showMoreButton.textContent = `Add to favorites`;
           showMoreButton.classList.add("show-more-button");
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
@@ -879,8 +879,8 @@
           });
 
           const showMoreButton = document.createElement("button");
-          showMoreButton.textContent = `Add to playlist`;
-          showMoreButton.classList.add("show-more-button", "add-button"); // add-button is used for adding a track to the playlist
+          showMoreButton.textContent = `Add to favorites`;
+          showMoreButton.classList.add("show-more-button", "add-button"); // add-button for adding a track to the favorites list (and later to playlists)
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
           // NEW 31.10. - adding properties/attributes to the Add-to-playlist-button: - 03.10. THIS WORKS AND VALUES ARE PASSED INTO PLAYLIST
