@@ -910,16 +910,22 @@
           const previewName = track.name;
           const previewArtist = albumArtist;
           const previewAlbum = albumName;
-          const rating = document.getElementById("review").value;
-      const time = new Date().toLocaleDateString();
+          // const rating = document.getElementById("review").value;
+          // const time = new Date().toLocaleDateString();
 
           // showMoreButton.addEventListener("click", addTask);   // 03.11. NEW! - add track to playlist
           // showMoreButton.addEventListener("click", function (event) {
           //   addTask(event, showMoreButton);
           // });
-          showMoreButton.addEventListener("click", (event) => {
-            addTask(event, previewArtist, previewName, previewAlbum, rating, time);
-          });
+          if (!showMoreButton.hasEventListener) {
+            showMoreButton.addEventListener("click", (event) => {
+              event.preventDefault();
+              // const rating = document.getElementById("review").value;  // no rating in this view (items in track list)
+              // const time = new Date().toLocaleDateString();
+              addTask(previewArtist, previewName, previewAlbum);
+              // document.getElementById("review").value = "";
+            });
+          }
 
           // li.appendChild(div);
           // li.appendChild(playButton); // NEW! PLAYBUTTON for individual tracks - enables playing preview of the track (30 sec)
@@ -1079,6 +1085,10 @@
           // Showing the cover of currently playing track's album:
           const musicWrapper = document.getElementById("music-wrapper");
 
+          if (document.getElementById("review").value !== "") {
+            document.getElementById("review").value = "";
+          }
+
           // Cheking if there is already an album cover (from the previous track) and removing it:
           const existingAlbumCover =
             musicWrapper.querySelector(".album-cover-image");
@@ -1145,8 +1155,8 @@
           const previewName = tracksData.items[trackIndex].name;
           const previewArtist = tracksData.items[trackIndex].artists[0].name;
           const previewAlbum = albumName;
-          const rating = document.getElementById("review").value;
-      const time = new Date().toLocaleDateString();
+          // const rating = document.getElementById("review").value;
+          // const time = new Date().toLocaleDateString();
 
           // const [previewName, previewArtist, previewAlbum, previewCover] = [
           //   "preview-trackname", // data-preview-trackname
@@ -1161,8 +1171,20 @@
           //   addTask(event, mainAddToPlaylist);
           // });
 
+          // remove existing eventlistener before adding a new one (prevents that addTask is run 2x times for each next added song)
+          //   mainAddToPlaylist.removeEventListener("click", (event) => {
+          //     handleAddToPlaylistClick;
+          //   event.preventDefault();
+          // });
+
           mainAddToPlaylist.addEventListener("click", (event) => {
-            addTask(event, previewArtist, previewName, previewAlbum, rating, time);
+            event.preventDefault();
+            // const rating = document.getElementById("review").value;
+            // const time = new Date().toLocaleDateString();
+            addTask(previewArtist, previewName, previewAlbum);
+            //   setTimeout(() => {
+            //     document.getElementById("review").value = "0";
+            // }, 500);
           });
         }
 
@@ -1306,6 +1328,13 @@
       if (!audioPlayer.paused) {
         audioPlayer.pause(); // pasue if something is already playing before the playTrack-function (this should prevent 'abort'-errors in console)
       }
+
+      // Check if the new track is already set to prevent redundant play 2x:
+      if (audioPlayer.src === previewUrl) {
+        console.log("Track is already playing");
+        return;
+      }
+
       // audio source is the selected track's URL:
       audioPlayer.src = previewUrl;
 
@@ -1400,7 +1429,9 @@
     function saveLists() {
       const addedItems = [];
       list.querySelectorAll("li").forEach((item) => {
+        // for each li, this function creates an object with keys and values (artist, rating etc.)
         addedItems.push({
+          // & adds the object to the (initially empty) list:  []
           artist: item.querySelector(".artist").textContent, // uses text-content found under the class '.artist'
           song: item.querySelector(".song").textContent, // uses text-content found under the class '.song', etc.
           album: item.querySelector(".album").textContent,
@@ -1408,7 +1439,9 @@
           time: item.querySelector(".time").textContent,
         });
       });
-      localStorage.setItem("addedList", JSON.stringify(addedItems));
+      localStorage.setItem("addedList", JSON.stringify(addedItems)); // saves the list as key, and it's value in local storage
+
+      // document.getElementById("review").value = "";
 
       const favoriteItems = [];
       favoritesList.querySelectorAll("li").forEach((item) => {
@@ -1449,8 +1482,8 @@
       // values are fetched via the function 'addTask' and then saved into the card:
       item.innerHTML = `<div class="form-theme item-card" > 
       <p class="item-fill flex-item">  
-      <span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> <br> 
       <span class="thin"> Song: </span> <span class="song">${song}</span> <br> 
+      <span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> <br> 
       <span class="thin"> Album:  </span> <span class="album">${album}</span> <br> 
       <span class="thin"> Rate:  </span>   <span  class="rating">${rating}</span> <br> 
       <span class="thin"> Rated on:  </span>   <span class="time">${time}</span>
@@ -1460,48 +1493,49 @@
 
       addFavoriteButton(itemCardDiv);
       addRemoveButton(itemCardDiv);
-
+      // document.getElementById("review").value = "";
       return item;
     }
 
     // console.log(paragraph);
 
     // Adding new task on the list - this function just fetches values (and then, they will be added to card in next function 'createTask'):
-    function addTask(event, artist, song, album, rating, time) {
-      event.preventDefault();
+    function addTask(artist, song, album) {
+      // event.preventDefault();
+      const rating = document.getElementById("review").value;
+      const time = new Date().toLocaleDateString();
 
-      // let artist, song, album;
+      console.log(list);
 
-      // artist = button.getAttribute("data-preview-artist");
-      // song = button.getAttribute("data-preview-trackname");
-      // album = button.getAttribute("data-preview-album");
+      if (list.children.length === 0) {
+        const item = createTask(artist, song, album, rating, time);
+        list.appendChild(item);
+      } else {
+        const existingItem = [...list.querySelectorAll("li")].find((item) => {
+          return (
+            item.querySelector(".artist").textContent === artist &&
+            item.querySelector(".song").textContent === song &&
+            item.querySelector(".album").textContent === album
+          );
+        });
 
-      // artist =
-      //   showMoreButton.getAttribute("data-preview-artist") ||
-      //   mainAddToPlaylist.getAttribute("data-preview-artist");
-      // song =
-      //   showMoreButton.getAttribute("data-preview-trackname") ||
-      //   mainAddToPlaylist.getAttribute("data-preview-trackname");
-      // album =
-      //   showMoreButton.getAttribute("data-preview-album") ||
-      //   mainAddToPlaylist.getAttribute("data-preview-album");
+        if (existingItem) {
+          // if this item already exsists, just modify it's rating with the new rate:
+          // const ratingElement = existingItem.querySelector(".rating");
+          // ratingElement.textContent = rating;
+          console.log("Item already exists, not modifying rating");
+        } else {
+          const item = createTask(artist, song, album, rating, time);
+          list.appendChild(item);
+        }
+      }
 
-      // const showMoreButton = event.currentTarget;
-      // const artist = showMoreButton.getAttribute("data-preview-artist") || mainAddToPlaylist.getAttribute("data-preview-artist");
-      // const song = showMoreButton.getAttribute("data-preview-trackname") || mainAddToPlaylist.getAttribute("data-preview-trackname");
-      // const album = showMoreButton.getAttribute("data-preview-album") || mainAddToPlaylist.getAttribute("data-preview-album");
-      // const rating = document.getElementById("review").value;
-      // const time = new Date().toLocaleDateString();
+      document.getElementById("artist").value = "";
+      document.getElementById("song").value = "";
+      document.getElementById("album").value = "";
+      // document.getElementById("review").value = ""; // empty the input field, so the next rate - for next song can be added
+      console.log("review:", rating);
 
-      // test:
-      //const time = new Date(2023, 11, 17).toLocaleDateString();
-
-      const item = createTask(artist, song, album, rating, time);
-      list.appendChild(item);
-      // document.getElementById("artist").value = "";
-      // document.getElementById("song").value = "";
-      // document.getElementById("album").value = "";
-      document.getElementById("review").value = ""; // empty the input field, so the next rate - for next song can be added
       saveLists();
     }
 
@@ -1632,7 +1666,8 @@
     // function removeTask:
     function removeTask(event) {
       const removeButton = event.target;
-      removeButton.parentNode.remove();
+      // removeButton.parentNode.remove();  // remove-button is inside another div and not directly inside 'li', so we have to remove closest 'li'
+      removeButton.closest("li").remove();  
       // removes the whole parent-task (in which the removeButton was embedded as a child)
       saveLists();
     }

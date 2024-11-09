@@ -27,7 +27,6 @@
       rel="stylesheet"
     />
   </head>
-
   <body>
     <header id="navigation" class="red header-style" class="flex-container">
       <div id="top-icon">
@@ -46,7 +45,7 @@
             <a href="/" class="ancor-style">Home</a>
           </button>
           <button class="button nav-button">
-            <a href="/favorites" class="ancor-style">Playlists</a>
+            <a href="/favorites" class="ancor-style">My playlists</a>
           </button>
 
           <button class="dropdown-toggle button nav-button">Theme</button>
@@ -75,14 +74,11 @@
     <div>
       <div id="first-container">
         <div class="visible-title1 title-theme" id="head-title">
-          <h1>My playlists</h1>
-          <h3 class="shadow-text">Keep all your favorite music in one place</h3>
+          <h2>My playlists</h2>
+          <h3 class="shadow-text">Create, play and edit your playlists</h3>
         </div>
       </div>
-    </div>
-    <!-- 1st form: Search: -->
 
-    
       <!-- 1st form: Search: -->
 
       <form
@@ -108,17 +104,118 @@
             <button
               type="submit"
               class="input-button button play-button nav-button"
+              id="search-all-button"
             >
               Search
             </button>
           </div>
         </div>
 
+        <!-- NEW 23.10.: checkbox for choosing between 3 Search categories -->
+
+        <p class="search-category">*Search by category:</p>
+
+        <div class="flex-item-big flex-container" id="flex-search-category">
+          <div class="flex-item" id="first-input">
+            <p>
+              <label for="artist">Artist:</label>
+              <input
+                type="checkbox"
+                id="artist"
+                name="category"
+                value="artist"
+              />
+            </p>
+          </div>
+
+          <div class="flex-item" id="second-input">
+            <p>
+              <label for="album">Album:</label>
+              <input type="checkbox" id="album" name="category" value="album" />
+            </p>
+          </div>
+
+          <div class="flex-item" id="third-input">
+            <p>
+              <label for="song">Song:</label>
+              <input type="checkbox" id="song" name="category" value="song" />
+            </p>
+          </div>
+        </div>
       </form>
 
-      <!-- 2nd form - Results of the Search: -->
+      <!-- 2nd form: Music player + Rating songs/albums and Adding them to the current list -->
 
-      <form action="" method="get" class="form flex-container form-theme">
+      <form
+        action=""
+        method="get"
+        class="form flex-container form-theme form-player"
+      >
+        <p id="currently-playing">Currently playing:</p>
+        <div class="flex-container">
+          <div class="flex-item" id="music-player">
+            <div id="music-wrapper">
+              <audio controls id="audio-player">
+                
+              </audio>
+              <div id="controls">
+                <div id="prev-button"><img id="prev-icon" src="/pictures/prev-button.png" alt="previous-button"></div>
+                <div id="sound-pic"><img id="sound-pic" src="/pictures/sound-bars.png" alt="sound-bars-img"></div>
+                <!-- instead sound-pic, when audio-player is playing, there will be sound-gif moving: -->
+                 <div id="sound-bars" style="display: none;"><img id="sound-gif" src="/pictures/sound-bars.gif" alt="sound-bars"></div> 
+                <div id="next-button"><img id="next-icon" src="/pictures/next-button.png" alt="next-button"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-item" id="current-play">
+            <p><label for="album">No track or album selected.</label></p>
+            <!-- <div class="current-track"> -->
+
+            <!-- this fills out dinamically, depending on currently playing song. It is displaying: current song, album, artist and duration. 
+               Song, artist and album - values are also copied when user adds this song to his playlist - they fill out new list items. -->
+
+            <!-- </div> -->
+          </div>
+
+          <div class="flex-item" id="forth-input">
+            <p><label for="review">Rate (1-10):</label></p>
+            <p>
+              <input
+                class="input-color"
+                type="number"
+                id="review"
+                name="review"
+                pattern="[1-10]"
+                min="1"
+                max="10"
+                size="25"
+                required
+              />
+            </p>
+          </div>
+
+          <div id="add-to-playlist" class="flex-item">
+            <p></p>
+            <button
+              type="submit"
+              id="player-add-to-playlist"
+              class="input-button add-button button nav-button"
+            >
+              Add to favorites
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- 3rd form - Results of the Search: -->
+
+      <form
+        action=""
+        method="get"
+        id="form-results-container"
+        class="form flex-container form-theme"
+      >
         <div class="flex-item">
           <p id="search-results" tabindex="0">Results:</p>
           <div id="results-container" class="flex-container-results">
@@ -130,77 +227,26 @@
                ...
                Songs:
                ...
-               Svaka podsekcija sadrži neki broj (limit) list-itema (npr. do max 10 rezultata).
-               Za albume i pjesme - svaki pojedini rezultat (li) dobiva button Play na kraju svojeg retka!
-               Svaki artist ima ove informacije: artist, genres, slika. 
-               Klikom na button pored (Find music ili nešto slično) otvara se samo taj artist (nestaju ostali rezultati), 
-               prikažu se redom nazivi svih albuma, 
-               i popularne pjesme (sa slikama covera pripadajućih albuma). Pored svih albuma i pjesama su buttoni Play.
+          
+               Each subsection contains a certain number (limit) of list-items (up to max 9 results currently), expandible.
+               For albums and songs - each individual result (li) gets a Play button at the end of its line!
+               Each artist has this information: artist, genres, image. 
+               Clicking on the button underneath (Discography) we can open his albums (other results disappear), 
+               the names of albums are displayed in order (up to max 9 results, with pictures of the corresponding album covers), expandible.
+               Click on album opens it's tracks. Tracks have buttons: Play and Add to playlist.
                
-               Svaki album ima ove informacije: artist, ime albuma, broj pjesama, trajanje albuma, godina izdanja, cover slika albuma.
-               Svaka pjesma ima ove informacije: artist, ime albuma na kojem se nalazi, trajanje pjesme, godina izdanja albuma, cover slika albuma.
+               Each album has this information: name of the album, artist, release date, number of songs, cover image of the album.
+               Each song has the following information: artist, album, album cover image. 
 
               -->
             <!-- </ol> -->
           </div>
         </div>
       </form>
-
-      <h2>Currently playing:</h2>
-
-      <!-- 3rd form: Music player + Rating songs/albums and Adding them to the current list -->
-
-      <form action="" method="get" class="form flex-container form-theme">
-        <div class="flex-item" id="music-player">
-          <div id="music-wrapper">
-            <audio controls>
-              <!-- placeholder for a real fetched song: -->
-              <!-- <source src="horse.mp3" type="audio/mpeg"> -->
-              ...
-            </audio>
-          </div>
-        </div>
-        <div class="flex-item" id="current-play">
-          <p><label for="album">Current track:</label></p>
-          <div id="current-track">
-            <ul id="selected-track">
-              <!-- this fills out dinamically, depending on currently playing song. It is displaying: current song, album, artist and duration. 
-               Song, artist and album - values are also copied when user adds this song to his playlist - they fill out new list items. -->
-            </ul>
-          </div>
-        </div>
-
-        <div class="flex-item" id="forth-input">
-          <p><label for="review">Rate (1-10):</label></p>
-          <p>
-            <input
-              class="input-color"
-              type="number"
-              id="review"
-              name="review"
-              pattern="[1-10]"
-              min="1"
-              max="10"
-              size="25"
-              required
-            />
-          </p>
-        </div>
-
-        <div id="submit-button" class="flex-item">
-          <p></p>
-          <button
-            type="submit"
-            class="input-button add-button button nav-button"
-          >
-            Add to playlist
-          </button>
-        </div>
-      </form>
     </div>
     <div id="results">
       <div class="visible-title2 title-theme">
-        <h2 id="new-title">My current list:</h2>
+        <h2 id="new-title">Favorite songs:</h2>
       </div>
       <ul id="added-list"></ul>
     </div>
@@ -216,31 +262,17 @@
         </div>
       </div>
     </div>
-
-
-    <script src="/favorites.js"></script>
+    <script src="/index.js"></script>
+    <!-- script for Spotify Player SDK -->
   </body>
 </html>
 
-
-<!-- dodati drugačiju pozadinu ili drugačiji format za My playlists, tako da se rezlikuje od Home pagea što više -->
-
-<!-- 
-Cijeli favorites.JS je isti kao index.JS, samo je ovo zakomentirano jer je radilo probleme, budući da smo te inpute maknuli iz Search-forma:
-(bio je error u console-logu vezna uz točno taj event-listener):
-
- // Event-listener za praćenje unosa u sva tri ova polja s posebnim kategorijama:
-    // [artistInput, songInput, albumInput].forEach((input) => {
-    //   input.addEventListener("input", () => {
-    //     const query = input.value.trim();
-    //     if (query.length > 0) {
-    //       fetchSuggestions2(query);
-    //     } else {
-    //       resultsList.innerHTML = ""; // Očisti rezultate ako je unos prazan
-    //     }
-    //   });
-    // });
-
+<!-- Node.js added - new file 'server.js' added. 
+'public' file added. 
+Whole CSS, index.js and pictures are now in folder 'public'.
+All paths in html and in themes.scss were changed: '/'' was added in front (so the page works only on localhost:3000, not as usually in browser). 
+Additional dependencies installed in package.json: cors, dotenv, express.
+Nodemon installed to refresh server with each code change.
+To start the page on localhost:3000, open bash and enter command: 
+nodemon server.js (or before the nodemon, it was: node server.js)
 -->
-
-<!-- CODE COPIED FROM index.js ON 10.10.2024. ANY NEW FUNCTIONALITIES in index.js SHOULD BE ADDED HERE ALSO.  -->
