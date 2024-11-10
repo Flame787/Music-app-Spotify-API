@@ -6,7 +6,7 @@
     <title>Music app</title>
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="icon" href="/pictures/app-icon.png" />
+    <link rel="icon" href="/pictures/app-icon11.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,20 +32,20 @@
       <div id="top-icon">
         <img
           id="app-icon"
-          src="/pictures/app-icon.png"
-          width="50"
-          height="50"
+          src="/pictures/app-icon11.png"
+          width="60"
+          height="60"
           alt="application icon"
         />
       </div>
       <div id="nav-title">Music player app</div>
       <nav id="navbar">
         <div id="nav-list">
-          <button class="button nav-button">
+          <button class="button nav-button" id="home-button">
             <a href="/" class="ancor-style">Home</a>
           </button>
           <button class="button nav-button">
-            <a href="/favorites" class="ancor-style">My playlists</a>
+            <a href="/favorites" class="ancor-style">My playlist</a>
           </button>
 
           <button class="dropdown-toggle button nav-button">Theme</button>
@@ -74,6 +74,15 @@
     <div>
       <div id="first-container">
         <div class="visible-title1 title-theme" id="head-title">
+          <div id="top-icon">
+            <img
+              id="app-icon-title"
+              src="/pictures/app-icon11.png"
+              width="120"
+              height="120"
+              alt="application icon"
+            />
+          </div>
           <h1>Music player</h1>
           <h3 class="shadow-text">Explore music and create your playlists</h3>
         </div>
@@ -244,24 +253,25 @@
         </div>
       </form>
     </div>
-    <div id="results">
+
+    <div id="favorite-items" class="hidden-element">
       <div class="visible-title2 title-theme">
         <h2 id="new-title">Favorite songs:</h2>
       </div>
       <ul id="added-list"></ul>
     </div>
 
-    <div>
+    <!-- <div>
       <div id="first-container">
         <h2>My favorite lists</h2>
-        <!-- <h3>Keep all your favorite albums on one place</h3> -->
-
+        
         <div id="fav_lists">
           <h2 id="new-title">Favorite albums:</h2>
           <ul id="fav_albums"></ul>
         </div>
       </div>
-    </div>
+    </div> -->
+
     <script src="/index.js"></script>
     <!-- script for Spotify Player SDK -->
   </body>

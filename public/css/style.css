@@ -1485,6 +1485,19 @@ button:hover {
   width: 13rem;
 }
 
+.hidden-element {
+  display: none;
+}
+
+#app-icon-title {
+  margin-top: 3%;
+}
+
+.larger-font {
+  font-size: 3.2rem;
+  font-weight: bold;
+}
+
 @media (max-width: 2000px) {
   #sound-gif {
     width: 11rem;
@@ -1567,6 +1580,9 @@ button:hover {
   #flex-search-category {
     margin-left: 20%;
     margin-right: 20%;
+  }
+  .larger-font {
+    font-size: 2.8rem;
   }
 }
 @media (max-width: 1113px) {
@@ -1663,6 +1679,9 @@ button:hover {
   .result-flex-item div {
     font-size: 1rem !important;
   }
+  .larger-font {
+    font-size: 2.5rem;
+  }
 }
 @media (max-width: 840px) {
   .dropdown-menu {
@@ -1686,6 +1705,9 @@ button:hover {
   }
   .result-flex-item div {
     font-size: 1rem !important;
+  }
+  .larger-font {
+    font-size: 2rem;
   }
 }
 @media (max-width: 786px) {

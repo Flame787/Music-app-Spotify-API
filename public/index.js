@@ -1,11 +1,16 @@
-// NEW BRANCH "PLAYLIST" - for playlist functionalities
-// 27.10. changes merged from the latest branch "SEARCH_TYPES" into the "master" branch.
-// After that, based on newly updated 'master' branch, here continues the new 'PLAYLIST' branch.
+// NEW BRANCH "FINISH" - added 10.11. - to finish My playlist functionalities
+// 10.11. changes merged from the latest branch "PLAYLIST" into the "master" branch.
+// Last status in PLAYLIST branch 10.11.: 
+// Add to favorites button works on single list items, but main favorite-button (in audio player) not working correctly (& will be removed).
+// Adding and removing works with simple functions. Rest of unused code in comments will be removed. 
+// Rating also not working ok with main favorite-button, but picked up ok with individual item buttons -> rating will be moved to 'My playlist' page
+// loadLists & saveLists added again & work ok. 
 
 (function () {
   function Todo() {
     const buttonPlay = document.querySelector(".play-button");
     const submitToListButton = document.querySelector(".add-button");
+    const homeButton = document.querySelector(".home-button");
     const list = document.getElementById("added-list"); // first list (ul) that gets tasks appended
     const favoritesList = document.getElementById("fav_albums"); // second list (ul) with favorite songs
     const searchInput = document.getElementById("search-all-input");
@@ -184,13 +189,17 @@
     // const button = document.querySelectorAll("button");
 
     // let album, rating, artist, song, time, item;
-    // OVO SE BAŠ NE KORISTI, VEZANO UZ ČUDNU funkciju fetchSuggestions2 ??:
-    const artistInput = document.getElementById("artist");
-    const songInput = document.getElementById("song");
-    const albumInput = document.getElementById("album");
-    const resultsList = document.getElementById("results");
+    // this is not used anymore:
+    // const artistInput = document.getElementById("artist");
+    // const songInput = document.getElementById("song");
+    // const albumInput = document.getElementById("album");
+    // const favoriteItems = document.getElementById("favorite-items");
 
     // ---------------------- FUNCTIONS FOR HANDLING SEARCH INPUT ------------------------------------- //
+
+    // homeButton.addEventListener("click", (event) => {
+    //   event.preventDefault();
+    // });
 
     searchAllButton.addEventListener("click", (event) => {
       event.preventDefault(); // Prevent the default form submission
@@ -1417,20 +1426,20 @@
         );
       }
 
-      if (savedFavorites) {
-        const items = JSON.parse(savedFavorites);
-        items.forEach((item) =>
-          favoritesList.appendChild(
-            createFavorite(
-              item.artist,
-              item.song,
-              item.album,
-              item.rating,
-              item.time
-            )
-          )
-        );
-      }
+      // if (savedFavorites) {
+      //   const items = JSON.parse(savedFavorites);
+      //   items.forEach((item) =>
+      //     favoritesList.appendChild(
+      //       createFavorite(
+      //         item.artist,
+      //         item.song,
+      //         item.album,
+      //         item.rating,
+      //         item.time
+      //       )
+      //     )
+      //   );
+      // }
     }
 
     // Save lists to localStorage:
@@ -1461,17 +1470,17 @@
 
       // document.getElementById("review").value = "";
 
-      const favoriteItems = [];
-      favoritesList.querySelectorAll("li").forEach((item) => {
-        favoriteItems.push({
-          artist: item.querySelector(".artist").textContent,
-          song: item.querySelector(".song").textContent,
-          album: item.querySelector(".album").textContent,
-          rating: item.querySelector(".rating").textContent,
-          time: item.querySelector(".time").textContent,
-        });
-      });
-      localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
+      // const favoriteItems = [];
+      // favoritesList.querySelectorAll("li").forEach((item) => {
+      //   favoriteItems.push({
+      //     artist: item.querySelector(".artist").textContent,
+      //     song: item.querySelector(".song").textContent,
+      //     album: item.querySelector(".album").textContent,
+      //     rating: item.querySelector(".rating").textContent,
+      //     time: item.querySelector(".time").textContent,
+      //   });
+      // });
+      // localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
     }
 
     // ______________________________________________________________________________
@@ -1509,7 +1518,7 @@
 
       const itemCardDiv = item.querySelector(".item-card"); // inside 'item', there is an item-card-div, & here we save this div into a variable
 
-      addFavoriteButton(itemCardDiv); // adding fav-button into the item-card-div
+      // addFavoriteButton(itemCardDiv); // adding fav-button into the item-card-div
       addRemoveButton(itemCardDiv); // adding remove-button into the item-card-div
       // document.getElementById("review").value = "";
       console.log("Here executes the createTask function.");
@@ -1645,44 +1654,44 @@
       changeTheme(defaultTheme);
     });
 
-    // add button FavoriteButton:
-    function addFavoriteButton(itemCardDiv) {
-      const favoriteButton = document.createElement("button");
-      favoriteButton.setAttribute("type", "button");
-      favoriteButton.classList.add("favorite-button", "button", "flex-item");
-      favoriteButton.addEventListener("click", setFavorite);
-      favoriteButton.innerHTML = "Add to favorites";
-      itemCardDiv.insertBefore(favoriteButton, itemCardDiv.firstChild);
+    // add button FavoriteButton (added on Liked songs, and can move them to "All favorite songs - this secondary list doesn't exist anymore"):
+    // function addFavoriteButton(itemCardDiv) {
+    //   const favoriteButton = document.createElement("button");
+    //   favoriteButton.setAttribute("type", "button");
+    //   favoriteButton.classList.add("favorite-button", "button", "flex-item");
+    //   favoriteButton.addEventListener("click", setFavorite);
+    //   favoriteButton.innerHTML = "Add to favorites";
+    //   itemCardDiv.insertBefore(favoriteButton, itemCardDiv.firstChild);
 
-      const listTitle = document.getElementById("new-title");
-      listTitle.style.display = "block";
-    }
+    //   const listTitle = document.getElementById("new-title");
+    //   listTitle.style.display = "block";
+    // }
 
     // Function setFavorite:
-    function setFavorite(event) {
-      const item = event.target.parentNode;
-      const artist = item.querySelector(".artist").textContent;
-      const song = item.querySelector(".song").textContent;
-      const album = item.querySelector(".album").textContent;
-      const rating = item.querySelector(".rating").textContent;
-      const time = item.querySelector(".time").textContent;
+    // function setFavorite(event) {
+    //   const item = event.target.parentNode;
+    //   const artist = item.querySelector(".artist").textContent;
+    //   const song = item.querySelector(".song").textContent;
+    //   const album = item.querySelector(".album").textContent;
+    //   const rating = item.querySelector(".rating").textContent;
+    //   const time = item.querySelector(".time").textContent;
 
-      // Debugging:
-      console.log("Extracted values:", { song, album, artist, rating, time });
+    //   // Debugging:
+    //   console.log("Extracted values:", { song, album, artist, rating, time });
 
-      if (!artist || !song || !album || !rating || !time) {
-        console.error("Some elements are missing in the item:", {
-          artist,
-          song,
-          album,
-          rating,
-          time,
-        });
-        return;
-      }
+    //   if (!artist || !song || !album || !rating || !time) {
+    //     console.error("Some elements are missing in the item:", {
+    //       artist,
+    //       song,
+    //       album,
+    //       rating,
+    //       time,
+    //     });
+    //     return;
+    //   }
 
       // Create favorite item:
-      const favoriteItem = createFavorite(artist, song, album, rating, time);
+      // const favoriteItem = createFavorite(artist, song, album, rating, time);
 
       // if (!songElement || !albumElement || !artistElement || !ratingElement || !timeElement) {
       //   console.error("Cannot find necessary elements in the item.");
@@ -1691,43 +1700,43 @@
 
       // Function to check if the item already exists in favorites, and if not, adds it to Favorites list:
 
-      function addIf(favoriteItem) {
-        let found = false;
-        favoritesList.querySelectorAll("li").forEach((element) => {
-          if (element.innerHTML === favoriteItem.innerHTML) {
-            found = true;
-          }
-        });
-        if (!found) {
-          favoritesList.appendChild(favoriteItem);
-          console.log(`Added '${song}' on the favorites list.`);
-        } else {
-          console.log(`'${song}' is already on the list.`);
-        }
-      }
+    //   function addIf(favoriteItem) {
+    //     let found = false;
+    //     favoritesList.querySelectorAll("li").forEach((element) => {
+    //       if (element.innerHTML === favoriteItem.innerHTML) {
+    //         found = true;
+    //       }
+    //     });
+    //     if (!found) {
+    //       favoritesList.appendChild(favoriteItem);
+    //       console.log(`Added '${song}' on the favorites list.`);
+    //     } else {
+    //       console.log(`'${song}' is already on the list.`);
+    //     }
+    //   }
 
-      addIf(favoriteItem);
-      saveLists();
-    }
+    //   addIf(favoriteItem);
+    //   saveLists();
+    // }
 
     // Function createFavorite:
-    function createFavorite(artist, song, album, rating, time) {
-      const item = document.createElement("li");
-      item.innerHTML = `<div class="form-theme item-card item-card2"> <p class="item-fill2 flex-item">
-      <span class="thin2">Artist: </span><span class="artist2" id="white" >${artist}</span><br>
-      <span class="thin2">Song: </span><span class="song2" id="white" > ${song} </span><br>
-      <span class="thin2">Album: </span><span class="album2" id="white" >${album}</span><br>
-      <span class="thin2">Rate: </span><span class="rating2" id="white" >${rating}</span><br>
-      <span class="thin2">Rated on: </span><span class="time2" id="white" >${time}</span></p>  </div>`;
+    // function createFavorite(artist, song, album, rating, time) {
+    //   const item = document.createElement("li");
+    //   item.innerHTML = `<div class="form-theme item-card item-card2"> <p class="item-fill2 flex-item">
+    //   <span class="thin2">Artist: </span><span class="artist2" id="white" >${artist}</span><br>
+    //   <span class="thin2">Song: </span><span class="song2" id="white" > ${song} </span><br>
+    //   <span class="thin2">Album: </span><span class="album2" id="white" >${album}</span><br>
+    //   <span class="thin2">Rate: </span><span class="rating2" id="white" >${rating}</span><br>
+    //   <span class="thin2">Rated on: </span><span class="time2" id="white" >${time}</span></p>  </div>`;
 
-      console.log("Created item HTML:", item.innerHTML); // Debugging
+    //   console.log("Created item HTML:", item.innerHTML); // Debugging
 
-      const itemCardDiv = item.querySelector(".item-card");
+    //   const itemCardDiv = item.querySelector(".item-card");
 
-      addRemoveButton(itemCardDiv);
+    //   addRemoveButton(itemCardDiv);
 
-      return item;
-    }
+    //   return item;
+    // }
 
     // Debugging to ensure favoritesList is found
     console.log("favoritesList:", favoritesList);
@@ -1814,6 +1823,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
+
 // If backspace pressed when not focused on Input field,
 document.addEventListener("keydown", function (event) {
   const activeElement = document.activeElement;
@@ -1832,37 +1842,8 @@ document.addEventListener("keydown", function (event) {
 
 // __________________________________________________________________________________________________________________________________________________________________
 
-// 13.10.2024. RADI PREVIEW, svira na audio-playeru - npr.   Judas Priest - Album: Screaming for Vengeance / Led Zeppelin - Album: Led Zeppelin
-
-// Error kod dodavanja novih itema na favorite listu:
-// index.js:338 Uncaught TypeError: Cannot read properties of null (reading 'textContent')
-//     at HTMLButtonElement.setFavorite (index.js:338:49)
-
-// index.js:287 Uncaught TypeError: Cannot read properties of null (reading 'textContent')
-//     at HTMLButtonElement.setFavorite (index.js:287:49)
-
-// također se ne može ni removati iteme s 1. liste:
-// index.js:124 Uncaught TypeError: Cannot read properties of null (reading 'textContent')
-//     at index.js:124:46
-//     at NodeList.forEach (<anonymous>)
-//     at saveLists (index.js:122:35)
-//     at HTMLButtonElement.removeTask (index.js:370:7)
-// Kasnije je removanje s osnovne liste ipak proradilo.
-
-// I removanje itema s favorite liste radi normalno, ali dodavanje s osnovne liste ne radi.
-
-// Give your stylesheet link an id..
-
-// <link rel=stylesheet href=mycss.css id=shtylesheet>
-// Then you can change it with javascript
-
-// function changeStylesheet(newstylesheet){
-//     document.getElementById('shtylesheet').setAttribute('href', newstylesheet);
-// }
-// Then if you wanna do buttons or something
-
-// <button onclick="changeStylesheet('light.css')">Lights on</button>
-// <button onclick="changeStylesheet('dark.css')">Lights off</button>
+// 13.10.2024. - PREVIEW works, plays on audio-playeru 
+// 10.11.2024. - Adding and removing items from the list works ok via single item-Fav-buttons
 
 // ------------------------ NEXT STEPS TO DO: ----------------------------------------------------------------------------------
 
@@ -1916,7 +1897,7 @@ document.addEventListener("keydown", function (event) {
 - dodati event listener
 - pjesme se dodaju na donju trenutno aktivnu Playlistu koju se može dalje obrađivati, te na 2. stranicu: My playlists (i kasnije možda čak spremaju u bazu)
 
-- na 2. stranici (Favorites) pjesma iz aktualne playliste se može dodati u bilo koju već postojeću playlistu, ili se može kreirati nova playlista:
+- na 2. stranici (My playlist / Favorites) pjesma iz aktualne playliste se može dodati u bilo koju već postojeću playlistu, ili se može kreirati nova playlista:
 
 "NEW SONG" 
 - 1. ADD TO AN EXISTING PLAYLIST -> 2. CHOOSE... (DROPDOWN OF ALL PLAYLIST NAMES) - 3. ADD TRACK -> 4. info se pojavi (običan tekst): TRACK ADDED.

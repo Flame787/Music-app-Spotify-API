@@ -869,12 +869,26 @@ button {
   // }
 }
 
+.hidden-element {
+  display: none;
+}
+
+#app-icon-title{
+  margin-top: 3%;
+}
+
+.larger-font{
+  font-size: 3.2rem;
+  font-weight: bold;
+}
+
 @media (max-width: 2000px){
   #sound-gif {
     width: 11rem;
   }
   #sound-pic {
     width: 11rem;
+    
   }
 }
 
@@ -965,6 +979,9 @@ button {
   #flex-search-category {
     margin-left: 20%;
     margin-right: 20%;
+  }
+  .larger-font{
+    font-size: 2.8rem;
   }
 }
 
@@ -1074,6 +1091,9 @@ button {
   .result-flex-item div {
     font-size: 1rem !important;
   }
+  .larger-font{
+    font-size: 2.5rem;
+  }
 }
 
 @media (max-width: 840px) {
@@ -1101,6 +1121,9 @@ button {
   }
   .result-flex-item div {
     font-size: 1rem !important;
+  }
+  .larger-font{
+    font-size: 2rem;
   }
 }
 
