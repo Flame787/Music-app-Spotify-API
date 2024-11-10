@@ -1397,82 +1397,82 @@
 
     // ------------------------------------------------------------------------
     // Load lists from localStorage on init:
-    // function loadLists() {
-    //   list.innerHTML = "";
-    //   const savedList = localStorage.getItem("addedList");
-    //   const savedFavorites = localStorage.getItem("favoritesList");
+    function loadLists() {
+      list.innerHTML = "";
+      const savedList = localStorage.getItem("addedList");
+      const savedFavorites = localStorage.getItem("favoritesList");
 
-    //   if (savedList) {
-    //     const items = JSON.parse(savedList);
-    //     items.forEach((item) =>
-    //       list.appendChild(
-    //         createTask(
-    //           item.artist,
-    //           item.song,
-    //           item.album,
-    //           item.rating,
-    //           item.time
-    //         )
-    //       )
-    //     );
-    //   }
+      if (savedList) {
+        const items = JSON.parse(savedList);
+        items.forEach((item) =>
+          list.appendChild(
+            createTask(
+              item.artist,
+              item.song,
+              item.album,
+              item.rating,
+              item.time
+            )
+          )
+        );
+      }
 
-    //   if (savedFavorites) {
-    //     const items = JSON.parse(savedFavorites);
-    //     items.forEach((item) =>
-    //       favoritesList.appendChild(
-    //         createFavorite(
-    //           item.artist,
-    //           item.song,
-    //           item.album,
-    //           item.rating,
-    //           item.time
-    //         )
-    //       )
-    //     );
-    //   }
-    // }
+      if (savedFavorites) {
+        const items = JSON.parse(savedFavorites);
+        items.forEach((item) =>
+          favoritesList.appendChild(
+            createFavorite(
+              item.artist,
+              item.song,
+              item.album,
+              item.rating,
+              item.time
+            )
+          )
+        );
+      }
+    }
 
     // Save lists to localStorage:
-    // function saveLists() {
-    //   const addedItems = [];
-    //   list.querySelectorAll("li").forEach((item) => {
-    //     // for each li, this function creates an object with keys and values (artist, rating etc.)
-    //     addedItems.push({
-    //       // & adds the object to the (initially empty) list:  []
-    //       artist: item.querySelector(".artist").textContent, // uses text-content found under the class '.artist'
-    //       song: item.querySelector(".song").textContent, // uses text-content found under the class '.song', etc.
-    //       album: item.querySelector(".album").textContent,
-    //       rating: item.querySelector(".rating").textContent,
-    //       time: item.querySelector(".time").textContent,
-    //     });
-    //   });
+    function saveLists() {
+      const addedItems = [];
+      list.querySelectorAll("li").forEach((item) => {
+        // for each li, this function creates an object with keys and values (artist, rating etc.)
+        addedItems.push({
+          // & adds the object to the (initially empty) list:  []
+          artist: item.querySelector(".artist").textContent, // uses text-content found under the class '.artist'
+          song: item.querySelector(".song").textContent, // uses text-content found under the class '.song', etc.
+          album: item.querySelector(".album").textContent,
+          rating: item.querySelector(".rating").textContent,
+          time: item.querySelector(".time").textContent,
+        });
+      });
 
-    //   // const items = [...list.querySelectorAll("li")].map((item) => ({
-    //   //   artist: item.querySelector(".artist").textContent,
-    //   //   song: item.querySelector(".song").textContent,
-    //   //   album: item.querySelector(".album").textContent,
-    //   //   rating: item.querySelector(".rating").textContent,
-    //   //   time: item.querySelector(".time").textContent,
-    //   // }));
-    //   // localStorage.setItem("addedList", JSON.stringify(items));
+      // const items = [...list.querySelectorAll("li")].map((item) => ({
+      //   artist: item.querySelector(".artist").textContent,
+      //   song: item.querySelector(".song").textContent,
+      //   album: item.querySelector(".album").textContent,
+      //   rating: item.querySelector(".rating").textContent,
+      //   time: item.querySelector(".time").textContent,
+      // }));
+      // localStorage.setItem("addedList", JSON.stringify(items));
 
-    //   localStorage.setItem("addedList", JSON.stringify(addedItems)); // saves the list as key, and it's value in local storage
+      localStorage.setItem("addedList", JSON.stringify(addedItems)); // saves the list as key, and it's value in local storage
 
-    //   // document.getElementById("review").value = "";
+      // document.getElementById("review").value = "";
 
-    //   const favoriteItems = [];
-    //   favoritesList.querySelectorAll("li").forEach((item) => {
-    //     favoriteItems.push({
-    //       artist: item.querySelector(".artist").textContent,
-    //       song: item.querySelector(".song").textContent,
-    //       album: item.querySelector(".album").textContent,
-    //       rating: item.querySelector(".rating").textContent,
-    //       time: item.querySelector(".time").textContent,
-    //     });
-    //   });
-    //   localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
-    // }
+      const favoriteItems = [];
+      favoritesList.querySelectorAll("li").forEach((item) => {
+        favoriteItems.push({
+          artist: item.querySelector(".artist").textContent,
+          song: item.querySelector(".song").textContent,
+          album: item.querySelector(".album").textContent,
+          rating: item.querySelector(".rating").textContent,
+          time: item.querySelector(".time").textContent,
+        });
+      });
+      localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
+    }
 
     // ______________________________________________________________________________
 
@@ -1600,7 +1600,7 @@
       //   //     saveLists();
       //   //     loadLists();
 
-      //   saveLists();
+        saveLists();
       //   // artist = "";
       //   // song = "";
       //   // album = "";
@@ -1633,7 +1633,7 @@
       // submitToListButton.addEventListener("click", addTask);
 
       // buttonPlay.addEventListener("click", playSong);
-      // loadLists();
+      loadLists();
     };
 
     // ***** Call init function when the DOM is fully loaded
@@ -1756,7 +1756,7 @@
 
       removeButton.closest("li").remove(); // removes html-element from the DOM
       console.log("Removed a list item from the list.");
-
+      saveLists();
       // let index = 0;
       // // removeButton.parentNode.remove();  // remove-button is inside another div and not directly inside 'li', so we have to remove closest 'li'
 
