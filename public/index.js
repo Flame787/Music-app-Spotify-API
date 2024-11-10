@@ -183,7 +183,7 @@
     // const form = document.getElementById("form");
     // const button = document.querySelectorAll("button");
 
-    let album, rating, artist, song, time, item;
+    // let album, rating, artist, song, time, item;
     // OVO SE BAŠ NE KORISTI, VEZANO UZ ČUDNU funkciju fetchSuggestions2 ??:
     const artistInput = document.getElementById("artist");
     const songInput = document.getElementById("song");
@@ -925,6 +925,9 @@
               addTask(previewArtist, previewName, previewAlbum);
               // document.getElementById("review").value = "";
             });
+            // showMoreButton.removeEventListener("click", (event) => {
+            //   event.preventDefault();
+            // });
           }
 
           // li.appendChild(div);
@@ -1179,9 +1182,12 @@
 
           mainAddToPlaylist.addEventListener("click", (event) => {
             event.preventDefault();
-            // const rating = document.getElementById("review").value;
-            // const time = new Date().toLocaleDateString();
-            addTask(previewArtist, previewName, previewAlbum);
+            const rating1 = document.getElementById("review").value;
+            const time = new Date().toLocaleDateString();
+
+            console.log("rating1:", rating1);
+
+            addTask(previewArtist, previewName, previewAlbum, rating1, time);
             //   setTimeout(() => {
             //     document.getElementById("review").value = "0";
             // }, 500);
@@ -1391,6 +1397,7 @@
     // ------------------------------------------------------------------------
     // Load lists from localStorage on init:
     function loadLists() {
+      list.innerHTML = "";
       const savedList = localStorage.getItem("addedList");
       const savedFavorites = localStorage.getItem("favoritesList");
 
@@ -1439,6 +1446,16 @@
           time: item.querySelector(".time").textContent,
         });
       });
+
+      // const items = [...list.querySelectorAll("li")].map((item) => ({
+      //   artist: item.querySelector(".artist").textContent,
+      //   song: item.querySelector(".song").textContent,
+      //   album: item.querySelector(".album").textContent,
+      //   rating: item.querySelector(".rating").textContent,
+      //   time: item.querySelector(".time").textContent,
+      // }));
+      // localStorage.setItem("addedList", JSON.stringify(items));
+
       localStorage.setItem("addedList", JSON.stringify(addedItems)); // saves the list as key, and it's value in local storage
 
       // document.getElementById("review").value = "";
@@ -1473,7 +1490,7 @@
     // event.preventDefault(); // Prevent the default form submission
     // call handleSearch() instead of displaySearchResults
 
-    function createTask(artist, song, album, rating, time) {
+    function createTask(artist, song, album, rating2, time) {
       const item = document.createElement("li");
 
       // const div = document.createElement("div");
@@ -1485,7 +1502,7 @@
       <span class="thin"> Song: </span> <span class="song">${song}</span> <br> 
       <span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> <br> 
       <span class="thin"> Album:  </span> <span class="album">${album}</span> <br> 
-      <span class="thin"> Rate:  </span>   <span  class="rating">${rating}</span> <br> 
+      <span class="thin"> Rate:  </span>   <span  class="rating">${rating2}</span> <br> 
       <span class="thin"> Rated on:  </span>   <span class="time">${time}</span>
       </p>  </div>`;
 
@@ -1500,18 +1517,22 @@
     // console.log(paragraph);
 
     // Adding new task on the list - this function just fetches values (and then, they will be added to card in next function 'createTask'):
-    function addTask(artist, song, album) {
+    function addTask(artist, song, album, rating2, time) {
       // event.preventDefault();
-      const rating = document.getElementById("review").value;
-      const time = new Date().toLocaleDateString();
+      // const newRating = document.getElementById("review").value;
+      // const time = new Date().toLocaleDateString();
 
-      console.log(list);
+      console.log("List inside addTask function:", list);
+      console.log("rating2:", rating2);
 
-      if (list.children.length === 0) {
-        const item = createTask(artist, song, album, rating, time);
-        list.appendChild(item);
-      } else {
-        const existingItem = [...list.querySelectorAll("li")].find((item) => {
+      function removeExistingItem(artist, song, album) {
+        // turning Nodelist into a real array:
+        const listItems = [...list.querySelectorAll("li")];
+
+        // const existingItem = [...list.querySelectorAll("li")].find((item) => {
+
+        // Filtering all items which are duplicates:
+        const duplicates = listItems.filter((item) => {
           return (
             item.querySelector(".artist").textContent === artist &&
             item.querySelector(".song").textContent === song &&
@@ -1519,24 +1540,42 @@
           );
         });
 
-        if (existingItem) {
-          // if this item already exsists, just modify it's rating with the new rate:
-          // const ratingElement = existingItem.querySelector(".rating");
-          // ratingElement.textContent = rating;
-          console.log("Item already exists, not modifying rating");
-        } else {
-          const item = createTask(artist, song, album, rating, time);
-          list.appendChild(item);
+        // If there is 1 or more duplicate, we delete them all:
+        if (duplicates.length > 0) {
+          duplicates.forEach((duplicate) => {
+            duplicate.remove();
+          });
+          console.log(`${duplicates.length} duplicate(s) removed`);
         }
+
+        // if (existingItem) {
+        //   // ratingElement.textContent = rating;
+        //   existingItem.remove(); // remove full item if already found on the list
+        //   console.log("Existing item removed");
+        // }
       }
 
-      document.getElementById("artist").value = "";
-      document.getElementById("song").value = "";
-      document.getElementById("album").value = "";
-      // document.getElementById("review").value = ""; // empty the input field, so the next rate - for next song can be added
-      console.log("review:", rating);
+      setTimeout(() => {
+        if (list.children.length === 0) {
+          // if list is empty, just add new item
+          const item = createTask(artist, song, album, rating2, time);
+          list.appendChild(item);
+        } else {
+          removeExistingItem(artist, song, album); // if list not empty, check for previous identic items and remove them
+          // add new item to the list:
+          const item = createTask(artist, song, album, rating2, time);
+          list.appendChild(item);
+          console.log("New item added.");
+        }
+        saveLists();
+        loadLists();
 
-      saveLists();
+        // document.getElementById("artist").value = "";
+        // document.getElementById("song").value = "";
+        // document.getElementById("album").value = "";
+        // document.getElementById("review").value = ""; // empty the input field, so the next rate - for next song can be added
+        console.log("review:", rating2);
+      }, 50);
     }
 
     this.init = function () {
@@ -1666,11 +1705,48 @@
     // function removeTask:
     function removeTask(event) {
       const removeButton = event.target;
+
+      let index = 0;
       // removeButton.parentNode.remove();  // remove-button is inside another div and not directly inside 'li', so we have to remove closest 'li'
-      removeButton.closest("li").remove();  
-      // removes the whole parent-task (in which the removeButton was embedded as a child)
-      saveLists();
+
+      const favoriteItemsList = document.querySelectorAll(".remove-button"); // Assuming that every favored item <li> has one remove-button
+
+      // turning nodelist into a real array:
+      const favoriteItemsArray = Array.from(favoriteItemsList);
+
+      // what happens when remove-button is clicked:
+      favoriteItemsArray.forEach((button) => {
+        button.addEventListener("click", (event) => {
+          // find <li> parent
+          const listItem2 = button.closest("li");
+          // find index
+
+          // Filtriraj samo <li> elemente unutar roditelja:
+          const listItems = Array.from(listItem2.parentElement.children).filter(
+            (child) => child.tagName === "LI"
+          );
+
+          index = listItems.indexOf(listItem2); // we are changing index, according to the real index of the currently removed song
+          // For test- show index of the current <li>, whose play-button was clicked:
+          console.log("index:", index); // index is shown correctly for each song on the list (0, 1, 2, 3...)
+
+          favoriteItemsArray.splice(index, 1);
+          console.log("Item spliced out.");  // 10.11. THIS WORKS, BUT ONLY ON SECOND CLICK ON REMOVE BUTTON, NOT ON 1ST!!
+                                            // AFTER DELETING, ITEMS ARE STILL RECREATED WHEN NEW ITEM IS ADDED, AND ALL ASSIGNED SAME NEW RATING!
+
+          removeButton.closest("li").remove();
+          // removes the whole parent-task (in which the removeButton was embedded as a child)
+          saveLists();
+          loadLists();
+        });
+      });
+
+      // listItem2 = list.indexOf(removeButton.closest("li"));
+
+      // list.splice(index, 1);
+      // console.log("Item sliced out.");
     }
+
   }
   // here ends Todo function.
 
