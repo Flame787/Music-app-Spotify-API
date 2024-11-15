@@ -19,13 +19,13 @@ $backgrounds: (
   //Volcano
   theme7: url("../pictures/1gradient radial black red.png"),
   //Copper
-  theme8: url("../pictures/1gradient teal orange.png"),
+  theme8: url("../pictures/blue27.jpg"),
   //Sunrise
   theme9: url("../pictures/abstract-green.jpg"),
   //Green
-  theme10: url("../pictures/green-triangles.jpg"),
+  theme10: url("../pictures/forest11.jpg"),
   //Emerald
-  theme11: url("../pictures/blue-green44.jpg"),
+  theme11: url("../pictures/blue-water3.jpg"),
   //Azure
   theme12: url("../pictures/frost2.jpg"),
   //Frost
@@ -85,12 +85,7 @@ $headerThemes: (
   //Copper
   theme8:
     (
-      background:
-        radial-gradient(
-          at 25% 75%,
-          rgba(223, 87, 13, 0.403),
-          rgba(3, 131, 99, 0.749)
-        ),
+      background: radial-gradient(at 25% 75%, #2528839a, rgba(9, 20, 36, 0.638)),
     ),
 
   //Sunrise
@@ -209,9 +204,9 @@ $themes: (
     box-shadow: 3px 3px 2px #04062db6,
   ),
   theme8: (
-    background-color: rgb(185, 125, 52),
+    background-color: #0b6893,
     background-image:
-      linear-gradient(320deg, #e2efaa 0%, rgb(222, 162, 12) 33%, #cd551d 100%),
+      linear-gradient(320deg, #aadeef 0%, #1554ad 43%, #02376b 100%),
     color: white,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -283,8 +278,6 @@ $themes: (
   ),
 );
 
-
-
 // Set of colors for Remove-buttons:
 
 $themes2: (
@@ -340,9 +333,8 @@ $themes2: (
     box-shadow: 3px 3px 2px #04062db6,
   ),
   theme8: (
-    background-color: rgb(163, 11, 11),
-    background-image:
-      linear-gradient(320deg, rgb(225, 151, 60) 0%, rgb(3, 131, 99) 100%),
+    background-color: rgb(2, 22, 63),
+    background-image: linear-gradient(320deg, #729faf9c 0%, #101661b1 50%),
     color: white,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -586,10 +578,8 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme8: (
-    // background: radial-gradient(at 25% 75%,  #f3eef1b5, rgba(124, 139, 167, 0.749)),
-    background:
-      radial-gradient(at 75% 25%, #d2c05ca8, rgba(203, 113, 28, 0.693)),
-    color: black,
+    background: radial-gradient(at 75% 25%, #5d5c6658, rgba(5, 25, 55, 0.749)),
+    color: white,
     text-shadow: none,
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),

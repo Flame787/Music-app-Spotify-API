@@ -1190,18 +1190,16 @@
           //   event.preventDefault();
           // });
 
-          mainAddToPlaylist.addEventListener("click", (event) => {
-            event.preventDefault();
-            const rating = document.getElementById("review").value;
-            const time = new Date().toLocaleDateString();
+          // mainAddToPlaylist.addEventListener("click", (event) => {   - 15.11. removed this button, not needded
+          //   event.preventDefault();
+          //   const rating = document.getElementById("review").value;
+          //   const time = new Date().toLocaleDateString();
 
-            console.log("rating:", rating);
+          //   console.log("rating:", rating);
 
-            addTask(previewArtist, previewName, previewAlbum, rating, time); // main button on Audio player, can add current track to favorites
-            //   setTimeout(() => {
-            //     document.getElementById("review").value = "0";
-            // }, 500);
-          });
+          //   addTask(previewArtist, previewName, previewAlbum, rating, time); // main button on Audio player, can add current track to favorites
+            
+          // });
         }
 
         /* Adding event-listeners on all Play-buttona & icons: */

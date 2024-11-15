@@ -41,10 +41,10 @@
       <div id="nav-title">Music player app</div>
       <nav id="navbar">
         <div id="nav-list">
-          <button class="button nav-button" id="home-button">
+          <button class="button nav-button" id="home-button" onclick="window.location.href='/'">
             <a href="/" class="ancor-style">Home</a>
           </button>
-          <button class="button nav-button">
+          <button class="button nav-button" onclick="window.location.href='/favorites'">
             <a href="/favorites" class="ancor-style">My playlist</a>
           </button>
 
@@ -58,9 +58,9 @@
             <li role="option" data-value="theme5">Energy ⚡</li>
             <li role="option" data-value="theme6">Volcano 🌋</li>
             <li role="option" data-value="theme7">Copper 🔶</li>
-            <li role="option" data-value="theme8">Sunrise 🌄</li>
-            <li role="option" data-value="theme9">Green 🦚</li>
-            <li role="option" data-value="theme10">Emerald 🟩</li>
+            <li role="option" data-value="theme8">Cosmos 🌌</li>
+            <li role="option" data-value="theme9">Green 🌳</li>
+            <li role="option" data-value="theme10">Forest 🌿</li>
             <li role="option" data-value="theme11">Azure 💦</li>
             <li role="option" data-value="theme12">Frost ❄️</li>
             <li role="option" data-value="theme13">Nord 🧊</li>
@@ -187,7 +187,7 @@
             <!-- </div> -->
           </div>
 
-          <div class="flex-item" id="forth-input">
+          <div class="flex-item hidden-element" id="forth-input">
             <p><label for="review">Rate (1-10):</label></p>
             <p>
               <input
@@ -204,16 +204,16 @@
             </p>
           </div>
 
-          <div id="add-to-playlist" class="flex-item">
+          <!-- <div id="add-to-playlist hidden-element" class="flex-item">
             <p></p>
             <button
               type="submit"
               id="player-add-to-playlist"
-              class="input-button add-button button nav-button"
+              class="input-button add-button button nav-button hidden-element"
             >
               Add to favorites
             </button>
-          </div>
+          </div> -->
         </div>
       </form>
 

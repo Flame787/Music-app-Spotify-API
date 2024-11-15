@@ -33,16 +33,16 @@ body.theme7 {
   background-image: url("../pictures/1gradient radial black red.png") !important;
 }
 body.theme8 {
-  background-image: url("../pictures/1gradient teal orange.png") !important;
+  background-image: url("../pictures/blue27.jpg") !important;
 }
 body.theme9 {
   background-image: url("../pictures/abstract-green.jpg") !important;
 }
 body.theme10 {
-  background-image: url("../pictures/green-triangles.jpg") !important;
+  background-image: url("../pictures/forest11.jpg") !important;
 }
 body.theme11 {
-  background-image: url("../pictures/blue-green44.jpg") !important;
+  background-image: url("../pictures/blue-water3.jpg") !important;
 }
 body.theme12 {
   background-image: url("../pictures/frost2.jpg") !important;
@@ -216,8 +216,8 @@ body.theme15 {
 .theme8 .dropdown-menu,
 .theme8 .show-more-button,
 .theme8 .play-button {
-  background-color: rgb(185, 125, 52);
-  background-image: linear-gradient(320deg, #e2efaa 0%, rgb(222, 162, 12) 33%, #cd551d 100%);
+  background-color: #0b6893;
+  background-image: linear-gradient(320deg, #aadeef 0%, #1554ad 43%, #02376b 100%);
   color: white;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -397,8 +397,8 @@ body.theme15 {
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme8 .remove-button {
-  background-color: rgb(163, 11, 11);
-  background-image: linear-gradient(320deg, rgb(225, 151, 60) 0%, rgb(3, 131, 99) 100%);
+  background-color: rgb(2, 22, 63);
+  background-image: linear-gradient(320deg, rgba(114, 159, 175, 0.6117647059) 0%, rgba(16, 22, 97, 0.6941176471) 50%);
   color: white;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -494,8 +494,8 @@ body.theme15 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme8 .form-theme {
-  background: radial-gradient(at 75% 25%, rgba(210, 192, 92, 0.6588235294), rgba(203, 113, 28, 0.693));
-  color: black;
+  background: radial-gradient(at 75% 25%, rgba(93, 92, 102, 0.3450980392), rgba(5, 25, 55, 0.749));
+  color: white;
   text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
@@ -567,7 +567,7 @@ body.theme15 {
   background: radial-gradient(at 25% 75%, rgba(104, 44, 14, 0.6470588235), rgba(9, 3, 1, 0.584));
 }
 .theme8 .header-style {
-  background: radial-gradient(at 25% 75%, rgba(223, 87, 13, 0.403), rgba(3, 131, 99, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(37, 40, 131, 0.6039215686), rgba(9, 20, 36, 0.638));
 }
 .theme9 .header-style {
   background: radial-gradient(at 25% 75%, rgba(99, 154, 3, 0.321), rgba(2, 111, 84, 0.749));
@@ -1496,6 +1496,7 @@ button:hover {
 .larger-font {
   font-size: 3.2rem;
   font-weight: bold;
+  margin-top: 0%;
 }
 
 @media (max-width: 2000px) {
