@@ -1,10 +1,10 @@
 // NEW BRANCH "FINISH" - added 10.11. - to finish My playlist functionalities
 // 10.11. changes merged from the latest branch "PLAYLIST" into the "master" branch.
-// Last status in PLAYLIST branch 10.11.: 
+// Last status in PLAYLIST branch 10.11.:
 // Add to favorites button works on single list items, but main favorite-button (in audio player) not working correctly (& will be removed).
-// Adding and removing works with simple functions. Rest of unused code in comments will be removed. 
+// Adding and removing works with simple functions. Rest of unused code in comments will be removed.
 // Rating also not working ok with main favorite-button, but picked up ok with individual item buttons -> rating will be moved to 'My playlist' page
-// loadLists & saveLists added again & work ok. 
+// loadLists & saveLists added again & work ok.
 
 (function () {
   function Todo() {
@@ -926,19 +926,18 @@
           // showMoreButton.addEventListener("click", function (event) {
           //   addTask(event, showMoreButton);
           // });
-          if (!showMoreButton.hasEventListener) {
-            showMoreButton.addEventListener("click", (event) => {
-              event.preventDefault();
-              const rating = document.getElementById("review").value;  // no rating in this view (items in track list)
-              const time = new Date().toLocaleDateString();
-              // const rating = "";
-              addTask(previewArtist, previewName, previewAlbum, rating, time); // individual buttons on each track card, can add item to favorites
-              // document.getElementById("review").value = "";
-            });
-            // showMoreButton.removeEventListener("click", (event) => {
-            //   event.preventDefault();
-            // });
-          }
+
+          showMoreButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            // const rating = document.getElementById("review").value;  // no rating in this view (items in track list)
+            const time = new Date().toLocaleDateString();
+            // const rating = "";
+            addTask(previewArtist, previewName, previewAlbum, time); // individual buttons on each track card, can add item to favorites
+            // document.getElementById("review").value = "";
+          });
+          // showMoreButton.removeEventListener("click", (event) => {
+          //   event.preventDefault();
+          // });
 
           // li.appendChild(div);
           // li.appendChild(playButton); // NEW! PLAYBUTTON for individual tracks - enables playing preview of the track (30 sec)
@@ -1198,7 +1197,7 @@
           //   console.log("rating:", rating);
 
           //   addTask(previewArtist, previewName, previewAlbum, rating, time); // main button on Audio player, can add current track to favorites
-            
+
           // });
         }
 
@@ -1417,7 +1416,7 @@
               item.artist,
               item.song,
               item.album,
-              item.rating,
+              // item.rating,
               item.time
             )
           )
@@ -1450,7 +1449,7 @@
           artist: item.querySelector(".artist").textContent, // uses text-content found under the class '.artist'
           song: item.querySelector(".song").textContent, // uses text-content found under the class '.song', etc.
           album: item.querySelector(".album").textContent,
-          rating: item.querySelector(".rating").textContent,
+          // rating: item.querySelector(".rating").textContent,
           time: item.querySelector(".time").textContent,
         });
       });
@@ -1498,7 +1497,7 @@
     // event.preventDefault(); // Prevent the default form submission
     // call handleSearch() instead of displaySearchResults
 
-    function createTask(artist, song, album, rating, time) {
+    function createTask(artist, song, album, time) {
       const item = document.createElement("li"); // list-element is only created and returned, but not yet added to the list
 
       // const div = document.createElement("div");
@@ -1510,8 +1509,9 @@
       <span class="thin"> Song: </span> <span class="song">${song}</span> <br> 
       <span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> <br> 
       <span class="thin"> Album:  </span> <span class="album">${album}</span> <br> 
-      <span class="thin"> Rate:  </span>   <span  class="rating">${rating}</span> <br> 
-      <span class="thin"> Rated on:  </span>   <span class="time">${time}</span>
+      
+      <span class="thin"> Added on:  </span>   <span class="time">${time}</span><br> 
+      <span class="thin"> Rate:  </span>   <span  class="rating"></span> 
       </p>  </div>`;
 
       const itemCardDiv = item.querySelector(".item-card"); // inside 'item', there is an item-card-div, & here we save this div into a variable
@@ -1526,12 +1526,12 @@
     // console.log(paragraph);
 
     // Adding new task on the list - this function just fetches values (and then, they will be added to card in next function 'createTask'):
-    function addTask(artist, song, album, rating, time) {
+    function addTask(artist, song, album, time) {
       // event.preventDefault();
       // const newRating = document.getElementById("review").value;
       // const time = new Date().toLocaleDateString();
 
-      const item = createTask(artist, song, album, rating, time); // here the item is already created - not yet! added into html-Node-list
+      const item = createTask(artist, song, album, time); // here the item is already created - not yet! added into html-Node-list
 
       function addIf(item) {
         let found = false;
@@ -1607,7 +1607,7 @@
       //   //     saveLists();
       //   //     loadLists();
 
-        saveLists();
+      saveLists();
       //   // artist = "";
       //   // song = "";
       //   // album = "";
@@ -1688,15 +1688,15 @@
     //     return;
     //   }
 
-      // Create favorite item:
-      // const favoriteItem = createFavorite(artist, song, album, rating, time);
+    // Create favorite item:
+    // const favoriteItem = createFavorite(artist, song, album, rating, time);
 
-      // if (!songElement || !albumElement || !artistElement || !ratingElement || !timeElement) {
-      //   console.error("Cannot find necessary elements in the item.");
-      //   return;
-      // }
+    // if (!songElement || !albumElement || !artistElement || !ratingElement || !timeElement) {
+    //   console.error("Cannot find necessary elements in the item.");
+    //   return;
+    // }
 
-      // Function to check if the item already exists in favorites, and if not, adds it to Favorites list:
+    // Function to check if the item already exists in favorites, and if not, adds it to Favorites list:
 
     //   function addIf(favoriteItem) {
     //     let found = false;
@@ -1821,7 +1821,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
-
 // If backspace pressed when not focused on Input field,
 document.addEventListener("keydown", function (event) {
   const activeElement = document.activeElement;
@@ -1840,7 +1839,7 @@ document.addEventListener("keydown", function (event) {
 
 // __________________________________________________________________________________________________________________________________________________________________
 
-// 13.10.2024. - PREVIEW works, plays on audio-playeru 
+// 13.10.2024. - PREVIEW works, plays on audio-playeru
 // 10.11.2024. - Adding and removing items from the list works ok via single item-Fav-buttons
 
 // ------------------------ NEXT STEPS TO DO: ----------------------------------------------------------------------------------
