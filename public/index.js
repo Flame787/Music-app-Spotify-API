@@ -586,25 +586,59 @@
           const li = document.createElement("li");
           const div = createDiv();
           const img = document.createElement("img");
+          // const imgContainer = document.createElement("div");
+
+          // imgContainer.classList.add("image-container");
+          // imgContainer.setAttribute("id", "img-div");
+          // imgContainer.appendChild(img);
 
           // Check if track's album has a cover picture and if first cover is available:
           if (item.album && item.album.images && item.album.images.length > 0) {
             img.src = item.album.images[0].url;
-            img.alt = `${item.name} Album Cover`;
-            img.classList.add("result-image");
-
-            // Insert the div-image before the text content:
-            li.insertBefore(div, li.firstChild);
 
             // li.insertBefore(img, li.firstChild);
-            div.appendChild(img);
-            div.classList.add("image-container");
+            // div.appendChild(img);
+            // div.classList.add("image-container");
+          } else {
+            img.src = "./pictures/image-placeholder.jpg"; // placeholder, if no image available
           }
+
+          img.alt = `${item.name} Album Cover`;
+          img.classList.add("result-image");
+
+          // Insert the div-image before the text content:
+          li.insertBefore(div, li.firstChild);
+          div.appendChild(img);
+          div.classList.add("image-container");
+
+
+          div.addEventListener("click", (event) => {
+            event.preventDefault();
+            document
+              .getElementById("currently-playing")
+              .scrollIntoView({ behavior: "smooth", block: "start" });
+
+            if (item.preview_url) {
+              currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
+              playTrack(item.preview_url); // calling the basic function to play current song index in audio-player
+              // 16.11. song plays correctly in audio-player if the song-preview is found.
+              updateCurrentlyPlayingInfo(index); // update info on currently playing track
+              // 16.11. THIS DOESN'T WORK CORRECTLY SO FAR, SHOULD TRANSFER OTHER VARIABLES TO THE FUNCTION INSTEAD OF INDEX?
+              //new:
+              document.getElementById("sound-pic").style.display = "none";
+              document.getElementById("sound-bars").style.display = "block";
+            } else {
+              console.error(
+                "Nema dostupnog track URL-a za prvu pjesmu:",
+                item.name
+              );
+            }
+          });
 
           // Create a <div> for the text and append it
           const textDivSong1 = createDiv();
           const textDivSong2 = createDiv();
-          textDivSong1.textContent = `${item.name}`; // NAZIV PJESME
+          textDivSong1.textContent = `${item.name}`; // SONG NAME
           textDivSong2.textContent = `By: ${item.artists[0].name}`;
 
           const showMoreButton = document.createElement("button");
@@ -990,7 +1024,6 @@
             }
           }
           checkIfFavorized(savedList);
-
 
           ulTracks.appendChild(li);
         });
