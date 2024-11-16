@@ -583,8 +583,15 @@ hr {
 .warning-message {
   color: red;
   font-size: 1rem;
-  margin-top: 5px;
+  margin-top: 3px;
 }
+
+.favorite-message {
+  // color: rgb(80, 7, 117);
+  font-size: 1rem;
+  margin-top: 0px;
+}
+
 
 .result-category {
   width: 100%;

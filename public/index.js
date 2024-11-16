@@ -214,13 +214,21 @@
       }
     });
 
-    // Funcion for warning if the input-field is empty:
+    // Function for warning if the input-field is empty:
     function displayMessage(container, text) {
       const message = document.createElement("p");
       message.textContent = text;
       message.classList.add("warning-message");
       container.appendChild(message); // ("Please enter your query" - in red letters)
     } // OVA FUNKCIJA RADI OK 25.10.
+
+    // Function for informing that the song was added to Favorites-playlist:
+    function displayFavoriteInfo(container, text) {
+      const message = document.createElement("p");
+      message.textContent = text;
+      message.classList.add("favorite-message");
+      container.appendChild(message); // ("Please enter your query" - in red letters)
+    }
 
     // 25.10.: helper (middleman) function in order to FETCH and DISPLAY results, and to focus on the Search results
     // this function CALLS other important functions: checkCategories(query) -> fetchSearchResults -> await displaySearchResults(query):
@@ -888,6 +896,7 @@
           });
 
           const showMoreButton = document.createElement("button");
+
           showMoreButton.textContent = `Add to favorites`;
           showMoreButton.classList.add("show-more-button", "add-button"); // add-button for adding a track to the favorites list (and later to playlists)
           showMoreButton.setAttribute("id", "add-to-playlist-button");
@@ -919,6 +928,7 @@
           const previewName = track.name;
           const previewArtist = albumArtist;
           const previewAlbum = albumName;
+
           // const rating = document.getElementById("review").value;
           // const time = new Date().toLocaleDateString();
 
@@ -934,6 +944,12 @@
             // const rating = "";
             addTask(previewArtist, previewName, previewAlbum, time); // individual buttons on each track card, can add item to favorites
             // document.getElementById("review").value = "";
+            const listItem = showMoreButton.closest("li");
+            displayFavoriteInfo(listItem, "🤍");
+            // addRemoveButton(listItem);
+            showMoreButton.classList.add("hidden-element");
+
+            // displayFavoriteInfo(listItem, "Track added.");
           });
           // showMoreButton.removeEventListener("click", (event) => {
           //   event.preventDefault();
@@ -947,9 +963,34 @@
             li.appendChild(element)
           );
 
-          // ** LATER ADD EVENT LISTENER FOR THE 3RD FUNCTION - ADD TO LIST!
-          // (define which multiple variables it passes to the function Add to playlist)
-          // - f.e. track.name, albumName, albumArtist, albumImageUrl, track.duration_ms, track.is_playable (true / false)
+          const savedList = localStorage.getItem("addedList");
+
+          function checkIfFavorized(savedList) {
+            let found = false;
+
+            if (savedList) {
+              const items = JSON.parse(savedList);
+              items.forEach((item) => {
+                if (
+                  item.artist === previewArtist &&
+                  item.song === previewName &&
+                  item.album === previewAlbum
+                ) {
+                  found = true;
+                  // showMoreButton.textContent = `🤍`;
+                  const listItem = showMoreButton.closest("li");
+                  displayFavoriteInfo(listItem, "🤍");
+                  showMoreButton.classList.add("hidden-element");
+                }
+              });
+              if (!found) {
+                // showMoreButton.textContent = `Add to favorites`;
+                console.log(`'${song}' not yet on the favorites list.`);
+              }
+            }
+          }
+          checkIfFavorized(savedList);
+
 
           ulTracks.appendChild(li);
         });
@@ -1406,7 +1447,7 @@
     function loadLists() {
       list.innerHTML = "";
       const savedList = localStorage.getItem("addedList");
-      const savedFavorites = localStorage.getItem("favoritesList");
+      // const savedFavorites = localStorage.getItem("favoritesList");
 
       if (savedList) {
         const items = JSON.parse(savedList);
@@ -1608,6 +1649,11 @@
       //   //     loadLists();
 
       saveLists();
+
+      // new 16.11. - adding notification when a song was added to favorites:
+      // const addFavInfo = document.getElementById("add-to-playlist-button");
+      // displayMessage(addFavInfo, "Added to the playlist.");
+
       //   // artist = "";
       //   // song = "";
       //   // album = "";
