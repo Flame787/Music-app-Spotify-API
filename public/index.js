@@ -172,7 +172,7 @@
       }
     });
 
-    // Add functionality to choose options:
+    // Add functionality to choose options/themes:
     document.querySelectorAll(".dropdown-menu li").forEach(function (option) {
       option.addEventListener("click", function () {
         const themeName = option.getAttribute("data-value");
@@ -180,20 +180,12 @@
           option.textContent;
         document.querySelector(".dropdown-menu").classList.remove("show");
         changeTheme(themeName);
+
       });
     });
 
+
     /////////////////////////////////   CODE FOR FETCHING ARTISTS, ALBUMS AND SONGS:   ////////////////////////////////////////
-
-    // const form = document.getElementById("form");
-    // const button = document.querySelectorAll("button");
-
-    // let album, rating, artist, song, time, item;
-    // this is not used anymore:
-    // const artistInput = document.getElementById("artist");
-    // const songInput = document.getElementById("song");
-    // const albumInput = document.getElementById("album");
-    // const favoriteItems = document.getElementById("favorite-items");
 
     // ---------------------- FUNCTIONS FOR HANDLING SEARCH INPUT ------------------------------------- //
 

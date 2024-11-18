@@ -1494,7 +1494,7 @@ button:hover {
   display: none;
 }
 
-#app-icon-title {
+#app-icon-title, #app-icon-title2 {
   margin-top: 3%;
 }
 
