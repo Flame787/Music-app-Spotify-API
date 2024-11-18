@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   text-align: center;
 }
 
@@ -761,7 +761,7 @@ body {
 }
 
 h1 {
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 h1,
@@ -799,9 +799,9 @@ h3 {
 }
 
 #nav-title {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Inter", sans-serif;
   color: #f5f5f4;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Inter", sans-serif;
   letter-spacing: 2px;
   font-weight: bold;
   font-size: 1.7rem;
@@ -945,7 +945,7 @@ select option {
 
 #search-form {
   width: 50%;
-  margin: 4% auto;
+  margin: 2% auto;
 }
 
 input[type=checkbox] {
@@ -960,7 +960,7 @@ input[type=checkbox] {
 }
 
 #music-player {
-  margin-top: 5%;
+  margin-top: 1%;
   width: 90%;
   height: 40%;
 }
@@ -1440,7 +1440,7 @@ li .image-container-artist img {
 }
 
 .search-category {
-  margin: 40px auto 0%;
+  margin: 30px auto 0%;
 }
 
 #form-results-container {
@@ -1448,7 +1448,7 @@ li .image-container-artist img {
 }
 
 #flex-search-category {
-  margin-bottom: 5%;
+  margin-bottom: 2%;
   margin-left: 25%;
   margin-right: 25%;
 }
@@ -1499,9 +1499,10 @@ button:hover {
 }
 
 .larger-font {
-  font-size: 3.2rem;
+  font-size: 3.4rem;
   font-weight: bold;
-  margin-top: 0%;
+  margin: 0%;
+  font-family: "Inter", sans-serif;
 }
 
 @media (max-width: 2000px) {
