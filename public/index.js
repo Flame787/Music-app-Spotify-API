@@ -1,10 +1,8 @@
 // NEW BRANCH "FINISH" - added 10.11. - to finish My playlist functionalities
 // 10.11. changes merged from the latest branch "PLAYLIST" into the "master" branch.
 // Last status in PLAYLIST branch 10.11.:
-// Add to favorites button works on single list items, but main favorite-button (in audio player) not working correctly (& will be removed).
-// Adding and removing works with simple functions. Rest of unused code in comments will be removed.
-// Rating also not working ok with main favorite-button, but picked up ok with individual item buttons -> rating will be moved to 'My playlist' page
-// loadLists & saveLists added again & work ok.
+// Searching, adding to playlist and playing songs works ok. Rating removed.
+// LoadLists & saveLists added again & work ok.
 
 (function () {
   function Todo() {
@@ -180,10 +178,8 @@
           option.textContent;
         document.querySelector(".dropdown-menu").classList.remove("show");
         changeTheme(themeName);
-
       });
     });
-
 
     /////////////////////////////////   CODE FOR FETCHING ARTISTS, ALBUMS AND SONGS:   ////////////////////////////////////////
 
@@ -603,7 +599,6 @@
           div.appendChild(img);
           div.classList.add("image-container");
 
-
           div.addEventListener("click", (event) => {
             event.preventDefault();
             document
@@ -621,7 +616,7 @@
               document.getElementById("sound-bars").style.display = "block";
             } else {
               console.error(
-                "Nema dostupnog track URL-a za prvu pjesmu:",
+                "No available track URL for the first song:",
                 item.name
               );
             }
@@ -954,6 +949,8 @@
           const previewName = track.name;
           const previewArtist = albumArtist;
           const previewAlbum = albumName;
+          const previewUrl = track.preview_url;
+          const previewImage = albumImageUrl;
 
           // const rating = document.getElementById("review").value;
           // const time = new Date().toLocaleDateString();
@@ -968,7 +965,7 @@
             // const rating = document.getElementById("review").value;  // no rating in this view (items in track list)
             const time = new Date().toLocaleDateString();
             // const rating = "";
-            addTask(previewArtist, previewName, previewAlbum, time); // individual buttons on each track card, can add item to favorites
+            addTask(previewArtist, previewName, previewAlbum, previewUrl, previewImage, time); // individual buttons on each track card, can add item to favorites
             // document.getElementById("review").value = "";
             const listItem = showMoreButton.closest("li");
             displayFavoriteInfo(listItem, "🤍");
@@ -1482,7 +1479,8 @@
               item.artist,
               item.song,
               item.album,
-              // item.rating,
+              item.url,
+              item.image,
               item.time
             )
           )
@@ -1563,9 +1561,11 @@
     // event.preventDefault(); // Prevent the default form submission
     // call handleSearch() instead of displaySearchResults
 
-    function createTask(artist, song, album, time) {
+    function createTask(artist, song, album, url, image, time) {
       const item = document.createElement("li"); // list-element is only created and returned, but not yet added to the list
-
+      console.log("Preview URL:", url);
+      console.log("Preview time:", time);
+      console.log("Preview image:", image);
       // const div = document.createElement("div");
       // div.classList.add("form-theme", "item-card");
 
@@ -1577,7 +1577,6 @@
       <span class="thin"> Album:  </span> <span class="album">${album}</span> <br> 
       
       <span class="thin"> Added on:  </span>   <span class="time">${time}</span><br> 
-      <span class="thin"> Rate:  </span>   <span  class="rating"></span> 
       </p>  </div>`;
 
       const itemCardDiv = item.querySelector(".item-card"); // inside 'item', there is an item-card-div, & here we save this div into a variable
@@ -1585,6 +1584,72 @@
       // addFavoriteButton(itemCardDiv); // adding fav-button into the item-card-div
       addRemoveButton(itemCardDiv); // adding remove-button into the item-card-div
       // document.getElementById("review").value = "";
+
+      // 18.11. new:
+      const playButton = document.createElement("button");
+      playButton.textContent = `Play  ▶`; // NEW - PLAY-button
+      playButton.classList.add("play-button", "play-starter");
+
+      // [
+      //   "fav-url", // Attach track URL to play-button
+      //   "fav-song",
+      //   "fav-artist",
+      //   "fav-album",
+      //   "fav-image",
+      // ].forEach((attr, i) => {
+      //   playButton.setAttribute(
+      //     `data-${attr}`,
+      //     [
+      //       url,
+      //       song,
+      //       artist,
+      //       album,
+      //       image,
+      //     ][i]
+      //   );
+      // });
+
+      // const [
+      //   url,
+      //   song,
+      //   artist,
+      //   album,
+      //   image,
+      // ] = [
+      //   "preview-url", // data-preview-url
+      //   "preview-trackname", // data-preview-...
+      //   "preview-artist",
+      //   "preview-album",
+      //   "preview-cover",
+      // ].map((attr) => playButton.getAttribute(`data-${attr}`));
+
+
+      playButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        document
+          .getElementById("currently-playing")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+        console.log("song:", song);
+        console.log("url:", url);
+
+        if (url) {
+          currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
+          playTrack(url); // calling the basic function to play current song index in audio-player
+          // 16.11. song plays correctly in audio-player if the song-preview is found.
+          updateCurrentlyPlayingInfo(artist, song, album); // update info on currently playing track
+          // 16.11. THIS DOESN'T WORK CORRECTLY SO FAR, SHOULD TRANSFER OTHER VARIABLES TO THE FUNCTION INSTEAD OF INDEX?
+          //new:
+          document.getElementById("sound-pic").style.display = "none";
+          document.getElementById("sound-bars").style.display = "block";
+        } else {
+          console.error(
+            "No available track URL for the song:",
+            item.name
+          );
+        }
+      });
+      itemCardDiv.appendChild(playButton);
+
       console.log("Here executes the createTask function.");
       return item;
     }
@@ -1592,12 +1657,14 @@
     // console.log(paragraph);
 
     // Adding new task on the list - this function just fetches values (and then, they will be added to card in next function 'createTask'):
-    function addTask(artist, song, album, time) {
+    function addTask(artist, song, album, url, image, time) {
       // event.preventDefault();
       // const newRating = document.getElementById("review").value;
       // const time = new Date().toLocaleDateString();
 
-      const item = createTask(artist, song, album, time); // here the item is already created - not yet! added into html-Node-list
+      const item = createTask(artist, song, album, url, image, time); // here the item is already created - not yet! added into html-Node-list
+
+      console.log("Fetched data about new favorized song:", artist, song, album, url, image, time);
 
       function addIf(item) {
         let found = false;
