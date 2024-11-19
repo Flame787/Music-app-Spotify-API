@@ -906,7 +906,7 @@
             playButton.setAttribute(
               `data-${attr}`,
               [
-                track.id,   // fetched values that we save into attributes
+                track.id, // fetched values that we save into attributes
                 track.preview_url,
                 track.name,
                 albumArtist,
@@ -965,7 +965,14 @@
             // const rating = document.getElementById("review").value;  // no rating in this view (items in track list)
             const time = new Date().toLocaleDateString();
             // const rating = "";
-            addTask(previewArtist, previewName, previewAlbum, previewUrl, previewImage, time); // individual buttons on each track card, can add item to favorites
+            addTask(
+              previewArtist,
+              previewName,
+              previewAlbum,
+              previewUrl,
+              previewImage,
+              time
+            ); // individual buttons on each track card, can add item to favorites
             // document.getElementById("review").value = "";
             const listItem = showMoreButton.closest("li");
             displayFavoriteInfo(listItem, "🤍");
@@ -1232,7 +1239,6 @@
           const previewAlbum = albumName;
           // const rating = document.getElementById("review").value;
           // const time = new Date().toLocaleDateString();
-
         }
 
         /* Adding event-listeners on all Play-buttona & icons: */
@@ -1457,7 +1463,6 @@
           )
         );
       }
-
     }
 
     // Save lists to localStorage:
@@ -1470,17 +1475,16 @@
           artist: item.querySelector(".artist").textContent, // uses text-content found under the class '.artist'
           song: item.querySelector(".song").textContent, // uses text-content found under the class '.song', etc.
           album: item.querySelector(".album").textContent,
-          url: item.querySelector(".url").textContent,  //  CANNOT READ PROPERTIES OF NULL
+          url: item.querySelector(".url").textContent, //  CANNOT READ PROPERTIES OF NULL
           image: item.querySelector(".image").textContent, //  CANNOT READ PROPERTIES OF NULL
           // rating: item.querySelector(".rating").textContent,
-          time: item.querySelector(".time").textContent
+          time: item.querySelector(".time").textContent,
         });
       });
 
       localStorage.setItem("addedList", JSON.stringify(addedItems)); // saves the list as key, and it's value in local storage
 
       // document.getElementById("review").value = "";
-
     }
 
     // ______________________________________________________________________________
@@ -1499,7 +1503,7 @@
     // submitToListButton.addEventListener("click", addTask);
     // event.preventDefault(); // Prevent the default form submission
     // call handleSearch() instead of displaySearchResults
- 
+
     function createTask(artist, song, album, url, image, time) {
       const item = document.createElement("li"); // list-element is only created and returned, but not yet added to the list
       console.log("Preview URL:", url);
@@ -1561,6 +1565,11 @@
       //   "fav-image",
       // ].map((attr) => playButton.getAttribute(`data-${attr}`));
 
+      playButton.setAttribute("data-url", url); // Saving URL into 'data-url' atributte, transferred by button
+      playButton.setAttribute("data-artist", artist); // Saving artist into 'data-artist' atributte, transferred by button
+      playButton.setAttribute("data-song", song); // ... we will use this later to fetch info for playNextSong etc.
+      playButton.setAttribute("data-album", album);
+      playButton.setAttribute("data-image", image);
 
       function updateCurrentlyPlayingInfo(artist, song, album, image) {
         // Showing the cover of currently playing track's album:
@@ -1631,33 +1640,349 @@
         currentTrackData.appendChild(currentTrackInfo);
       }
 
+      // getting real index of each song on the track list (fetching single list-items via play-buttons):
 
-      playButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        document
-          .getElementById("currently-playing")
-          .scrollIntoView({ behavior: "smooth", block: "start" });
-        console.log("song:", song);
-        console.log("url:", url);
+      //******************** FUNCTIONS FOR PLAYING FAVORITE SONGS FROM PLAYLIST: */
 
-        if (url) {
-          currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
-          playTrack(url); // calling the basic function to play current song index in audio-player
-          // 16.11. song plays correctly in audio-player if the song-preview is found.
-          updateCurrentlyPlayingInfo(artist, song, album, image); // update info on currently playing track
-          // 16.11. THIS DOESN'T WORK CORRECTLY SO FAR, SHOULD TRANSFER OTHER VARIABLES TO THE FUNCTION INSTEAD OF INDEX?
-          //new:
-          document.getElementById("sound-pic").style.display = "none";
-          document.getElementById("sound-bars").style.display = "block";
-        } else {
-          console.error(
-            "No available track URL for the song:",
-            song
-          );
-        }
-      });
+      // 19.11. - NEW CODE:
+      // Globalni indeks trenutne pjesme
+      // let index = 0;
+      // const favTrackList = document.querySelectorAll(".play-button");
+      // // Funkcija za sviranje pjesme prema indeksu
+      // function playTrackByIndex(newIndex) {
+      //   // Kružna navigacija kroz listu
+      //   index = (newIndex + favTrackList.length) % favTrackList.length; // Održava indeks unutar granica liste
 
-  
+      //   // Dohvat trenutne pjesme iz liste favorita
+      //   const currentButton = favTrackList[index];
+      //   const trackUrl = currentButton.getAttribute("data-url");
+      //   const trackSong = currentButton.getAttribute("data-song");
+      //   const trackArtist = currentButton.getAttribute("data-artist");
+      //   const trackAlbum = currentButton.getAttribute("data-album");
+      //   const trackImage = currentButton.getAttribute("data-image");
+
+      //   // Provjera postojanja URL-a pjesme
+      //   if (trackUrl) {
+      //     playTrack(trackUrl); // Funkcija za reprodukciju pjesme
+      //     updateCurrentlyPlayingInfo(
+      //       trackArtist,
+      //       trackSong,
+      //       trackAlbum,
+      //       trackImage
+      //     ); // Ažuriranje informacija u UI-ju
+      //     document.getElementById("sound-pic").style.display = "none";
+      //     document.getElementById("sound-bars").style.display = "block";
+      //   } else {
+      //     console.log("Track URL missing. Skipping...");
+      //     playTrackByIndex(index + 1); // Ako URL nedostaje, preskoči na sljedeću pjesmu
+      //   }
+      // }
+
+      // // Automatsko sviranje sljedeće pjesme kada trenutna završi
+      // audioPlayer.addEventListener("ended", () => playTrackByIndex(index + 1));
+
+      // // Dodavanje događaja za prethodnu pjesmu
+      // prevButton.addEventListener("click", () => playTrackByIndex(index - 1));
+
+      // // Dodavanje događaja za sljedeću pjesmu
+      // nextButton.addEventListener("click", () => playTrackByIndex(index + 1));
+
+      // // Funkcija za ažuriranje playButton atributa i sviranje trenutne pjesme
+      // playButton.addEventListener("click", (event) => {
+      //   event.preventDefault();
+      //   document
+      //     .getElementById("currently-playing")
+      //     .scrollIntoView({ behavior: "smooth", block: "start" });
+
+      //   // Postavljanje atributa za play dugme
+      //   playButton.setAttribute("data-url", url);
+      //   playButton.setAttribute("data-song", song);
+      //   playButton.setAttribute("data-album", album);
+      //   playButton.setAttribute("data-image", image);
+
+      //   // Pokretanje pjesme
+      //   playTrack(url);
+      //   updateCurrentlyPlayingInfo(artist, song, album, image);
+      // });
+
+//  OVAJ 1. SOLUTION NE NALAZI NIJEDAN URL I STARA BESKONAČNU PETLJU TRAŽENJA IDUĆE PJESME
+
+      // 2. solution:
+
+      let index = 0; // Trenutni indeks pjesme
+// const favTrackList = document.querySelectorAll(".fav-track"); // Pretpostavka: ovo sadrži sve favorite
+const favTrackList = document.querySelectorAll(".play-button");
+// const playButton = document.getElementById("play-button"); // Dugme za reprodukciju
+const prevButton = document.getElementById("prev-button");
+const nextButton = document.getElementById("next-button");
+const audioPlayer = document.getElementById("audio-player"); // Audio player element
+
+// Funkcija za postavljanje atributa play dugmeta
+function setPlayButtonAttributes(url, song, artist, album, image) {
+  playButton.setAttribute("data-url", url);
+  playButton.setAttribute("data-song", song);
+  playButton.setAttribute("data-artist", artist);
+  playButton.setAttribute("data-album", album);
+  playButton.setAttribute("data-image", image);
+}
+
+// Funkcija za sviranje pjesme po indeksu
+function playTrackByIndex(newIndex) {
+  index = (newIndex + favTrackList.length) % favTrackList.length; // Osiguravanje kružne navigacije
+
+  const currentButton = favTrackList[index];
+  const trackUrl = currentButton.getAttribute("data-url");
+  const trackSong = currentButton.getAttribute("data-song");
+  const trackArtist = currentButton.getAttribute("data-artist");
+  const trackAlbum = currentButton.getAttribute("data-album");
+  const trackImage = currentButton.getAttribute("data-image");
+
+  if (trackUrl) {
+    playTrack(trackUrl); // Funkcija za reprodukciju pjesme
+    updateCurrentlyPlayingInfo(trackArtist, trackSong, trackAlbum, trackImage); // Ažuriranje UI-ja
+    setPlayButtonAttributes(trackUrl, trackSong, trackArtist, trackAlbum, trackImage); // Ažuriraj play dugme
+    document.getElementById("sound-pic").style.display = "none";
+    document.getElementById("sound-bars").style.display = "block";
+  } else {
+    console.log("Track URL missing. Skipping...");
+    playTrackByIndex(index + 1); // Preskoči na sljedeću pjesmu
+  }
+}
+
+// Event listener za kraj pjesme - prelazak na sljedeću pjesmu
+audioPlayer.addEventListener("ended", () => playTrackByIndex(index + 1));
+
+// Event listener za prethodnu pjesmu
+prevButton.addEventListener("click", () => playTrackByIndex(index - 1));
+
+// Event listener za sljedeću pjesmu
+nextButton.addEventListener("click", () => playTrackByIndex(index + 1));
+
+// Event listener za play dugme
+playButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const url = playButton.getAttribute("data-url");
+  const song = playButton.getAttribute("data-song");
+  const artist = playButton.getAttribute("data-artist");
+  const album = playButton.getAttribute("data-album");
+  const image = playButton.getAttribute("data-image");
+
+  if (url) {
+    document
+      .getElementById("currently-playing")
+      .scrollIntoView({ behavior: "smooth", block: "start" });
+    playTrack(url); // Sviraj pjesmu
+    updateCurrentlyPlayingInfo(artist, song, album, image); // Ažuriraj trenutno sviranje
+  } else {
+    console.log("No track selected.");
+  }
+});
+
+// Pomoćne funkcije (mogu biti definirane negdje drugdje)
+function playTrack(url) {
+  audioPlayer.src = url;
+  audioPlayer.play();
+}
+
+function updateCurrentlyPlayingInfo(artist, song, album, image) {
+  document.querySelector(".artist").textContent = artist;
+  document.querySelector(".song").textContent = song;
+  document.querySelector(".album").textContent = album;
+  document.querySelector(".image").textContent = image;
+}
+
+// 2. SOLUTION ALSO PRODUCES INFINITE LOOP WHEN SEARCHING NEXT SONG, AND DOESN'T EVEN SHOW ALBUM IMAGE. 
+
+
+      // **************** HERE STARTS COMMENDED (COMPLICATED) CODE ****************************//
+
+      //       prevButton.addEventListener("click", (event) => {
+      //         event.preventDefault(); // Prevent default button behavior
+      //         playPreviousTrack();
+      //       });
+      //       nextButton.addEventListener("click", playNextTrack); // 30.10. next-button works!
+
+      //       let index = 0;
+
+      //       const favTrackList = document.querySelectorAll(".play-button"); // Assuming that every play-button in each <li> has this class
+      //       console.log("favTrackList:", favTrackList.length);
+
+      //       favTrackList.forEach((button) => {
+      //         button.addEventListener("click", (event) => {
+      //           // find <li> parent:
+      //           const listItem = button.closest("li");
+
+      //           // Filter only <li> elements inside the parent:
+      //           const listItems = Array.from(listItem.parentElement.children).filter(
+      //             (child) => child.tagName === "LI"
+      //           );
+      //           // find index:
+      //           index = listItems.indexOf(listItem); // we are changing index, according to the real index of the currently play-clicked song
+
+      //           // For test- show index of the current <li>, whose play-button was clicked:
+      //           console.log("index:", index); // index is shown correctly for each song on the list (0, 1, 2, 3...)
+      //           playTrack(url);
+      //           updateCurrentlyPlayingInfo(artist, song, album, image);
+      //           // return index;
+      //         });
+      //       });
+
+      //       // let currentTrackIndex = 0; // first song on the album
+
+      //       audioPlayer.addEventListener("ended", playNextTrack); // when one preview-song ends, next song on the list is played.
+
+      //       function playNextTrack() {
+      //         // (only the 1st song is played by the basic function playTrack, but each next song is started by this function: playNextTrack)
+      //         // Increase the song index, in order to play the 2. song on the album, then the 3., and so on...
+      //         index++;
+      //         console.log("index2:", index);
+      //         // Check if the currentTrackIndex is smaller, than the total number of items on the track-list:
+      //         if (index < favTrackList.length) {
+      //           const currentButton = favTrackList[index]; // save current song index into a shorter expression
+      //           const nextUrl = currentButton.getAttribute("data-url");
+      //           // console.log("currentTrack.url", currentTrack.url);
+      //           console.log("Current index:", index);
+
+      //           // Check if the current song has a playable preview_url:
+      //           if (nextUrl) {
+      //             playTrack(nextUrl); // calling the basic function to play current song index in audio-player
+
+      //             // saving Playbutton-attributes into new variables:
+      //       const nextSong = currentButton.getAttribute("data-song");
+      //       const nextArtist = currentButton.getAttribute("data-artist");
+      //       const nextAlbum = currentButton.getAttribute("data-album");
+      //       const nextImage = currentButton.getAttribute("data-image");
+      //             updateCurrentlyPlayingInfo(nextArtist, nextSong, nextAlbum, nextImage); // update info on currently playing track
+
+      //             document.getElementById("sound-pic").style.display = "none";
+      //             document.getElementById("sound-bars").style.display = "block";
+
+      //             console.log("Next song started:", favTrackList[index].url);
+      //           } else {
+      //             console.log(
+      //               "Preview URL for the next song is missing. Skipping to next song."
+      //             );
+      //             playNextTrack(); // Try all over again with the next song
+      //           }
+      //         } else {
+      //           console.log("Reproduction is finished.");
+      //           index = 0;
+      //           // Sets index back to 0, so if the album cover image is clicked again, the whole album reproduction starts over.
+      //         }
+      //       }
+
+      //       let currentTrackIndex = 0;
+
+      //       function playFullAlbum() {
+      //         // (only the 1st song is played by the basic function playTrack, but each next song is started by this function: playNextTrack)
+
+      //         // As we are starting from the 1st song on the album, index also has to come down to 0 (so if we later use playNext-function, it will work ok):
+      //         index = 0;
+      //         // Check if the currentTrackIndex is smaller, than the total number of items on the track-list:
+      //         if (currentTrackIndex < favTrackList.length) {
+      //           const currentButton = favTrackList[currentTrackIndex];     // save current song index into a shorter expression
+      //           const nextUrl = currentButton.getAttribute("data-url");
+      //           // Check if the current song has a playable preview_url:
+      //           if (nextUrl) {
+      //             playTrack(nextUrl); // calling the basic function to play current song index in audio-player
+
+      // // saving Playbutton-attributes into new variables:
+      // const nextSong = currentButton.getAttribute("data-song");
+      // const nextArtist = currentButton.getAttribute("data-artist");
+      // const nextAlbum = currentButton.getAttribute("data-album");
+      // const nextImage = currentButton.getAttribute("data-image");
+      //       updateCurrentlyPlayingInfo(nextArtist, nextSong, nextAlbum, nextImage);
+      // // update info on currently playing track
+
+      //             // updateCurrentlyPlayingInfo(index); // update info on currently playing track
+      //             //new:
+      //             document.getElementById("sound-pic").style.display = "none";
+      //             document.getElementById("sound-bars").style.display = "block";
+      //             console.log(
+      //               "Reproducing album track:",
+      //               song,
+      //               " - currentTrackIndex:",
+      //               currentTrackIndex,
+      //               "index:",
+      //               index
+      //             );
+      //             // Increase the song index, in order to play the 2. song on the album, then the 3., and so on...
+      //             currentTrackIndex++;
+      //           } else {
+      //             console.log(
+      //               "Preview URL for the next song is missing. Skipping to next song."
+      //             );
+      //             playNextTrack(); // Try all over again with the next song
+      //           }
+      //         } else {
+      //           console.log("Reproduction is finished.");
+      //           index = 0;
+      //           // Sets index back to 0, so if the album cover image is clicked again, the whole album reproduction starts over.
+      //         }
+      //       }
+
+      //       function playPreviousTrack() {
+      //         // Decrease the song index, in order to play previous song...
+      //         index--;
+
+      //         // Check if the currentTrackIndex is bigger, than the total number of items on the track-list:
+      //         if (index >= 0) {
+      //           const currentButton = favTrackList[index];   // save current song index into a shorter expression
+      //           const prevUrl = currentButton.getAttribute("data-url");
+      //           // Check if the current song has a playable preview_url:
+      //           if (prevUrl) {
+      //             playTrack(prevUrl); // calling the basic function to play current song index in audio-player
+
+      //             const prevSong = currentButton.getAttribute("data-song");
+      //             const prevArtist = currentButton.getAttribute("data-artist");
+      //             const prevAlbum = currentButton.getAttribute("data-album");
+      //             const prevImage = currentButton.getAttribute("data-image");
+      //             updateCurrentlyPlayingInfo(prevArtist, prevSong, prevAlbum, prevImage);
+
+      //             document.getElementById("sound-pic").style.display = "none";
+      //             document.getElementById("sound-bars").style.display = "block";
+
+      //             // updateCurrentlyPlayingInfo(index); // update info on currently playing track
+      //             console.log("Previous song started:", prevSong);
+      //           } else {
+      //             console.log(
+      //               "Preview URL for the previous song is missing. Skipping to next song."
+      //             );
+      //             playPreviousTrack(); // Try all over again with the next song
+      //           }
+      //         } else {
+      //           console.log("Reproduction is finished.");
+      //           index = 0;
+      //           // Sets index back to 0, so if the album cover image is clicked again, the whole album reporoduction starts over.
+      //         }
+      //       }
+
+      //**********/
+
+      // 19.11. - THIS WORKS FOR PLAYING INDIVIDUAL SONGS FROM PLAYLIST, BUT ONLY WHEN NO OTHER PLAY-FUNCTIONS ARE ADDED:
+
+      // playButton.addEventListener("click", (event) => {
+      //   event.preventDefault();
+      //   document
+      //     .getElementById("currently-playing")
+      //     .scrollIntoView({ behavior: "smooth", block: "start" });
+      //   console.log("song:", song);
+      //   console.log("url:", url);
+
+      //   if (url) {
+      //     // currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
+      //     playTrack(url); // calling the basic function to play current song index in audio-player
+      //     // 16.11. song plays correctly in audio-player if the song-preview is found.
+      //     updateCurrentlyPlayingInfo(artist, song, album, image); // update info on currently playing track
+      //     // 16.11. THIS DOESN'T WORK CORRECTLY SO FAR, SHOULD TRANSFER OTHER VARIABLES TO THE FUNCTION INSTEAD OF INDEX?
+      //     //new:
+      //     document.getElementById("sound-pic").style.display = "none";
+      //     document.getElementById("sound-bars").style.display = "block";
+      //   } else {
+      //     console.error("No available track URL for the song:", song);
+      //   }
+      // });
+
       itemCardDiv.appendChild(playButton);
 
       console.log("Here executes the createTask function.");
@@ -1674,7 +1999,15 @@
 
       const item = createTask(artist, song, album, url, image, time); // here the item is already created - not yet! added into html-Node-list
 
-      console.log("Fetched data about new favorized song:", artist, song, album, url, image, time); // THIS WORKS OK
+      console.log(
+        "Fetched data about new favorized song:",
+        artist,
+        song,
+        album,
+        url,
+        image,
+        time
+      ); // THIS WORKS OK
 
       function addIf(item) {
         let found = false;
@@ -1701,9 +2034,16 @@
       // list.appendChild(item);
       console.log("Here was executed the addTask function.");
 
-      saveLists();  // THIS WORKS NOW:
-      console.log("Saved data about new favorized song:", artist, song, album, url, image, time);
-
+      saveLists(); // THIS WORKS NOW:
+      console.log(
+        "Saved data about new favorized song:",
+        artist,
+        song,
+        album,
+        url,
+        image,
+        time
+      );
     }
 
     this.init = function () {
