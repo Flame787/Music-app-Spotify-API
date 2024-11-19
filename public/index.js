@@ -896,8 +896,8 @@
           // (so they can be fetched later from the clicked button (playbutton / playSymbol): track URL, name, artist, album, cover):
           // skraćeno:
           [
-            "track-id", // Attach track ID to play-button
-            "preview-url", // Attach track URL to play-button
+            "track-id", // arbitrary attribute names in which we save values ("data-track-id") - f.e. Attach track ID to play-button
+            "preview-url", // Attach track URL to play-button...
             "preview-trackname",
             "preview-artist",
             "preview-album",
@@ -906,7 +906,7 @@
             playButton.setAttribute(
               `data-${attr}`,
               [
-                track.id,
+                track.id,   // fetched values that we save into attributes
                 track.preview_url,
                 track.name,
                 albumArtist,
@@ -1233,35 +1233,6 @@
           // const rating = document.getElementById("review").value;
           // const time = new Date().toLocaleDateString();
 
-          // const [previewName, previewArtist, previewAlbum, previewCover] = [
-          //   "preview-trackname", // data-preview-trackname
-          //   "preview-artist", // data-preview-artist
-          //   "preview-album",
-          //   "preview-cover",
-          // ].map((attr) => mainAddToPlaylist.getAttribute(`data-${attr}`));
-
-          // mainAddToPlaylist.addEventListener("click", addTask);
-
-          // mainAddToPlaylist.addEventListener("click", function(event) {
-          //   addTask(event, mainAddToPlaylist);
-          // });
-
-          // remove existing eventlistener before adding a new one (prevents that addTask is run 2x times for each next added song)
-          //   mainAddToPlaylist.removeEventListener("click", (event) => {
-          //     handleAddToPlaylistClick;
-          //   event.preventDefault();
-          // });
-
-          // mainAddToPlaylist.addEventListener("click", (event) => {   - 15.11. removed this button, not needded
-          //   event.preventDefault();
-          //   const rating = document.getElementById("review").value;
-          //   const time = new Date().toLocaleDateString();
-
-          //   console.log("rating:", rating);
-
-          //   addTask(previewArtist, previewName, previewAlbum, rating, time); // main button on Audio player, can add current track to favorites
-
-          // });
         }
 
         /* Adding event-listeners on all Play-buttona & icons: */
@@ -1487,20 +1458,6 @@
         );
       }
 
-      // if (savedFavorites) {
-      //   const items = JSON.parse(savedFavorites);
-      //   items.forEach((item) =>
-      //     favoritesList.appendChild(
-      //       createFavorite(
-      //         item.artist,
-      //         item.song,
-      //         item.album,
-      //         item.rating,
-      //         item.time
-      //       )
-      //     )
-      //   );
-      // }
     }
 
     // Save lists to localStorage:
@@ -1513,35 +1470,17 @@
           artist: item.querySelector(".artist").textContent, // uses text-content found under the class '.artist'
           song: item.querySelector(".song").textContent, // uses text-content found under the class '.song', etc.
           album: item.querySelector(".album").textContent,
+          url: item.querySelector(".url").textContent,  //  CANNOT READ PROPERTIES OF NULL
+          image: item.querySelector(".image").textContent, //  CANNOT READ PROPERTIES OF NULL
           // rating: item.querySelector(".rating").textContent,
-          time: item.querySelector(".time").textContent,
+          time: item.querySelector(".time").textContent
         });
       });
-
-      // const items = [...list.querySelectorAll("li")].map((item) => ({
-      //   artist: item.querySelector(".artist").textContent,
-      //   song: item.querySelector(".song").textContent,
-      //   album: item.querySelector(".album").textContent,
-      //   rating: item.querySelector(".rating").textContent,
-      //   time: item.querySelector(".time").textContent,
-      // }));
-      // localStorage.setItem("addedList", JSON.stringify(items));
 
       localStorage.setItem("addedList", JSON.stringify(addedItems)); // saves the list as key, and it's value in local storage
 
       // document.getElementById("review").value = "";
 
-      // const favoriteItems = [];
-      // favoritesList.querySelectorAll("li").forEach((item) => {
-      //   favoriteItems.push({
-      //     artist: item.querySelector(".artist").textContent,
-      //     song: item.querySelector(".song").textContent,
-      //     album: item.querySelector(".album").textContent,
-      //     rating: item.querySelector(".rating").textContent,
-      //     time: item.querySelector(".time").textContent,
-      //   });
-      // });
-      // localStorage.setItem("favoritesList", JSON.stringify(favoriteItems));
     }
 
     // ______________________________________________________________________________
@@ -1560,7 +1499,7 @@
     // submitToListButton.addEventListener("click", addTask);
     // event.preventDefault(); // Prevent the default form submission
     // call handleSearch() instead of displaySearchResults
-
+ 
     function createTask(artist, song, album, url, image, time) {
       const item = document.createElement("li"); // list-element is only created and returned, but not yet added to the list
       console.log("Preview URL:", url);
@@ -1575,15 +1514,14 @@
       <span class="thin"> Song: </span> <span class="song">${song}</span> <br> 
       <span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> <br> 
       <span class="thin"> Album:  </span> <span class="album">${album}</span> <br> 
-      
+      <span class="hidden-element url">${url}</span> <!-- Adding classes for url & image, but leaving them hidden -->
+     <span class="hidden-element image">${image}</span> 
       <span class="thin"> Added on:  </span>   <span class="time">${time}</span><br> 
       </p>  </div>`;
 
       const itemCardDiv = item.querySelector(".item-card"); // inside 'item', there is an item-card-div, & here we save this div into a variable
 
-      // addFavoriteButton(itemCardDiv); // adding fav-button into the item-card-div
       addRemoveButton(itemCardDiv); // adding remove-button into the item-card-div
-      // document.getElementById("review").value = "";
 
       // 18.11. new:
       const playButton = document.createElement("button");
@@ -1609,19 +1547,89 @@
       //   );
       // });
 
-      // const [
+      // const [  // variables cannot be re-defined again
       //   url,
       //   song,
       //   artist,
       //   album,
       //   image,
       // ] = [
-      //   "preview-url", // data-preview-url
-      //   "preview-trackname", // data-preview-...
-      //   "preview-artist",
-      //   "preview-album",
-      //   "preview-cover",
+      //   "fav-url", // data-preview-url
+      //   "fav-song", // data-preview-...
+      //   "fav-artist",
+      //   "fav-album",
+      //   "fav-image",
       // ].map((attr) => playButton.getAttribute(`data-${attr}`));
+
+
+      function updateCurrentlyPlayingInfo(artist, song, album, image) {
+        // Showing the cover of currently playing track's album:
+        const musicWrapper = document.getElementById("music-wrapper");
+
+        // if (document.getElementById("review").value !== "") {
+        //   document.getElementById("review").value = "";
+        // }
+
+        // Cheking if there is already an album cover image (from a previous track) and removing it:
+        const existingAlbumCover =
+          musicWrapper.querySelector(".album-cover-image");
+        if (existingAlbumCover) {
+          existingAlbumCover.remove();
+        }
+
+        const currentlyPlayingCover = document.createElement("div");
+        currentlyPlayingCover.classList.add("album-cover-image");
+        const img = document.createElement("img");
+        const div = document.createElement("div");
+
+        // Displaying album cover picture (if existing):
+        if (image) {
+          img.src = image;
+        } else {
+          img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+        }
+        img.alt = `${album} Album Cover`;
+        img.classList.add("result-image");
+        div.classList.add("image-container");
+
+        div.appendChild(img);
+        currentlyPlayingCover.appendChild(div);
+
+        musicWrapper.insertBefore(
+          currentlyPlayingCover,
+          musicWrapper.firstChild
+        );
+
+        const currentTrackData = document.getElementById("current-play");
+        currentTrackData.innerHTML = "";
+
+        const currentTrackInfo = createDiv();
+
+        const currentTrackInfoDiv1 = createDiv();
+        const currentTrackInfoDiv2 = createDiv();
+        const currentTrackInfoDiv3 = createDiv();
+        const currentTrackInfoDiv4 = createDiv();
+        const currentTrackInfoDiv5 = createDiv();
+
+        currentTrackInfoDiv1.textContent = `${song}`;
+        currentTrackInfoDiv2.textContent = `By:`;
+        currentTrackInfoDiv3.textContent = `${artist}`;
+        currentTrackInfoDiv4.textContent = `Album:`;
+        currentTrackInfoDiv5.textContent = `${album}`;
+
+        currentTrackInfoDiv1.classList.add("result-item-name");
+        currentTrackInfoDiv3.classList.add("result-item-name");
+        currentTrackInfoDiv5.classList.add("result-item-name");
+
+        currentTrackInfo.appendChild(currentTrackInfoDiv1);
+        currentTrackInfo.appendChild(currentTrackInfoDiv2);
+        currentTrackInfo.appendChild(currentTrackInfoDiv3);
+        currentTrackInfo.appendChild(currentTrackInfoDiv4);
+        currentTrackInfo.appendChild(currentTrackInfoDiv5);
+
+        currentTrackInfo.classList.add("current-track");
+        currentTrackData.appendChild(currentTrackInfo);
+      }
 
 
       playButton.addEventListener("click", (event) => {
@@ -1636,7 +1644,7 @@
           currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
           playTrack(url); // calling the basic function to play current song index in audio-player
           // 16.11. song plays correctly in audio-player if the song-preview is found.
-          updateCurrentlyPlayingInfo(artist, song, album); // update info on currently playing track
+          updateCurrentlyPlayingInfo(artist, song, album, image); // update info on currently playing track
           // 16.11. THIS DOESN'T WORK CORRECTLY SO FAR, SHOULD TRANSFER OTHER VARIABLES TO THE FUNCTION INSTEAD OF INDEX?
           //new:
           document.getElementById("sound-pic").style.display = "none";
@@ -1644,10 +1652,12 @@
         } else {
           console.error(
             "No available track URL for the song:",
-            item.name
+            song
           );
         }
       });
+
+  
       itemCardDiv.appendChild(playButton);
 
       console.log("Here executes the createTask function.");
@@ -1664,7 +1674,7 @@
 
       const item = createTask(artist, song, album, url, image, time); // here the item is already created - not yet! added into html-Node-list
 
-      console.log("Fetched data about new favorized song:", artist, song, album, url, image, time);
+      console.log("Fetched data about new favorized song:", artist, song, album, url, image, time); // THIS WORKS OK
 
       function addIf(item) {
         let found = false;
@@ -1691,91 +1701,14 @@
       // list.appendChild(item);
       console.log("Here was executed the addTask function.");
 
-      // console.log("List inside addTask function:", list);
-      // console.log("rating in addTask function:", rating);
+      saveLists();  // THIS WORKS NOW:
+      console.log("Saved data about new favorized song:", artist, song, album, url, image, time);
 
-      // function removeExistingItem(artist, song, album) {
-      //   // turning Nodelist into a real array:
-      //   const listItems = [...list.querySelectorAll("li")];
-
-      //   // const existingItem = [...list.querySelectorAll("li")].find((item) => {
-
-      //   // Filter-function returns already existing duplicates from the list (because otherwise 2 items are created instead one):
-      //   const duplicates = listItems.filter((item) => {
-      //     return (
-      //       item.querySelector(".artist").textContent === artist &&
-      //       item.querySelector(".song").textContent === song &&
-      //       item.querySelector(".album").textContent === album
-      //     );
-      //   });
-
-      //   // If there is 1 or more duplicate, we delete them all:
-      //   if (duplicates.length > 0) {
-      //     duplicates.forEach((duplicate) => {
-      //       duplicate.remove();
-      //     });
-      //     console.log(`${duplicates.length} duplicate(s) removed`);
-      //   }
-
-      //   // if (existingItem) {
-      //   //   // ratingElement.textContent = rating;
-      //   //   existingItem.remove(); // remove full item if already found on the list
-      //   //   console.log("Existing item removed");
-      //   // }
-      // }
-
-      // setTimeout(() => {
-      //   if (list.children.length === 0) {
-      //     // if list is empty, just add new item
-      //     const item = createTask(artist, song, album, rating, time);
-      //     list.appendChild(item);
-      //   } else {
-      //     removeExistingItem(artist, song, album); // if list not empty, check for previous identic items and remove them
-      //     // add new item to the list:
-      //     const item = createTask(artist, song, album, rating, time);
-      //     list.appendChild(item);
-      //     console.log("New item added.");
-      //     console.log("review:", rating);
-      //   }
-      //   //     saveLists();
-      //   //     loadLists();
-
-      saveLists();
-
-      // new 16.11. - adding notification when a song was added to favorites:
-      // const addFavInfo = document.getElementById("add-to-playlist-button");
-      // displayMessage(addFavInfo, "Added to the playlist.");
-
-      //   // artist = "";
-      //   // song = "";
-      //   // album = "";
-      //   // rating2 = ""; // empty the input field, so next rating for next song can be added - BUT NEW RATING ALSO MODIFIES OLD ITEMS ON LIST!! (NOT OK)
-      //   // time = "";
-
-      //       document.getElementById("artist").value = "";  // THIS ALSO DOESN'T CLEAR PREV. VALUES COMPLETELY, THEY STILL STAY MEMORIZED
-      //       document.getElementById("song").value = "";
-      //       document.getElementById("album").value = "";
-      //       document.getElementById("review").value = ""; // empty the input field, so the next rate - for next song can be added
-
-      // }, 50);
     }
-
-    // function addTask(artist, song, album, rating2, time) {
-    // const item = createTask(artist, song, album, rating2, time);
-    //   list.appendChild(item);
-    //   saveLists();
-    //   artist = "";
-    //   song = "";
-    //   album = "";
-    //   rating2 = ""; // empty the input field, so the next rate - for next song can be added
-    //   time ="";
-    // }
 
     this.init = function () {
       // body initially has a default theme0:
       document.body.classList.add("theme0");
-      // new task (item) added on the add-button click:
-      // submitToListButton.addEventListener("click", addTask);
 
       // buttonPlay.addEventListener("click", playSong);
       loadLists();
