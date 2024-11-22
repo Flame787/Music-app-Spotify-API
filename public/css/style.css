@@ -1001,8 +1001,7 @@ audio::-webkit-media-controls-volume-slider {
   padding-right: 8px;
 }
 
-.item-card {
-  max-width: 40%;
+.item-card, .item-card2 {
   margin: auto;
   border-radius: 30px;
   margin-bottom: 50px;
@@ -1018,13 +1017,18 @@ audio::-webkit-media-controls-volume-slider {
   gap: 5%;
 }
 
-.item-card:hover {
-  transform: translateY(-10px);
+.item-card1 {
+  max-width: 40%;
 }
 
 .item-card2 {
+  max-width: 70%;
   font-size: smaller;
   gap: 10%;
+}
+
+.item-card:hover {
+  transform: translateY(-10px);
 }
 
 h3 {
@@ -1491,6 +1495,12 @@ button:hover {
   width: 13rem;
 }
 
+.my-playlist-play, .remove-button-playlist {
+  margin-top: 0;
+  width: 20%;
+  font-size: 1.1rem;
+}
+
 .hidden-element {
   display: none;
 }
@@ -1536,8 +1546,10 @@ button:hover {
     font-size: 1.1rem;
     padding: 2%;
   }
-  .item-card2 {
-    gap: 0;
+  .remove-button-playlist, .my-playlist-play {
+    font-size: 1rem;
+    padding: 0%;
+    max-width: 20%;
   }
   #empty {
     display: none;
@@ -1596,6 +1608,11 @@ button:hover {
 @media (max-width: 1113px) {
   #nav-list button {
     width: 15%;
+  }
+  .remove-button-playlist, .my-playlist-play {
+    font-size: 0.9rem;
+    padding: 0%;
+    max-width: 20%;
   }
 }
 @media (max-width: 1056px) {
@@ -1656,6 +1673,11 @@ button:hover {
   }
   .result-flex-item div {
     font-size: 1rem !important;
+  }
+  .remove-button-playlist, .my-playlist-play {
+    font-size: 0.8rem;
+    padding: 0%;
+    max-width: 20%;
   }
 }
 @media (max-width: 908px) {
@@ -1741,6 +1763,10 @@ button:hover {
   }
   .item-fill2 {
     flex-basis: 70%;
+    margin: 3% auto;
+  }
+  .item-fill3 {
+    flex-basis: 30%;
     margin: 3% auto;
   }
   h1 {
@@ -1846,6 +1872,18 @@ button:hover {
     margin-left: 12%;
     margin-right: 12%;
   }
+  .remove-button-playlist, .my-playlist-play {
+    font-size: 0.8rem;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    max-width: 95%;
+  }
+  .remove-button-playlist {
+    margin-top: 7%;
+  }
+  .item-card2 {
+    flex-direction: column;
+  }
 }
 @media (max-width: 512px) {
   .red {
@@ -1888,6 +1926,14 @@ button:hover {
   #search-form {
     width: 85%;
   }
+  .remove-button-playlist, .my-playlist-play {
+    font-size: 0.7rem;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 60%;
+  }
 }
 @media (max-width: 389px) {
   .red {
@@ -1902,5 +1948,13 @@ button:hover {
   #flex-search-category {
     margin-left: 5%;
     margin-right: 5%;
+  }
+  .remove-button-playlist, .my-playlist-play {
+    font-size: 0.7rem;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 60%;
   }
 }/*# sourceMappingURL=style.css.map */

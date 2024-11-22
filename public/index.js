@@ -1513,8 +1513,8 @@
       // div.classList.add("form-theme", "item-card");
 
       // values are fetched via the function 'addTask' and then saved into the card:
-      item.innerHTML = `<div class="form-theme item-card" > 
-      <p class="item-fill flex-item">  
+      item.innerHTML = `<div class="form-theme item-card2" > 
+      <p class="item-fill3">  
       <span class="thin"> Song: </span> <span class="song">${song}</span> <br> 
       <span class="thin"> Artist:  </span> <span  class="artist">${artist}</span> <br> 
       <span class="thin"> Album:  </span> <span class="album">${album}</span> <br> 
@@ -1523,14 +1523,33 @@
       <span class="thin"> Added on:  </span>   <span class="time">${time}</span><br> 
       </p>  </div>`;
 
-      const itemCardDiv = item.querySelector(".item-card"); // inside 'item', there is an item-card-div, & here we save this div into a variable
-
-      addRemoveButton(itemCardDiv); // adding remove-button into the item-card-div
+      const itemCardDiv = item.querySelector(".item-card2"); // inside 'item', there is an item-card-div, & here we save this div into a variable
 
       // 18.11. new:
       const playButton = document.createElement("button");
       playButton.textContent = `Play  ▶`; // NEW - PLAY-button
-      playButton.classList.add("play-button", "play-starter");
+      playButton.classList.add(
+        "play-button",
+        "play-starter",
+        "my-playlist-play",
+        "item-fill3"
+      );
+      itemCardDiv.appendChild(playButton);
+
+      function addRemoveButton(itemCardDiv) {
+        const removeButton = document.createElement("button");
+
+        removeButton.classList.add("remove-button", "item-fill3", "remove-button-playlist");
+        removeButton.textContent = "Remove from list";
+        removeButton.addEventListener("click", removeTask);
+        // divElement.innerHTML += removeButton.outerHTML;
+
+        // itemCardDiv.appendChild(removeButton);
+        itemCardDiv.insertBefore(removeButton, itemCardDiv.firstChild);
+      }
+
+      // adding remove-button into the item-card-div
+      addRemoveButton(itemCardDiv);
 
       // [
       //   "fav-url", // Attach track URL to play-button
@@ -1705,94 +1724,104 @@
       //   updateCurrentlyPlayingInfo(artist, song, album, image);
       // });
 
-//  OVAJ 1. SOLUTION NE NALAZI NIJEDAN URL I STARA BESKONAČNU PETLJU TRAŽENJA IDUĆE PJESME
+      //  OVAJ 1. SOLUTION NE NALAZI NIJEDAN URL I STARA BESKONAČNU PETLJU TRAŽENJA IDUĆE PJESME
 
       // 2. solution:
 
       let index = 0; // Trenutni indeks pjesme
-// const favTrackList = document.querySelectorAll(".fav-track"); // Pretpostavka: ovo sadrži sve favorite
-const favTrackList = document.querySelectorAll(".play-button");
-// const playButton = document.getElementById("play-button"); // Dugme za reprodukciju
-const prevButton = document.getElementById("prev-button");
-const nextButton = document.getElementById("next-button");
-const audioPlayer = document.getElementById("audio-player"); // Audio player element
+      // const favTrackList = document.querySelectorAll(".fav-track");
+      const favTrackList = document.querySelectorAll(".play-button");
+      // const playButton = document.getElementById("play-button");
+      const prevButton = document.getElementById("prev-button");
+      const nextButton = document.getElementById("next-button");
+      const audioPlayer = document.getElementById("audio-player"); // Audio player element
 
-// Funkcija za postavljanje atributa play dugmeta
-function setPlayButtonAttributes(url, song, artist, album, image) {
-  playButton.setAttribute("data-url", url);
-  playButton.setAttribute("data-song", song);
-  playButton.setAttribute("data-artist", artist);
-  playButton.setAttribute("data-album", album);
-  playButton.setAttribute("data-image", image);
-}
+      // Funkcija za postavljanje atributa play dugmeta
+      function setPlayButtonAttributes(url, song, artist, album, image) {
+        playButton.setAttribute("data-url", url);
+        playButton.setAttribute("data-song", song);
+        playButton.setAttribute("data-artist", artist);
+        playButton.setAttribute("data-album", album);
+        playButton.setAttribute("data-image", image);
+      }
 
-// Funkcija za sviranje pjesme po indeksu
-function playTrackByIndex(newIndex) {
-  index = (newIndex + favTrackList.length) % favTrackList.length; // Osiguravanje kružne navigacije
+      // Funkcija za sviranje pjesme po indeksu
+      function playTrackByIndex(newIndex) {
+        index = (newIndex + favTrackList.length) % favTrackList.length; // Osiguravanje kružne navigacije
 
-  const currentButton = favTrackList[index];
-  const trackUrl = currentButton.getAttribute("data-url");
-  const trackSong = currentButton.getAttribute("data-song");
-  const trackArtist = currentButton.getAttribute("data-artist");
-  const trackAlbum = currentButton.getAttribute("data-album");
-  const trackImage = currentButton.getAttribute("data-image");
+        const currentButton = favTrackList[index];
+        const trackUrl = currentButton.getAttribute("data-url");
+        const trackSong = currentButton.getAttribute("data-song");
+        const trackArtist = currentButton.getAttribute("data-artist");
+        const trackAlbum = currentButton.getAttribute("data-album");
+        const trackImage = currentButton.getAttribute("data-image");
 
-  if (trackUrl) {
-    playTrack(trackUrl); // Funkcija za reprodukciju pjesme
-    updateCurrentlyPlayingInfo(trackArtist, trackSong, trackAlbum, trackImage); // Ažuriranje UI-ja
-    setPlayButtonAttributes(trackUrl, trackSong, trackArtist, trackAlbum, trackImage); // Ažuriraj play dugme
-    document.getElementById("sound-pic").style.display = "none";
-    document.getElementById("sound-bars").style.display = "block";
-  } else {
-    console.log("Track URL missing. Skipping...");
-    playTrackByIndex(index + 1); // Preskoči na sljedeću pjesmu
-  }
-}
+        if (trackUrl) {
+          playTrack(trackUrl); // Funkcija za reprodukciju pjesme
+          updateCurrentlyPlayingInfo(
+            trackArtist,
+            trackSong,
+            trackAlbum,
+            trackImage
+          ); // Ažuriranje UI-ja
+          setPlayButtonAttributes(
+            trackUrl,
+            trackSong,
+            trackArtist,
+            trackAlbum,
+            trackImage
+          ); // Ažuriraj play dugme
+          document.getElementById("sound-pic").style.display = "none";
+          document.getElementById("sound-bars").style.display = "block";
+        } else {
+          console.log("Track URL missing. Skipping...");
+          playTrackByIndex(index + 1); // Preskoči na sljedeću pjesmu
+        }
+      }
 
-// Event listener za kraj pjesme - prelazak na sljedeću pjesmu
-audioPlayer.addEventListener("ended", () => playTrackByIndex(index + 1));
+      // Event listener za kraj pjesme - prelazak na sljedeću pjesmu
+      audioPlayer.addEventListener("ended", () => playTrackByIndex(index + 1));
 
-// Event listener za prethodnu pjesmu
-prevButton.addEventListener("click", () => playTrackByIndex(index - 1));
+      // Event listener za prethodnu pjesmu
+      prevButton.addEventListener("click", () => playTrackByIndex(index - 1));
 
-// Event listener za sljedeću pjesmu
-nextButton.addEventListener("click", () => playTrackByIndex(index + 1));
+      // Event listener za sljedeću pjesmu
+      nextButton.addEventListener("click", () => playTrackByIndex(index + 1));
 
-// Event listener za play dugme
-playButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  const url = playButton.getAttribute("data-url");
-  const song = playButton.getAttribute("data-song");
-  const artist = playButton.getAttribute("data-artist");
-  const album = playButton.getAttribute("data-album");
-  const image = playButton.getAttribute("data-image");
+      // Event listener za play dugme
+      playButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        const url = playButton.getAttribute("data-url");
+        const song = playButton.getAttribute("data-song");
+        const artist = playButton.getAttribute("data-artist");
+        const album = playButton.getAttribute("data-album");
+        const image = playButton.getAttribute("data-image");
 
-  if (url) {
-    document
-      .getElementById("currently-playing")
-      .scrollIntoView({ behavior: "smooth", block: "start" });
-    playTrack(url); // Sviraj pjesmu
-    updateCurrentlyPlayingInfo(artist, song, album, image); // Ažuriraj trenutno sviranje
-  } else {
-    console.log("No track selected.");
-  }
-});
+        if (url) {
+          document
+            .getElementById("currently-playing")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+          playTrack(url); // Sviraj pjesmu
+          updateCurrentlyPlayingInfo(artist, song, album, image); // Ažuriraj trenutno sviranje
+        } else {
+          console.log("No track selected.");
+        }
+      });
 
-// Pomoćne funkcije (mogu biti definirane negdje drugdje)
-function playTrack(url) {
-  audioPlayer.src = url;
-  audioPlayer.play();
-}
+      // Pomoćne funkcije (mogu biti definirane negdje drugdje)
+      function playTrack(url) {
+        audioPlayer.src = url;
+        audioPlayer.play();
+      }
 
-function updateCurrentlyPlayingInfo(artist, song, album, image) {
-  document.querySelector(".artist").textContent = artist;
-  document.querySelector(".song").textContent = song;
-  document.querySelector(".album").textContent = album;
-  document.querySelector(".image").textContent = image;
-}
+      function updateCurrentlyPlayingInfo(artist, song, album, image) {
+        document.querySelector(".artist").textContent = artist;
+        document.querySelector(".song").textContent = song;
+        document.querySelector(".album").textContent = album;
+        document.querySelector(".image").textContent = image;
+      }
 
-// 2. SOLUTION ALSO PRODUCES INFINITE LOOP WHEN SEARCHING NEXT SONG, AND DOESN'T EVEN SHOW ALBUM IMAGE. 
-
+      // 2. SOLUTION ALSO PRODUCES INFINITE LOOP WHEN SEARCHING NEXT SONG, AND DOESN'T EVEN SHOW ALBUM IMAGE.
 
       // **************** HERE STARTS COMMENDED (COMPLICATED) CODE ****************************//
 
