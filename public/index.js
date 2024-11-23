@@ -561,6 +561,75 @@
     //  - - - - - Check and display TRACKS / SONGS:  - - - - - - - - - - -
     // DODATI UVJET DA SE PRIKAŽE SAMO AKO SU TRACKSI BILI TRAŽENI (ILI SVE 3):
 
+    // 23.11. - NEW updateCurrentlyPlayingInfo-function:
+
+    function updateSongPlayingInfo(song, artist, album, image) {
+      // Showing the cover of currently playing track's album:
+      const musicWrapper = document.getElementById("music-wrapper");
+      // Checking if there is already an album cover (from the previous track) and removing it:
+      const existingAlbumCover =
+        musicWrapper.querySelector(".album-cover-image");
+      if (existingAlbumCover) {
+        existingAlbumCover.remove();
+      }
+
+      const currentlyPlayingCover = document.createElement("div");
+      currentlyPlayingCover.classList.add("album-cover-image");
+      const img = document.createElement("img");
+      const div = document.createElement("div");
+
+      // Displaying album cover picture (if existing):
+      if (image) {
+        img.src = image;
+      } else {
+        img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+      }
+      img.alt = `${album} Album Cover`;
+      img.classList.add("result-image");
+      div.classList.add("image-container");
+      div.appendChild(img);
+      currentlyPlayingCover.appendChild(div);
+
+      musicWrapper.insertBefore(currentlyPlayingCover, musicWrapper.firstChild);
+
+      const currentTrackData = document.getElementById("current-play");
+      currentTrackData.innerHTML = "";
+
+      const currentTrackInfo = createDiv();
+      const currentTrackInfoDiv1 = createDiv();
+      const currentTrackInfoDiv2 = createDiv();
+      const currentTrackInfoDiv3 = createDiv();
+      const currentTrackInfoDiv4 = createDiv();
+      const currentTrackInfoDiv5 = createDiv();
+
+      currentTrackInfoDiv1.textContent = `${song}`;
+      currentTrackInfoDiv2.textContent = `By:`;
+      currentTrackInfoDiv3.textContent = `${artist}`;
+      currentTrackInfoDiv4.textContent = `Album:`;
+      currentTrackInfoDiv5.textContent = `${album}`;
+
+      currentTrackInfoDiv1.classList.add("result-item-name");
+      currentTrackInfoDiv3.classList.add("result-item-name");
+      currentTrackInfoDiv5.classList.add("result-item-name");
+
+      currentTrackInfo.appendChild(currentTrackInfoDiv1);
+      currentTrackInfo.appendChild(currentTrackInfoDiv2);
+      currentTrackInfo.appendChild(currentTrackInfoDiv3);
+      currentTrackInfo.appendChild(currentTrackInfoDiv4);
+      currentTrackInfo.appendChild(currentTrackInfoDiv5);
+
+      currentTrackInfo.classList.add("current-track");
+      currentTrackData.appendChild(currentTrackInfo);
+
+      // ***
+      // NEW 03.11. ADDED FUNCTION WHICH PASSES VALUES TO THE mainAddToPlaylist-button (in audio-player):
+      // const previewName = tracksData.items[trackIndex].name;
+      // const previewArtist = tracksData.items[trackIndex].artists[0].name;
+      // const previewAlbum = albumName;
+      // const rating = document.getElementById("review").value;
+      // const time = new Date().toLocaleDateString();
+    }
+
     function showTracks(results) {
       const ulSongs = document.createElement("ul"); // create an unordered list for artists
       const titleSongs = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
@@ -606,19 +675,33 @@
               .scrollIntoView({ behavior: "smooth", block: "start" });
 
             if (item.preview_url) {
-              currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
+              currentTrackIndex = 0; // set tracks index to the 1st song: [0]
               playTrack(item.preview_url); // calling the basic function to play current song index in audio-player
               // 16.11. song plays correctly in audio-player if the song-preview is found.
-              updateCurrentlyPlayingInfo(index); // update info on currently playing track
-              // 16.11. THIS DOESN'T WORK CORRECTLY SO FAR, SHOULD TRANSFER OTHER VARIABLES TO THE FUNCTION INSTEAD OF INDEX?
-              //new:
+              updateSongPlayingInfo(
+                item.name,
+                item.artists[0].name,
+                item.album.name,
+                item.album.images[0].url
+              );
+              // info on currently playing track - 23.11. track info is correctly shown in audio-player
+
               document.getElementById("sound-pic").style.display = "none";
               document.getElementById("sound-bars").style.display = "block";
             } else {
-              console.error(
-                "No available track URL for the first song:",
-                item.name
+              
+              audioPlayer.pause(); 
+              updateSongPlayingInfo(
+                item.name,
+                item.artists[0].name,
+                item.album.name,
+                item.album.images[0].url
               );
+              const noPreview = createDiv();
+              currentPlay = document.getElementById("current-play");
+              noPreview.textContent = `No preview available for this track.`;
+              noPreview.classList.add("warning-message");
+              currentPlay.appendChild(noPreview);
             }
           });
 
@@ -1539,7 +1622,11 @@
       function addRemoveButton(itemCardDiv) {
         const removeButton = document.createElement("button");
 
-        removeButton.classList.add("remove-button", "item-fill3", "remove-button-playlist");
+        removeButton.classList.add(
+          "remove-button",
+          "item-fill3",
+          "remove-button-playlist"
+        );
         removeButton.textContent = "Remove from list";
         removeButton.addEventListener("click", removeTask);
         // divElement.innerHTML += removeButton.outerHTML;
@@ -1736,7 +1823,7 @@
       const nextButton = document.getElementById("next-button");
       const audioPlayer = document.getElementById("audio-player"); // Audio player element
 
-      // Funkcija za postavljanje atributa play dugmeta
+      // Funkcija za postavljanje atributa play buttona
       function setPlayButtonAttributes(url, song, artist, album, image) {
         playButton.setAttribute("data-url", url);
         playButton.setAttribute("data-song", song);
@@ -1746,38 +1833,38 @@
       }
 
       // Funkcija za sviranje pjesme po indeksu
-      function playTrackByIndex(newIndex) {
-        index = (newIndex + favTrackList.length) % favTrackList.length; // Osiguravanje kružne navigacije
+      // function playTrackByIndex(newIndex) {
+      //   index = (newIndex + favTrackList.length) % favTrackList.length; // Osiguravanje kružne navigacije
 
-        const currentButton = favTrackList[index];
-        const trackUrl = currentButton.getAttribute("data-url");
-        const trackSong = currentButton.getAttribute("data-song");
-        const trackArtist = currentButton.getAttribute("data-artist");
-        const trackAlbum = currentButton.getAttribute("data-album");
-        const trackImage = currentButton.getAttribute("data-image");
+      //   const currentButton = favTrackList[index];
+      //   const trackUrl = currentButton.getAttribute("data-url");
+      //   const trackSong = currentButton.getAttribute("data-song");
+      //   const trackArtist = currentButton.getAttribute("data-artist");
+      //   const trackAlbum = currentButton.getAttribute("data-album");
+      //   const trackImage = currentButton.getAttribute("data-image");
 
-        if (trackUrl) {
-          playTrack(trackUrl); // Funkcija za reprodukciju pjesme
-          updateCurrentlyPlayingInfo(
-            trackArtist,
-            trackSong,
-            trackAlbum,
-            trackImage
-          ); // Ažuriranje UI-ja
-          setPlayButtonAttributes(
-            trackUrl,
-            trackSong,
-            trackArtist,
-            trackAlbum,
-            trackImage
-          ); // Ažuriraj play dugme
-          document.getElementById("sound-pic").style.display = "none";
-          document.getElementById("sound-bars").style.display = "block";
-        } else {
-          console.log("Track URL missing. Skipping...");
-          playTrackByIndex(index + 1); // Preskoči na sljedeću pjesmu
-        }
-      }
+      //   if (trackUrl) {
+      //     playTrack(trackUrl); // Funkcija za reprodukciju pjesme
+      //     updateCurrentlyPlayingInfo(
+      //       trackArtist,
+      //       trackSong,
+      //       trackAlbum,
+      //       trackImage
+      //     ); // Ažuriranje UI-ja
+      //     setPlayButtonAttributes(
+      //       trackUrl,
+      //       trackSong,
+      //       trackArtist,
+      //       trackAlbum,
+      //       trackImage
+      //     ); // Ažuriraj play dugme
+      //     document.getElementById("sound-pic").style.display = "none";
+      //     document.getElementById("sound-bars").style.display = "block";
+      //   } else {
+      //     console.log("Track URL missing. Skipping...");
+      //     playTrackByIndex(index + 1); // Preskoči na sljedeću pjesmu
+      //   }
+      // }
 
       // Event listener za kraj pjesme - prelazak na sljedeću pjesmu
       audioPlayer.addEventListener("ended", () => playTrackByIndex(index + 1));
