@@ -585,8 +585,8 @@
         img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
       }
       img.alt = `${album} Album Cover`;
-      img.classList.add("result-image");
-      div.classList.add("image-container");
+      img.classList.add("result-image-playing");
+      // div.classList.add("image-container");
       div.appendChild(img);
       currentlyPlayingCover.appendChild(div);
 
@@ -1274,8 +1274,8 @@
           }
 
           img.alt = `${albumName} Album Cover`;
-          img.classList.add("result-image");
-          div.classList.add("image-container");
+          img.classList.add("result-image-playing");
+          // div.classList.add("image-container");
 
           div.appendChild(img);
           currentlyPlayingCover.appendChild(div);
@@ -1400,8 +1400,8 @@
             }
 
             img.alt = `${previewAlbum} Album Cover`;
-            img.classList.add("result-image");
-            div.classList.add("image-container");
+            img.classList.add("result-image-playing");
+            // div.classList.add("image-container");
 
             div.appendChild(img);
             currentlyPlayingCover.appendChild(div);
