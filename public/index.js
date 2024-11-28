@@ -630,6 +630,7 @@
       // const time = new Date().toLocaleDateString();
     }
 
+    // showing list of individual tracks/songs associated with the query:
     function showTracks(results) {
       const ulSongs = document.createElement("ul"); // create an unordered list for artists
       const titleSongs = document.createElement("h3"); // visible titles of each of the 3 result-sub-containers
@@ -668,7 +669,7 @@
           div.appendChild(img);
           div.classList.add("image-container");
 
-          div.addEventListener("click", (event) => {
+          div.addEventListener("click", (event) => { // if the icon of an individual song was clicked, playing starts.
             event.preventDefault();
             document
               .getElementById("currently-playing")
@@ -686,8 +687,8 @@
               );
               // info on currently playing track - 23.11. track info is correctly shown in audio-player
 
-              document.getElementById("sound-pic").style.display = "none";
-              document.getElementById("sound-bars").style.display = "block";
+              document.getElementById("sound-pic").style.display = "none";   // static animation-picture is removed
+              document.getElementById("sound-bars").style.display = "block";  // dynamic animation starts to move 
             } else {
               audioPlayer.pause();
               updateSongPlayingInfo(
@@ -946,10 +947,10 @@
           if (tracksData.items[currentTrackIndex].preview_url) {
             currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
             playFullAlbum(tracksData.items[currentTrackIndex].preview_url);
-            updateCurrentlyPlayingInfo(index);
+            updateCurrentlyPlayingInfo(currentTrackIndex);
           } else {
             console.error(
-              "Nema dostupnog track URL-a za prvu pjesmu:",
+              "There is no available track URL for the first song:",
               tracksData.items[currentTrackIndex].name
             );
           }
@@ -1137,7 +1138,7 @@
 
             // For test- show index of the current <li>, whose play-button was clicked:
             console.log("index:", index); // index is shown correctly for each song on the list (0, 1, 2, 3...)
-            playTrack(tracksData.items[index].preview_url);
+            playTrack(tracksData.items[index].preview_url);   // MODIFIED 29.11. after API DEPRICATION
             updateCurrentlyPlayingInfo(index);
             // return index;
           });
@@ -1489,10 +1490,12 @@
           .catch((error) => {
             const noPreview = createDiv();
             currentPlay = document.getElementById("current-play");
+            document.getElementById("sound-pic").style.display = "block";
+            document.getElementById("sound-bars").style.display = "none";
             noPreview.textContent = `No preview available for this track.`;
             noPreview.classList.add("warning-message");
             currentPlay.appendChild(noPreview);
-            console.error("Error playing track:", error);
+            console.error("Error playing track:", previewUrl, error);
           });
       }, 50);
     }
@@ -1541,7 +1544,7 @@
     function saveLists() {
       const addedItems = [];
       list.querySelectorAll("li").forEach((item) => {
-        // for each li, this function creates an object with keys and values (artist, rating etc.)
+        // for each li, this function creates an object with keys and values (artist, song, rating etc.)
         addedItems.push({
           // & adds the object to the (initially empty) list:  []
           artist: item.querySelector(".artist").textContent, // uses text-content found under the class '.artist'
@@ -1626,7 +1629,7 @@
     function playAndUpdateFavTrack() {
       let index = 0; // order-number of the song on the album
       const trackList = document.querySelectorAll(".my-playlist-play");
-      //  Targeting each play-button in all list items on 'My playlist'
+      //  Targeting all play-buttons in all list-items on 'My playlist'
 
       trackList.forEach((playbutton) => {
         // na svaki button (na svakom itemu liste)
@@ -1661,7 +1664,7 @@
           console.log("Song data:", { song, artist, album, image, url });
 
           if (!url) {
-            console.error("URL za odabranu pjesmu nije pronađen:", {
+            console.error("URL for selected song was not found:", {
               song,
               artist,
               album,
