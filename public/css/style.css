@@ -1508,6 +1508,23 @@ button:hover {
   font-size: 1.1rem;
 }
 
+.spotify-logo {
+  width: 1.8rem;
+  height: auto;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
+}
+
+.spotify:hover {
+  color: #f5f5f4;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.spotify a:-webkit-any-link {
+  color: #f5f5f4;
+  text-decoration: none;
+}
+
 .hidden-element {
   display: none;
 }

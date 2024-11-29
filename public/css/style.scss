@@ -885,6 +885,30 @@ button {
   font-size: 1.1rem;
 }
 
+.spotify-logo {
+  width: 1.8rem;
+  height: auto;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
+}
+
+.spotify:hover {
+  // color: #840f6a;
+  // color: #1b8e38;
+  // background: -webkit-linear-gradient(#eee, #840f6a);
+  color: $fontColor2;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.spotify a:-webkit-any-link {
+  color: $fontColor2;
+  // background: -webkit-radial-gradient(#4dc628, #0f844a);
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
+  // color: #1b8e38;
+  text-decoration: none;
+  // text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
+}
 
 // MEDIA QUERIES:
 

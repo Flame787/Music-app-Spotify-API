@@ -1473,15 +1473,13 @@
       // Dinamički kreirajte embed kod
       const embedCode = `<iframe src="https://open.spotify.com/embed/track/${trackId}" width="700" height="550" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
     
-// add SCSS code for embed-element - modify width & height responsively with % or rem - in media queries
+// + add SCSS code for embed-element - modify width & height responsively with % or rem - in media queries
 
       // Prikazivanje embed koda na stranici
       const container = document.getElementById('spotify-embed-container');
       container.innerHTML = embedCode;
     }
     
-
-
 
     // Function to play selected track preview in html-audio-player:
     async function playTrack(trackId) {
