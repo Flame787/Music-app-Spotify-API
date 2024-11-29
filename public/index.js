@@ -677,7 +677,7 @@
               .getElementById("currently-playing")
               .scrollIntoView({ behavior: "smooth", block: "start" });
 
-            if (item.preview_url) {
+            if (item.id) {
               currentTrackIndex = 0; // set tracks index to the 1st song: [0]
               playTrack(item.id); // calling the basic function to play current song index // 29.11. changed to 'item.id'
               // 16.11. song plays correctly in audio-player if the song-preview is found.
@@ -692,6 +692,7 @@
               document.getElementById("sound-pic").style.display = "none"; // static animation-picture is removed
               document.getElementById("sound-bars").style.display = "block"; // dynamic animation starts to move
             } else {
+              console-log("Cannot fetch id:", item.id);
               audioPlayer.pause();
               updateSongPlayingInfo(
                 // show track info, even if the song preview cannot be played.
@@ -933,30 +934,30 @@
         img.alt = `${albumName} Album Cover`;
         img.classList.add("result-image");
 
-        imgContainer.classList.add("image-container");
+        // imgContainer.classList.add("image-container");  // removing play-icon from the album cover, as we cannot play full album.
         imgContainer.setAttribute("id", "img-div");
         imgContainer.appendChild(img);
 
         // tu su bile funkcije playPrev i playNext
 
         // ADDING EVENT-LISTENER TO THE IMG-CONTAINER - ON CLICK, IT SHOULD START PLAYING THE FULL ALBUM FROM THE 1ST SONG:
-        imgContainer.addEventListener("click", (event) => {
-          event.preventDefault();
-          document
-            .getElementById("currently-playing")
-            .scrollIntoView({ behavior: "smooth", block: "start" });
+        // imgContainer.addEventListener("click", (event) => {
+        //   event.preventDefault();
+        //   document
+        //     .getElementById("currently-playing")
+        //     .scrollIntoView({ behavior: "smooth", block: "start" });
 
-          if (tracksData.items[currentTrackIndex].preview_url) {
-            currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
-            playFullAlbum(tracksData.items[currentTrackIndex].preview_url);
-            updateCurrentlyPlayingInfo(currentTrackIndex);
-          } else {
-            console.error(
-              "There is no available track URL for the first song:",
-              tracksData.items[currentTrackIndex].name
-            );
-          }
-        });
+        //   if (tracksData.items[currentTrackIndex].preview_url) {
+        //     currentTrackIndex = 0; // When album cover image was clicked, set tracks index to the 1st song: [0]
+        //     playFullAlbum(tracksData.items[currentTrackIndex].preview_url);
+        //     updateCurrentlyPlayingInfo(currentTrackIndex);
+        //   } else {
+        //     console.error(
+        //       "There is no available track URL for the first song:",
+        //       tracksData.items[currentTrackIndex].name
+        //     );
+        //   }
+        // });
 
         // Continue with the main function - handleTrackListButtonClick:
 
@@ -1495,63 +1496,65 @@
 
       generateEmbed(trackId);  // NEW EMBED! 29.11. works!
 
-      try {
-        const response = await fetch(`/api/tracks/${trackId}`);
-        const results = await response.json();
-        console.log("Fetched track object:", results);
+      // 29.11. Commenting out the code which functioned before the preview_url's were blocked
+      // we are NOT using our Player anymore, but Spotify embeded preview player:
+      // try {
+      //   const response = await fetch(`/api/tracks/${trackId}`);
+      //   const results = await response.json();
+      //   console.log("Fetched track object:", results);
 
         
-        // Check if the new track is already set to prevent redundant play 2x:
-        if (audioPlayer.src === results.preview_url) {
-          console.log("Track is already playing");
-          return;
-        }
+      //   // Check if the new track is already set to prevent redundant play 2x:
+      //   if (audioPlayer.src === results.preview_url) {
+      //     console.log("Track is already playing");
+      //     return;
+      //   }
 
-        // audio source is the selected track's URL:
-        audioPlayer.src = results.preview_url;
+      //   // audio source is the selected track's URL:
+      //   audioPlayer.src = results.preview_url;
 
-        // Load the new track (*needed if the source is changing dynamically):
-        audioPlayer.load();
+      //   // Load the new track (*needed if the source is changing dynamically):
+      //   audioPlayer.load();
 
-        // Automatically play the track after loading:
-        setTimeout(() => {
-          audioPlayer
-            .play()
-            .then(() => {
-              console.log("Track is playing");
-              document.getElementById("sound-pic").style.display = "none";
-              document.getElementById("sound-bars").style.display = "block";
-            })
-            .catch((error) => {
-              // const noPreview = createDiv();
-              // currentPlay = document.getElementById("current-play");
-              // document.getElementById("sound-pic").style.display = "block";
-              // document.getElementById("sound-bars").style.display = "none";
-              // noPreview.textContent = `No preview available for this track.`;
-              // noPreview.classList.add("warning-message");
-              // currentPlay.appendChild(noPreview);
-              console.error("Error playing track:", results.preview_url, error);
-            });
-        }, 50);
-      } catch (error) {
-        console.error("Error fetching preview_url:", error);
-        displayMessage(resultsContainer, "Error fetching preview_url with new function.");
-      }
+      //   // Automatically play the track after loading:
+      //   setTimeout(() => {
+      //     audioPlayer
+      //       .play()
+      //       .then(() => {
+      //         console.log("Track is playing");
+      //         document.getElementById("sound-pic").style.display = "none";
+      //         document.getElementById("sound-bars").style.display = "block";
+      //       })
+      //       .catch((error) => {
+      //         // const noPreview = createDiv();
+      //         // currentPlay = document.getElementById("current-play");
+      //         // document.getElementById("sound-pic").style.display = "block";
+      //         // document.getElementById("sound-bars").style.display = "none";
+      //         // noPreview.textContent = `No preview available for this track.`;
+      //         // noPreview.classList.add("warning-message");
+      //         // currentPlay.appendChild(noPreview);
+      //         console.error("Error playing track:", results.preview_url, error);
+      //       });
+      //   }, 50);
+      // } catch (error) {
+      //   console.error("Error fetching preview_url:", error);
+      //   displayMessage(resultsContainer, "Error fetching preview_url with new function.");
+      // }
     }
 
     // here ends the function playTrack(previewUrl) – which is inside of the bigger function Todo()
 
     // Event listener to show gif when audio starts playing again after pause
-    audioPlayer.addEventListener("playing", () => {
-      document.getElementById("sound-pic").style.display = "none";
-      document.getElementById("sound-bars").style.display = "block";
-    });
+    // audioPlayer.addEventListener("playing", () => {
+    //   document.getElementById("sound-pic").style.display = "none";
+    //   document.getElementById("sound-bars").style.display = "block";
+    // });
 
     // Event listener for pausing to switch back to the static image
-    audioPlayer.addEventListener("pause", () => {
-      document.getElementById("sound-pic").style.display = "block";
-      document.getElementById("sound-bars").style.display = "none";
-    });
+    // audioPlayer.addEventListener("pause", () => {
+    //   document.getElementById("sound-pic").style.display = "block";
+    //   document.getElementById("sound-bars").style.display = "none";
+    // });
 
     // ____________________________________________________________
 
