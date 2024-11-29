@@ -669,7 +669,8 @@
           div.appendChild(img);
           div.classList.add("image-container");
 
-          div.addEventListener("click", (event) => { // if the icon of an individual song was clicked, playing starts.
+          div.addEventListener("click", (event) => {
+            // if the icon of an individual song was clicked, playing starts.
             event.preventDefault();
             document
               .getElementById("currently-playing")
@@ -677,7 +678,7 @@
 
             if (item.preview_url) {
               currentTrackIndex = 0; // set tracks index to the 1st song: [0]
-              playTrack(item.preview_url); // calling the basic function to play current song index in audio-player
+              playTrack(item.id); // calling the basic function to play current song index // 29.11. changed to 'item.id'
               // 16.11. song plays correctly in audio-player if the song-preview is found.
               updateSongPlayingInfo(
                 item.name,
@@ -687,8 +688,8 @@
               );
               // info on currently playing track - 23.11. track info is correctly shown in audio-player
 
-              document.getElementById("sound-pic").style.display = "none";   // static animation-picture is removed
-              document.getElementById("sound-bars").style.display = "block";  // dynamic animation starts to move 
+              document.getElementById("sound-pic").style.display = "none"; // static animation-picture is removed
+              document.getElementById("sound-bars").style.display = "block"; // dynamic animation starts to move
             } else {
               audioPlayer.pause();
               updateSongPlayingInfo(
@@ -870,7 +871,7 @@
     // 25.10. - ovo je isto ok, može ostati, jer je zasebna funkcija za prikaz samo Tracklista s odabranog albuma
     // (nije isto kao obični search rezultati, niti koristi isti API):
 
-    async function handleTrackListButtonClick( // OVA FUNKCIJA RADI NA PRITISAK BUTTONA, I U NJOJ PLAY BUTTON -> PREVIEW PLAYER RADI :D :)
+    async function handleTrackListButtonClick( // This function works on button click, and play-button works:D :)
       albumId,
       albumName,
       albumArtist,
@@ -1035,6 +1036,7 @@
           const previewAlbum = albumName;
           const previewUrl = track.preview_url;
           const previewImage = albumImageUrl;
+          const trackId = track.id;
 
           // const rating = document.getElementById("review").value;
           // const time = new Date().toLocaleDateString();
@@ -1055,7 +1057,8 @@
               previewAlbum,
               previewUrl,
               previewImage,
-              time
+              time, 
+              trackId
             ); // individual buttons on each track card, can add item to favorites
             // document.getElementById("review").value = "";
             const listItem = showMoreButton.closest("li");
@@ -1125,7 +1128,7 @@
         const trackList = document.querySelectorAll(".play-button"); // Assuming that every play-button in each <li> has this class
 
         trackList.forEach((button) => {
-          button.addEventListener("click", (event) => {
+          button.addEventListener("click", (event) => {  // playing individual song by pressing song's play-button
             // find <li> parent
             const listItem = button.closest("li");
             // find index
@@ -1138,7 +1141,8 @@
 
             // For test- show index of the current <li>, whose play-button was clicked:
             console.log("index:", index); // index is shown correctly for each song on the list (0, 1, 2, 3...)
-            playTrack(tracksData.items[index].preview_url);   // MODIFIED 29.11. after API DEPRICATION
+            playTrack(tracksData.items[index].id); // MODIFIED 29.11. after API DEPRICATION
+            console.log("tracksData: ", tracksData);
             updateCurrentlyPlayingInfo(index);
             // return index;
           });
@@ -1191,8 +1195,8 @@
             const currentTrack = tracksData.items[currentTrackIndex]; // save current song index into a shorter expression
 
             // Check if the current song has a playable preview_url:
-            if (currentTrack.preview_url) {
-              playTrack(currentTrack.preview_url); // calling the basic function to play current song index in audio-player
+            if (currentTrack.id) {   /// changed 29.11.
+              playTrack(currentTrack.id); // calling the basic function to play current song index in audio-player
               updateCurrentlyPlayingInfo(index); // update info on currently playing track
               //new:
               document.getElementById("sound-pic").style.display = "none";
@@ -1367,7 +1371,7 @@
             if (previewUrl) {
               console.log("Playing track preview from URL:", previewUrl);
               // Call playTrack with the preview URL
-              playTrack(previewUrl);
+              playTrack(trackId);        // 29.11. changed
               console.log("Playing track:", previewName);
               console.log("Artist:", previewArtist);
               console.log("Album:", previewAlbum);
@@ -1460,45 +1464,80 @@
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+
+
+    // 29.11. NOVO za embed-funkciju:
+
+    async function generateEmbed(trackId) {
+     
+      // Dinamički kreirajte embed kod
+      const embedCode = `<iframe src="https://open.spotify.com/embed/track/${trackId}" width="700" height="550" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+    
+// add SCSS code for embed-element - modify width & height responsively with % or rem - in media queries
+
+      // Prikazivanje embed koda na stranici
+      const container = document.getElementById('spotify-embed-container');
+      container.innerHTML = embedCode;
+    }
+    
+
+
+
     // Function to play selected track preview in html-audio-player:
-    function playTrack(previewUrl) {
+    async function playTrack(trackId) {
+      console.log("trackId: ", trackId);
+
       if (!audioPlayer.paused) {
         audioPlayer.pause(); // pasue if something is already playing before the playTrack-function (this should prevent 'abort'-errors in console)
       }
 
-      // Check if the new track is already set to prevent redundant play 2x:
-      if (audioPlayer.src === previewUrl) {
-        console.log("Track is already playing");
-        return;
+      generateEmbed(trackId);  // NOVO EMBED! 29.11. radi!
+
+      try {
+        const response = await fetch(`/api/tracks/${trackId}`);
+        const results = await response.json();
+        console.log("Fetched track object:", results);
+
+        
+
+        // Check if the new track is already set to prevent redundant play 2x:
+        if (audioPlayer.src === results.preview_url) {
+          console.log("Track is already playing");
+          return;
+        }
+
+        // audio source is the selected track's URL:
+        audioPlayer.src = results.preview_url;
+
+        // Load the new track (*needed if the source is changing dynamically):
+        audioPlayer.load();
+
+        // Automatically play the track after loading:
+        setTimeout(() => {
+          audioPlayer
+            .play()
+            .then(() => {
+              console.log("Track is playing");
+              document.getElementById("sound-pic").style.display = "none";
+              document.getElementById("sound-bars").style.display = "block";
+            })
+            .catch((error) => {
+              const noPreview = createDiv();
+              currentPlay = document.getElementById("current-play");
+              document.getElementById("sound-pic").style.display = "block";
+              document.getElementById("sound-bars").style.display = "none";
+              noPreview.textContent = `No preview available for this track.`;
+              noPreview.classList.add("warning-message");
+              currentPlay.appendChild(noPreview);
+              console.error("Error playing track:", results.preview_url, error);
+            });
+        }, 50);
+      } catch (error) {
+        console.error("Error fetching preview_url:", error);
+        displayMessage(resultsContainer, "Error fetching preview_url with new function.");
       }
-
-      // audio source is the selected track's URL:
-      audioPlayer.src = previewUrl;
-
-      // Load the new track (*needed if the source is changing dynamically):
-      audioPlayer.load();
-
-      // Automatically play the track after loading:
-      setTimeout(() => {
-        audioPlayer
-          .play()
-          .then(() => {
-            console.log("Track is playing");
-            document.getElementById("sound-pic").style.display = "none";
-            document.getElementById("sound-bars").style.display = "block";
-          })
-          .catch((error) => {
-            const noPreview = createDiv();
-            currentPlay = document.getElementById("current-play");
-            document.getElementById("sound-pic").style.display = "block";
-            document.getElementById("sound-bars").style.display = "none";
-            noPreview.textContent = `No preview available for this track.`;
-            noPreview.classList.add("warning-message");
-            currentPlay.appendChild(noPreview);
-            console.error("Error playing track:", previewUrl, error);
-          });
-      }, 50);
     }
+
     // here ends the function playTrack(previewUrl) – which is inside of the bigger function Todo()
 
     // Event listener to show gif when audio starts playing again after pause
@@ -1566,8 +1605,7 @@
 
     // Creating new task / new item on a submit/play-list:
 
-
-    function createTask(artist, song, album, url, image, time) {
+    function createTask(artist, song, album, url, image, time, id) {
       const item = document.createElement("li"); // list-element is only created and returned, but not yet added to the list
       console.log("Preview URL:", url);
       console.log("Preview time:", time);
@@ -1583,6 +1621,7 @@
       <span class="thin"> Album:  </span> <span class="album">${album}</span> <br> 
       <span class="hidden-element url">${url}</span> <!-- Adding classes for url & image, but leaving them hidden -->
      <span class="hidden-element image">${image}</span> 
+     <span class="hidden-element id">${id}</span> 
       <span class="thin"> Added on:  </span>   <span class="time">${time}</span><br> 
       </p>  </div>`;
 
@@ -1650,8 +1689,9 @@
             ".hidden-element.image"
           ).textContent;
           const url = listItem.querySelector(".hidden-element.url").textContent;
+          const id = listItem.querySelector(".hidden-element.id").textContent;
 
-          console.log("Extracted data:", { song, artist, album, image, url });
+          console.log("Extracted data:", { song, artist, album, image, url, id });
 
           // find index: filter only <li>-elements inside parent:
           const listItems = Array.from(listItem.parentElement.children).filter(
@@ -1661,7 +1701,7 @@
           // For test- show index of the current <li>, whose play-button was clicked:
           console.log("index:", index); // index is shown correctly for each song on the list (0, 1, 2, 3...)
           console.log("listItems:", listItems);
-          console.log("Song data:", { song, artist, album, image, url });
+          console.log("Song data:", { song, artist, album, image, url, id });
 
           if (!url) {
             console.error("URL for selected song was not found:", {
@@ -1671,7 +1711,7 @@
             });
             return; // Izlaz iz funkcije ako URL nedostaje
           }
-          playTrack(url); // tracksData – lista itema
+          playTrack(id); // tracksData – lista itema  // 29.11. changed from (url) to (id)
 
           // updateCurrentlyPlayingInfo(index);
           updateSongPlayingInfo(song, artist, album, image);
@@ -1701,8 +1741,8 @@
                 ".hidden-element.image"
               ).textContent;
               // Check if the current song has a playable preview_url:
-              if (url) {
-                playTrack(url); // calling the basic function to play current song index in audio-player
+              if (id) {
+                playTrack(id); // calling the basic function to play current song index in audio-player
                 updateSongPlayingInfo(song, artist, album, image); // update info on currently playing track
                 document.getElementById("sound-pic").style.display = "none";
                 document.getElementById("sound-bars").style.display = "block";
@@ -1798,12 +1838,12 @@
     }
 
     // Adding new task on the list - this function just fetches values (and then, they will be added to card in next function 'createTask'):
-    function addTask(artist, song, album, url, image, time) {
+    function addTask(artist, song, album, url, image, time, id) {
       // event.preventDefault();
       // const newRating = document.getElementById("review").value;
       // const time = new Date().toLocaleDateString();
 
-      const item = createTask(artist, song, album, url, image, time); // here the item is already created - not yet! added into html-Node-list
+      const item = createTask(artist, song, album, url, image, time, id); // here the item is already created - not yet! added into html-Node-list
 
       console.log(
         "Fetched data about new favorized song:",
