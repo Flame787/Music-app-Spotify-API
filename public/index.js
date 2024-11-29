@@ -17,6 +17,7 @@
     const searchAllButton = document.getElementById("search-all-button");
     // const searchForm = document.getElementById("search-form");
     const mainAddToPlaylist = document.getElementById("player-add-to-playlist");
+    // const embedContainer = document.getElementById("spotify-embed-container");
     const formContainer = document.getElementById("zero-input");
     const formResultsContainerTracks = document.getElementById(
       "form-results-container"
@@ -1471,7 +1472,7 @@
     async function generateEmbed(trackId) {
      
       // Dinamički kreirajte embed kod
-      const embedCode = `<iframe src="https://open.spotify.com/embed/track/${trackId}" width="700" height="550" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+      const embedCode = `<iframe src="https://open.spotify.com/embed/track/${trackId}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
     
 // + add SCSS code for embed-element - modify width & height responsively with % or rem - in media queries
 
@@ -1484,6 +1485,8 @@
     // Function to play selected track preview in html-audio-player:
     async function playTrack(trackId) {
       console.log("trackId: ", trackId);
+
+      // embedContainer.classList.add("hidden-element");
 
       if (!audioPlayer.paused) {
         audioPlayer.pause(); // pasue if something is already playing before the playTrack-function (this should prevent 'abort'-errors in console)

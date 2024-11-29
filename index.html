@@ -41,10 +41,17 @@
       <div id="nav-title">Music domain</div>
       <nav id="navbar">
         <div id="nav-list">
-          <button class="button nav-button" id="home-button" onclick="window.location.href='/'">
+          <button
+            class="button nav-button"
+            id="home-button"
+            onclick="window.location.href='/'"
+          >
             <a href="/" class="ancor-style">Home</a>
           </button>
-          <button class="button nav-button" onclick="window.location.href='/favorites'">
+          <button
+            class="button nav-button"
+            onclick="window.location.href='/favorites'"
+          >
             <a href="/favorites" class="ancor-style">My playlist</a>
           </button>
 
@@ -83,9 +90,24 @@
               alt="application icon"
             />
           </div>
-          <h1>Welcome to your Music domain</h1>
-          <h3 class="shadow-text">Explore music and create your playlists</h3>
-          <h4 class="shadow-text">provided by: <span class="spotify"><a  href="https://open.spotify.com/" target="_blank"><img class="spotify-logo" src="pictures/Spotify_Logo_Green.png" alt="spotify-logo">Spotify</a></span></h4>
+          <h1>
+            Welcome to your <span class="purple-hover">Music domain</span>
+          </h1>
+          <div class="purple-hover">
+            <h3 class="shadow-text">Explore music and create your playlists</h3>
+          </div>
+          <h4 class="shadow-text">
+            provided by:
+            <span class="spotify"
+              ><a href="https://open.spotify.com/" target="_blank"
+                ><img
+                  class="spotify-logo"
+                  src="pictures/Spotify_Logo_Green.png"
+                  alt="spotify-logo"
+                />Spotify</a
+              ></span
+            >
+          </h4>
         </div>
       </div>
 
@@ -161,30 +183,54 @@
         method="get"
         class="form flex-container form-theme form-player"
       >
-        <p id="currently-playing">Currently playing:</p>
+        <p id="currently-playing" class="flex-container">Currently playing:</p>
 
-<!-- NEW 29.11. - EMBED CONTAINER: -->
-        <div id="spotify-embed-container">
-          <!-- Dinamički će biti umetnut embed kod -->
+        <!-- NEW 29.11. - EMBED CONTAINER: -->
+        <div id="spotify-embed-container" class="flex-container">
+          
+          <!-- embed preview-player will be inserted dinamically -->
         </div>
 
         <div class="flex-container">
-          <div class="flex-item" id="music-player">
+          <div class="flex-item hidden-element" id="music-player">
             <div id="music-wrapper">
-              <audio controls id="audio-player">
-                
-              </audio>
+              <audio controls id="audio-player"></audio>
               <div id="controls">
-                <div id="prev-button"><img id="prev-icon" src="/pictures/prev-button.png" alt="previous-button"></div>
-                <div id="sound-pic"><img id="sound-pic" src="/pictures/sound-bars.png" alt="sound-bars-img"></div>
+                <div id="prev-button">
+                  <img
+                    id="prev-icon"
+                    src="/pictures/prev-button.png"
+                    alt="previous-button"
+                  />
+                </div>
+                <div id="sound-pic">
+                  <img
+                    id="sound-pic"
+                    src="/pictures/sound-bars.png"
+                    alt="sound-bars-img"
+                  />
+                </div>
                 <!-- instead sound-pic, when audio-player is playing, there will be sound-gif moving: -->
-                 <div id="sound-bars" style="display: none;"><img id="sound-gif" src="/pictures/sound-bars.gif" alt="sound-bars"></div> 
-                <div id="next-button"><img id="next-icon" src="/pictures/next-button.png" alt="next-button"></div>
+                <div id="sound-bars" style="display: none">
+                  <img
+                    id="sound-gif"
+                    src="/pictures/sound-bars.gif"
+                    alt="sound-bars"
+                  />
+                </div>
+                <div id="next-button">
+                  <img
+                    id="next-icon"
+                    src="/pictures/next-button.png"
+                    alt="next-button"
+                  />
+                </div>
               </div>
             </div>
           </div>
 
           <div class="flex-item" id="current-play">
+            <div class="mute-icon"><img src="/pictures/audio-mute-icon.png" alt="mute-icon"></div>
             <p><label for="album">No track or album selected.</label></p>
             <!-- <div class="current-track"> -->
 
