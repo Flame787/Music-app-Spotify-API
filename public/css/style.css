@@ -42,7 +42,7 @@ body.theme10 {
   background-image: url("../pictures/forest11.jpg") !important;
 }
 body.theme11 {
-  background-image: url("../pictures/blue-water3.jpg") !important;
+  background-image: url("../pictures/view-water3.jpg") !important;
 }
 body.theme12 {
   background-image: url("../pictures/frost2.jpg") !important;
@@ -250,7 +250,7 @@ body.theme15 {
 .theme11 .show-more-button,
 .theme11 .play-button {
   background-color: #a6cad2;
-  background-image: linear-gradient(320deg, #dbf4f4 0%, rgba(86, 235, 248, 0.7254901961) 20%, rgba(31, 107, 108, 0.749) 100%);
+  background-image: linear-gradient(320deg, #dbf4f4 0%, rgba(86, 235, 248, 0.7254901961) 20%, rgba(31, 84, 108, 0.749) 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -416,13 +416,13 @@ body.theme15 {
 }
 .theme11 .remove-button {
   background-color: rgb(37, 121, 143);
-  background-image: linear-gradient(320deg, #caebf3 0%, #067f71 26%, #013c5f 80%);
+  background-image: linear-gradient(320deg, #caebf3 0%, #1c8196 26%, #1c6590 80%);
   color: black;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
 .theme12 .remove-button {
   background-color: rgb(35, 107, 116);
-  background-image: linear-gradient(320deg, #a8c8f0 0%, rgb(34, 115, 125) 20%, #04264f 100%);
+  background-image: linear-gradient(320deg, #a8c8f0 0%, rgb(45, 150, 164) 20%, #2d5a92 100%);
   color: black;
   box-shadow: 3px 3px 2px rgba(4, 6, 45, 0.7137254902);
 }
@@ -512,7 +512,7 @@ body.theme15 {
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
 }
 .theme11 .form-theme {
-  background: radial-gradient(at 25% 75%, rgba(2, 129, 141, 0.6352941176), rgba(2, 51, 52, 0.674));
+  background: radial-gradient(at 25% 75%, rgba(38, 177, 190, 0.4588235294), rgba(24, 72, 111, 0.674));
   color: white;
   text-shadow: none;
   box-shadow: 3px 3px 2px rgba(120, 118, 118, 0.6901960784);
@@ -570,16 +570,16 @@ body.theme15 {
   background: radial-gradient(at 25% 75%, rgba(37, 40, 131, 0.6039215686), rgba(9, 20, 36, 0.638));
 }
 .theme9 .header-style {
-  background: radial-gradient(at 25% 75%, rgba(99, 154, 3, 0.321), rgba(2, 111, 84, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(2, 111, 84, 0.749), rgba(99, 154, 3, 0.393));
 }
 .theme10 .header-style {
   background: radial-gradient(at 25% 75%, rgba(99, 154, 3, 0.574), rgba(2, 71, 40, 0.764));
 }
 .theme11 .header-style {
-  background: radial-gradient(at 25% 75%, rgba(2, 129, 141, 0.7254901961), rgba(2, 51, 52, 0.749));
+  background: radial-gradient(at 25% 75%, rgba(38, 177, 190, 0.4588235294), rgba(24, 72, 111, 0.674));
 }
 .theme12 .header-style {
-  background: radial-gradient(at 75% 25%, rgba(128, 179, 213, 0.7490196078), rgba(26, 78, 113, 0.749));
+  background: radial-gradient(at 75% 25%, rgba(128, 179, 213, 0.7490196078), rgba(59, 123, 166, 0.749));
 }
 .theme13 .header-style {
   background: radial-gradient(at 75% 25%, #cbd7df, rgba(67, 161, 185, 0.749));
@@ -799,13 +799,23 @@ h3 {
 }
 
 #nav-title {
-  font-family: "Inter", sans-serif;
+  font-family: "Poppins", sans-serif !important;
   color: #f5f5f4;
   font-family: "Inter", sans-serif;
   letter-spacing: 2px;
   font-weight: bold;
   font-size: 1.7rem;
   flex-basis: 12%;
+}
+
+.purple {
+  color: rgb(164, 52, 84);
+  letter-spacing: 0.2px;
+}
+
+.blue {
+  color: rgb(38, 101, 174);
+  letter-spacing: 0.2px;
 }
 
 #nav-list {
@@ -1551,6 +1561,10 @@ button:hover {
 
 .purple-hover:hover {
   color: rgb(164, 52, 84);
+}
+
+.blue-hover:hover {
+  color: rgb(38, 101, 174);
 }
 
 .spotify-embed-container {

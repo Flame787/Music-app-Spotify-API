@@ -25,7 +25,7 @@ $backgrounds: (
   //Green
   theme10: url("../pictures/forest11.jpg"),
   //Forest
-  theme11: url("../pictures/blue-water3.jpg"),
+  theme11: url("../pictures/view-water3.jpg"),
   //Azure
   theme12: url("../pictures/frost2.jpg"),
   //Frost
@@ -43,27 +43,32 @@ $headerThemes: (
     background: radial-gradient(at 25% 75%, #0800058e, rgba(9, 20, 36, 0.652)),
   ),
   //Theme
+
   theme1:
     (
       background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
     ),
   //Disco
+
   theme2:
     (
       background: radial-gradient(at 25% 75%, #2b043e, rgba(9, 20, 36, 0.749)),
     ),
   //Night
+
   theme3:
     (
       // background: radial-gradient(at 25% 75%, #621c4b, rgba(9, 20, 36, 0.749)),
       background: linear-gradient(320deg, #5138a586 0%, #04051b88 100%),
     ),
   //Future
+
   theme4:
     (
       background: radial-gradient(at 25% 75%, #2528839a, rgba(9, 20, 36, 0.638)),
     ),
   //Retro
+
   theme5:
     (
       background:
@@ -74,32 +79,36 @@ $headerThemes: (
         ),
     ),
   //Energy
+
   theme6:
     (
       background: radial-gradient(at 25% 75%, #363433cb, rgba(9, 3, 1, 0.749)),
     ),
   //Volcano
+
   theme7:
     (
       background: radial-gradient(at 25% 75%, #682c0ea5, rgba(9, 3, 1, 0.584)),
     ),
   //Copper
+
   theme8:
     (
       background: radial-gradient(at 25% 75%, #2528839a, rgba(9, 20, 36, 0.638)),
     ),
+  //Cosmos
 
-  //Sunrise
   theme9:
     (
       background:
         radial-gradient(
           at 25% 75%,
-          rgba(99, 154, 3, 0.321),
-          rgba(2, 111, 84, 0.749)
+          rgba(2, 111, 84, 0.749),
+          rgba(99, 154, 3, 0.393)
         ),
     ),
   //Green
+
   theme10:
     (
       background:
@@ -109,29 +118,34 @@ $headerThemes: (
           rgba(2, 71, 40, 0.764)
         ),
     ),
-  //Emerald
+  //Forest
+
   theme11:
     (
-      background: radial-gradient(at 25% 75%, #02818db9, rgba(2, 51, 52, 0.749)),
+      background: radial-gradient(at 25% 75%, #26b1be75, rgba(24, 72, 111, 0.674)),
     ),
   //Azure
+
   theme12:
     (
       background:
-        radial-gradient(at 75% 25%, #80b3d5bf, rgba(26, 78, 113, 0.749)),
+        radial-gradient(at 75% 25%, #80b3d5bf, rgba(59, 123, 166, 0.749)),
     ),
   //Frost
+
   theme13:
     (
       background:
         radial-gradient(at 75% 25%, #cbd7df, rgba(67, 161, 185, 0.749)),
     ),
   //Nord
+
   theme14:
     (
       background: linear-gradient(to bottom, rgba(31, 2, 28, 0.749), #1d2e6a6a),
     ),
   //Purple
+
   theme15:
     (
       background:
@@ -238,7 +252,7 @@ $themes: (
         320deg,
         #dbf4f4 0%,
         #56ebf8b9 20%,
-        rgba(31, 107, 108, 0.749) 100%
+        rgba(31, 84, 108, 0.749) 100%
       ),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
@@ -362,7 +376,7 @@ $themes2: (
   theme11: (
     background-color: rgb(37, 121, 143),
     background-image:
-      linear-gradient(320deg, #caebf3 0%, #067f71 26%, #013c5f 80%),
+      linear-gradient(320deg, #caebf3 0%, #1c8196 26%, #1c6590 80%),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -370,7 +384,7 @@ $themes2: (
     // background-color: orange,
     background-color: rgb(35, 107, 116),
     background-image:
-      linear-gradient(320deg, #a8c8f0 0%, rgb(34, 115, 125) 20%, #04264f 100%),
+      linear-gradient(320deg, #a8c8f0 0%, rgb(45, 150, 164) 20%, #2d5a92 100%),
     color: black,
     box-shadow: 3px 3px 2px #04062db6,
   ),
@@ -611,7 +625,7 @@ $formThemes: (
   theme11: (
     // background:
     //   radial-gradient(at 25% 75%, #a4d1ed4f, rgba(96, 148, 226, 0.567)),
-    background: radial-gradient(at 25% 75%, #02818da2, rgba(2, 51, 52, 0.674)),
+    background: radial-gradient(at 25% 75%, #26b1be75, rgba(24, 72, 111, 0.674)),
     color: white,
     text-shadow: none,
     box-shadow: 3px 3px 2px $boxShadowColor1,

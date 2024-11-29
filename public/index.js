@@ -775,6 +775,85 @@
           titleSongs.classList.add("result-category"); // centered title "Songs:"
           textDivSong1.classList.add("result-item-name"); // bold and bigger font
 
+   // --> ovo doraditi za Tracks, dodati 'Add to favorites' button functionality
+   [
+    "track-id", // Attach track ID (dynamic value) to the play-button
+    "preview-url", // Attach track URL (dynamic value) to the play-button
+    "preview-trackname",
+    "preview-artist",
+    "preview-album",
+    "preview-cover",
+  ].forEach((attr, i) => {
+    showMoreButton.setAttribute(
+      // function transfers dynamic values to the attributes
+      `data-${attr}`, // creates name of the attribute, f.e. 'data-track-id'...
+      [
+        item.id,
+        item.preview_url,
+        item.name,
+        item.artists[0].name,
+        item.album.name,
+        item.album.images[0].url,
+      ][i]
+    );
+  });
+
+  const previewName = item.name;
+  const previewArtist = item.artists[0].name;
+  const previewAlbum = item.album.name;
+  const previewUrl = item.preview_url;
+  const previewImage = item.album.images[0].url;
+  const trackId = item.id;
+  const time = new Date().toLocaleDateString();
+
+  showMoreButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    
+    addTask(
+      previewArtist,
+      previewName,
+      previewAlbum,
+      previewUrl,
+      previewImage,
+      time,
+      trackId
+    ); // individual buttons on each track card, can add item to favorites
+    // document.getElementById("review").value = "";
+    const listItem = showMoreButton.closest("li");
+    displayFavoriteInfo(listItem, "🤍");
+   
+    showMoreButton.classList.add("hidden-element");
+    // displayFavoriteInfo(listItem, "Track added.");
+  });
+ 
+  const savedList = localStorage.getItem("addedList");
+
+  function checkIfFavorized(savedList) {
+    let found = false;
+
+    if (savedList) {
+      const items = JSON.parse(savedList);
+      items.forEach((item) => {
+        if (
+          item.artist === previewArtist &&
+          item.song === previewName &&
+          item.album === previewAlbum
+        ) {
+          found = true;
+          // showMoreButton.textContent = `🤍`;
+          const listItem = showMoreButton.closest("li");
+          displayFavoriteInfo(listItem, "🤍");
+          showMoreButton.classList.add("hidden-element");
+        }
+      });
+      if (!found) {
+        // showMoreButton.textContent = `Add to favorites`;
+        console.log(`'${song}' not yet on the favorites list.`);
+      }
+    }
+  }
+  checkIfFavorized(savedList);
+
           ulSongs.appendChild(li);
           resultsContainer.appendChild(ulSongs);
         });
@@ -784,7 +863,7 @@
         errorMessage.textContent = `No tracks found.`;
       }
 
-      // --> ovo doraditi za Tracks, dodati 'Add to favorites' button functionality
+   
     }
 
     // ------------ Additional function to fetch albums (discography) by artist name: (linked by button Discography) --------------------------------

@@ -180,10 +180,21 @@ h3 {
 }
 
 #nav-title {
-  font-family: $inter;
+  font-family: $poppins !important;
+ 
   color: $fontColor2;
   @include nav-title();
   flex-basis: 12%;
+}
+
+.purple {
+  color: rgb(164, 52, 84);
+  letter-spacing: 0.2px;
+}
+
+.blue {
+  color: rgb(38, 101, 174);
+  letter-spacing: 0.2px;
 }
 
 #nav-list {
@@ -944,6 +955,9 @@ button {
   //   // -webkit-text-fill-color: rgb(222, 105, 204);
 }
 
+.blue-hover:hover {
+  color: rgb(38, 101, 174);
+}
 // .purpe-hover:hover {
 //   display: inline-block;
 //     background: linear-gradient(to top left,#ff75c3,#ffa647,#ffe83f,#9fff5b,#70e2ff,#cd93ff) !important;
