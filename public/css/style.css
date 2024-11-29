@@ -2026,4 +2026,8 @@ iframe {
     padding-bottom: 1%;
     width: 60%;
   }
+  iframe {
+    width: 15rem;
+    height: 15rem;
+  }
 }/*# sourceMappingURL=style.css.map */

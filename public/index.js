@@ -100,8 +100,8 @@
           .querySelectorAll(
             ".nav-button, .favorite-button, #theme_color, option"
           )
-          .forEach((button) => {
-            button.classList.remove(theme);
+          .forEach((element) => {
+            element.classList.remove(theme);
           });
         document.querySelectorAll(".remove-button").forEach((button) => {
           button.classList.remove(theme);
@@ -149,9 +149,26 @@
         text.classList.add(themeName);
       });
 
-      console.log("Selected theme:", themeName);
-      console.log("Body classes:", body.classList);
+      // Save selected theme to localStorage - NEW 29.11.
+      // localStorage.setItem("selectedTheme", themeName);
+
+      // console.log("Selected theme:", themeName);
+      // console.log("Body classes:", body.classList);
     }
+
+    // NEW: LOAD SAVED THEME:
+
+    // document.addEventListener("DOMContentLoaded", () => {
+    //   const savedTheme = localStorage.getItem("selectedTheme");
+    //   if (savedTheme) {
+    //     changeTheme(savedTheme);
+    //     // Ažurirajte tekst u dropdown izborniku ako je potrebno
+    //     // const selectedOption = document.querySelector(`.dropdown-menu li[data-value="${savedTheme}"]`);
+    //     if (selectedOption) {
+    //       document.querySelector(".dropdown-toggle").textContent = selectedOption.textContent;
+    //     }
+    //   }
+    // });
 
     // Dropdown for theme-picking (instead of select-element):
     document
@@ -171,6 +188,34 @@
       }
     });
 
+    function saveTheme(themeName) {
+      localStorage.setItem("selectedTheme", themeName);
+      console.log("Tema spremljena:", themeName);
+    }
+
+    function loadTheme() {
+      const savedTheme = localStorage.getItem("selectedTheme");
+      if (savedTheme) {
+        changeTheme(savedTheme); // Poziva funkciju za promjenu teme
+        console.log("Učitana spremljena tema:", savedTheme);
+
+        // Ako dropdown prikazuje trenutnu temu, ažurirajte prikaz
+        const selectedOption = document.querySelector(
+          `.dropdown-menu li[data-value="${savedTheme}"]`
+        );
+        if (selectedOption) {
+          document.querySelector(".dropdown-toggle").textContent =
+            selectedOption.textContent;
+        }
+      } else {
+        console.log("Nema spremljene teme.");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadTheme(); // Automatski primjenjuje spremljenu temu
+    });
+
     // Add functionality to choose options/themes:
     document.querySelectorAll(".dropdown-menu li").forEach(function (option) {
       option.addEventListener("click", function () {
@@ -179,6 +224,7 @@
           option.textContent;
         document.querySelector(".dropdown-menu").classList.remove("show");
         changeTheme(themeName);
+        saveTheme(themeName);
       });
     });
 
@@ -692,7 +738,7 @@
               document.getElementById("sound-pic").style.display = "none"; // static animation-picture is removed
               document.getElementById("sound-bars").style.display = "block"; // dynamic animation starts to move
             } else {
-              console-log("Cannot fetch id:", item.id);
+              console - log("Cannot fetch id:", item.id);
               audioPlayer.pause();
               updateSongPlayingInfo(
                 // show track info, even if the song preview cannot be played.
@@ -1007,7 +1053,11 @@
           const showMoreButton = document.createElement("button");
 
           showMoreButton.textContent = `Add to favorites`;
-          showMoreButton.classList.add("show-more-button", "add-button", "button50"); // add-button for adding a track to the favorites list (and later to playlists)
+          showMoreButton.classList.add(
+            "show-more-button",
+            "add-button",
+            "button50"
+          ); // add-button for adding a track to the favorites list (and later to playlists)
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
           // NEW 31.10. - adding properties/attributes to the Add-to-playlist-button: - 03.10. THIS WORKS AND VALUES ARE PASSED INTO PLAYLIST
@@ -1060,7 +1110,7 @@
               previewAlbum,
               previewUrl,
               previewImage,
-              time, 
+              time,
               trackId
             ); // individual buttons on each track card, can add item to favorites
             // document.getElementById("review").value = "";
@@ -1131,7 +1181,8 @@
         const trackList = document.querySelectorAll(".play-button"); // Assuming that every play-button in each <li> has this class
 
         trackList.forEach((button) => {
-          button.addEventListener("click", (event) => {  // playing individual song by pressing song's play-button
+          button.addEventListener("click", (event) => {
+            // playing individual song by pressing song's play-button
             // find <li> parent
             const listItem = button.closest("li");
             // find index
@@ -1198,7 +1249,8 @@
             const currentTrack = tracksData.items[currentTrackIndex]; // save current song index into a shorter expression
 
             // Check if the current song has a playable preview_url:
-            if (currentTrack.id) {   /// changed 29.11.
+            if (currentTrack.id) {
+              /// changed 29.11.
               playTrack(currentTrack.id); // calling the basic function to play current song index in audio-player
               updateCurrentlyPlayingInfo(index); // update info on currently playing track
               //new:
@@ -1374,7 +1426,7 @@
             if (previewUrl) {
               console.log("Playing track preview from URL:", previewUrl);
               // Call playTrack with the preview URL
-              playTrack(trackId);        // 29.11. changed
+              playTrack(trackId); // 29.11. changed
               console.log("Playing track:", previewName);
               console.log("Artist:", previewArtist);
               console.log("Album:", previewAlbum);
@@ -1467,22 +1519,18 @@
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-
-
     // 29.11. NOVO za embed-funkciju:
 
     async function generateEmbed(trackId) {
-     
       // Dinamički kreirajte embed kod
       const embedCode = `<iframe src="https://open.spotify.com/embed/track/${trackId}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
-    
-// + add SCSS code for embed-element - modify width & height responsively with % or rem - in media queries
+
+      // + add SCSS code for embed-element - modify width & height responsively with % or rem - in media queries
 
       // Prikazivanje embed koda na stranici
-      const container = document.getElementById('spotify-embed-container');
+      const container = document.getElementById("spotify-embed-container");
       container.innerHTML = embedCode;
     }
-    
 
     // Function to play selected track preview in html-audio-player:
     async function playTrack(trackId) {
@@ -1494,7 +1542,7 @@
         audioPlayer.pause(); // pasue if something is already playing before the playTrack-function (this should prevent 'abort'-errors in console)
       }
 
-      generateEmbed(trackId);  // NEW EMBED! 29.11. works!
+      generateEmbed(trackId); // NEW EMBED! 29.11. works!
 
       // 29.11. Commenting out the code which functioned before the preview_url's were blocked
       // we are NOT using our Player anymore, but Spotify embeded preview player:
@@ -1503,7 +1551,6 @@
       //   const results = await response.json();
       //   console.log("Fetched track object:", results);
 
-        
       //   // Check if the new track is already set to prevent redundant play 2x:
       //   if (audioPlayer.src === results.preview_url) {
       //     console.log("Track is already playing");
@@ -1598,7 +1645,7 @@
           image: item.querySelector(".image").textContent, //  CANNOT READ PROPERTIES OF NULL
           // rating: item.querySelector(".rating").textContent,
           time: item.querySelector(".time").textContent,
-          id: item.querySelector(".id").textContent
+          id: item.querySelector(".id").textContent,
         });
       });
 
@@ -1698,7 +1745,14 @@
           const url = listItem.querySelector(".hidden-element.url").textContent;
           const id = listItem.querySelector(".hidden-element.id").textContent;
 
-          console.log("Extracted data:", { song, artist, album, image, url, id });
+          console.log("Extracted data:", {
+            song,
+            artist,
+            album,
+            image,
+            url,
+            id,
+          });
 
           // find index: filter only <li>-elements inside parent:
           const listItems = Array.from(listItem.parentElement.children).filter(
@@ -1901,7 +1955,7 @@
 
     this.init = function () {
       // body initially has a default theme0:
-      document.body.classList.add("theme0");
+      // document.body.classList.add("theme0");
 
       // buttonPlay.addEventListener("click", playSong);
       loadLists();
@@ -1911,10 +1965,10 @@
     // document.addEventListener("DOMContentLoaded", this.init.bind(this));
 
     // Set initial theme when the page loads
-    document.addEventListener("DOMContentLoaded", function () {
-      const defaultTheme = "theme0"; // Set your default theme here
-      changeTheme(defaultTheme);
-    });
+    // document.addEventListener("DOMContentLoaded", function () {
+    //   const defaultTheme = "theme0"; // Set your default theme here
+    //   changeTheme(defaultTheme);
+    // });
 
     // add button FavoriteButton (added on Liked songs, and can move them to "All favorite songs - this secondary list doesn't exist anymore"):
     // function addFavoriteButton(itemCardDiv) {
