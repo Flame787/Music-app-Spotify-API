@@ -1006,7 +1006,7 @@
           const showMoreButton = document.createElement("button");
 
           showMoreButton.textContent = `Add to favorites`;
-          showMoreButton.classList.add("show-more-button", "add-button"); // add-button for adding a track to the favorites list (and later to playlists)
+          showMoreButton.classList.add("show-more-button", "add-button", "button50"); // add-button for adding a track to the favorites list (and later to playlists)
           showMoreButton.setAttribute("id", "add-to-playlist-button");
 
           // NEW 31.10. - adding properties/attributes to the Add-to-playlist-button: - 03.10. THIS WORKS AND VALUES ARE PASSED INTO PLAYLIST
@@ -1501,7 +1501,6 @@
         console.log("Fetched track object:", results);
 
         
-
         // Check if the new track is already set to prevent redundant play 2x:
         if (audioPlayer.src === results.preview_url) {
           console.log("Track is already playing");
@@ -1572,7 +1571,8 @@
               item.album,
               item.url,
               item.image,
-              item.time
+              item.time,
+              item.id
             )
           )
         );
@@ -1595,6 +1595,7 @@
           image: item.querySelector(".image").textContent, //  CANNOT READ PROPERTIES OF NULL
           // rating: item.querySelector(".rating").textContent,
           time: item.querySelector(".time").textContent,
+          id: item.querySelector(".id").textContent
         });
       });
 
@@ -1612,6 +1613,7 @@
       console.log("Preview URL:", url);
       console.log("Preview time:", time);
       console.log("Preview image:", image);
+      console.log("Preview id:", id);
       // const div = document.createElement("div");
       // div.classList.add("form-theme", "item-card");
 

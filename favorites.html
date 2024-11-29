@@ -161,8 +161,15 @@
         class="form flex-container form-theme form-player"
       >
         <p id="currently-playing">Currently playing:</p>
+
+<!-- NEW 29.11. - EMBED CONTAINER: -->
+<div id="spotify-embed-container" class="flex-container">
+          
+  <!-- embed preview-player will be inserted dinamically -->
+</div>
+
         <div class="flex-container">
-          <div class="flex-item" id="music-player">
+          <div class="flex-item hidden-element" id="music-player">
             <div id="music-wrapper">
               <audio controls id="audio-player">
                 
@@ -178,7 +185,8 @@
           </div>
 
           <div class="flex-item" id="current-play">
-            <p><label for="album">No track or album selected.</label></p>
+            <div class="mute-icon"><img src="/pictures/audio-mute-icon.png" alt="mute-icon"></div>
+            <p><label for="album">No track selected.</label></p>
             <!-- <div class="current-track"> -->
 
             <!-- this fills out dinamically, depending on currently playing song. It is displaying: current song, album, artist and duration. 
