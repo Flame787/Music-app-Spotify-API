@@ -380,7 +380,8 @@ audio::-webkit-media-controls-volume-slider {
 // }
 
 .item-card,
-.item-card2 {
+.item-card2,
+.item-card3 {
   // max-width: 40%;
   margin: auto;
   border-radius: 30px;
@@ -405,6 +406,29 @@ audio::-webkit-media-controls-volume-slider {
   max-width: 70%;
   font-size: smaller;
   gap: 10%;
+}
+
+.favorite-message {
+  // color: rgb(80, 7, 117);
+  font-size: 1rem;
+  margin-top: 0px;
+  width: 44%;
+  text-align: center;
+  margin: 8% auto 3%;
+}
+
+.item-card3, .favorite-message {
+  max-width: 90%;
+  font-size: smaller;
+  gap: 5%;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.button50{
+  width: 44%;
 }
 
 .item-card:hover {
@@ -593,11 +617,7 @@ hr {
   margin-top: 3px;
 }
 
-.favorite-message {
-  // color: rgb(80, 7, 117);
-  font-size: 1rem;
-  margin-top: 0px;
-}
+
 
 .result-category {
   width: 100%;
@@ -661,6 +681,10 @@ hr {
   margin: auto;
 }
 
+.flex-container-tracks li.item-card3 {
+  margin: auto auto 3%;
+}
+
 .flex-container-tracks li div {
   width: 500px;
   margin: auto;
@@ -673,7 +697,7 @@ hr {
 
 .flex-container-tracks .play-button {
   // width: 60%;
-  width: 170px;
+  // width: 170px;
   margin: 8% auto 3%;
   // padding: auto 2%;
   display: block;
@@ -681,8 +705,8 @@ hr {
 
 .flex-container-tracks .show-more-button {
   // width: 60%;
-  width: 170px;
-  margin: 8% auto 12%;
+  // width: 170px;
+  margin: 8% auto 3%;
 }
 
 // Adding Play-button layer (background element) - on Hover over albums & songs picture:
@@ -796,13 +820,13 @@ li .image-container-artist img {
 .show-more-button {
   margin: 4% auto;
   font-size: 1.1rem;
-  width: 45%;
+  width: 30%;
 }
 
 .play-button {
   margin-top: 5%;
   font-size: 1.1rem;
-  width: 50%;
+  width: 30%;
 }
 
 .form-player {

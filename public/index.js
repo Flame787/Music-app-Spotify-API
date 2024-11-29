@@ -700,11 +700,11 @@
                 item.album.name,
                 item.album.images[0].url
               );
-              const noPreview = createDiv();
-              currentPlay = document.getElementById("current-play");
-              noPreview.textContent = `No preview available for this track.`; // added info on error (no preview available)
-              noPreview.classList.add("warning-message");
-              currentPlay.appendChild(noPreview);
+              // const noPreview = createDiv();
+              // currentPlay = document.getElementById("current-play");
+              // noPreview.textContent = `No preview available for this track.`; // added info on error (no preview available)
+              // noPreview.classList.add("warning-message");
+              // currentPlay.appendChild(noPreview);
             }
           });
 
@@ -971,12 +971,13 @@
           const li = document.createElement("li");
           const div = createDiv();
           div.textContent = `${track.track_number}. ${track.name}`;
-          li.classList.add("li-item-style");
+          li.classList.add("li-item-style", "form-theme", "item-card3");
+
           li.classList.add("result-item-name", "result-flex-item");
 
           const playButton = document.createElement("button");
           playButton.textContent = `Play  ▶`; // NEW - PLAY-button
-          playButton.classList.add("play-button", "play-starter");
+          playButton.classList.add("play-button", "play-starter", "button50");
 
           // Save important data about playing track via playButton attributes:
           // (so they can be fetched later from the clicked button (playbutton / playSymbol): track URL, name, artist, album, cover):
@@ -1492,7 +1493,7 @@
         audioPlayer.pause(); // pasue if something is already playing before the playTrack-function (this should prevent 'abort'-errors in console)
       }
 
-      generateEmbed(trackId);  // NOVO EMBED! 29.11. radi!
+      generateEmbed(trackId);  // NEW EMBED! 29.11. works!
 
       try {
         const response = await fetch(`/api/tracks/${trackId}`);
@@ -1523,13 +1524,13 @@
               document.getElementById("sound-bars").style.display = "block";
             })
             .catch((error) => {
-              const noPreview = createDiv();
-              currentPlay = document.getElementById("current-play");
-              document.getElementById("sound-pic").style.display = "block";
-              document.getElementById("sound-bars").style.display = "none";
-              noPreview.textContent = `No preview available for this track.`;
-              noPreview.classList.add("warning-message");
-              currentPlay.appendChild(noPreview);
+              // const noPreview = createDiv();
+              // currentPlay = document.getElementById("current-play");
+              // document.getElementById("sound-pic").style.display = "block";
+              // document.getElementById("sound-bars").style.display = "none";
+              // noPreview.textContent = `No preview available for this track.`;
+              // noPreview.classList.add("warning-message");
+              // currentPlay.appendChild(noPreview);
               console.error("Error playing track:", results.preview_url, error);
             });
         }, 50);
