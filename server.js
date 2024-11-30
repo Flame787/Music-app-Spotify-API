@@ -88,7 +88,7 @@ app.get("/favorites", (req, res) => {
 //   res.send("Token set!");
 // });
 
-// 21.10. WE WILL COMMENT THIS, NOT NEEDED (NEEDED ONLY FOR SDK AUTHORISATION):
+// 21.10. COMMENTED OUT, NOT NEEDED (NEEDED ONLY FOR SDK AUTHORISATION):
 
 // const refreshUserAccessToken = async () => {
 
@@ -390,13 +390,13 @@ app.get("/api/search", async (req, res) => {
   const type = req.query.type || "artist,album,track"; // type of the search, f.e. artist, album, track
   // NEW 22.10.:
   const offset = parseInt(req.query.offset) || 0;
-  const limit = parseInt(req.query.limit) || 12;
+  const limit = parseInt(req.query.limit) || 30;
 
   const clientAccessToken = await getAccessToken(); // fetch access token
 
   // URL for Search on Spotify API:
   // const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=${type}&offset=${offset}&limit=${limit}`;
-  const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=12`;
+  const searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=30`;
 
   try {
     const response = await fetch(searchUrl, {
