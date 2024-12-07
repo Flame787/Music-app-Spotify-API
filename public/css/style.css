@@ -1583,6 +1583,7 @@ iframe {
 
 .last-container {
   font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .hidden-element {

@@ -1,27 +1,16 @@
-// require("dotenv").config(); // load environment variables from 'dotenv' file
 import dotenv from "dotenv";
 dotenv.config();
-
-// load Express:
-// const express = require("express");
-// const cors = require("cors");
-// const https = require("https");
-// const bodyParser = require("body-parser");
-// const fetch = require("node-fetch");
-// const path = require("path"); // for work with files and folders
-// *Recommended when dealing with file paths to ensure they are cross-compatible for different operating systems (npr. Windows, macOS, Linux).
-// *If you plan to use relative paths, path can prevent possible misdefined path errors, especially when using methods like res.sendFile() to serve static files.
 
 // Dependencies:
 import express from "express"; // to create a web server
 import cors from "cors"; // handling cross-origin requests
-import https from "https"; // for making HTTPS-requests (...not used so far)
+// import https from "https"; // for making HTTPS-requests (...not used so far)
 import bodyParser from "body-parser"; // parse incoming request bodies (although not needed, as Express now includes body-parsing by default for JSON)
 import fetch from "node-fetch"; // to make HTTP requests (in this case, to Spotify's API)
 import path from "path"; // used to calculate __dirname in ES modules, since it's not available like in CommonJS
 import { fileURLToPath } from "url";
 // static files (e.g., CSS, JS) are served from the public folder
-// the / route serves an index.html file from the root directory of the project using sendFil
+// the / route serves an index.html file from the root directory of the project using sendFile
 
 // Calculate __dirname:
 const __filename = fileURLToPath(import.meta.url);
@@ -37,11 +26,12 @@ const PORT = process.env.PORT || 3000;
 const clientId = process.env.client_id;
 const clientSecret = process.env.client_secret;
 
-// -> and this exact same link should be also set in Spotify Dashboard (Settings) as the only redirect-link!
+
 // const redirect_uri = "http://localhost:3000/callback";
-// if using SDK player, it's very important that the callback link (redirect page after user login) is localhost:3000/callback
+// *if using SDK player, it's very important that the callback link (redirect page after user login) is localhost:3000/callback
 // but for client authorisation we can use simply this redirect_uri:
 const redirect_uri = "http://localhost:3000";
+// -> the same link should be also set in Spotify Dashboard (Settings) as redirect-link!
 
 const auth_endpoint = "https://accounts.spotify.com/authorize";
 const response_type = "token";
@@ -49,7 +39,7 @@ const response_type = "token";
 // Middleware:
 app.use(cors());
 app.use(express.static("public"));
-// - for stacit files (pictures etc), index.JS and all CSS files - put them all in the map 'public' so Express could serve them at request.
+// - for stacit files (pictures etc), index.JS, all CSS files - in map 'public' -> Express serves them at request
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true })); // Parsing the body of our request into URL
 
@@ -63,9 +53,8 @@ let clientTokenExpirationTime = null;
 let isFetchingToken = false; // New variable for tracking the status of token fetching
 
 // Define main routes:
-// SEND-request can be only ONE! - nothing else can be returned after that. Next SEND-requests following after this one will not be realised!
+// SEND-request can be only ONE! - nothing else can be returned after that. Following SEND-requests will not be realized!
 
-// ADDED 21.10.:
 // Route for serving 'index.html' (home page: '/'):
 // If index.html is in the same map as server.js (on the same 'hierarchy level'), the path to index.html should look like this:
 app.get("/", (req, res) => {
@@ -77,160 +66,11 @@ app.get("/favorites", (req, res) => {
   res.sendFile(path.join(__dirname + "/favorites.html"));
 });
 
-// new 15.10.:
-
-// app.get("/set-token", (req, res) => {
-//   // setting token and saving it's expiration time
-//   const expiresIn = 3600; // Access token lasts for 3600 sec (1 hour)
-//   userTokenExpirationTime = Date.now() + expiresIn * 1000;
-//   userAccessToken = "yourAccessTokenHere";
-
-//   res.send("Token set!");
-// });
-
-// 21.10. COMMENTED OUT, NOT NEEDED (NEEDED ONLY FOR SDK AUTHORISATION):
-
-// const refreshUserAccessToken = async () => {
-
-//   const response = await fetch("https://accounts.spotify.com/api/token", {
-//     method: "POST",
-//     headers: {
-//       Authorization:
-//         "Basic " +
-//         Buffer.from(clientId + ":" + clientSecret).toString("base64"),
-//       "Content-Type": "application/x-www-form-urlencoded",
-//     },
-//     body: new URLSearchParams({
-//       grant_type: "refresh_token",
-//       refresh_token: userRefreshToken,
-//     }),
-//   });
-
-//   const data = await response.json();
-//   if (response.ok) {
-//     console.log("New access token received:", data.access_token);
-
-//     userAccessToken = data.access_token;
-//     userTokenExpirationTime = Date.now() + data.expires_in * 1000; // Set expiration time
-//     return data.access_token; // return new access token
-//   } else {
-//     throw new Error("Failed to refresh access token");
-//   }
-// };
-
-// Function which checks if user access token is expired:
-// const isUserTokenExpired = () => {
-//   return Date.now() >= tokenExpirationTime;
-// };
-
-// app.get("/", async (req, res) => {
-//   console.log("Checking userAccessToken...");
-
-//   if (!userAccessToken || isUserTokenExpired()) {
-//     console.log("Access token is missing or expired, refreshing token...");
-
-//     try {
-//       // Refresh token (if expired))
-//       const newToken = await refreshUserAccessToken();
-//       userAccessToken = newToken;
-//       tokenExpirationTime = Date.now() + 3600 * 1000; // set new expiration time
-//     } catch (error) {
-//       console.error("Error refreshing token:", error);
-//       return res.redirect("/login"); // If refreshing doesn't succeed, reroute to login page
-//     }
-//   }
-
-// Ako je token valjan, posluži početnu stranicu:
-//   console.log("User access token found:", userAccessToken);
-//   res.sendFile(path.join(__dirname + "/index.html"));
-// });
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - -- -
 
-// NEW: Route for Login - needed if we want to use Player SDK:
-
-// app.get("/login", (req, res) => {
-//   // const auth_endpoint = "https://accounts.spotify.com/authorize"; // Spotify authorization endpoint
-//   const scopes =
-//     "streaming user-read-email user-read-private user-modify-playback-state user-read-playback-state"; // Scopes for the permissions we need
-//   const authUrl = `${auth_endpoint}?response_type=code&client_id=${clientId}&scope=${encodeURIComponent(
-//     scopes
-//   )}&redirect_uri=${encodeURIComponent(redirect_uri)}`;
-//   res.redirect(authUrl);
-// });
-
-// NEW:  Route for Callback (sending user access token after authorisation on Spotify page):
-
-// ALSO NOT NEEDED, IF WE ARE USING ONLY CLIENT ACCESS TOKEN, AND NOT USER ACCESS TOKEN:
-// app.get("/callback", async (req, res) => {
-//   const code = req.query.code;
-
-//   if (!code) {
-//     console.log("Authorization code not found.");
-//     return res.send("Authorization code not found.");
-//   }
-
-//   const params = new URLSearchParams();
-//   params.append("grant_type", "authorization_code");
-//   params.append("code", code);
-//   params.append("redirect_uri", redirect_uri);
-//   params.append("client_id", clientId);
-//   params.append("client_secret", clientSecret);
-
-//   try {
-//     const response = await fetch("https://accounts.spotify.com/api/token", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-//       body: params,
-//     });
-
-//     const data = await response.json();
-//     if (response.ok) {
-//       userAccessToken = data.access_token;
-
-//       // Provjera postojanja refresh tokena
-//       if (data.refresh_token) {
-//         userRefreshToken = data.refresh_token; // save refresh token
-//       }
-//       userTokenExpirationTime = Date.now() + data.expires_in * 1000; // set expiration time
-
-//       console.log("User access token received:", userAccessToken);
-//       console.log("Token expires in:", data.expires_in, "seconds");
-//       res.redirect("/"); // redirects to home page
-//     } else {
-//       console.log(
-//         `Error fetching access token: ${response.status} - ${data.error}`
-//       );
-//       res.send(`Error fetching access token: ${data.error_description}`);
-//     }
-//   } catch (error) {
-//     console.log(`Error during token request: ${error.message}`);
-//     res.send(`Error during token request: ${error.message}`);
-//   }
-// });
-
-// New route for fetching userAccessToken:
-// app.get("/api/get-user-access-token", (req, res) => {
-//   try {
-//     if (userAccessToken) {
-//       res.json({ token: userAccessToken });
-//     } else {
-//       res.status(401).send("Unauthorized"); // If token not existing, return status 401
-//     }
-//   } catch (error) {
-//     console.error("Error fetching user access token:", error);
-//     res.status(500).send("Internal Server Error"); // Return status 500 in case of an error
-//   }
-// });
-
-// Autentifikacija radi, userAccessToken se dodjeljuje. Ako je user već ulogiran, automatski redirecta na home page bez potrebe za prijavom.
-// Testirano paralelno u 2 browsera (Chrome i Mozilla).
-// Čak i kad se izlogiram iz Spotify app-a, userAccessToken je i dalje aktivan.
-// Isti userAccessToken se prikazuje u server-konzoli za oba browsera (console-loga se kad god reloadamo stranicu u nekom browseru).
-// Znači da je userAccessToken dodijeljen na temelju device_id, koji je isti neovisno u kojem browseru se koristi, i traje i dalje (cca sat vremena).
 
 // Asyncronous function to fetch Client access token:
-// function sends a POST request to Spotify API to retrieve an OAuth access token.
+// function sends a POST-request to Spotify API to retrieve an OAuth access token.
 // the request uses 'client_credentials'- grant type to authenticate the app.
 // the access token is stored in a global variable 'accessToken' -> later renamed to 'clientAccessToken'.
 async function getAccessToken() {
@@ -290,7 +130,7 @@ async function getAccessToken() {
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    // Prikaz u formatu HH:MM:SS
+    // Time format HH:MM:SS
     const currentTime = `${hours.toString().padStart(2, "0")}:${minutes
       .toString()
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
@@ -366,22 +206,6 @@ app.get("/api/token", async (req, res) => {
 // http GET 'https://api.spotify.com/v1/search?q=remaster%2520track%3ADoxy%2520artist%3AMiles%2520Davis&type=album' \
 // Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
 
-// ENDPOINT PLAYER:
-/* Get Playback State
-Transfer Playback
-Get Available Devices
-Get Currently Playing Track
-Start/Resume Playback
-Pause Playback
-Skip To Next
-Skip To Previous
-Seek To Position
-Set Repeat Mode
-Set Playback Volume
-Toggle Playback Shuffle
-Get Recently Played Tracks
-Get the User's Queue
-Add Item to Playback Queue */
 
 // Backend defines an AOI-endpoint (call it /api/suggestions or /api/search or similar).
 // When a request was sent from frontend to this endpoint, server is handling user request, fetching results, and returning them in json-format:
@@ -416,7 +240,7 @@ app.get("/api/search", async (req, res) => {
   }
 });
 
-// Route for fetching info about album - used for the funkcion 'handleTrackListButtonClick' in index.js (showing tracks from an album):
+// Route for fetching info about album - used for the function 'handleTrackListButtonClick' in index.js (showing tracks from an album):
 app.get("/api/albums/:id/tracks", async (req, res) => {
   const albumId = req.params.id;
 
@@ -451,7 +275,7 @@ app.get("/api/albums/:id/tracks", async (req, res) => {
 app.get("/api/artists/:id/albums", async (req, res) => {
   const artistId = req.params.id;
 
-  const clientAccessToken = await getAccessToken(); // Dohvati access token
+  const clientAccessToken = await getAccessToken(); // Fetch access token
 
   const searchUrl = `https://api.spotify.com/v1/artists/${artistId}/albums`;
 
@@ -503,65 +327,6 @@ app.get("/api/tracks/:id", async (req, res) => {
   }
 });
 
-// Route for using Spotify Player - showing which song is currently playing:
-// app.get("/api/me/player/currently-playing", async (req, res) => {
-//   // const playback = req.track.id;
-
-//   const clientAccessToken = await getAccessToken();
-
-//   const searchUrl = `https://api.spotify.com/v1/me/player/currently-playing`;
-
-//   try {
-//     const response = await fetch(searchUrl, {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${clientAccessToken}`,
-//       },
-//     });
-//     if (response.ok) {
-//       const playingTrack = await response.json();
-//       res.json(playingTrack);
-//     } else {
-//       res
-//         .status(response.status)
-//         .json({ error: "Failed to fetch currently playing track" });
-//     }
-//   } catch (error) {
-//     console.error("Error fetching track:", error);
-//     res.status(500).send("Error fetching currently playing song");
-//   }
-// });
-
-// // Route for using Spotify Player - it uses track.id for playing a song:
-// app.get("/api/me/player/play", async (req, res) => {
-//   const playback = req.track.id;
-
-//   const clientAccessToken = await getAccessToken();
-
-//   const searchUrl = `https://api.spotify.com/v1/me/player/play`;
-
-//   try {
-//     const response = await fetch(searchUrl, {
-//       method: "PUT",
-//       headers: {
-//         Authorization: `Bearer ${clientAccessToken}`,
-//       },
-//       body: {
-//         context_uri: `{"uris": ["spotify:track:${playback}"]}`,
-//       },
-//     });
-
-//     if (response.ok) {
-//       const playingTrack = await response.json();
-//       res.json(playingTrack);
-//     } else {
-//       res.status(response.status).json({ error: "Failed to play the track." });
-//     }
-//   } catch (error) {
-//     console.error("Error fetching track:", error);
-//     res.status(500).send("Failed to play the track.");
-//   }
-// });
 
 // ---------------------------------------------------------------------------------
 
@@ -607,24 +372,6 @@ app.get("/api/search", async (req, res) => {
   }
 });
 
-// Define additional routes (if needed):
-// app.get("/api/data", (req, res) => {
-//   res.json({ message: "This is some data" });
-// });
-
-// Logic for searching songs (npr. API-call to Spotify API):
-// app.get("/api/search", async (req, res) => {
-//   const query = req.query.q;
-// });
-
-// Edited endpoint for searching artist, song or album:
-// app.get("/api/suggestions", (req, res) => {
-//   const query = req.query.q;
-// Add logic for searching (from API-documentation - Search)
-// Add logic for returning results
-//   const results = searchDatabaseForSuggestions(query); // current logic for saving results
-//   res.json({ results });
-// });
 
 // Error handling middleware:
 app.use((err, req, res, next) => {
