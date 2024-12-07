@@ -600,7 +600,6 @@ $formThemes: (
   ),
 
   theme9: (
-    // background: radial-gradient(at 25% 75%, #343030b2, rgba(33, 2, 3, 0.749)),
     background:
       radial-gradient(
         at 25% 75%,
@@ -623,8 +622,6 @@ $formThemes: (
     box-shadow: 3px 3px 2px $boxShadowColor1,
   ),
   theme11: (
-    // background:
-    //   radial-gradient(at 25% 75%, #a4d1ed4f, rgba(96, 148, 226, 0.567)),
     background: radial-gradient(at 25% 75%, #26b1be75, rgba(24, 72, 111, 0.674)),
     color: white,
     text-shadow: none,
@@ -632,7 +629,6 @@ $formThemes: (
   ),
   theme12: (
     background:
-      // radial-gradient(at 25% 75%, #c8e2f2bf, rgba(110, 158, 230, 0.749)),
     radial-gradient(at 75% 25%, #b1b0b0c6, rgba(42, 101, 140, 0.8)),
     color: white,
     text-shadow: none,
@@ -640,7 +636,6 @@ $formThemes: (
   ),
   theme13: (
     background:
-      // radial-gradient(at 75% 25%, #b1b0b0b2, rgba(42, 100, 140, 0.749)),
     radial-gradient(at 25% 75%, #c8e2f2bf, #57c3de8e),
     color: black,
     text-shadow: none,

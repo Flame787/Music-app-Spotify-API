@@ -925,10 +925,11 @@ select option {
   height: 20%;
 }
 
-/* if height in vh: 20vh is used, it doesn't scale well, if too many elements added to the list (lower flex-container), 
-    they won't fit anymore to a fixed vh-height, but will be overlapping into upper flex-container.
-    Better to use percentage for containers inside the page, then the page will grow larger if needed - scrollable, 
-    as long as alements are added to the list, but they will always fit into their container.
+/* if height in vh: 20vh is used, it doesn't scale well, if too many elements added to the list 
+(lower flex-container), they won't fit anymore to a fixed vh-height, 
+but will be overlapping into upper flex-container.
+Better to use percentage for containers inside the page, then the page will grow larger if needed 
+- scrollable, as long as alements are added to the list, but they will always fit into their container.
  */
 .flex-item {
   margin: 3%;
@@ -1381,7 +1382,7 @@ li .image-container::before {
   background-repeat: no-repeat;
   opacity: 0; /* set transparency innitially to 0 */
   transition: opacity 0.3s ease; /* smooth effect change */
-  /* Transformacija za centriranje slike */
+  /* Transformation for centering the image: */
   transform: translate(-50%, -50%);
 }
 
@@ -1444,9 +1445,9 @@ li .image-container-artist::before {
   background-size: cover; /* set picture image according to the container */
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0; /* set transparency innitially to 0 */
+  opacity: 0; /* set transparency initially to 0 */
   transition: opacity 0.3s ease; /* smooth effect change */
-  /* Transformacija za centriranje slike */
+  /* Transformation for centering the image: */
   transform: translate(-50%, -50%);
 }
 
@@ -1610,6 +1611,9 @@ iframe {
   .show-more-button {
     width: 40%;
   }
+  li p {
+    max-width: 30%;
+  }
 }
 @media (max-width: 1540px) {
   #nav-list button:last-child {
@@ -1668,9 +1672,6 @@ iframe {
   }
   .last-container {
     font-size: 0.8rem;
-  }
-  li p {
-    max-width: 30%;
   }
 }
 @media (max-width: 1150px) {

@@ -137,7 +137,7 @@ button a {
   }
 }
 
-////////////////////////////////////////////////// DEFAULT STYLES, INDEPENDENT OF SELECTED THEMES: ////////////////////////////////////////////////
+///////////////////////////// DEFAULT STYLES, INDEPENDENT OF SELECTED THEMES: /////////////////////////
 
 body {
   font-family: $poppins;
@@ -298,10 +298,11 @@ select {
   margin: 1% 10%;
   height: 20%;
 }
-/* if height in vh: 20vh is used, it doesn't scale well, if too many elements added to the list (lower flex-container), 
-    they won't fit anymore to a fixed vh-height, but will be overlapping into upper flex-container.
-    Better to use percentage for containers inside the page, then the page will grow larger if needed - scrollable, 
-    as long as alements are added to the list, but they will always fit into their container.
+/* if height in vh: 20vh is used, it doesn't scale well, if too many elements added to the list 
+(lower flex-container), they won't fit anymore to a fixed vh-height, 
+but will be overlapping into upper flex-container.
+Better to use percentage for containers inside the page, then the page will grow larger if needed 
+- scrollable, as long as alements are added to the list, but they will always fit into their container.
  */
 
 .flex-item {
@@ -386,10 +387,6 @@ audio::-webkit-media-controls-volume-slider {
   padding-right: 8px;
 }
 
-// .play-button{
-//   align-self: flex-end;
-// }
-
 .item-card,
 .item-card2,
 .item-card3 {
@@ -420,7 +417,6 @@ audio::-webkit-media-controls-volume-slider {
 }
 
 .favorite-message {
-  // color: rgb(80, 7, 117);
   font-size: 1rem;
   margin-top: 0px;
   width: 44%;
@@ -494,7 +490,8 @@ select {
   }
 
   // content: '': creatse an empty ::after pseudo-element, to which we can provide some style.
-  // position: absolute: Pseudo-element is positioned absolutely inside the parent element which is positioned relatively (button or select). So it may move freely inside the boderd of teh parent element.
+  // position: absolute: Pseudo-element is positioned absolutely inside the parent element which is positioned relatively (button or select).
+  // So it may move freely inside the boderd of teh parent element.
   // top: 0, left: -100%: ::after element starts aoutside of the left side of parent element
   // width: 200%, height: 100%: Pseudo-element has double the element-width, so it may create effect of crossing over the whole element.
   // background: linear-gradient: defines gradient with light white line in the middle (rgba(255, 255, 255, 0.5)), simulating the shine.
@@ -622,7 +619,7 @@ hr {
   outline: none;
 }
 
-// if querry is smaller than 1, or empty:
+// if quiry is smaller than 1, or empty:
 .warning-message {
   color: red;
   font-size: 1rem;
@@ -700,22 +697,13 @@ hr {
   margin: auto;
 }
 
-// .flex-container-tracks img {
-//   margin-top: 5%;
-//   margin-bottom: 5%;
-// }
-
 .flex-container-tracks .play-button {
-  // width: 60%;
-  // width: 170px;
   margin: 8% auto 3%;
   // padding: auto 2%;
   display: block;
 }
 
 .flex-container-tracks .show-more-button {
-  // width: 60%;
-  // width: 170px;
   margin: 8% auto 3%;
 }
 
@@ -744,7 +732,7 @@ li .image-container::before {
   opacity: 0; /* set transparency innitially to 0 */
   transition: opacity 0.3s ease; /* smooth effect change */
 
-  /* Transformacija za centriranje slike */
+  /* Transformation for centering the image: */
   transform: translate(-50%, -50%);
 }
 
@@ -766,7 +754,7 @@ li .image-container img {
     cursor: pointer;
 
     &::before {
-      opacity: 0.8; // Povećana vidljivost ikone na hoveru
+      opacity: 0.8; // Better visibility of the icon when hovered
     }
   }
 
@@ -781,7 +769,7 @@ li .image-container img {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0; // Početna prozirnost
+    opacity: 0; // starting opacity
     transition: opacity 0.3s ease;
     transform: translate(-50%, -50%);
   }
@@ -791,7 +779,8 @@ li .image-container img {
   display: block;
 }
 
-// artist-result don't get the semi-transarent Play-icon (like albums and songs), but they get "Vew more" symbol - which opens Discography.
+// artist-result don't get the semi-transarent Play-icon (like albums and songs),
+// but they get "Vew more" symbol - which opens Discography.
 li .image-container-artist {
   position: relative;
   display: inline-block;
@@ -812,10 +801,10 @@ li .image-container-artist::before {
   background-size: cover; /* set picture image according to the container */
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0; /* set transparency innitially to 0 */
+  opacity: 0; /* set transparency initially to 0 */
   transition: opacity 0.3s ease; /* smooth effect change */
 
-  /* Transformacija za centriranje slike */
+  /* Transformation for centering the image: */
   transform: translate(-50%, -50%);
 }
 
@@ -927,8 +916,6 @@ button {
 }
 
 .spotify:hover {
-  // color: #840f6a;
-  // color: #1b8e38;
   // background: -webkit-linear-gradient(#eee, #840f6a);
   color: $fontColor2;
   cursor: pointer;
@@ -941,33 +928,15 @@ button {
   // background: -webkit-radial-gradient(to top left, #4dc628, #0f844a);  // too dark, not ok
   // -webkit-background-clip: text;
   // -webkit-text-fill-color: transparent;
-  // color: #1b8e38;
-  // text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
 }
 
 .purple-hover:hover {
   color: rgb(164, 52, 84);
-  //   // background: linear-gradient(to right, rgb(196, 164, 192), #b678cc);
-  //   background: linear-gradient(to right, rgb(222, 105, 204), rgb(229, 229, 235));
-  //   // color: transparent;
-  //     background-clip: text;
-  //     -webkit-text-fill-color: transparent;
-  //   // background-clip: text;
-  //   // -webkit-text-fill-color: transparent;
-  //   // -webkit-text-fill-color: rgb(222, 105, 204);
 }
 
 .blue-hover:hover {
   color: rgb(38, 101, 174);
 }
-// .purpe-hover:hover {
-//   display: inline-block;
-//     background: linear-gradient(to top left,#ff75c3,#ffa647,#ffe83f,#9fff5b,#70e2ff,#cd93ff) !important;
-//     -webkit-background-clip: text !important;
-//             background-clip: text !important;
-//     -webkit-text-fill-color: transparent !important;
-//     color: transparent;
-// }
 
 .spotify-embed-container {
   display: block;
@@ -1024,6 +993,9 @@ iframe {
   }
   .show-more-button {
     width: 40%;
+  }
+  li p {
+    max-width: 30%;
   }
 }
 
@@ -1096,9 +1068,6 @@ iframe {
   .last-container {
     font-size: 0.8rem;
   }
-  li p {
-    max-width: 30%;
-  }
 }
 
 @media (max-width: 1150px) {
@@ -1109,10 +1078,6 @@ iframe {
     flex-basis: 30%;
     margin: 1% auto;
   }
-
-  // h1 {
-  //   font-size: 3.3rem;
-  // }
 
   h3 {
     font-size: 1.9rem;
@@ -1468,13 +1433,6 @@ iframe {
     height: 200px;
   }
 
-  // button,
-  // input,
-  // .favorite-button,
-  // .remove-button, .show-more-button {
-  //   width: 60%;
-  // }
-
   h1 {
     font-size: 2.7rem;
   }
@@ -1496,24 +1454,24 @@ iframe {
   .result-category {
     font-size: 1.3rem;
   }
-  // NEW
+
   .flex-container-tracks .play-button {
     width: 130px;
   }
-  // NEW
+
   .flex-container-tracks .show-more-button {
     width: 130px;
   }
-  // NEW
+
   .result-image {
     width: 150px;
     height: 150px;
   }
-  // NEW
+
   #search-all-input {
     width: 90% !important;
   }
-  // NEW
+
   #search-all-button {
     width: 90% !important;
   }
