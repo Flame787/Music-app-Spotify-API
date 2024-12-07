@@ -152,7 +152,7 @@
 
     function saveTheme(themeName) {
       localStorage.setItem("selectedTheme", themeName);
-      console.log("Tema spremljena:", themeName);
+      console.log("Theme saved:", themeName);
     }
 
     function loadTheme() {
