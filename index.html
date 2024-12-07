@@ -38,7 +38,9 @@
           alt="application icon"
         />
       </div>
-      <div id="nav-title"><span class="purple">Music</span><span class="blue"> domain</span></div>
+      <div id="nav-title">
+        <span class="purple">Music</span><span class="blue"> domain</span>
+      </div>
       <nav id="navbar">
         <div id="nav-list">
           <button
@@ -187,7 +189,6 @@
 
         <!-- NEW 29.11. - EMBED CONTAINER: -->
         <div id="spotify-embed-container" class="flex-container">
-          
           <!-- embed preview-player will be inserted dinamically -->
         </div>
 
@@ -230,7 +231,9 @@
           </div>
 
           <div class="flex-item" id="current-play">
-            <div class="mute-icon"><img src="/pictures/audio-mute-icon2.png" alt="mute-icon"></div>
+            <div class="mute-icon">
+              <img src="/pictures/audio-mute-icon2.png" alt="mute-icon" />
+            </div>
             <p><label for="album">No track or album selected.</label></p>
             <!-- <div class="current-track"> -->
 
@@ -330,11 +333,48 @@
       <div class="owner align-center">
         &copy;
         <span id="copyright">
-            <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
+          <script>
+            document
+              .getElementById("copyright")
+              .appendChild(document.createTextNode(new Date().getFullYear()));
+          </script>
         </span>
         Marina Brezovic
-    </div>
-
+        <span class="spotify"
+          ><a href="https://open.spotify.com/" target="_blank"
+            ><img
+              class="spotify-logo"
+              src="pictures/Spotify_Logo_Green.png"
+              alt="spotify-logo"
+              name="Spotify" /></a
+        ></span>
+        <span class="linkedin"
+          ><a
+            href="https://linkedin.com/in/marina-brezovic-210b583b"
+            target="_blank"
+            ><img
+              class="linkedin-logo"
+              src="pictures/Linkedin_Logo.png"
+              alt="linkedin-logo"
+              name="LinkedIn" /></a
+        ></span>
+        <span class="facebook"
+          ><a href="https://facebook.com/" target="_blank"
+            ><img
+              class="facebook-logo"
+              src="pictures/Facebook_Logo.png"
+              alt="facebook-logo"
+              name="Facebook" /></a
+        ></span>
+        <span class="instagram"
+          ><a href="https://www.instagram.com/" target="_blank"
+            ><img
+              class="instagram-logo"
+              src="pictures/Instagram_Logo.png"
+              alt="instagram-logo"
+              name="Instagram" /></a
+        ></span>
+      </div>
     </footer>
 
     <script src="/index.js"></script>

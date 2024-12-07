@@ -181,7 +181,7 @@ h3 {
 
 #nav-title {
   font-family: $poppins !important;
- 
+
   color: $fontColor2;
   @include nav-title();
   flex-basis: 12%;
@@ -428,17 +428,18 @@ audio::-webkit-media-controls-volume-slider {
   margin: 8% auto 3%;
 }
 
-.item-card3, .favorite-message {
+.item-card3,
+.favorite-message {
   max-width: 90%;
   font-size: smaller;
   gap: 5%;
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.button50{
+.button50 {
   width: 44%;
 }
 
@@ -627,8 +628,6 @@ hr {
   font-size: 1rem;
   margin-top: 3px;
 }
-
-
 
 .result-category {
   width: 100%;
@@ -918,7 +917,10 @@ button {
   font-size: 1.1rem;
 }
 
-.spotify-logo {
+.spotify-logo,
+.facebook-logo,
+.linkedin-logo,
+.instagram-logo {
   width: 1.8rem;
   height: auto;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
@@ -979,11 +981,9 @@ iframe {
   height: 15rem;
 }
 
-.last-container{
-font-size: 1rem;
+.last-container {
+  font-size: 1rem;
 }
-
-
 
 // MEDIA QUERIES:
 
@@ -1092,6 +1092,12 @@ font-size: 1rem;
   .li-item-style {
     margin-bottom: 0%;
     padding-bottom: 1%;
+  }
+  .last-container {
+    font-size: 0.8rem;
+  }
+  li p {
+    max-width: 30%;
   }
 }
 
@@ -1451,6 +1457,9 @@ font-size: 1rem;
   .item-card2 {
     // gap: 7%;
     flex-direction: column;
+  }
+  .last-container {
+    font-size: 0.7rem;
   }
 }
 

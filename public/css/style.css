@@ -1047,7 +1047,8 @@ audio::-webkit-media-controls-volume-slider {
   margin: 8% auto 3%;
 }
 
-.item-card3, .favorite-message {
+.item-card3,
+.favorite-message {
   max-width: 90%;
   font-size: smaller;
   gap: 5%;
@@ -1541,7 +1542,10 @@ button:hover {
   font-size: 1.1rem;
 }
 
-.spotify-logo {
+.spotify-logo,
+.facebook-logo,
+.linkedin-logo,
+.instagram-logo {
   width: 1.8rem;
   height: auto;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
@@ -1661,6 +1665,12 @@ iframe {
   .li-item-style {
     margin-bottom: 0%;
     padding-bottom: 1%;
+  }
+  .last-container {
+    font-size: 0.8rem;
+  }
+  li p {
+    max-width: 30%;
   }
 }
 @media (max-width: 1150px) {
@@ -1970,6 +1980,9 @@ iframe {
   }
   .item-card2 {
     flex-direction: column;
+  }
+  .last-container {
+    font-size: 0.7rem;
   }
 }
 @media (max-width: 512px) {
