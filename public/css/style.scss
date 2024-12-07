@@ -654,7 +654,7 @@ hr {
 
 .li-item-style {
   padding: 0 1% 2%;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .flex-container-ol {
@@ -979,10 +979,11 @@ iframe {
   height: 15rem;
 }
 
-// .mute-icon{
-//   // width: 1rem;
-//   // height: auto;
-// }
+.last-container{
+font-size: 1rem;
+}
+
+
 
 // MEDIA QUERIES:
 
@@ -1020,6 +1021,9 @@ iframe {
   }
   #sound-pic {
     width: 11rem;
+  }
+  .show-more-button {
+    width: 40%;
   }
 }
 
