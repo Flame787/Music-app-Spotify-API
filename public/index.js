@@ -449,7 +449,7 @@
             img.src = item.images[0].url; // set the image url as source
           } else {
             // If no picture available, show a generic placeholder image:
-            img.src = "./pictures/image-placeholder.jpg"; // path to my placeholder image
+            img.src = "./pictures/image-placeholder3.png"; // path to my placeholder image
           }
           img.alt = `${item.name} Artist`;
           img.classList.add("result-image");
@@ -629,7 +629,7 @@
       if (image) {
         img.src = image;
       } else {
-        img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+        img.src = "./pictures/image-placeholder3.png"; // Placeholder if no image
       }
       img.alt = `${album} Album Cover`;
       img.classList.add("result-image-playing");
@@ -705,7 +705,7 @@
             // div.appendChild(img);
             // div.classList.add("image-container");
           } else {
-            img.src = "./pictures/image-placeholder.jpg"; // placeholder, if no image available
+            img.src = "./pictures/image-placeholder3.png"; // placeholder, if no image available
           }
 
           img.alt = `${item.name} Album Cover`;
@@ -905,7 +905,7 @@
             if (album.images && album.images.length > 0) {
               img.src = album.images[0].url;
             } else {
-              img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+              img.src = "./pictures/image-placeholder3.png"; // Placeholder if no image
             }
             img.alt = `${album.name} Album Cover`;
             img.classList.add("result-image");
@@ -1054,7 +1054,7 @@
         if (albumImageUrl) {
           img.src = albumImageUrl;
         } else {
-          img.src = "./pictures/image-placeholder.jpg"; // placeholder, if no image available
+          img.src = "./pictures/image-placeholder3.png"; // placeholder, if no image available
         }
         img.alt = `${albumName} Album Cover`;
         img.classList.add("result-image");
@@ -1409,7 +1409,7 @@
           if (albumImageUrl) {
             img.src = albumImageUrl;
           } else {
-            img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+            img.src = "./pictures/image-placeholder3.png"; // Placeholder if no image
           }
 
           img.alt = `${albumName} Album Cover`;
@@ -1535,7 +1535,7 @@
             if (previewCover) {
               img.src = previewCover;
             } else {
-              img.src = "./pictures/image-placeholder.jpg"; // Placeholder if no image
+              img.src = "./pictures/image-placeholder3.png"; // Placeholder if no image
             }
 
             img.alt = `${previewAlbum} Album Cover`;

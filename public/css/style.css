@@ -39,7 +39,7 @@ body.theme9 {
   background-image: url("../pictures/abstract-green.jpg") !important;
 }
 body.theme10 {
-  background-image: url("../pictures/forest11.jpg") !important;
+  background-image: url("../pictures/forest12.png") !important;
 }
 body.theme11 {
   background-image: url("../pictures/view-water3.jpg") !important;
@@ -954,7 +954,7 @@ select option {
 }
 
 #search-form {
-  width: 50%;
+  width: 40%;
   margin: 2% auto;
 }
 
@@ -1464,7 +1464,6 @@ li .image-container-artist img {
 }
 
 .play-button {
-  margin-top: 5%;
   font-size: 1.1rem;
   width: 30%;
 }
@@ -1483,7 +1482,7 @@ li .image-container-artist img {
 }
 
 .search-category {
-  margin: 30px auto 0%;
+  margin: 0% auto;
 }
 
 #form-results-container {
@@ -1492,8 +1491,8 @@ li .image-container-artist img {
 
 #flex-search-category {
   margin-bottom: 2%;
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 #search-all-button {
@@ -1605,6 +1604,9 @@ iframe {
   #nav-list button:last-child {
     margin-right: 150px;
   }
+  h1 {
+    font-size: 3.3rem;
+  }
   #nav-list button {
     margin: 0 40px;
   }
@@ -1662,9 +1664,6 @@ iframe {
     flex-basis: 30%;
     margin: 1% auto;
   }
-  h1 {
-    font-size: 3.3rem;
-  }
   h3 {
     font-size: 1.9rem;
     padding: 0%;
@@ -1676,8 +1675,8 @@ iframe {
     margin: 4% auto 8%;
   }
   #flex-search-category {
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
   }
   .larger-font {
     font-size: 2.8rem;
