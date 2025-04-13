@@ -19,8 +19,11 @@ const __dirname = path.dirname(__filename);
 // Initialize Express app:
 const app = express();
 
+// serve static files:
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Define port:
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 // Client ID & Client Secret securely saved in the .env file, fetched here via variables:
 const clientId = process.env.client_id;
@@ -30,7 +33,7 @@ const clientSecret = process.env.client_secret;
 // const redirect_uri = "http://localhost:3000/callback";
 // *if using SDK player, it's very important that the callback link (redirect page after user login) is localhost:3000/callback
 // but for client authorisation we can use simply this redirect_uri:
-const redirect_uri = "http://localhost:3000";
+const redirect_uri = "http://localhost:4000";
 // -> the same link should be also set in Spotify Dashboard (Settings) as redirect-link!
 
 const auth_endpoint = "https://accounts.spotify.com/authorize";
@@ -388,4 +391,4 @@ app.listen(PORT, () => {
 // node server.js  -OR-  nodemon server.js (if Nodemon installed)
 
 // Result, if status ok:
-// Server is running on port 3000
+// Server is running on port 4000

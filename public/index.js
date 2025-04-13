@@ -170,7 +170,10 @@
             selectedOption.textContent;
         }
       } else {
-        console.log("Saved theme missing.");
+        const defaultTheme = themes[0];
+        changeTheme(defaultTheme);
+        // console.log("Saved theme missing.");
+        console.log("Default theme applied:", defaultTheme);
       }
     }
 
@@ -1482,7 +1485,7 @@
       // NEW 24.11.:
       playAndUpdateFavTrack(); // function which adds event-listener to play-buttons
 
-      console.log("Here executes the createTask function.");
+      // console.log("Here executes the createTask function.");
       return item;
     }
 
@@ -1590,7 +1593,7 @@
       addIf(item);
 
       // list.appendChild(item);
-      console.log("Here was executed the addTask function.");
+      // console.log("Here was executed the addTask function.");
 
       saveLists();
       console.log(
