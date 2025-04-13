@@ -187,7 +187,7 @@
       >
         <p id="currently-playing" class="flex-container">Currently playing:</p>
 
-        <!-- NEW 29.11. - EMBED CONTAINER: -->
+        <!-- EMBED CONTAINER: -->
         <div id="spotify-embed-container" class="flex-container">
           <!-- embed preview-player will be inserted dinamically -->
         </div>
@@ -260,16 +260,6 @@
             </p>
           </div>
 
-          <!-- <div id="add-to-playlist hidden-element" class="flex-item">
-            <p></p>
-            <button
-              type="submit"
-              id="player-add-to-playlist"
-              class="input-button add-button button nav-button hidden-element"
-            >
-              Add to favorites
-            </button>
-          </div> -->
         </div>
       </form>
 
@@ -317,16 +307,6 @@
       <ul id="added-list"></ul>
     </div>
 
-    <!-- <div>
-      <div id="first-container">
-        <h2>My favorite lists</h2>
-        
-        <div id="fav_lists">
-          <h2 id="new-title">Favorite albums:</h2>
-          <ul id="fav_albums"></ul>
-        </div>
-      </div>
-    </div> -->
 
     <footer class="last-container">
       <br />
@@ -385,7 +365,8 @@
 <!-- Node.js added - new file 'server.js' added. 
 'public' file added. 
 Whole CSS, index.js and pictures are now in folder 'public'.
-All paths in html and in themes.scss were changed: '/'' was added in front (so the page works only on localhost:3000, not as usually in browser). 
+All paths in html and in themes.scss were changed: '/'' was added in front 
+(so the page works only on localhost:4000). 
 Additional dependencies installed in package.json: cors, dotenv, express.
 Nodemon installed to refresh server with each code change.
 To start the page on localhost:4000, open bash and enter command: 
