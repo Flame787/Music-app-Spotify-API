@@ -7,3 +7,20 @@ This app uses Vanilla Javascript ES6 on frontend, Express.js on backend (for Spo
 To start the app locally:
 1. Install dependencies: npm install
 2. Start the backend server: node server.js
+
+-------------------------------------------------------------------------------------------------------------
+
+Project structure:
+
+root/
+├── public/
+│   ├── css/
+│   │   └── style.css
+│   ├── pictures/
+│   └── index.js
+├── .env
+├── .gitignore
+├── favorites.html
+├── index.html
+├── package.json
+└── server.js

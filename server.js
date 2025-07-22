@@ -41,7 +41,7 @@ const response_type = "token";
 
 // Middleware:
 app.use(cors());
-app.use(express.static("public"));
+// app.use(express.static("public"));
 // - for stacit files (pictures etc), index.JS, all CSS files - in map 'public' -> Express serves them at request
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true })); // Parsing the body of our request into URL
