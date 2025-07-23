@@ -1779,11 +1779,22 @@ iframe {
   }
 }
 @media (max-width: 908px) {
+  .red {
+    height: 130px;
+  }
   #nav-title {
     font-size: 1.4rem;
   }
+  #nav-list button {
+    margin: 5px 15px;
+  }
   .result-flex-item div {
     font-size: 1rem !important;
+  }
+}
+@media (max-width: 889px) {
+  .red {
+    height: 150px;
   }
 }
 @media (max-width: 880px) {
@@ -1793,6 +1804,9 @@ iframe {
   #nav-list button,
   select {
     margin: 0 15px;
+  }
+  #nav-list button {
+    margin: 5px 15px;
   }
   #nav-title {
     font-size: 1.4rem;
@@ -1843,7 +1857,7 @@ iframe {
     font-size: 1rem;
   }
   .red {
-    height: 200px;
+    height: 180px;
   }
   .flex-item {
     flex-basis: 70%;
@@ -1986,10 +2000,18 @@ iframe {
   .last-container {
     font-size: 0.7rem;
   }
+  .nav-button {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 570px) {
+  .red {
+    height: 300px;
+  }
 }
 @media (max-width: 512px) {
   .red {
-    height: 200px;
+    height: 300px;
   }
   h1 {
     font-size: 2.7rem;
