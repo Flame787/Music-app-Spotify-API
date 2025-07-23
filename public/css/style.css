@@ -1306,7 +1306,7 @@ hr {
 }
 
 .li-item-style {
-  padding: 0 1% 2%;
+  padding: 0 5% 2%;
   font-size: 1.1rem;
 }
 
@@ -1586,6 +1586,11 @@ iframe {
   margin-bottom: 0.5rem;
 }
 
+#discography-button {
+  padding: 0 5px;
+  width: 50%;
+}
+
 .hidden-element {
   display: none;
 }
@@ -1614,6 +1619,10 @@ iframe {
   }
   li p {
     max-width: 30%;
+  }
+  #discography-button {
+    padding: 0 5px;
+    width: 50%;
   }
 }
 @media (max-width: 1540px) {
@@ -1673,6 +1682,10 @@ iframe {
   }
   .last-container {
     font-size: 0.8rem;
+  }
+  #discography-button {
+    padding: 0 5px;
+    width: 50%;
   }
 }
 @media (max-width: 1150px) {
@@ -1906,6 +1919,10 @@ iframe {
   .show-more-button {
     width: 70%;
   }
+  #discography-button {
+    padding: 0 5px;
+    width: 70%;
+  }
   button {
     margin-top: 5%;
     padding: 0%;
@@ -2008,6 +2025,10 @@ iframe {
   .red {
     height: 300px;
   }
+  #discography-button {
+    padding: 0 5px;
+    width: 80%;
+  }
 }
 @media (max-width: 512px) {
   .red {
@@ -2058,6 +2079,10 @@ iframe {
     padding-top: 1%;
     padding-bottom: 1%;
     width: 60%;
+  }
+  #discography-button {
+    padding: 0 5px;
+    width: 90%;
   }
 }
 @media (max-width: 389px) {
