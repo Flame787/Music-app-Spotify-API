@@ -1547,8 +1547,12 @@ iframe {
 @media (max-width: 389px) {
   // Iphone SE: 375 X 667
   .red {
-    height: 200px;
+    height: 300px;
   }
+  a.ancor-style {
+    font-size: 1rem;
+  }
+
   .flex-container-tracks li div {
     width: 150px;
   }
@@ -1575,8 +1579,8 @@ iframe {
   }
 }
 
-@media (max-width: 360px) {
-   .red {
-    height: 200px;
-  }
-}
+// @media (max-width: 360px) {
+//    .red {
+//     height: 200px;
+//   }
+// }
