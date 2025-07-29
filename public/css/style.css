@@ -2087,11 +2087,6 @@ iframe {
     padding: 0 5px;
     width: 90%;
   }
-}
-@media (max-width: 389px) {
-  .red {
-    height: 300px;
-  }
   a.ancor-style,
   .nav-button,
   .favorite-button,
@@ -2101,6 +2096,11 @@ iframe {
   .play-button,
   #search-all-button {
     font-size: 0.9rem;
+  }
+}
+@media (max-width: 389px) {
+  .red {
+    height: 300px;
   }
   .flex-container-tracks li div {
     width: 150px;

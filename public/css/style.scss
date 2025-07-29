@@ -852,7 +852,6 @@ li .image-container-artist img {
   display: none; // Element is hidden by default
 }
 
-
 #flex-search-category {
   margin-bottom: 2%;
   margin-left: 20%;
@@ -1546,16 +1545,6 @@ iframe {
     padding: 0 5px;
     width: 90%;
   }
-}
-
-@media (max-width: 389px) {
-  // Iphone SE: 375 X 667
-  .red {
-    height: 300px;
-  }
-  // a.ancor-style {
-  //   font-size: 1rem;
-  // }
 
   a.ancor-style,
   .nav-button,
@@ -1568,6 +1557,16 @@ iframe {
     font-size: 0.9rem;
     // padding: 1%;
   }
+}
+
+@media (max-width: 389px) {
+  // Iphone SE: 375 X 667
+  .red {
+    height: 300px;
+  }
+  // a.ancor-style {
+  //   font-size: 1rem;
+  // }
 
   .flex-container-tracks li div {
     width: 150px;
