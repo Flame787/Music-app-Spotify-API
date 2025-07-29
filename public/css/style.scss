@@ -852,6 +852,7 @@ li .image-container-artist img {
   display: none; // Element is hidden by default
 }
 
+
 #flex-search-category {
   margin-bottom: 2%;
   margin-left: 20%;
@@ -1477,7 +1478,7 @@ iframe {
     width: 80%;
   }
   #form-results-container {
-    width: 80%;
+    width: 80% !important;
   }
 }
 

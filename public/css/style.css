@@ -2030,7 +2030,7 @@ iframe {
     width: 80%;
   }
   #form-results-container {
-    width: 80%;
+    width: 80% !important;
   }
 }
 @media (max-width: 512px) {
