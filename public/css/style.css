@@ -2029,6 +2029,9 @@ iframe {
     padding: 0 5px;
     width: 80%;
   }
+  #form-results-container {
+    width: 80%;
+  }
 }
 @media (max-width: 512px) {
   .red {
@@ -2089,8 +2092,15 @@ iframe {
   .red {
     height: 300px;
   }
-  a.ancor-style {
-    font-size: 1rem;
+  a.ancor-style,
+  .nav-button,
+  .favorite-button,
+  .remove-button,
+  .submit-button,
+  .show-more-button,
+  .play-button,
+  #search-all-button {
+    font-size: 0.9rem;
   }
   .flex-container-tracks li div {
     width: 150px;
