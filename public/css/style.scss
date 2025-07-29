@@ -1261,7 +1261,7 @@ iframe {
 
   #nav-title {
     font-size: 1.2rem;
-    flex-basis: 90%;
+    flex-basis: 10%;
   }
 
   .remove-button {
@@ -1480,7 +1480,7 @@ iframe {
 
 @media (max-width: 512px) {
   .red {
-    height: 300px;
+    height: 200px;
   }
 
   h1 {
@@ -1547,7 +1547,7 @@ iframe {
 @media (max-width: 389px) {
   // Iphone SE: 375 X 667
   .red {
-    height: 300px;
+    height: 200px;
   }
   .flex-container-tracks li div {
     width: 150px;
@@ -1572,5 +1572,11 @@ iframe {
   iframe {
     width: 15rem;
     height: 15rem;
+  }
+}
+
+@media (max-width: 360px) {
+   .red {
+    height: 200px;
   }
 }
