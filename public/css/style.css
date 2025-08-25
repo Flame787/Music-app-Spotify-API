@@ -2097,6 +2097,10 @@ iframe {
   #search-all-button {
     font-size: 0.9rem;
   }
+  .main-title {
+    margin-left: 20px;
+    margin-right: 21px;
+  }
 }
 @media (max-width: 389px) {
   .red {
