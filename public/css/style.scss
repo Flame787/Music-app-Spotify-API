@@ -850,7 +850,7 @@ li .image-container-artist img {
 }
 
 .form-player .flex-item {
-  flex-basis: 40%;
+  flex-basis: 80%;
 }
 
 #form-results-container {
@@ -974,6 +974,11 @@ iframe {
 #discography-button {
   padding: 0 5px;
   width: 50%;
+}
+
+.playing-song-info {
+  flex-basis: 100%;
+  margin: 0;
 }
 
 // MEDIA QUERIES:
