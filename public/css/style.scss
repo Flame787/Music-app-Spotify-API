@@ -1243,7 +1243,7 @@ iframe {
   }
 
   #nav-list button {
-    margin: 5px 15px;
+    margin: 5px 10px;
   }
 
   #nav-title {
@@ -1479,9 +1479,15 @@ iframe {
   }
 }
 
+// @media (max-width: 760px) {
+//   #nav-list button {
+//     width: 6rem;
+//   }
+// }
+
 @media (max-width: 570px) {
   .red {
-    height: 300px;
+    height: 200px;
   }
   #discography-button {
     padding: 0 5px;
@@ -1576,9 +1582,9 @@ iframe {
 
 @media (max-width: 389px) {
   // Iphone SE: 375 X 667
-  .red {
-    height: 300px;
-  }
+  // .red {
+  //   height: 300px;
+  // }
   // a.ancor-style {
   //   font-size: 1rem;
   // }
@@ -1612,8 +1618,13 @@ iframe {
   }
 }
 
-// @media (max-width: 360px) {
-//    .red {
-//     height: 200px;
-//   }
-// }
+@media (max-width: 370px) {
+  // Iphone SE: 375 X 667
+  .red {
+    height: 200px;
+  }
+  #nav-list button {
+    width: 6rem;
+  }
+}
+

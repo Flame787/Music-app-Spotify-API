@@ -1831,7 +1831,7 @@ iframe {
     margin: 0 15px;
   }
   #nav-list button {
-    margin: 5px 15px;
+    margin: 5px 10px;
   }
   #nav-title {
     font-size: 1.4rem;
@@ -2035,7 +2035,7 @@ iframe {
 }
 @media (max-width: 570px) {
   .red {
-    height: 300px;
+    height: 200px;
   }
   #discography-button {
     padding: 0 5px;
@@ -2115,9 +2115,6 @@ iframe {
   }
 }
 @media (max-width: 389px) {
-  .red {
-    height: 300px;
-  }
   .flex-container-tracks li div {
     width: 150px;
   }
@@ -2143,5 +2140,13 @@ iframe {
   }
   h1 {
     font-size: 2rem;
+  }
+}
+@media (max-width: 370px) {
+  .red {
+    height: 200px;
+  }
+  #nav-list button {
+    width: 6rem;
   }
 }/*# sourceMappingURL=style.css.map */
