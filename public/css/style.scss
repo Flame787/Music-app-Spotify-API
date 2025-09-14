@@ -187,15 +187,25 @@ h3 {
   flex-basis: 12%;
 }
 
-.purple {
+.purple,
+.purple-nav {
   color: rgb(164, 52, 84);
   letter-spacing: 0.2px;
+  text-shadow: 2px 2px 2px rgb(244, 243, 228);
+}
+
+.blue,
+.blue-nav {
+  color: rgb(38, 101, 174);
+  letter-spacing: 0.2px;
+  text-shadow: 2px 2px 2px rgb(244, 243, 228);
+}
+
+.purple-nav {
   text-shadow: 1px 2px 2px rgb(244, 243, 228);
 }
 
-.blue {
-  color: rgb(38, 101, 174);
-  letter-spacing: 0.2px;
+.blue-nav {
   text-shadow: 1px 2px 2px rgb(244, 243, 228);
 }
 
@@ -1597,7 +1607,7 @@ iframe {
     width: 15rem;
     height: 15rem;
   }
-   h1 {
+  h1 {
     font-size: 2rem;
   }
 }
