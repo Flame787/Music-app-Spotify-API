@@ -1630,7 +1630,7 @@ iframe {
     width: 40%;
   }
   li p {
-    max-width: 30%;
+    max-width: 50%;
   }
   #discography-button {
     padding: 0 5px;
@@ -1679,7 +1679,7 @@ iframe {
     gap: 30px;
   }
   .flex-container-ol .result-flex-item {
-    flex-basis: 45% !important;
+    flex-basis: 75% !important;
   }
   .result-image {
     width: 200px;

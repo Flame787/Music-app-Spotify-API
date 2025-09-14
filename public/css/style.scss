@@ -684,6 +684,8 @@ hr {
   font-size: 1.3rem !important;
   font-weight: bold;
   padding: 2% 0;
+  // width: 150%;
+  // text-align: center;
 }
 
 .flex-container-tracks {
@@ -1015,7 +1017,7 @@ iframe {
     width: 40%;
   }
   li p {
-    max-width: 30%;
+    max-width: 50%;
   }
   #discography-button {
     padding: 0 5px;
@@ -1075,7 +1077,7 @@ iframe {
   }
 
   .flex-container-ol .result-flex-item {
-    flex-basis: 45% !important;
+    flex-basis: 75% !important;
   }
 
   .result-image {
