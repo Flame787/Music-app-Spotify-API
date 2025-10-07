@@ -679,6 +679,14 @@ hr {
   // margin-right: 5%;
 }
 
+.result-flex-item div {
+  padding: 2%;
+}
+
+.result-category {
+  padding: 2%;
+}
+
 .result-item-name {
   // font of the div-text (song name) in Track list (smaller on different media queries)
   font-size: 1.3rem !important;
@@ -1030,6 +1038,18 @@ iframe {
   }
 }
 
+@media (max-width: 1600px) {
+  .remove-button {
+    margin-top: 3% !important;
+  }
+  .play-button {
+    margin-bottom: 3% 
+  }
+  .item-card2 {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 1540px) {
   #nav-list button:last-child {
     margin-right: 150px;
@@ -1271,6 +1291,11 @@ iframe {
   .larger-font {
     font-size: 2.5rem;
   }
+
+  .remove-button {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
 }
 
 @media (max-width: 840px) {
@@ -1286,6 +1311,7 @@ iframe {
   .remove-button {
     margin: 3%;
   }
+
   h1 {
     font-size: 2.9rem;
   }
