@@ -19,7 +19,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-   
+
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
@@ -102,7 +102,7 @@
         </div>
       </div>
 
-      <!-- 1st form: Search: REMOVED, not needed on this page -->
+      <!-- 1st form: Search: REMOVED, not used on this 2nd page (but needed to avoid errors if different file structure) -->
 
       <form
         action=""
@@ -185,37 +185,6 @@
           <div class="flex-item hidden-element" id="music-player">
             <div id="music-wrapper">
               <audio controls id="audio-player"></audio>
-              <div id="controls">
-                <div id="prev-button">
-                  <img
-                    id="prev-icon"
-                    src="/pictures/prev-button.png"
-                    alt="previous-button"
-                  />
-                </div>
-                <div id="sound-pic">
-                  <img
-                    id="sound-pic"
-                    src="/pictures/sound-bars.png"
-                    alt="sound-bars-img"
-                  />
-                </div>
-                <!-- instead sound-pic, when audio-player is playing, there will be sound-gif moving: -->
-                <div id="sound-bars" style="display: none">
-                  <img
-                    id="sound-gif"
-                    src="/pictures/sound-bars.gif"
-                    alt="sound-bars"
-                  />
-                </div>
-                <div id="next-button">
-                  <img
-                    id="next-icon"
-                    src="/pictures/next-button.png"
-                    alt="next-button"
-                  />
-                </div>
-              </div>
             </div>
           </div>
 
@@ -231,38 +200,10 @@
 
             <!-- </div> -->
           </div>
-
-          <div class="flex-item hidden-element" id="forth-input">
-            <p><label for="review">Rate (1-10):</label></p>
-            <p>
-              <input
-                class="input-color"
-                type="number"
-                id="review"
-                name="review"
-                pattern="[1-10]"
-                min="1"
-                max="10"
-                size="25"
-                required
-              />
-            </p>
-          </div>
-
-          <!-- <div id="add-to-playlist" class="flex-item">
-            <p></p>
-            <button
-              type="submit"
-              id="player-add-to-playlist"
-              class="input-button add-button button nav-button"
-            >
-              Add to favorites
-            </button>
-          </div> -->
         </div>
       </form>
 
-      <!-- 3rd form - Results of the Search: -->
+      <!-- 3rd form - Results of the Search: (although not visible on My Playlist page) -->
 
       <form
         action=""
@@ -274,25 +215,6 @@
           <p id="search-results" tabindex="0">Results:</p>
           <div id="results-container" class="flex-container-results">
             <!-- <ol class="flex-container-ol"> -->
-            <!-- ovdje se formira lista s rednim brojevima (ol), u kojoj su podsekcije:
-               Artists:
-               ...
-               Albums:
-               ...
-               Songs:
-               ...
-          
-               Each subsection contains a certain number (limit) of list-items (up to max 20 results currently).
-               For albums and songs - each individual result (li) gets a Play button at the end of its line!
-               Each artist has this information: artist, genres, image. 
-               Clicking on the button underneath (Discography) we can open his albums (other results disappear), 
-               the names of albums are displayed in order (up to max 9 results, with pictures of the corresponding album covers).
-               Click on album opens it's tracks. Tracks have buttons: Play and Add to playlist.
-               
-               Each album has this information: name of the album, artist, release date, number of songs, cover image of the album.
-               Each song has the following information: artist, album, album cover image. 
-
-              -->
             <!-- </ol> -->
           </div>
         </div>
@@ -305,17 +227,6 @@
       </div>
       <ul id="added-list"></ul>
     </div>
-
-    <!-- <div>
-      <div id="first-container">
-        <h2>My favorite lists</h2>
-
-        <div id="fav_lists">
-          <h2 id="new-title">Favorite albums:</h2>
-          <ul id="fav_albums"></ul>
-        </div>
-      </div>
-    </div> -->
 
     <footer class="last-container">
       <br />
