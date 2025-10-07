@@ -224,23 +224,6 @@
 
             <!-- </div> -->
           </div>
-
-          <div class="flex-item hidden-element" id="forth-input">
-            <p><label for="review">Rate (1-10):</label></p>
-            <p>
-              <input
-                class="input-color"
-                type="number"
-                id="review"
-                name="review"
-                pattern="[1-10]"
-                min="1"
-                max="10"
-                size="25"
-                required
-              />
-            </p>
-          </div>
         </div>
       </form>
 
@@ -281,6 +264,7 @@
       </form>
     </div>
 
+    <!-- this section is showing only on My Playlist - 2nd page (but needed here to avoid errors in JS): -->
     <div id="favorite-items" class="hidden-element">
       <div class="visible-title2 title-theme">
         <h2 id="new-title">Favorite songs:</h2>
@@ -346,7 +330,6 @@
             />
           </a>
         </span>
-        
       </div>
     </footer>
 
