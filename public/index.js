@@ -1,5 +1,12 @@
 import { setupNavbar } from "./modules/navbar.js";
 
+import { setupThemeManager } from "./modules/themes.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  setupNavbar();
+  setupThemeManager();
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   setupNavbar();
 });
@@ -25,150 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function createDiv() {
       return document.createElement("div");
     }
-
-
-    ///////////////////////////////////   Themes   ///////////////////////////////////////////
-
-    const themes = [
-      "theme0",
-      "theme1",
-      "theme2",
-      "theme3",
-      "theme4",
-      "theme5",
-      "theme6",
-      "theme7",
-      "theme8",
-      "theme9",
-      "theme10",
-      "theme11",
-      "theme12",
-      "theme13",
-      "theme14",
-      "theme15",
-    ];
-
-    // Function for changing the theme:
-    function changeTheme(themeName) {
-      const body = document.body;
-
-      // Remove existing (previous) themes:
-      themes.forEach((theme) => {
-        body.classList.remove(theme);
-        document
-          .querySelectorAll(
-            ".nav-button, .favorite-button, #theme_color, option"
-          )
-          .forEach((element) => {
-            element.classList.remove(theme);
-          });
-        document.querySelectorAll(".remove-button").forEach((button) => {
-          button.classList.remove(theme);
-        });
-        document.querySelectorAll(".form-theme").forEach((form) => {
-          form.classList.remove(theme);
-        });
-        document.querySelectorAll(".title-theme").forEach((title) => {
-          title.classList.remove(theme);
-        });
-        document.querySelectorAll(".input-color").forEach((input) => {
-          input.classList.remove(theme);
-        });
-        document.querySelectorAll(".header-style").forEach((input) => {
-          input.classList.remove(theme);
-        });
-        document.querySelectorAll(".thin").forEach((text) => {
-          text.classList.remove(theme);
-        });
-      });
-
-      // Add newly selected theme style:
-      body.classList.add(themeName);
-      document
-        .querySelectorAll(".nav-button, .favorite-button, #theme_color, option")
-        .forEach((button) => {
-          button.classList.add(themeName);
-        });
-      document.querySelectorAll(".remove-button").forEach((button) => {
-        button.classList.add(themeName);
-      });
-      document.querySelectorAll(".form-theme").forEach((form) => {
-        form.classList.add(themeName);
-      });
-      document.querySelectorAll(".title-theme").forEach((title) => {
-        title.classList.add(themeName);
-      });
-      document.querySelectorAll(".input-color").forEach((input) => {
-        input.classList.add(themeName);
-      });
-      document.querySelectorAll(".header-style").forEach((input) => {
-        input.classList.add(themeName);
-      });
-      document.querySelectorAll(".thin").forEach((text) => {
-        text.classList.add(themeName);
-      });
-    }
-
-    // Dropdown for theme-picking (instead of select-element):
-    document
-      .querySelector(".dropdown-toggle")
-      .addEventListener("click", function () {
-        const menu = document.querySelector(".dropdown-menu");
-        menu.classList.toggle("show");
-      });
-
-    // Hide dropdown on click outside of it:
-    document.addEventListener("click", function (event) {
-      if (
-        !document.querySelector(".dropdown-toggle").contains(event.target) &&
-        !document.querySelector(".dropdown-menu").contains(event.target)
-      ) {
-        document.querySelector(".dropdown-menu").classList.remove("show");
-      }
-    });
-
-    function saveTheme(themeName) {
-      localStorage.setItem("selectedTheme", themeName);
-      console.log("Theme saved:", themeName);
-    }
-
-    function loadTheme() {
-      const savedTheme = localStorage.getItem("selectedTheme");
-      if (savedTheme) {
-        changeTheme(savedTheme); // calls the function for theme-change
-        console.log("Saved theme loaded:", savedTheme);
-
-        // When a theme is chosen, show it's name in dropdown-button:
-        const selectedOption = document.querySelector(
-          `.dropdown-menu li[data-value="${savedTheme}"]`
-        );
-        if (selectedOption) {
-          document.querySelector(".dropdown-toggle").textContent =
-            selectedOption.textContent;
-        }
-      } else {
-        const defaultTheme = themes[0];
-        changeTheme(defaultTheme);
-        // console.log("Saved theme missing.");
-        console.log("Default theme applied:", defaultTheme);
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      loadTheme(); // Automatically applies/loads saved theme
-    });
-
-    // Add functionality to choose options/themes:
-    document.querySelectorAll(".dropdown-menu li").forEach(function (option) {
-      option.addEventListener("click", function () {
-        const themeName = option.getAttribute("data-value");
-        document.querySelector(".dropdown-toggle").textContent =
-          option.textContent;
-        document.querySelector(".dropdown-menu").classList.remove("show");
-        changeTheme(themeName);
-        saveTheme(themeName);
-      });
-    });
 
     /////////////////////////////   CODE FOR FETCHING ARTISTS, ALBUMS AND SONGS:   /////////////////////////////
 
