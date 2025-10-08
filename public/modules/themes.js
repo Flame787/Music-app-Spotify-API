@@ -21,9 +21,11 @@ const themes = [
   "theme15",
 ];
 
+// Function for changing the theme: 
 function changeTheme(themeName) {
   const body = document.body;
 
+  // Remove all existing theme classes:
   themes.forEach((theme) => {
     body.classList.remove(theme);
     document
@@ -36,6 +38,7 @@ function changeTheme(themeName) {
       .forEach((el) => el.classList.remove(theme));
   });
 
+  // Add the newly selected theme style:
   body.classList.add(themeName);
   document
     .querySelectorAll(".nav-button, .favorite-button, #theme_color, option")
@@ -47,19 +50,21 @@ function changeTheme(themeName) {
     .forEach((el) => el.classList.add(themeName));
 }
 
+// Function to save the selected theme to localStorage:
 function saveTheme(themeName) {
   localStorage.setItem("selectedTheme", themeName);
 }
 
+// Function to load the saved theme from localStorage (or default theme):
 function loadTheme() {
   const savedTheme = localStorage.getItem("selectedTheme");
   const defaultTheme = themes[0];
-  const themeToApply = savedTheme || defaultTheme;
+  const themeToUse = savedTheme || defaultTheme;
 
-  changeTheme(themeToApply);
+  changeTheme(themeToUse);
 
   const selectedOption = document.querySelector(
-    `.dropdown-menu li[data-value="${themeToApply}"]`
+    `.dropdown-menu li[data-value="${themeToUse}"]`
   );
   if (selectedOption) {
     document.querySelector(".dropdown-toggle").textContent =
@@ -67,6 +72,7 @@ function loadTheme() {
   }
 }
 
+// Dropwown menu for theme-picking: 
 function setupThemeDropdown() {
   document.querySelector(".dropdown-toggle").addEventListener("click", () => {
     document.querySelector(".dropdown-menu").classList.toggle("show");
@@ -93,6 +99,7 @@ function setupThemeDropdown() {
   });
 }
 
+// Export/ Initialize the theme manager:
 export function setupThemeManager() {
   loadTheme();
   setupThemeDropdown();

@@ -477,31 +477,18 @@ document.addEventListener("DOMContentLoaded", () => {
               .getElementById("currently-playing")
               .scrollIntoView({ behavior: "smooth", block: "start" });
 
-            if (item.id) {
-              currentTrackIndex = 0; // set tracks index to the 1st song: [0]
-              playTrack(item.id); // calling the basic function to play current song index // changed to 'item.id'
+            playTrack(item.id); // calling the basic function to play current song index // changed to 'item.id'
 
-              updateSongPlayingInfo(
-                item.name,
-                item.artists[0].name,
-                item.album.name,
-                item.album.images[0].url
-              );
-              // info on currently playing track
+            updateSongPlayingInfo(
+              item.name,
+              item.artists[0].name,
+              item.album.name,
+              item.album.images[0].url
+            );
+            // info on currently playing track
 
-              document.getElementById("sound-pic").style.display = "none"; // static animation-picture is removed
-              document.getElementById("sound-bars").style.display = "block"; // dynamic animation starts to move
-            } else {
-              console - log("Cannot fetch id:", item.id);
-              audioPlayer.pause();
-              updateSongPlayingInfo(
-                // show track info, even if the song preview cannot be played.
-                item.name,
-                item.artists[0].name,
-                item.album.name,
-                item.album.images[0].url
-              );
-            }
+            document.getElementById("sound-pic").style.display = "none"; // static animation-picture is removed
+            document.getElementById("sound-bars").style.display = "block"; // dynamic animation starts to move
           });
 
           // Create a <div> for the text and append it
@@ -978,8 +965,6 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         });
 
-        let currentTrackIndex = 0;
-
         // function to update info on currently playing track (when playing the whole album):
         function updateCurrentlyPlayingInfo(trackIndex) {
           // Showing the cover of currently playing track's album:
@@ -1305,6 +1290,33 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       itemCardDiv.appendChild(playButton);
 
+      // NEW 08.10.
+
+      // Adding event-listener to the play-button on each list-item:
+      playButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        document
+          .getElementById("currently-playing")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+
+        const listItem = event.currentTarget.closest("li");
+        const songText = listItem.querySelector(".song")?.textContent ?? "";
+        const artistText = listItem.querySelector(".artist")?.textContent ?? "";
+        const albumText = listItem.querySelector(".album")?.textContent ?? "";
+        const imageText =
+          listItem.querySelector(".hidden-element.image")?.textContent ?? "";
+        const idText =
+          listItem.querySelector(".hidden-element.id")?.textContent ?? "";
+
+        if (!idText) {
+          console.warn("Track ID not found in item.");
+          return;
+        }
+
+        playTrack(idText);
+        updateSongPlayingInfo(songText, artistText, albumText, imageText);
+      });
+
       function addRemoveButton(itemCardDiv) {
         const removeButton = document.createElement("button");
 
@@ -1323,77 +1335,11 @@ document.addEventListener("DOMContentLoaded", () => {
       addRemoveButton(itemCardDiv);
 
       // NEW 24.11.:
-      playAndUpdateFavTrack(); // function which adds event-listener to play-buttons
-
-      // console.log("Here executes the createTask function.");
+      // playAndUpdateFavTrack(); // function which adds event-listener to play-buttons
       return item;
     }
 
-    function playAndUpdateFavTrack() {
-      let index = 0; // order-number of the song on the album
-      const trackList = document.querySelectorAll(".my-playlist-play");
-      //  Targeting all play-buttons in all list-items on 'My playlist'
-
-      trackList.forEach((playbutton) => {
-        // each button (on each list-item)
-        // console.log(`Adding event listener to button ${index + 1}:`, button);
-        playbutton.addEventListener("click", (event) => {
-          event.preventDefault();
-          document
-            .getElementById("currently-playing")
-            .scrollIntoView({ behavior: "smooth", block: "start" });
-          // find <li> parent:
-          const listItem = playbutton.closest("li");
-
-          // Fetch needed data from <li> (list-item):
-          const song = listItem.querySelector(".song").textContent;
-          const artist = listItem.querySelector(".artist").textContent;
-          const album = listItem.querySelector(".album").textContent;
-          const image = listItem.querySelector(
-            ".hidden-element.image"
-          ).textContent;
-          const url = listItem.querySelector(".hidden-element.url").textContent;
-          const id = listItem.querySelector(".hidden-element.id").textContent;
-
-          console.log("Extracted data:", {
-            song,
-            artist,
-            album,
-            image,
-            url,
-            id,
-          });
-
-          // find index: filter only <li>-elements inside parent:
-          const listItems = Array.from(listItem.parentElement.children).filter(
-            (child) => child.tagName === "LI"
-          );
-          index = listItems.indexOf(listItem); // we are changing index, according to the real index of the currently play-clicked song
-          // For test- show index of the current <li>, whose play-button was clicked:
-          console.log("index:", index); // index is shown correctly for each song on the list (0, 1, 2, 3...)
-          console.log("listItems:", listItems);
-          console.log("Song data:", { song, artist, album, image, url, id });
-
-          if (!url) {
-            console.error("URL for selected song was not found:", {
-              song,
-              artist,
-              album,
-            });
-            return; // exit the function if URL is missing
-          }
-          playTrack(id); // tracksData – list of items  // 29.11. changed from (url) to (id)
-
-          // updateCurrentlyPlayingInfo(index);
-          updateSongPlayingInfo(song, artist, album, image);
-          // return listItems;
-          // audioPlayer.addEventListener("ended", playNextTrack);
-
-          let currentTrackIndex = 0; // entering new variable, another different  ‘index’
-        });
-      }); // here ends the tracklist.forEach(button)-function
-    }
-
+    
     // Adding new task on the list - this function just fetches values (and then, they will be added to card in next function 'createTask'):
     function addTask(artist, song, album, url, image, time, id) {
       // const time = new Date().toLocaleDateString();
