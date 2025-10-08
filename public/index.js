@@ -477,31 +477,18 @@ document.addEventListener("DOMContentLoaded", () => {
               .getElementById("currently-playing")
               .scrollIntoView({ behavior: "smooth", block: "start" });
 
-            if (item.id) {
-              currentTrackIndex = 0; // set tracks index to the 1st song: [0]
-              playTrack(item.id); // calling the basic function to play current song index // changed to 'item.id'
+            playTrack(item.id); // calling the basic function to play current song index // changed to 'item.id'
 
-              updateSongPlayingInfo(
-                item.name,
-                item.artists[0].name,
-                item.album.name,
-                item.album.images[0].url
-              );
-              // info on currently playing track
+            updateSongPlayingInfo(
+              item.name,
+              item.artists[0].name,
+              item.album.name,
+              item.album.images[0].url
+            );
+            // info on currently playing track
 
-              document.getElementById("sound-pic").style.display = "none"; // static animation-picture is removed
-              document.getElementById("sound-bars").style.display = "block"; // dynamic animation starts to move
-            } else {
-              console - log("Cannot fetch id:", item.id);
-              audioPlayer.pause();
-              updateSongPlayingInfo(
-                // show track info, even if the song preview cannot be played.
-                item.name,
-                item.artists[0].name,
-                item.album.name,
-                item.album.images[0].url
-              );
-            }
+            document.getElementById("sound-pic").style.display = "none"; // static animation-picture is removed
+            document.getElementById("sound-bars").style.display = "block"; // dynamic animation starts to move
           });
 
           // Create a <div> for the text and append it
@@ -978,8 +965,6 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         });
 
-        let currentTrackIndex = 0;
-
         // function to update info on currently playing track (when playing the whole album):
         function updateCurrentlyPlayingInfo(trackIndex) {
           // Showing the cover of currently playing track's album:
@@ -1388,8 +1373,6 @@ document.addEventListener("DOMContentLoaded", () => {
           updateSongPlayingInfo(song, artist, album, image);
           // return listItems;
           // audioPlayer.addEventListener("ended", playNextTrack);
-
-          let currentTrackIndex = 0; // entering new variable, another different  ‘index’
         });
       }); // here ends the tracklist.forEach(button)-function
     }
