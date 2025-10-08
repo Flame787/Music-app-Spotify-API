@@ -146,10 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // Call 2nd function: 'fetchSearchResults', and hand over argumets, which are here available: query & selectedType
       // Call fetchSearchResults and return its value
       fetchSearchResults(query, selectedType);
-      //  catch (error) {
-      //   console.error("Error fetching search results:", error);
-      //   }
-      // );
     }
 
     //////////// Function to send Api-request for Search results - from Frontend to Backend: //////////////////////
@@ -486,9 +482,6 @@ document.addEventListener("DOMContentLoaded", () => {
               item.album.images[0].url
             );
             // info on currently playing track
-
-            document.getElementById("sound-pic").style.display = "none"; // static animation-picture is removed
-            document.getElementById("sound-bars").style.display = "block"; // dynamic animation starts to move
           });
 
           // Create a <div> for the text and append it
@@ -970,9 +963,9 @@ document.addEventListener("DOMContentLoaded", () => {
           // Showing the cover of currently playing track's album:
           const musicWrapper = document.getElementById("music-wrapper");
 
-          if (document.getElementById("review").value !== "") {
-            document.getElementById("review").value = "";
-          }
+          // if (document.getElementById("review").value !== "") {
+          //   document.getElementById("review").value = "";
+          // }
 
           // Cheking if there is already an album cover (from the previous track) and removing it:
           const existingAlbumCover =
@@ -1339,7 +1332,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return item;
     }
 
-    
     // Adding new task on the list - this function just fetches values (and then, they will be added to card in next function 'createTask'):
     function addTask(artist, song, album, url, image, time, id) {
       // const time = new Date().toLocaleDateString();
